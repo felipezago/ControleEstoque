@@ -61,6 +61,21 @@ class Fornecedor:
         return lista_fornecedores
 
     @staticmethod
+    def get_todos_fornecedores_tabela():
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, end_rua, end_bairro, end_numero, "
+                    f"end_cidade, end_estado, end_cep FROM fornecedor "
+                    f"INNER JOIN endereco ON forn_end_id = end_id "
+                    f"ORDER BY forn_id")
+        lista_fornecedores = cur.fetchall()
+        cur.close()
+        conn.close()
+        return lista_fornecedores
+
+    @staticmethod
     def qtd_forn():
         config = Banco()
         params = config.get_params()

@@ -37,12 +37,29 @@ class Pessoa:
         return row
 
     @staticmethod
+    def get_pessoa_by_desc_tabela(campo, desc, tipo):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"SELECT clie_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, " 
+                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente " 
+                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id " 
+                    f"INNER JOIN endereco ON pess_end_id = end_id" 
+                    f" WHERE {campo} like \'%{desc}%\' AND pess_tipo = \'{tipo}\'")
+        row = cur.fetchall()
+        conn.close()
+        cur.close()
+        return row
+
+    @staticmethod
     def get_pessoa_by_desc(campo, desc, tipo):
         config = Banco()
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM pessoas WHERE {campo} like \'%{desc}%\' AND pess_tipo = \'{tipo}\'')
+        cur.execute(f'f"SELECT * from pessoas \
+                        f" WHERE {campo} like \'%{desc}%\' AND pess_tipo = \'{tipo}\'')
         row = cur.fetchall()
         conn.close()
         cur.close()

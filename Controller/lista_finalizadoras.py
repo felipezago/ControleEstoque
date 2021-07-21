@@ -29,6 +29,7 @@ class ListaFinalizadoras(QMainWindow):
         self.setFixedSize(self.size())
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
+
         # removendo opção de maximizar
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
 

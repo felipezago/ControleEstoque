@@ -176,7 +176,7 @@ class ListaClientes(QMainWindow):
         if self.ui.cb_clientes.currentIndex() == 1:
             cli.pessoa.nome = self.ui.tx_busca.text()
             if cli.pessoa.nome:
-                dados = cli.pessoa.get_pessoa_by_desc("pess_nome", cli.pessoa.nome.upper(), 'CLIENTE')
+                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_nome", cli.pessoa.nome.upper(), 'CLIENTE')
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -184,7 +184,7 @@ class ListaClientes(QMainWindow):
         elif self.ui.cb_clientes.currentIndex() == 0:
             if self.ui.tx_busca.text():
                 cli.id = self.ui.tx_busca.text()
-                dados = cli.get_cliente_by_id()
+                dados = cli.get_cliente_by_id_tabela()
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -192,7 +192,7 @@ class ListaClientes(QMainWindow):
         elif self.ui.cb_clientes.currentIndex() == 2:
             cli.pessoa.cpf = self.ui.tx_busca.text()
             if cli.pessoa.cpf:
-                dados = cli.pessoa.get_pessoa_by_desc("pess_cpf", cli.pessoa.cpf, 'CLIENTE')
+                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_cpf", cli.pessoa.cpf, 'CLIENTE')
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -200,7 +200,7 @@ class ListaClientes(QMainWindow):
         else:
             cli.pessoa.rg = self.ui.tx_busca.text()
             if cli.pessoa.rg:
-                dados = cli.pessoa.get_pessoa_by_desc("pess_rg", cli.pessoa.rg, 'CLIENTE')
+                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_rg", cli.pessoa.rg, 'CLIENTE')
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -210,82 +210,10 @@ class ListaClientes(QMainWindow):
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
-            c = Cliente()
-            c.pessoa = Pessoa()
-
-            if type(dados) == list:
-                for i, linha in enumerate(dados):
-                    # clientes
-                    c.pessoa.id = linha[0]
-                    dados_cliente = c.get_cliente_by_pessoa()
-                    try:
-                        clie_id = QTableWidgetItem(str(dados_cliente[0]))
-                    except TypeError:
-                        QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
-                        self.ui.tx_busca.setText("")
-                        self.dados_tabela()
-                    else:
-                        self.ui.tb_clientes.insertRow(i)
-                        self.ui.tb_clientes.setItem(i, 0, clie_id)
-
-                        # pessoa
-                        cli.pessoa.id = linha[0]
-                        cli_pessoa = cli.pessoa.get_pessoa_cliente_by_id()
-
-                        for j in range(2, 9):
-                            item_pess = cli_pessoa[j]
-                            self.ui.tb_clientes.setItem(i, j - 1, QTableWidgetItem(str(item_pess)))
-
-                        self.ui.tb_clientes.setItem(i, 1, QTableWidgetItem(formatar_cpf((cli_pessoa[2]))))
-                        self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((cli_pessoa[6]))))
-
-                        # endereco
-                        end = Endereco()
-                        end.id = cli_pessoa[1]
-                        emp_end = end.get_endereco_by_id()
-                        item = list()
-
-                        for n in range(1, 7):
-                            item.append(emp_end[n])
-
-                        aux = 1
-                        for m in range(7, 13):
-                            self.ui.tb_clientes.setItem(i, m, QTableWidgetItem(str(emp_end[aux])))
-                            aux += 1
-
-                        item.clear()
-            else:
-                clie_id = QTableWidgetItem(str(dados[0]))
-                self.ui.tb_clientes.insertRow(0)
-                self.ui.tb_clientes.setItem(0, 0, clie_id)
-
-                # pessoa
-                cli.pessoa = Pessoa()
-                cli.pessoa.id = dados[1]
-                cli_pessoa = cli.pessoa.get_pessoa_cliente_by_id()
-
-                for j in range(2, 9):
-                    item_pess = cli_pessoa[j]
-                    self.ui.tb_clientes.setItem(0, j - 1, QTableWidgetItem(str(item_pess)))
-
-                self.ui.tb_clientes.setItem(0, 1, QTableWidgetItem(formatar_cpf((cli_pessoa[2]))))
-                self.ui.tb_clientes.setItem(0, 5, QTableWidgetItem(formatar_rg((cli_pessoa[6]))))
-
-                # endereco
-                end = Endereco()
-                end.id = int(cli_pessoa[1])
-                emp_end = end.get_endereco_by_id()
-                item = list()
-
-                for n in range(1, 7):
-                    item.append(emp_end[n])
-
-                aux = 1
-                for m in range(7, 13):
-                    self.ui.tb_clientes.setItem(0, m, QTableWidgetItem(str(emp_end[aux])))
-                    aux += 1
-
-                item.clear()
+            for i, linha in enumerate(dados):
+                self.ui.tb_clientes.insertRow(i)
+                for j in range(0, 13):
+                    self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")
@@ -305,124 +233,66 @@ class ListaClientes(QMainWindow):
 
         # pessoa
         if c is not None:
-            self.cliente_selecionado.pessoa = Pessoa()
-            self.cliente_selecionado.pessoa.id = c[1]
-            p = self.cliente_selecionado.pessoa.get_pessoa_cliente_by_id()
-            self.cliente_selecionado.pessoa.cpf = p[2]
-            self.cliente_selecionado.pessoa.nome = p[3]
-            self.cliente_selecionado.pessoa.fone = p[4]
-            self.cliente_selecionado.pessoa.email = p[5]
-            self.cliente_selecionado.pessoa.rg = p[6]
-            self.cliente_selecionado.pessoa.celular = p[7]
+            # pessoa
+            if c is not None:
+                self.cliente_selecionado.pessoa = Pessoa()
+                self.cliente_selecionado.pessoa.id = c[1]
+                p = self.cliente_selecionado.pessoa.get_pessoa_cliente_by_id()
+                self.cliente_selecionado.pessoa.cpf = p[2]
+                self.cliente_selecionado.pessoa.nome = p[3]
+                self.cliente_selecionado.pessoa.fone = p[4]
+                self.cliente_selecionado.pessoa.email = p[5]
+                self.cliente_selecionado.pessoa.rg = p[6]
+                self.cliente_selecionado.pessoa.celular = p[7]
 
-        # endereço
-            self.cliente_selecionado.pessoa.endereco = Endereco()
-            self.cliente_selecionado.pessoa.endereco.id = p[1]
-            end_selecionado = self.cliente_selecionado.pessoa.endereco.get_endereco_by_id()
-            self.cliente_selecionado.pessoa.endereco.rua = end_selecionado[1]
-            self.cliente_selecionado.pessoa.endereco.bairro = end_selecionado[2]
-            self.cliente_selecionado.pessoa.endereco.numero = end_selecionado[3]
-            self.cliente_selecionado.pessoa.endereco.cidade = end_selecionado[4]
-            self.cliente_selecionado.pessoa.endereco.estado = end_selecionado[5]
-            self.cliente_selecionado.pessoa.endereco.cep = end_selecionado[6]
+                # endereço
+                self.cliente_selecionado.pessoa.endereco = Endereco()
+                self.cliente_selecionado.pessoa.endereco.id = p[1]
+                end_selecionado = self.cliente_selecionado.pessoa.endereco.get_endereco_by_id()
+                self.cliente_selecionado.pessoa.endereco.rua = end_selecionado[1]
+                self.cliente_selecionado.pessoa.endereco.bairro = end_selecionado[2]
+                self.cliente_selecionado.pessoa.endereco.numero = end_selecionado[3]
+                self.cliente_selecionado.pessoa.endereco.cidade = end_selecionado[4]
+                self.cliente_selecionado.pessoa.endereco.estado = end_selecionado[5]
+                self.cliente_selecionado.pessoa.endereco.cep = end_selecionado[6]
 
-        # setando os edits
-        self.ui.tx_id.setText(self.cliente_selecionado.id)
-        self.ui.tx_cpf.setText(self.cliente_selecionado.pessoa.cpf)
-        self.ui.tx_nome.setText(self.cliente_selecionado.pessoa.nome)
-        self.ui.tx_fone.setText(self.cliente_selecionado.pessoa.fone)
-        self.ui.tx_email.setText(self.cliente_selecionado.pessoa.email)
-        self.ui.tx_rg.setText(self.cliente_selecionado.pessoa.rg)
-        self.ui.tx_celular.setText(self.cliente_selecionado.pessoa.celular)
+                # setando os edits
+                self.ui.tx_id.setText(self.cliente_selecionado.id)
+                self.ui.tx_cpf.setText(self.cliente_selecionado.pessoa.cpf)
+                self.ui.tx_nome.setText(self.cliente_selecionado.pessoa.nome)
+                self.ui.tx_fone.setText(self.cliente_selecionado.pessoa.fone)
+                self.ui.tx_email.setText(self.cliente_selecionado.pessoa.email)
+                self.ui.tx_rg.setText(self.cliente_selecionado.pessoa.rg)
+                self.ui.tx_celular.setText(self.cliente_selecionado.pessoa.celular)
 
-        self.ui.tx_rua.setText(self.cliente_selecionado.pessoa.endereco.rua)
-        self.ui.tx_bairro.setText(self.cliente_selecionado.pessoa.endereco.bairro)
-        self.ui.tx_numero.setText(self.cliente_selecionado.pessoa.endereco.numero)
-        self.ui.tx_cidade.setText(self.cliente_selecionado.pessoa.endereco.cidade)
-        self.ui.tx_estado.setText(self.cliente_selecionado.pessoa.endereco.estado)
-        self.ui.tx_cep.setText(self.cliente_selecionado.pessoa.endereco.cep)
+                self.ui.tx_rua.setText(self.cliente_selecionado.pessoa.endereco.rua)
+                self.ui.tx_bairro.setText(self.cliente_selecionado.pessoa.endereco.bairro)
+                self.ui.tx_numero.setText(self.cliente_selecionado.pessoa.endereco.numero)
+                self.ui.tx_cidade.setText(self.cliente_selecionado.pessoa.endereco.cidade)
+                self.ui.tx_estado.setText(self.cliente_selecionado.pessoa.endereco.estado)
+                self.ui.tx_cep.setText(self.cliente_selecionado.pessoa.endereco.cep)
 
     def dados_tabela(self):
         self.cliente_selecionado.id = None
         self.ui.tx_busca.setText("")
         self.filtrado = False
-
         self.ui.bt_refresh.setEnabled(False)
         self.limpa_campos()
         self.ui.tb_clientes.clearContents()
         self.ui.tb_clientes.setRowCount(0)
-
-        dados = Cliente.get_todos_clientes()
-
         self.ui.bt_refresh.setEnabled(False)
 
-        if type(dados) == list:
-            for i, linha in enumerate(dados):
-                # cliente
-                id_cliente = QTableWidgetItem(str(linha[0]))
-                self.ui.tb_clientes.insertRow(i)
-                self.ui.tb_clientes.setItem(i, 0, id_cliente)
+        dados = Cliente.get_todos_clientes_tabela()
 
-                # pessoa
-                cli = Cliente()
-                cli.pessoa = Pessoa()
-                cli.pessoa.id = linha[1]
-                cli_pessoa = cli.pessoa.get_pessoa_cliente_by_id()
-
-                for j in range(2, 9):
-                    item_pess = cli_pessoa[j]
-                    self.ui.tb_clientes.setItem(i, j - 1, QTableWidgetItem(str(item_pess)))
-
-                self.ui.tb_clientes.setItem(i, 1, QTableWidgetItem(formatar_cpf((cli_pessoa[2]))))
-                self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((cli_pessoa[6]))))
-
-                # endereco
-                end = Endereco()
-                end.id = cli_pessoa[1]
-                emp_end = end.get_endereco_by_id()
-                item = list()
-
-                for n in range(1, 7):
-                    item.append(emp_end[n])
-
-                aux = 1
-                for m in range(7, 13):
-                    self.ui.tb_clientes.setItem(i, m, QTableWidgetItem(str(emp_end[aux])))
-                    aux += 1
-
-                item.clear()
-        else:
-            clie_id = QTableWidgetItem(str(dados[0]))
-            self.ui.tb_clientes.insertRow(0)
-            self.ui.tb_clientes.setItem(0, 0, clie_id)
-
-            # pessoa
-            cli = Cliente()
-            cli.pessoa.id = dados[1]
-            cli_pessoa = cli.pessoa.get_pessoa_cliente_by_id()
-
-            for j in range(2, 9):
-                item_pess = cli_pessoa[j]
-                self.ui.tb_clientes.setItem(0, j - 1, QTableWidgetItem(str(item_pess)))
-
-            self.ui.tb_clientes.setItem(0, 1, QTableWidgetItem(formatar_cpf((cli_pessoa[2]))))
-            self.ui.tb_clientes.setItem(0, 5, QTableWidgetItem(formatar_rg((cli_pessoa[6]))))
-
-            # endereco
-            end = Endereco()
-            end.id = int(cli_pessoa[1])
-            emp_end = end.get_endereco_by_id()
-            item = list()
-
-            for n in range(1, 7):
-                item.append(emp_end[n])
-
-            aux = 1
-            for m in range(7, 13):
-                self.ui.tb_clientes.setItem(0, m, QTableWidgetItem(str(emp_end[aux])))
-                aux += 1
-
-            item.clear()
+        for i, linha in enumerate(dados):
+            self.ui.tb_clientes.insertRow(i)
+            for j in range(0, 13):
+                if j == 5:
+                    self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((linha[5]))))
+                elif j == 1:
+                    self.ui.tb_clientes.setItem(i, 1, QTableWidgetItem(formatar_cpf((linha[1]))))
+                else:
+                    self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
         if self.adicionando:
             self.ui.tb_clientes.selectRow(self.ui.tb_clientes.rowCount() - 1)

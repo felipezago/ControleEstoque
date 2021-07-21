@@ -18,12 +18,29 @@ class Cliente:
         conn.close()
         return row
 
+    def get_cliente_by_id_tabela(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"SELECT clie_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
+                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
+                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
+                    f"INNER JOIN endereco ON pess_end_id = end_id WHERE clie_id = {self.id}")
+        row = cur.fetchall()
+        cur.close()
+        conn.close()
+        return row
+
     def get_cliente_by_pessoa(self):
         config = Banco()
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM cliente WHERE clie_pessoa_id = {self.pessoa.id}')
+        cur.execute(f"SELECT clie_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
+                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
+                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
+                    f"INNER JOIN endereco ON pess_end_id = end_id WHERE clie_pessoa_id = {self.pessoa.id}")
         row = cur.fetchone()
         cur.close()
         conn.close()
@@ -64,6 +81,21 @@ class Cliente:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM cliente")
+        lista_clientes = cur.fetchall()
+        cur.close()
+        conn.close()
+        return lista_clientes
+
+    @staticmethod
+    def get_todos_clientes_tabela():
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"SELECT clie_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
+                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
+                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
+                    f"INNER JOIN endereco ON pess_end_id = end_id")
         lista_clientes = cur.fetchall()
         cur.close()
         conn.close()

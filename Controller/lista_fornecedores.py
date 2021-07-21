@@ -307,71 +307,21 @@ class ListaFornecedor(QMainWindow):
         self.fornecedor_selecionado.id = None
         self.ui.tx_busca.setText("")
         self.filtrado = False
-
         self.ui.bt_refresh.setEnabled(False)
         self.limpa_campos()
         self.ui.tb_fornecedores.clearContents()
         self.ui.tb_fornecedores.setRowCount(0)
-
-        dados = Fornecedor.get_todos_fornecedores()
-
         self.ui.bt_refresh.setEnabled(False)
 
-        if type(dados) == list:
-            for i, linha in enumerate(dados):
-                # Fornecedor
-                id_fornecedor = QTableWidgetItem(str(linha[0]))
-                self.ui.tb_fornecedores.insertRow(i)
-                self.ui.tb_fornecedores.setItem(i, 0, id_fornecedor)
+        dados = Fornecedor.get_todos_fornecedores_tabela()
 
-                for j in range(2, 6):
-                    item_emp = linha[j]
-                    self.ui.tb_fornecedores.setItem(i, j - 1, QTableWidgetItem(str(item_emp)))
-
-                self.ui.tb_fornecedores.setItem(i, 2, QTableWidgetItem(formatar_cnpj(str(linha[3]))))
-
-                # endereco
-                end = Endereco()
-                end.id = int(linha[1])
-                emp_end = end.get_endereco_by_id()
-                item = list()
-
-                for n in range(1, 7):
-                    item.append(emp_end[n])
-
-                aux = 1
-                for m in range(5, 11):
-                    self.ui.tb_fornecedores.setItem(i, m, QTableWidgetItem(str(emp_end[aux])))
-                    aux += 1
-
-                item.clear()
-        else:
-            # Fornecedor
-            id_fornecedor = QTableWidgetItem(str(dados[0]))
-            self.ui.tb_fornecedores.insertRow(0)
-            self.ui.tb_fornecedores.setItem(0, 0, id_fornecedor)
-
-            for j in range(2, 6):
-                item_emp = dados[j]
-                self.ui.tb_fornecedores.setItem(0, j - 1, QTableWidgetItem(str(item_emp)))
-
-            self.ui.tb_fornecedores.setItem(0, 2, QTableWidgetItem(formatar_cnpj(str(dados[3]))))
-
-            # endereco
-            end = Endereco()
-            end.id = int(dados[1])
-            emp_end = end.get_endereco_by_id()
-            item = list()
-
-            for n in range(1, 7):
-                item.append(emp_end[n])
-
-            aux = 1
-            for m in range(5, 11):
-                self.ui.tb_fornecedores.setItem(0, m, QTableWidgetItem(str(emp_end[aux])))
-                aux += 1
-
-            item.clear()
+        for i, linha in enumerate(dados):
+            self.ui.tb_fornecedores.insertRow(i)
+            for j in range(0, 11):
+                if j == 2:
+                    self.ui.tb_fornecedores.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
+                else:
+                    self.ui.tb_fornecedores.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
     def editar(self):
         if self.fornecedor_selecionado.cnpj:
@@ -411,7 +361,6 @@ class ListaFornecedor(QMainWindow):
                 QMessageBox.warning(self, "Erro", str(error))
             else:
                 self.ui.tb_fornecedores.setFocus()
-                e
                 for i in range(0, 11):
                     self.ui.tb_fornecedores.setItem(self.linha_selecionada, i, QTableWidgetItem(itens[i]))
 

@@ -21,23 +21,38 @@ class Empresa:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM empresas WHERE {campo} like \'%{desc}%\'')
+        cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
+                    f'emp_site, end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep FROM empresas '
+                    f'INNER JOIN endereco ON emp_end_id = end_id '
+                    f'WHERE {campo} like \'%{desc}%\''
+                    f'ORDER BY emp_nomefantasia')
         row = cur.fetchall()
         cur.close()
         conn.close()
 
-        if len(row) == 1:
-            for a in row:
-                return a
-        else:
-            return row
+        return row
 
     def get_empresa_by_cnpj(self):
         config = Banco()
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM empresas WHERE emp_cnpj = \'{self.cnpj}\'')
+        cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
+                    f'emp_site, end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep FROM empresas '
+                    f'INNER JOIN endereco ON emp_end_id = end_id '
+                    f'WHERE emp_cnpj = \'{self.cnpj}\'')
+        row = cur.fetchall()
+        cur.close()
+        conn.close()
+        return row
+
+    def get_empresa_by_cnpj_all(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f'SELECT * FROM empresas '
+                    f'WHERE emp_cnpj = \'{self.cnpj}\'')
         row = cur.fetchone()
         cur.close()
         conn.close()
@@ -50,6 +65,21 @@ class Empresa:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM empresas ORDER BY emp_nomefantasia')
+        row = cur.fetchall()
+        cur.close()
+        conn.close()
+        return row
+
+    @staticmethod
+    def get_todas_empresas_tabela():
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
+                    f'emp_site, end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep FROM empresas '
+                    f'INNER JOIN endereco ON emp_end_id = end_id '
+                    f'ORDER BY emp_nomefantasia')
         row = cur.fetchall()
         cur.close()
         conn.close()

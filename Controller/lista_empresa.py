@@ -257,69 +257,17 @@ class ListaEmpresa(QMainWindow):
                 return
 
         if dados:
-
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
-            if type(dados) == list:
-                for i, linha in enumerate(dados):
-                    # empresa
-                    cnpj = QTableWidgetItem(formatar_cnpj(str(linha[0])))
-                    self.ui.tb_empresa.insertRow(i)
-                    self.ui.tb_empresa.setItem(i, 0, cnpj)
+            for i, linha in enumerate(dados):
+                # empresa
+                cnpj = QTableWidgetItem(formatar_cnpj(str(linha[0])))
+                self.ui.tb_empresa.insertRow(i)
+                self.ui.tb_empresa.setItem(i, 0, cnpj)
 
-                    for j in range(1, 9):
-                        aux = j
-                        if j < 7:
-                            item_emp = linha[aux + 2]
-                        else:
-                            item_emp = linha[aux]
-                        self.ui.tb_empresa.setItem(i, j, QTableWidgetItem(str(item_emp)))
-
-                    # endereco
-                    end = Endereco()
-                    end.id = int(linha[1])
-                    emp_end = end.get_endereco_by_id()
-                    item = list()
-
-                    for n in range(1, 7):
-                        item.append(emp_end[n])
-
-                    aux = 1
-                    for m in range(7, 13):
-                        self.ui.tb_empresa.setItem(i, m, QTableWidgetItem(str(emp_end[aux])))
-                        aux += 1
-
-                    item.clear()
-            else:
-                cnpj = QTableWidgetItem(formatar_cnpj(str(dados[0])))
-                self.ui.tb_empresa.insertRow(0)
-                self.ui.tb_empresa.setItem(0, 0, cnpj)
-
-                for j in range(1, 9):
-                    aux = j
-                    if j < 7:
-                        item_emp = dados[aux + 2]
-                    else:
-                        item_emp = dados[aux]
-                    self.ui.tb_empresa.setItem(0, j, QTableWidgetItem(str(item_emp)))
-
-                # endereco
-                end = Endereco()
-                end.id = int(dados[1])
-                emp_end = end.get_endereco_by_id()
-                item = list()
-
-                for n in range(1, 7):
-                    item.append(emp_end[n])
-
-                aux = 1
-                for m in range(7, 13):
-                    self.ui.tb_empresa.setItem(0, m, QTableWidgetItem(str(emp_end[aux])))
-                    aux += 1
-
-                item.clear()
-
+                for j in range(1, 13):
+                    self.ui.tb_empresa.setItem(i, j, QTableWidgetItem(str(linha[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")
@@ -344,7 +292,7 @@ class ListaEmpresa(QMainWindow):
 
         self.empresa_selecionada.cnpj = tb.item(tb.currentRow(), 0).text()
         self.empresa_selecionada.cnpj = formatar_cpf_rg(self.empresa_selecionada.cnpj)
-        c = self.empresa_selecionada.get_empresa_by_cnpj()
+        c = self.empresa_selecionada.get_empresa_by_cnpj_all()
 
         if c is not None:
             self.empresa_selecionada.razao_social = c[3]
@@ -385,81 +333,30 @@ class ListaEmpresa(QMainWindow):
             self.add_img_padrao()
 
     def dados_tabela(self):
-        self.empresa_selecionada.cnpj = None
-        self.ui.tx_busca.setText("")
-        self.filtrado = False
+            self.empresa_selecionada.cnpj = None
+            self.ui.tx_busca.setText("")
+            self.filtrado = False
+            self.ui.bt_refresh.setEnabled(False)
+            self.limpa_campos()
+            self.ui.tb_empresa.clearContents()
+            self.ui.tb_empresa.setRowCount(0)
+            self.ui.bt_refresh.setEnabled(False)
 
-        self.ui.bt_refresh.setEnabled(False)
-        self.limpa_campos()
-        self.ui.tb_empresa.clearContents()
-        self.ui.tb_empresa.setRowCount(0)
+            dados = Empresa.get_todas_empresas_tabela()
 
-        dados = Empresa.get_todas_empresas()
+            if type(dados) == list:
+                for i, linha in enumerate(dados):
+                    # empresa
+                    cnpj = QTableWidgetItem(formatar_cnpj(str(linha[0])))
+                    self.ui.tb_empresa.insertRow(i)
+                    self.ui.tb_empresa.setItem(i, 0, cnpj)
 
-        self.ui.bt_refresh.setEnabled(False)
+                    for j in range(1, 13):
+                        self.ui.tb_empresa.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
-        if type(dados) == list:
-            for i, linha in enumerate(dados):
-                # empresa
-                cnpj = QTableWidgetItem(formatar_cnpj(str(linha[0])))
-                self.ui.tb_empresa.insertRow(i)
-                self.ui.tb_empresa.setItem(i, 0, cnpj)
-
-                for j in range(1, 9):
-                    aux = j
-                    if j < 7:
-                        item_emp = linha[aux+2]
-                    else:
-                        item_emp = linha[aux]
-                    self.ui.tb_empresa.setItem(i, j, QTableWidgetItem(str(item_emp)))
-
-                # endereco
-                end = Endereco()
-                end.id = int(linha[1])
-                emp_end = end.get_endereco_by_id()
-                item = list()
-
-                for n in range(1, 7):
-                    item.append(emp_end[n])
-
-                aux = 1
-                for m in range(7, 13):
-                    self.ui.tb_empresa.setItem(i, m, QTableWidgetItem(str(emp_end[aux])))
-                    aux += 1
-
-                item.clear()
-        else:
-            cnpj = QTableWidgetItem(formatar_cnpj(str(dados[0])))
-            self.ui.tb_empresa.insertRow(0)
-            self.ui.tb_empresa.setItem(0, 0, cnpj)
-
-            for j in range(1, 9):
-                aux = j
-                if j < 7:
-                    item_emp = dados[aux + 2]
-                else:
-                    item_emp = dados[aux]
-                self.ui.tb_empresa.setItem(0, j, QTableWidgetItem(str(item_emp)))
-
-            # endereco
-            end = Endereco()
-            end.id = int(dados[1])
-            emp_end = end.get_endereco_by_id()
-            item = list()
-
-            for n in range(1, 7):
-                item.append(emp_end[n])
-
-            aux = 1
-            for m in range(7, 13):
-                self.ui.tb_empresa.setItem(0, m, QTableWidgetItem(str(emp_end[aux])))
-                aux += 1
-
-            item.clear()
-
-        if self.adicionando:
-            self.ui.tb_empresa.selectRow(self.ui.tb_empresa.rowCount() - 1)
-            self.adicionando = False
+            if self.adicionando:
+                self.ui.tb_empresa.selectRow(self.ui.tb_empresa.rowCount() - 1)
+                self.adicionando = False
 
     def editar(self):
         if self.empresa_selecionada.cnpj:
@@ -482,7 +379,7 @@ class ListaEmpresa(QMainWindow):
             itens.append(emp_editar.site)
 
             emp_editar.endereco = Endereco()
-            emp_editar.endereco.id = self.empresa_selecionada.get_empresa_by_cnpj()[1]
+            emp_editar.endereco.id = self.empresa_selecionada.get_empresa_by_cnpj()[0][1]
             emp_editar.endereco.rua = self.ui.tx_rua.text().upper()
             itens.append(emp_editar.endereco.rua)
             emp_editar.endereco.bairro = self.ui.tx_bairro.text().upper()
