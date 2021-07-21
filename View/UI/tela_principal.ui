@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>FZR Sistemas</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>280</y>
+      <width>301</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+background-color: rgb(238, 238, 236);
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="lbl_usuario">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(238, 238, 236);
+color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>Usuário: FELIPE ZAGO RODRIGUES</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lbl_ip">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(238, 238, 236);
+color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>Ip: 127.000.000.1</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lbl_bd">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(238, 238, 236);
+color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>Base de dados: controles</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lbl_data">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(238, 238, 236);
+color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>12/02/2021 23:00:00</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(238, 238, 236);
+color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>FZR Sistemas</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QFrame" name="frame_atalhos">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>801</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(238, 238, 236);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="lbl_atalho_venda_txt">
+     <property name="geometry">
+      <rect>
+       <x>6</x>
+       <y>40</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>F5 - Vendas</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_atalho_venda">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>10</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>../Imagens/venda.png</pixmap>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_cadastros">
+    <property name="title">
+     <string>Cadastros</string>
+    </property>
+    <addaction name="actionCadastroUsuarios"/>
+    <addaction name="actionCadastroEmpresas"/>
+    <addaction name="actionCadastroClientes"/>
+    <addaction name="actionCadastroVeiculos"/>
+    <addaction name="actionCadastroFornecedores"/>
+    <addaction name="actionCadastroProdutos"/>
+    <addaction name="actionCadastroServicos"/>
+    <addaction name="actionCadastroCategorias"/>
+    <addaction name="actionCadastroFinalizadoras"/>
+   </widget>
+   <widget class="QMenu" name="menu_visualizar">
+    <property name="title">
+     <string>Visualizar</string>
+    </property>
+    <addaction name="actionVisualizaUsuarios"/>
+    <addaction name="actionVisualizaEmpresas"/>
+    <addaction name="actionVisualizaClientes"/>
+    <addaction name="actionVisualizaVeiculos"/>
+    <addaction name="actionVisualizaFornecedores"/>
+    <addaction name="actionVisualizaProdutos"/>
+    <addaction name="actionVisualizaServicos"/>
+    <addaction name="actionVisualizaCategorias"/>
+    <addaction name="actionVisualizaEndereco"/>
+    <addaction name="actionVisualizaFinalizadoras"/>
+   </widget>
+   <widget class="QMenu" name="menu_venda">
+    <property name="title">
+     <string>Venda</string>
+    </property>
+    <addaction name="actionNova_Venda"/>
+    <addaction name="actionVisualizar_Vendas"/>
+   </widget>
+   <widget class="QMenu" name="menuConfigura_o">
+    <property name="title">
+     <string>Configuração</string>
+    </property>
+    <addaction name="actionBanco_de_Dados"/>
+   </widget>
+   <widget class="QMenu" name="menuSair">
+    <property name="title">
+     <string>Sair</string>
+    </property>
+    <addaction name="actionSaidaOperador"/>
+    <addaction name="actionSair_do_Sistema"/>
+   </widget>
+   <addaction name="menu_cadastros"/>
+   <addaction name="menu_visualizar"/>
+   <addaction name="menu_venda"/>
+   <addaction name="menuConfigura_o"/>
+   <addaction name="menuSair"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionCadastroUsuarios">
+   <property name="text">
+    <string>Usuários</string>
+   </property>
+  </action>
+  <action name="actionCadastroEmpresas">
+   <property name="text">
+    <string>Empresas</string>
+   </property>
+  </action>
+  <action name="actionCadastroClientes">
+   <property name="text">
+    <string>Clientes</string>
+   </property>
+  </action>
+  <action name="actionCadastroVeiculos">
+   <property name="text">
+    <string>Veículos</string>
+   </property>
+  </action>
+  <action name="actionCadastroFornecedores">
+   <property name="text">
+    <string>Fornecedores</string>
+   </property>
+  </action>
+  <action name="actionCadastroServicos">
+   <property name="text">
+    <string>Serviços</string>
+   </property>
+  </action>
+  <action name="actionCadastroProdutos">
+   <property name="text">
+    <string>Produtos</string>
+   </property>
+  </action>
+  <action name="actionSaidaOperador">
+   <property name="text">
+    <string>Saída de Operador</string>
+   </property>
+  </action>
+  <action name="actionSair_do_Sistema">
+   <property name="text">
+    <string>Sair do Sistema</string>
+   </property>
+  </action>
+  <action name="actionBanco_de_Dados">
+   <property name="text">
+    <string>Banco de Dados</string>
+   </property>
+  </action>
+  <action name="actionNova_Venda">
+   <property name="text">
+    <string>Nova Venda</string>
+   </property>
+  </action>
+  <action name="actionVisualizar_Vendas">
+   <property name="text">
+    <string>Visualizar Vendas</string>
+   </property>
+  </action>
+  <action name="actionVisualizaClientes">
+   <property name="text">
+    <string>Clientes</string>
+   </property>
+  </action>
+  <action name="actionVisualizaServicos">
+   <property name="text">
+    <string>Serviços</string>
+   </property>
+  </action>
+  <action name="actionVisualizaProdutos">
+   <property name="text">
+    <string>Produtos</string>
+   </property>
+  </action>
+  <action name="actionVisualizaFornecedores">
+   <property name="text">
+    <string>Fornecedores</string>
+   </property>
+  </action>
+  <action name="actionVisualizaEmpresas">
+   <property name="text">
+    <string>Empresas</string>
+   </property>
+  </action>
+  <action name="actionVisualizaUsuarios">
+   <property name="text">
+    <string>Usuarios</string>
+   </property>
+  </action>
+  <action name="actionCadastroCategorias">
+   <property name="text">
+    <string>Categorias</string>
+   </property>
+  </action>
+  <action name="actionVisualizaCategorias">
+   <property name="text">
+    <string>Categorias</string>
+   </property>
+  </action>
+  <action name="actionVisualizaEndereco">
+   <property name="text">
+    <string>Endereço</string>
+   </property>
+  </action>
+  <action name="actionVisualizaVeiculos">
+   <property name="text">
+    <string>Veiculos</string>
+   </property>
+  </action>
+  <action name="actionCadastroFinalizadoras">
+   <property name="text">
+    <string>Finalizadoras</string>
+   </property>
+  </action>
+  <action name="actionVisualizaFinalizadoras">
+   <property name="text">
+    <string>Finalizadoras</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

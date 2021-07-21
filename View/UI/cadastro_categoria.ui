@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ct_FormProdutos</class>
+ <widget class="QFrame" name="ct_FormProdutos">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>285</width>
+    <height>161</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Cadastro de Categorias</string>
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
+  <widget class="QFrame" name="fr_FormProdutos">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>841</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: #FFF;
+border: none</string>
+   </property>
+   <widget class="QLabel" name="lb_FormProdutos">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>780</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 14px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+
+border-bottom: 2px solid #A2A2A2
+}</string>
+    </property>
+    <property name="text">
+     <string>CADASTRAR CATEGORIA</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>215</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>DESCRIÇÃO CATEGORIA</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_desc_cat">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>271</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; 
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QFrame" name="fr_BotoesFormProdutos">
+    <property name="geometry">
+     <rect>
+      <x>-380</x>
+      <y>130</y>
+      <width>671</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:#E1DFE0;
+border: none;</string>
+    </property>
+    <widget class="QPushButton" name="bt_CancelarProdutos">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>0</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #1E87F0;
+color: #FFF
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>CANCELAR</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_SalvarProdutos">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>0</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #7AB32E;
+color: #FFF
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>SALVAR</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="lb_qtdeMin">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>350</y>
+      <width>40</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_PorcentagemVarejo">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>360</y>
+      <width>60</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #FFF;
+border-radius: 2px;
+color: #7AB32E;
+font: 20px &quot;Arial&quot; ;
+font-weight: bold
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>tx_desc_cat</tabstop>
+  <tabstop>tx_PorcentagemVarejo</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
