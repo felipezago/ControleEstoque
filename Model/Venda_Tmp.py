@@ -1,9 +1,10 @@
 import psycopg2
 from Funcoes.configdb import Banco
+from Model.Veiculo import Veiculo
 
 
 class Venda_Tmp:
-    def __init__(self, cod_interno="", veiculo="", id_venda="", id_prod_serv="", tipo="", qtd="", valor="", desconto="",
+    def __init__(self, cod_interno="", veiculo: Veiculo = "", id_venda="", id_prod_serv="", tipo="", qtd="", valor="", desconto="",
                  data_hora="", status=""):
         self.cod_interno = cod_interno
         self.veiculo = veiculo
@@ -37,7 +38,8 @@ class Venda_Tmp:
         row = cur.fetchone()
         cur.close()
         conn.close()
-        return row
+        for a in row:
+            return a
 
     @staticmethod
     def get_venda(desc, operador, valor):

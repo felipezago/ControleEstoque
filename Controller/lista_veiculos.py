@@ -258,66 +258,18 @@ class ListaVeiculos(QMainWindow):
         self.veiculo_selecionado.placa = None
         self.ui.tx_busca.setText("")
         self.filtrado = False
-
         self.ui.bt_refresh.setEnabled(False)
         self.limpa_campos()
         self.ui.tb_veiculos.clearContents()
         self.ui.tb_veiculos.setRowCount(0)
-
-        dados = Veiculo.get_todos_veiculos()
-
         self.ui.bt_refresh.setEnabled(False)
 
-        v = Veiculo()
-        v.cliente = Cliente()
-        v.cliente.pessoa = Pessoa()
+        dados = Veiculo.get_todos_veiculos_tb()
 
-        if type(dados) == list:
-            for i, linha in enumerate(dados):
-                # clientes
-                v.id = linha[0]
-                v.cliente.id = linha[1]
-                cliente = v.cliente.get_cliente_by_id()
-                v.cliente.pessoa.id = cliente[1]
-                dados_cliente = v.cliente.pessoa.get_pessoa_cliente_by_id()
-
-                self.ui.tb_veiculos.insertRow(i)
-                self.ui.tb_veiculos.setItem(i, 0, QTableWidgetItem(str(linha[0])))
-
-                for j in range(2, 4):
-                    item = linha[j]
-                    self.ui.tb_veiculos.setItem(i, j - 1, QTableWidgetItem(str(item)))
-
-                try:
-                    clie_nome = QTableWidgetItem(str(dados_cliente[3]))
-                except TypeError:
-                    QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
-                    self.ui.tx_busca.setText("")
-                    self.dados_tabela()
-                else:
-                    self.ui.tb_veiculos.setItem(i, 3, clie_nome)
-        else:
-            v.id = dados[0]
-            v.cliente.id = dados[1]
-            cliente = v.cliente.get_cliente_by_id()
-            v.cliente.pessoa.id = cliente[1]
-            dados_cliente = v.cliente.pessoa.get_pessoa_cliente_by_id()
-
-            self.ui.tb_veiculos.insertRow(0)
-            self.ui.tb_veiculos.setItem(0, 0, QTableWidgetItem(str(dados[0])))
-
-            for j in range(2, 4):
-                item = dados[j]
-                self.ui.tb_veiculos.setItem(0, j - 1, QTableWidgetItem(str(item)))
-
-            try:
-                clie_nome = QTableWidgetItem(str(dados_cliente[3]))
-            except TypeError:
-                QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
-                self.ui.tx_busca.setText("")
-                self.dados_tabela()
-            else:
-                self.ui.tb_veiculos.setItem(0, 3, clie_nome)
+        for i, linha in enumerate(dados):
+            self.ui.tb_veiculos.insertRow(i)
+            for j in range(0, 4):
+                self.ui.tb_veiculos.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
     def editar(self):
         if self.veiculo_selecionado.placa:

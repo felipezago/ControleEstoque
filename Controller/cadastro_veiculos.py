@@ -74,7 +74,7 @@ class CadastroVeiculos(QMainWindow):
             self.ui.cb_cliente.addItem(nome_pessoa)
             self.ui.cb_cliente.setItemData(contador, v)
 
-        if self.tela.cliente_selecionado:
+        if self.tela:
             indice = self.ui.cb_cliente.findText(self.tela.cliente_selecionado.pessoa.nome)
             self.ui.cb_cliente.setCurrentIndex(indice)
 

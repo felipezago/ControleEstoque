@@ -136,7 +136,7 @@ class PesquisaClientes(QMainWindow):
         if self.ui.cb_clientes.currentIndex() == 1:
             cli.pessoa.nome = self.ui.tx_busca.text()
             if cli.pessoa.nome:
-                dados = cli.pessoa.get_pessoa_by_desc("pess_nome", cli.pessoa.nome.upper(), 'CLIENTE')
+                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_nome", cli.pessoa.nome.upper(), 'CLIENTE')
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -144,7 +144,7 @@ class PesquisaClientes(QMainWindow):
         elif self.ui.cb_clientes.currentIndex() == 0:
             if self.ui.tx_busca.text():
                 cli.id = self.ui.tx_busca.text()
-                dados = cli.get_cliente_by_id()
+                dados = cli.get_cliente_by_id_tabela()
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -152,7 +152,7 @@ class PesquisaClientes(QMainWindow):
         elif self.ui.cb_clientes.currentIndex() == 2:
             cli.pessoa.cpf = self.ui.tx_busca.text()
             if cli.pessoa.cpf:
-                dados = cli.pessoa.get_pessoa_by_desc("pess_cpf", cli.pessoa.cpf, 'CLIENTE')
+                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_cpf", cli.pessoa.cpf, 'CLIENTE')
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -160,7 +160,7 @@ class PesquisaClientes(QMainWindow):
         else:
             cli.pessoa.rg = self.ui.tx_busca.text()
             if cli.pessoa.rg:
-                dados = cli.pessoa.get_pessoa_by_desc("pess_rg", cli.pessoa.rg, 'CLIENTE')
+                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_rg", cli.pessoa.rg, 'CLIENTE')
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -170,50 +170,10 @@ class PesquisaClientes(QMainWindow):
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
-            c = Cliente()
-            c.pessoa = Pessoa()
-
-            if type(dados) == list:
-                for i, linha in enumerate(dados):
-                    # clientes
-                    c.pessoa.id = linha[0]
-                    dados_cliente = c.get_cliente_by_pessoa()
-                    try:
-                        clie_id = QTableWidgetItem(str(dados_cliente[0]))
-                    except TypeError:
-                        QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
-                        self.ui.tx_busca.setText("")
-                        self.dados_tabela()
-                    else:
-                        self.ui.tb_clientes.insertRow(i)
-                        self.ui.tb_clientes.setItem(i, 0, clie_id)
-
-                        # pessoa
-                        cli.pessoa.id = linha[0]
-                        cli_pessoa = cli.pessoa.get_pessoa_cliente_by_id()
-
-                        for j in range(2, 9):
-                            item_pess = cli_pessoa[j]
-                            self.ui.tb_clientes.setItem(i, j - 1, QTableWidgetItem(str(item_pess)))
-
-                        self.ui.tb_clientes.setItem(i, 1, QTableWidgetItem(formatar_cpf((cli_pessoa[2]))))
-                        self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((cli_pessoa[6]))))
-            else:
-                clie_id = QTableWidgetItem(str(dados[0]))
-                self.ui.tb_clientes.insertRow(0)
-                self.ui.tb_clientes.setItem(0, 0, clie_id)
-
-                # pessoa
-                cli.pessoa = Pessoa()
-                cli.pessoa.id = dados[1]
-                cli_pessoa = cli.pessoa.get_pessoa_cliente_by_id()
-
-                for j in range(2, 9):
-                    item_pess = cli_pessoa[j]
-                    self.ui.tb_clientes.setItem(0, j - 1, QTableWidgetItem(str(item_pess)))
-
-                self.ui.tb_clientes.setItem(0, 1, QTableWidgetItem(formatar_cpf((cli_pessoa[2]))))
-                self.ui.tb_clientes.setItem(0, 5, QTableWidgetItem(formatar_rg((cli_pessoa[6]))))
+            for i, linha in enumerate(dados):
+                self.ui.tb_clientes.insertRow(i)
+                for j in range(0, 13):
+                    self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")
@@ -244,50 +204,22 @@ class PesquisaClientes(QMainWindow):
         self.cliente_selecionado.id = None
         self.ui.tx_busca.setText("")
         self.filtrado = False
-
         self.ui.bt_refresh.setEnabled(False)
         self.ui.tb_clientes.clearContents()
         self.ui.tb_clientes.setRowCount(0)
-
-        dados = Cliente.get_todos_clientes()
-
         self.ui.bt_refresh.setEnabled(False)
 
-        if type(dados) == list:
-            for i, linha in enumerate(dados):
-                # cliente
-                id_cliente = QTableWidgetItem(str(linha[0]))
-                self.ui.tb_clientes.insertRow(i)
-                self.ui.tb_clientes.setItem(i, 0, id_cliente)
+        dados = Cliente.get_todos_clientes_tabela()
 
-                # pessoa
-                cli = Cliente()
-                cli.pessoa = Pessoa()
-                cli.pessoa.id = linha[1]
-                cli_pessoa = cli.pessoa.get_pessoa_cliente_by_id()
-
-                for j in range(2, 9):
-                    item_pess = cli_pessoa[j]
-                    self.ui.tb_clientes.setItem(i, j - 1, QTableWidgetItem(str(item_pess)))
-
-                self.ui.tb_clientes.setItem(i, 1, QTableWidgetItem(formatar_cpf((cli_pessoa[2]))))
-                self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((cli_pessoa[6]))))
-        else:
-            clie_id = QTableWidgetItem(str(dados[0]))
-            self.ui.tb_clientes.insertRow(0)
-            self.ui.tb_clientes.setItem(0, 0, clie_id)
-
-            # pessoa
-            cli = Cliente()
-            cli.pessoa.id = dados[1]
-            cli_pessoa = cli.pessoa.get_pessoa_cliente_by_id()
-
-            for j in range(2, 9):
-                item_pess = cli_pessoa[j]
-                self.ui.tb_clientes.setItem(0, j - 1, QTableWidgetItem(str(item_pess)))
-
-            self.ui.tb_clientes.setItem(0, 1, QTableWidgetItem(formatar_cpf((cli_pessoa[2]))))
-            self.ui.tb_clientes.setItem(0, 5, QTableWidgetItem(formatar_rg((cli_pessoa[6]))))
+        for i, linha in enumerate(dados):
+            self.ui.tb_clientes.insertRow(i)
+            for j in range(0, 13):
+                if j == 5:
+                    self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((linha[5]))))
+                elif j == 1:
+                    self.ui.tb_clientes.setItem(i, 1, QTableWidgetItem(formatar_cpf((linha[1]))))
+                else:
+                    self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
         if self.adicionando:
             self.ui.tb_clientes.selectRow(self.ui.tb_clientes.rowCount() - 1)

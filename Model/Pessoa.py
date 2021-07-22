@@ -1,9 +1,10 @@
 import psycopg2
 from Funcoes.configdb import Banco
+from Model.Endereco import Endereco
 
 
 class Pessoa:
-    def __init__(self, id="", endereco="", cpf="", nome="", fone="", email="", rg="", celular="", tipo=""):
+    def __init__(self, id="", endereco: Endereco = "", cpf="", nome="", fone="", email="", rg="", celular="", tipo=""):
         self.nome = nome
         self.email = email
         self.cpf = cpf

@@ -137,7 +137,7 @@ class PesquisaProdutos(QMainWindow):
         if self.ui.tx_busca.text():
             if self.ui.cb_produtos.currentIndex() == 0:
                 prod.id = self.ui.tx_busca.text()
-                dados = prod.get_produto_by_id()
+                dados = prod.get_produto_by_id_tb()
             elif self.ui.cb_produtos.currentIndex() == 1:
                 prod.codbarras = self.ui.tx_busca.text()
                 dados = prod.get_produtos_by_desc("prod_codbarras", prod.codbarras)
@@ -150,84 +150,47 @@ class PesquisaProdutos(QMainWindow):
             elif self.ui.cb_produtos.currentIndex() == 4:
                 prod.fornecedor.nome = self.ui.tx_busca.text().upper()
                 dados_fornecedor = prod.fornecedor.get_fornecedores_by_desc("forn_nome", prod.fornecedor.nome)
-                if type(dados_fornecedor) == list:
-                    for item in dados_fornecedor:
+
+                if dados_fornecedor:
+                    if type(dados_fornecedor) == list:
+                        cods = list()
+                        for item in dados_fornecedor:
+                            cods.append(item[0])
+                        tup = tuple(cods)
+                        prod.fornecedor.id = tup
+                        dados = prod.get_produto_by_fornecedor("in")
+                    else:
                         prod.fornecedor.id = dados_fornecedor[0]
-                        dados = prod.get_produto_by_fornecedor()
-                else:
-                    prod.fornecedor.id = dados_fornecedor[0]
-                    dados = prod.get_produto_by_fornecedor()
+                        dados = prod.get_produto_by_fornecedor("=")
             else:
                 prod.categoria.descricao = self.ui.tx_busca.text().upper()
                 dados_cat = prod.categoria.get_categorias_by_desc(prod.categoria.descricao)
-                prod.categoria.id = dados_cat[0]
-                dados = prod.get_produto_by_categoria()
+
+                if dados_cat:
+                    if type(dados_cat) == list:
+                        cods = list()
+                        for item in dados_cat:
+                            cods.append(item[0])
+                        tup = tuple(cods)
+                        prod.categoria.id = tup
+                        dados = prod.get_produto_by_categoria("in")
+                    else:
+                        prod.categoria.id = dados_cat[0]
+                        dados = prod.get_produto_by_categoria("=")
         else:
             QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
             self.dados_tabela()
             return
 
         if dados:
-
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
-            if type(dados) == list:
-                for i, linha in enumerate(dados):
-                    # Produtos
-                    prod_id = QTableWidgetItem(str(linha[0]))
-                    self.ui.tb_produtos.insertRow(i)
-                    self.ui.tb_produtos.setItem(i, 0, prod_id)
-
-                    # fornecedor
-                    f = Fornecedor()
-                    f.id = int(linha[1])
-                    forn_prod = f.get_fornecedor_by_id()
-                    f.nome = forn_prod[2]
-
-                    # categoria
-                    c = Categoria()
-                    c.id = int(linha[2])
-                    cat_prod = c.get_categoria_by_id()
-                    c.descricao = cat_prod[1]
-
-                    self.ui.tb_produtos.setItem(i, 1, QTableWidgetItem(str(linha[4])))
-                    self.ui.tb_produtos.setItem(i, 2, QTableWidgetItem(str(linha[3])))
-                    self.ui.tb_produtos.setItem(i, 3, QTableWidgetItem(str(linha[5])))
-                    self.ui.tb_produtos.setItem(i, 4, QTableWidgetItem(str(linha[6])))
-                    self.ui.tb_produtos.setItem(i, 5, QTableWidgetItem(str(linha[7])))
-                    self.ui.tb_produtos.setItem(i, 6, QTableWidgetItem(str(f.nome)))
-                    self.ui.tb_produtos.setItem(i, 7, QTableWidgetItem(str(c.descricao)))
-            else:
-                prod_id = QTableWidgetItem(str(dados[0]))
-                self.ui.tb_produtos.insertRow(0)
-                self.ui.tb_produtos.setItem(0, 0, prod_id)
-
-                for j in range(1, 6):
-                    # estoque no lugar do codigo de barras
-                    if j == 1:
-                        item_prod = dados[j + 3]
-                    # codbarras no lugar do estoque
-                    elif j == 2:
-                        item_prod = dados[j + 1]
-                    # demais campos
-                    else:
-                        item_prod = dados[j + 2]
-                    self.ui.tb_produtos.setItem(0, j, QTableWidgetItem(str(item_prod)))
-
-                # fornecedor
-                f = Fornecedor()
-                f.id = int(dados[1])
-                forn_prod = f.get_fornecedor_by_id()
-                f.nome = forn_prod[2]
-                self.ui.tb_produtos.setItem(0, 6, QTableWidgetItem(str(f.nome)))
-
-                # categoria
-                c = Categoria()
-                c.id = int(dados[2])
-                cat_prod = c.get_categoria_by_id()
-                c.descricao = cat_prod[1]
-                self.ui.tb_produtos.setItem(0, 7, QTableWidgetItem(str(c.descricao)))
+            for i, linha in enumerate(dados):
+                # Produtos
+                self.ui.tb_produtos.insertRow(i)
+                for j in range(0, 8):
+                    self.ui.tb_produtos.setItem(i, j, QTableWidgetItem(str(linha[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")
@@ -265,77 +228,18 @@ class PesquisaProdutos(QMainWindow):
         self.produto_selecionado.id = None
         self.ui.tx_busca.setText("")
         self.filtrado = False
-
         self.ui.bt_refresh.setEnabled(False)
         self.ui.tb_produtos.clearContents()
         self.ui.tb_produtos.setRowCount(0)
+        self.ui.bt_refresh.setEnabled(False)
 
         dados = Produtos.get_todos_produtos()
 
-        self.ui.bt_refresh.setEnabled(False)
+        for i, linha in enumerate(dados):
+            self.ui.tb_produtos.insertRow(i)
 
-        if type(dados) == list:
-            for i, linha in enumerate(dados):
-                # Produtos
-                prod_id = QTableWidgetItem(str(linha[0]))
-                self.ui.tb_produtos.insertRow(i)
-                self.ui.tb_produtos.setItem(i, 0, prod_id)
-
-                for j in range(1, 6):
-                    # estoque no lugar do codigo de barras
-                    if j == 1:
-                        item_prod = linha[j + 3]
-                    # codbarras no lugar do estoque
-                    elif j == 2:
-                        item_prod = linha[j + 1]
-                    # demais campos
-                    else:
-                        item_prod = linha[j + 2]
-                    self.ui.tb_produtos.setItem(i, j, QTableWidgetItem(str(item_prod)))
-
-                # fornecedor
-                f = Fornecedor()
-                f.id = int(linha[1])
-                forn_prod = f.get_fornecedor_by_id()
-                f.nome = forn_prod[2]
-                self.ui.tb_produtos.setItem(i, 6, QTableWidgetItem(str(f.nome)))
-
-                # categoria
-                c = Categoria()
-                c.id = int(linha[2])
-                cat_prod = c.get_categoria_by_id()
-                c.descricao = cat_prod[1]
-                self.ui.tb_produtos.setItem(i, 7, QTableWidgetItem(str(c.descricao)))
-        else:
-            prod_id = QTableWidgetItem(str(dados[0]))
-            self.ui.tb_produtos.insertRow(0)
-            self.ui.tb_produtos.setItem(0, 0, prod_id)
-
-            for j in range(1, 6):
-                # estoque no lugar do codigo de barras
-                if j == 1:
-                    item_prod = dados[j + 3]
-                # codbarras no lugar do estoque
-                elif j == 2:
-                    item_prod = dados[j + 1]
-                # demais campos
-                else:
-                    item_prod = dados[j + 2]
-                self.ui.tb_produtos.setItem(0, j, QTableWidgetItem(str(item_prod)))
-
-            # fornecedor
-            f = Fornecedor()
-            f.id = int(dados[1])
-            forn_prod = f.get_fornecedor_by_id()
-            f.nome = forn_prod[2]
-            self.ui.tb_produtos.setItem(0, 6, QTableWidgetItem(str(f.nome)))
-
-            # categoria
-            c = Categoria()
-            c.id = int(dados[1])
-            cat_prod = c.get_categoria_by_id()
-            c.descricao = cat_prod[1]
-            self.ui.tb_produtos.setItem(0, 7, QTableWidgetItem(str(c.descricao)))
+            for j in range(0, 8):
+                self.ui.tb_produtos.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
         if self.adicionando:
             self.ui.tb_produtos.selectRow(self.ui.tb_produtos.rowCount() - 1)

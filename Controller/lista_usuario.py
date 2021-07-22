@@ -161,39 +161,12 @@ class ListaUsuario(QMainWindow):
         usu.pessoa = Pessoa()
         usu.pessoa.id = operador[0]
 
-        dados_pessoa = usu.pessoa.get_pessoa_usuario_by_id()
         dados_usuario = usu.get_usuario_by_pessoa()
 
         self.ui.tb_usuario.insertRow(0)
 
-        # dados usuario
-        id_usu = QTableWidgetItem(str(dados_usuario[0]))
-        id_usu.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        self.ui.tb_usuario.setItem(0, 0, id_usu)
-        login = QTableWidgetItem(str(dados_usuario[2]))
-        login.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        self.ui.tb_usuario.setItem(0, 7, login)
-
-        # dados  pessoa
-        cpf = QTableWidgetItem(dados_pessoa[2])
-        cpf.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        nome = QTableWidgetItem(dados_pessoa[3])
-        nome.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        fone = QTableWidgetItem(dados_pessoa[4])
-        fone.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        email = QTableWidgetItem(dados_pessoa[5])
-        email.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        rg = QTableWidgetItem(dados_pessoa[6])
-        rg.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        celular = QTableWidgetItem(dados_pessoa[7])
-        celular.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-
-        item = list()
-        for c in range(2, 8):
-            item.append(dados_pessoa[c])
-
-        for i in range(1, 7):
-            self.ui.tb_usuario.setItem(0, i, QTableWidgetItem(item[i - 1]))
+        for i in range(0, 8):
+            self.ui.tb_usuario.setItem(0, i, QTableWidgetItem(str(dados_usuario[i])))
 
     def validar_campos(self):
         if not self.ui.tx_nome.text():

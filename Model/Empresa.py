@@ -1,9 +1,11 @@
 import psycopg2
 from Funcoes.configdb import Banco
+from Model.Endereco import Endereco
 
 
 class Empresa:
-    def __init__(self, cnpj="", endereco="", usuario="", razao_social="", nome_fantasia="", inscricao_estadual="",
+    def __init__(self, cnpj="", endereco: Endereco = "", usuario="", razao_social="", nome_fantasia="",
+                 inscricao_estadual="",
                  email="", fone="", site=""):
         self.cnpj = cnpj
         self.endereco = endereco
@@ -200,8 +202,8 @@ class Empresa:
 
                 # colocando a imagem em um label
                 s.ui.lb_LogoEmpresa.setPixmap(QPixmap(path_to_dir + str(blob[0]).replace(" ", "").strip() + '.' +
-                                                      blob[1]).scaledToWidth(150, Qt.TransformationMode(
-                    Qt.FastTransformation)))
+                                                      blob[1]).scaledToWidth(150, Qt.
+                                                                             TransformationMode(Qt.FastTransformation)))
                 cur.close()
             else:
                 return False

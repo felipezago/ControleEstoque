@@ -110,7 +110,7 @@ class Finalizar(QMainWindow):
 
             v_fin.valor = float(self.ui.tx_valor.text())
             v_fin.finalizadoras.id = fin_id
-            v_fin.venda.id = Venda_Tmp.get_cod_venda()[0]
+            v_fin.venda.id_venda = Venda_Tmp.get_cod_venda()
 
             try:
                 v_fin.inserir_fin_venda()
@@ -120,11 +120,15 @@ class Finalizar(QMainWindow):
                 self.preenche_tabela()
 
                 valor_pago = self.tela_principal.venda_fin.valor_pago()
-                if valor_pago > self.total:
-                    from Model.Vendas import Vendas
+                if valor_pago >= self.total:
+                    from Model.Venda_Itens import Vendas
                     from Model.Veiculo import Veiculo
+                    from Model.Vendas_Header import Vendas_Header
 
-                    QMessageBox.about(self, "Venda Finalizada!", f"Valor de troco: {valor_pago - self.total}")
+                    self.tela_principal.finalizou = True
+
+                    if (valor_pago - self.total) > 0:
+                        QMessageBox.about(self, "Venda Finalizada!", f"Valor de troco: {valor_pago - self.total:.2f}")
 
                     v = Venda_Tmp()
                     v.veiculo = Veiculo()
@@ -133,16 +137,24 @@ class Finalizar(QMainWindow):
                     v.veiculo.placa = veic_placa
                     v.update_cliente()
 
+                    header = Vendas_Header()
+                    header.veiculo = Veiculo()
+                    header.id = Venda_Tmp.get_cod_venda()
+                    header.veiculo.placa = veic_placa
+                    header.qtd_itens = Venda_Tmp.qtd_itens()
+                    header.total_descontos = Venda_Tmp.soma_descontos()
+                    header.valor_total = Venda_Tmp.retorna_total()
+                    header.status = "FINALIZADO"
+                    header.inserir()
+
                     Vendas.inserir_venda()
                     Venda_Tmp.delete_venda()
-                    self.tela_principal.finalizou = True
                     self.close()
 
                 self.set_lbls()
                 self.tela_principal.recebeu_pagamento = True
                 self.ui.tx_valor.setText("")
                 self.ui.cb_pagamento.setCurrentIndex(0)
-
         else:
             QMessageBox.warning(self, "Erro!", "Favor selecionar uma opção!")
 
@@ -189,7 +201,7 @@ class Finalizar(QMainWindow):
 
         v_fin = Venda_Fin()
         v_fin.venda = Venda_Tmp()
-        v_fin.venda.id_venda = Venda_Tmp.get_cod_venda()[0]
+        v_fin.venda.id_venda = Venda_Tmp.get_cod_venda()
 
         dados = v_fin.get_fins_venda()
 

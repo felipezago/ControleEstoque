@@ -1,10 +1,11 @@
 import psycopg2
 from Funcoes.configdb import Banco
 from Funcoes.funcoes import show_msg
+from Model.Pessoa import Pessoa
 
 
 class Usuario:
-    def __init__(self, id="", pessoa="", nome="", senha=""):
+    def __init__(self, id="", pessoa: Pessoa = "", nome="", senha=""):
         self.nome = nome
         self.senha = senha
         self.id = id
@@ -26,7 +27,10 @@ class Usuario:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM usuarios WHERE usu_pessoa_id = {self.pessoa.id}')
+        cur.execute(f'SELECT usu_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, usu_nome '
+                    f'FROM usuarios '
+                    f'INNER JOIN pessoas ON usu_pessoa_id = pess_id '
+                    f'WHERE usu_pessoa_id = {self.pessoa.id}')
         row = cur.fetchone()
         cur.close()
         conn.close()

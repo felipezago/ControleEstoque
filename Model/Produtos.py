@@ -19,16 +19,16 @@ class Produtos:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM produtos WHERE {campo} like \'%{desc}%\' order by prod_id')
+        cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
+                    f'cat_descricao FROM produtos '
+                    f'INNER JOIN fornecedor ON prod_forn_id = forn_id '
+                    f'INNER JOIN categoria ON prod_cat_id = cat_id '
+                    f'WHERE {campo} like \'%{desc}%\' order by prod_id')
         row = cur.fetchall()
         cur.close()
         conn.close()
 
-        if len(row) == 1:
-            for a in row:
-                return a
-        else:
-            return row
+        return row
 
     def get_produto_by_id(self):
         config = Banco()
@@ -41,23 +41,46 @@ class Produtos:
         cur.close()
         return row
 
-    def get_produto_by_fornecedor(self):
+    def get_produto_by_id_tb(self):
         config = Banco()
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM produtos WHERE prod_forn_id = {self.fornecedor.id}')
+        cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
+                    f'cat_descricao FROM produtos '
+                    f'INNER JOIN fornecedor ON prod_forn_id = forn_id '
+                    f'INNER JOIN categoria ON prod_cat_id = cat_id '
+                    f'WHERE prod_id = {self.id}')
         row = cur.fetchall()
         conn.close()
         cur.close()
         return row
 
-    def get_produto_by_categoria(self):
+    def get_produto_by_fornecedor(self, op):
         config = Banco()
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM produtos WHERE prod_cat_id = {self.categoria.id}')
+        cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
+                    f'cat_descricao FROM produtos '
+                    f'INNER JOIN fornecedor ON prod_forn_id = forn_id '
+                    f'INNER JOIN categoria ON prod_cat_id = cat_id'
+                    f' WHERE prod_forn_id {op} {self.fornecedor.id}')
+        row = cur.fetchall()
+        conn.close()
+        cur.close()
+        return row
+
+    def get_produto_by_categoria(self, op):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
+                    f'cat_descricao FROM produtos '
+                    f'INNER JOIN fornecedor ON prod_forn_id = forn_id '
+                    f'INNER JOIN categoria ON prod_cat_id = cat_id'
+                    f' WHERE prod_cat_id {op} {self.categoria.id}')
         row = cur.fetchall()
         conn.close()
         cur.close()
@@ -109,7 +132,11 @@ class Produtos:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM produtos ORDER BY prod_id')
+        cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
+                    f'cat_descricao FROM produtos '
+                    f'INNER JOIN fornecedor ON prod_forn_id = forn_id '
+                    f'INNER JOIN categoria ON prod_cat_id = cat_id'
+                    f' ORDER BY prod_id')
         row = cur.fetchall()
         cur.close()
         conn.close()

@@ -362,9 +362,12 @@ class ListaFornecedor(QMainWindow):
             else:
                 self.ui.tb_fornecedores.setFocus()
                 for i in range(0, 11):
-                    self.ui.tb_fornecedores.setItem(self.linha_selecionada, i, QTableWidgetItem(itens[i]))
+                    if i == 2:
+                        self.ui.tb_fornecedores.setItem(self.linha_selecionada, 2,
+                                                        QTableWidgetItem(formatar_cnpj(itens[2])))
+                    else:
+                        self.ui.tb_fornecedores.setItem(self.linha_selecionada, i, QTableWidgetItem(itens[i]))
 
-                self.ui.tb_fornecedores.setItem(self.linha_selecionada, 2, QTableWidgetItem(formatar_cnpj(itens[2])))
         else:
             QMessageBox.warning(self, "Atenção!", "Favor selecionar alguma linha!")
 

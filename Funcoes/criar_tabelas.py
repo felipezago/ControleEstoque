@@ -171,20 +171,15 @@ def create_tables():
            )
            """,
             "criar_venda": """
-           CREATE TABLE IF NOT EXISTS vendas (
+           CREATE TABLE IF NOT EXISTS vendas_itens (
                venda_cod_interno SERIAL PRIMARY KEY,
-               venda_veic_placa VARCHAR(15),
                venda_id INT NOT NULL,
                venda_prod_serv_id INT NOT NULL,
                venda_tipo VARCHAR(15) NOT NULL,
                venda_qtd INT NOT NULL,
                venda_valor FLOAT NOT NULL,               
                venda_desconto FLOAT,
-               venda_datahora TIMESTAMP,
-               venda_status VARCHAR(20),
-               FOREIGN KEY (venda_veic_placa)
-                   REFERENCES veiculo (veic_placa)
-                   ON UPDATE CASCADE ON DELETE CASCADE               
+               venda_datahora TIMESTAMP                             
            )
            """,
             "criar_finalizadoras": """
@@ -204,6 +199,20 @@ def create_tables():
                            ON UPDATE CASCADE ON DELETE CASCADE
                    )
                    """,
+            "criar_venda_cabeçalho": """
+                       CREATE TABLE IF NOT EXISTS vendas (
+                           venda_id INT PRIMARY KEY,
+                           venda_veic_placa VARCHAR(15),
+                           venda_qtd_itens INT,
+                           venda_total_descontos FLOAT,
+                           venda_valor_total FLOAT,
+                           venda_status VARCHAR(50),
+                            FOREIGN KEY (venda_veic_placa)
+                               REFERENCES veiculo (veic_placa)
+                               ON UPDATE CASCADE ON DELETE CASCADE 
+                       )
+                       """,
+
             "criar_procedure_usuario": """
                    CREATE OR REPLACE PROCEDURE add_usuario(
                            rua VARCHAR,

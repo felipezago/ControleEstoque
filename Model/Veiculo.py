@@ -39,10 +39,24 @@ class Veiculo:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM veiculo")
-        list = cur.fetchall()
+        row = cur.fetchall()
         cur.close()
         conn.close()
-        return list
+        return row
+
+    @staticmethod
+    def get_todos_veiculos_tb():
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"SELECT veic_placa, veic_marca, veic_modelo, pess_nome FROM veiculo "
+                    f"INNER JOIN cliente ON veic_clie_id = clie_id "
+                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id ")
+        row = cur.fetchall()
+        cur.close()
+        conn.close()
+        return row
 
     @staticmethod
     def qtd_cli():

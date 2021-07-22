@@ -1,9 +1,11 @@
 import psycopg2
 from Funcoes.configdb import Banco
+from Model.Finalizadoras import Finalizadoras
+from Model.Venda_Tmp import Venda_Tmp
 
 
 class Venda_Fin:
-    def __init__(self, id_fin="", finalizadoras="", venda="", valor=""):
+    def __init__(self, id_fin="", finalizadoras: Finalizadoras = "", venda: Venda_Tmp = "", valor=""):
         self.id = id_fin
         self.finalizadoras = finalizadoras
         self.venda = venda
@@ -14,7 +16,7 @@ class Venda_Fin:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT SUM(vendas_fin_valor) FROM vendas_fin WHERE vendas_id = {self.venda.id}')
+        cur.execute(f'SELECT SUM(vendas_fin_valor) FROM vendas_fin WHERE vendas_id = {self.venda.id_venda}')
         row = cur.fetchone()
         cur.close()
         conn.close()
@@ -41,7 +43,7 @@ class Venda_Fin:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f"INSERT INTO vendas_fin (fin_id, vendas_id, vendas_fin_valor) "
-                    f"VALUES ({self.finalizadoras.id}, {self.venda.id}, {self.valor})")
+                    f"VALUES ({self.finalizadoras.id}, {self.venda.id_venda}, {self.valor})")
         conn.commit()
         cur.close()
         conn.close()
@@ -61,8 +63,7 @@ class Venda_Fin:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        print(f"DELETE FROM vendas_fin WHERE vendas_id = {self.venda.id}")
-        cur.execute(f"DELETE FROM vendas_fin WHERE vendas_id = {self.venda.id}")
+        cur.execute(f"DELETE FROM vendas_fin WHERE vendas_id = {self.venda.id_venda}")
         conn.commit()
         cur.close()
         conn.close()

@@ -1,9 +1,10 @@
 import psycopg2
 from Funcoes.configdb import Banco
+from Model.Pessoa import Pessoa
 
 
 class Cliente:
-    def __init__(self, id="", pessoa=""):
+    def __init__(self, id="", pessoa: Pessoa = ""):
         self.id = id
         self.pessoa = pessoa
 

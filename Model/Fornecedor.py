@@ -1,10 +1,11 @@
 import psycopg2
 from Funcoes.configdb import Banco
+from Model.Endereco import Endereco
 
 
 class Fornecedor:
-    def __init__(self, id="", endereco="", nome="", cnpj="", email="", fone=""):
-        self.id = id
+    def __init__(self, id_forn="", endereco: Endereco = "", nome="", cnpj="", email="", fone=""):
+        self.id = id_forn
         self.endereco = endereco
         self.nome = nome
         self.cnpj = cnpj

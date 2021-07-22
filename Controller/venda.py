@@ -29,7 +29,8 @@ class EventFilter(QtCore.QObject):
                     obj.atualiza_tabela()
                 elif obj.recebeu_pagamento or obj.excluiu_pagamento:
                     obj.set_valores_lbl()
-                elif obj.finalizou:
+
+                if obj.finalizou:
                     obj.limpa_tela()
 
         return QtCore.QObject.eventFilter(self, obj, event)
@@ -46,6 +47,8 @@ class VendaTemp(QMainWindow):
         self.ui.setupUi(self)
         self.dialogs = list()
         self.setFixedSize(self.size())
+
+        self.installEventFilter(EventFilter(self))
 
         self.item_selecionado = None
         self.cliente_selecionado = Cliente()
@@ -77,12 +80,10 @@ class VendaTemp(QMainWindow):
         self.ui.lb_valor_pago.setText("0,00")
         self.ui.bt_add_veiculo.setEnabled(False)
 
-        self.installEventFilter(EventFilter(self))
         self.setWindowModality(QtCore.Qt.ApplicationModal)
 
         # ação dos botoes
         self.ui.bt_cancelar.clicked.connect(self.sair)
-        self.ui.bt_finalizar.clicked.connect(self.finalizar)
         self.ui.bt_aberto.clicked.connect(self.deixar_aberto)
         self.ui.bt_excluir.clicked.connect(self.excluir)
         self.ui.bt_inserir.clicked.connect(self.valida_campos)
@@ -143,12 +144,15 @@ class VendaTemp(QMainWindow):
     def tela_descontos(self):
         from Controller.descontos import Descontos
 
-        if self.venda_fin.valor_pago() > 0:
-            QMessageBox.warning(self, "Aviso!", "Não é possível aplicar descontos após ter realizar um pagamento.")
+        if Venda_Tmp.check_registros():
+            if self.venda_fin.valor_pago() > 0:
+                QMessageBox.warning(self, "Aviso!", "Não é possível aplicar descontos após ter realizar um pagamento.")
+            else:
+                desc = Descontos(self)
+                exec_app(desc)
+                self.dialogs.append(desc)
         else:
-            desc = Descontos(self)
-            exec_app(desc)
-            self.dialogs.append(desc)
+            QMessageBox.warning(self, "Aviso!", "Não é possível aplicar descontos sem nenhum item registrado.")
 
     def tela_fin(self):
         from Controller.finalizar import Finalizar
@@ -277,19 +281,20 @@ class VendaTemp(QMainWindow):
 
         from datetime import datetime
 
-        data_hora = datetime.now()
+        data_e_hora_atuais = datetime.now()
+        data_e_hora_em_texto = data_e_hora_atuais.strftime('%d/%m/%Y %H:%M:%S')
         status = "EM ANDAMENTO"
 
         venda.id_prod_serv = self.item_selecionado.id
         venda.valor = float(self.ui.tx_valor.text())
         venda.desconto = 0
-        venda.data_hora = data_hora
+        venda.data_hora = data_e_hora_em_texto
         venda.tipo = tipo
         venda.qtd = qtd
         venda.status = status
 
         venda.inserir_venda()
-        self.venda_fin.venda.id = Venda_Tmp.get_cod_venda()[0]
+        self.venda_fin.venda.id_venda = Venda_Tmp.get_cod_venda()
 
         self.limpa_campos_item()
         self.atualiza_tabela()
@@ -489,34 +494,36 @@ class VendaTemp(QMainWindow):
         return total
 
     def excluir(self):
-        if not self.venda_fin.valor_pago() > 0:
-            if self.venda_selecionada.cod_interno:
-                reply = QMessageBox.question(self, 'Excluir?', f'Tem certeza que deseja excluir o item: '
-                                                               f'{self.venda_selecionada.cod_interno}?',
-                                             QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        if Venda_Tmp.check_registros():
+            if not self.venda_fin.valor_pago() > 0:
+                if self.venda_selecionada.cod_interno:
+                    reply = QMessageBox.question(self, 'Excluir?', f'Tem certeza que deseja excluir o item: '
+                                                                   f'{self.venda_selecionada.cod_interno}?',
+                                                 QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+                    if reply == QMessageBox.Yes:
+                        try:
+                            if Venda_Tmp.qtd_itens() == 1:
+                                self.limpar_selecao_cliente()
+                                self.set_clientes_enabled(True)
+                                self.ui.bt_descontos.setEnabled(False)
+                                self.recebeu_desconto_subtotal = False
+                                self.ui.bt_add_veiculo.setEnabled(False)
+                            self.venda_selecionada.delete_item_venda()
+                            self.venda_selecionada.cod_interno = None
 
-                if reply == QMessageBox.Yes:
-                    try:
-                        if Venda_Tmp.qtd_itens() == 1:
-                            self.limpar_selecao_cliente()
-                            self.set_clientes_enabled(True)
-                            self.ui.bt_descontos.setEnabled(False)
-                            self.recebeu_desconto_subtotal = False
-                            self.ui.bt_add_veiculo.setEnabled(False)
-                        self.venda_selecionada.delete_item_venda()
-                        self.venda_selecionada.cod_interno = None
-
-                    except Exception as error:
-                        QMessageBox.warning(self, "Erro", str(error))
+                        except Exception as error:
+                            QMessageBox.warning(self, "Erro", str(error))
+                        else:
+                            self.ui.tb_venda.removeRow(self.linha_selecionada)
+                            self.set_valores_lbl()
                     else:
-                        self.ui.tb_venda.removeRow(self.linha_selecionada)
-                        self.set_valores_lbl()
+                        return
                 else:
-                    return
+                    QMessageBox.warning(self, "Atenção!", "Favor selecionar alguma linha!")
             else:
-                QMessageBox.warning(self, "Atenção!", "Favor selecionar alguma linha!")
+                QMessageBox.warning(self, "Atenção!", "Não é possível excluir um item após ter efetuado um pagamento.")
         else:
-            QMessageBox.warning(self, "Atenção!", "Não é possível excluir um item após ter efetuado um pagamento.")
+            QMessageBox.warning(self, "Aviso!", "Não é possível excluir itens, se não há itens registrados.")
 
     def set_valores_lbl(self):
         self.ui.lb_valor_parcial.setText(f"{Venda_Tmp.retorna_total() + Venda_Tmp.soma_descontos():.2f}")
@@ -544,7 +551,7 @@ class VendaTemp(QMainWindow):
     def delete_fins():
         v_fin = Venda_Fin()
         v_fin.venda = Venda_Tmp()
-        v_fin.venda.id = Venda_Tmp.get_cod_venda()[0]
+        v_fin.venda.id = Venda_Tmp.get_cod_venda()
         v_fin.delete_fin_by_venda()
 
     def limpa_tela(self):
@@ -553,6 +560,18 @@ class VendaTemp(QMainWindow):
         self.ui.lb_valor_pago.setText("0,00")
         self.ui.lb_valor_parcial.setText("0,00")
 
-        self.limpa_campos_item()
-        self.limpar_selecao_item()
-        self.limpar_selecao_cliente()
+        self.ui.tx_busca_cliente.setEnabled(True)
+        self.ui.bt_busca_cliente.setEnabled(True)
+        self.ui.tx_busca_cliente.setText("")
+        self.ui.tx_nome_cliente.setText("")
+        self.ui.cb_veiculo.setCurrentIndex(0)
+        self.ui.cb_veiculo.setEnabled(True)
+        self.ui.cb_veiculo.clear()
+        self.ui.bt_alterar_cliente.setHidden(True)
+
+        self.ui.tb_venda.clearContents()
+        self.ui.tb_venda.removeRow(0)
+        self.ui.tx_busca_cliente.setFocus()
+
+        self.recebeu_pagamento = False
+        self.finalizou = False
