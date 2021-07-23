@@ -7,6 +7,7 @@ if __name__ == '__main__':
     from Controller.tela_principal import exec_main
     from Controller.login import exec_login
     from Controller.configuracao_db import exec_conf_db
+    from Funcoes.pdf_venda import gerar_pdf
 
     conexao = Banco()
     conexao.conecta()
@@ -16,6 +17,7 @@ if __name__ == '__main__':
 
         create_tables()
         if Operador.verifica_operador_ativo():
+            gerar_pdf(7, '04325195000109', 4)
             exec_main()
         else:
             exec_login()

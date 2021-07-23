@@ -200,8 +200,7 @@ class Finalizar(QMainWindow):
         self.ui.tb_fin.setRowCount(0)
 
         v_fin = Venda_Fin()
-        v_fin.venda = Venda_Tmp()
-        v_fin.venda.id_venda = Venda_Tmp.get_cod_venda()
+        v_fin.id_venda = Venda_Tmp.get_cod_venda()
 
         dados = v_fin.get_fins_venda()
 

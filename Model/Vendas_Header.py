@@ -33,3 +33,18 @@ class Vendas_Header:
         conn.commit()
         cur.close()
         conn.close()
+
+    def get_venda_pdf(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"SELECT venda_valor_total, venda_total_descontos, (venda_valor_total + venda_total_descontos) "
+                    f"FROM vendas"
+                    f" WHERE venda_id = {self.id}")
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return row

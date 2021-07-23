@@ -379,7 +379,7 @@ class ListaEmpresa(QMainWindow):
             itens.append(emp_editar.site)
 
             emp_editar.endereco = Endereco()
-            emp_editar.endereco.id = self.empresa_selecionada.get_empresa_by_cnpj()[0][1]
+            emp_editar.endereco.id = self.empresa_selecionada.get_endereco_empresa()
             emp_editar.endereco.rua = self.ui.tx_rua.text().upper()
             itens.append(emp_editar.endereco.rua)
             emp_editar.endereco.bairro = self.ui.tx_bairro.text().upper()

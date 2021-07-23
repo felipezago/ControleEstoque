@@ -45,3 +45,26 @@ class Vendas:
         conn.commit()
         cur.close()
         conn.close()
+
+    def select_tb_pdf(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"""
+            SELECT venda_prod_serv_id, CASE 
+                                            WHEN venda_tipo = 'PRODUTO' THEN prod_desc
+                                            WHEN venda_tipo = 'SERVIÇO' THEN serv_desc 
+                                        END, 
+                                        venda_qtd, venda_valor, (venda_qtd * venda_valor), venda_desconto, 
+                                        ROUND(venda_valor * venda_qtd - venda_desconto) AS total
+                                        FROM vendas_itens
+            INNER JOIN produtos ON venda_prod_serv_id = prod_id
+            LEFT JOIN servicos ON venda_prod_serv_id = serv_id
+            WHERE venda_id = {self.id_venda}
+            """)
+        select = cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+        return select

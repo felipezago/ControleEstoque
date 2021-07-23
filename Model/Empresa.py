@@ -34,6 +34,23 @@ class Empresa:
 
         return row
 
+    def get_empresas_pdf(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"""
+        SELECT INITCAP(emp_nomefantasia), INITCAP(end_rua), end_numero, INITCAP(end_bairro), emp_fone, 
+        CONCAT(SUBSTR(emp_cnpj,1,2),'.',SUBSTR(emp_cnpj,3,3),'.',SUBSTR(emp_cnpj,6,3),'/',SUBSTR(emp_cnpj,9,4), '-', 
+        SUBSTR(emp_cnpj,13,2)), initcap(end_cidade), end_estado, emp_inscricaoestadual FROM empresas
+        INNER JOIN endereco ON emp_end_id = end_id
+        WHERE emp_cnpj = \'{self.cnpj}\'""")
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+
+        return row
+
     def get_empresa_by_cnpj(self):
         config = Banco()
         params = config.get_params()
@@ -47,6 +64,18 @@ class Empresa:
         cur.close()
         conn.close()
         return row
+
+    def get_endereco_empresa(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f'SELECT emp_end_id FROM empresas WHERE emp_cnpj = \'{self.cnpj}\'')
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+        for a in row:
+            return a
 
     def get_empresa_by_cnpj_all(self):
         config = Banco()

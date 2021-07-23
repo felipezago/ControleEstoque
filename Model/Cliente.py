@@ -8,6 +8,24 @@ class Cliente:
         self.id = id
         self.pessoa = pessoa
 
+    def get_cliente_pdf(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f'''SELECT INITCAP(pess_nome), 
+                    CONCAT(SUBSTR(pess_cpf,1,3),'.',SUBSTR(pess_cpf,4,3),'.',SUBSTR(pess_cpf,7,3),'-',
+                    SUBSTR(pess_cpf,10,2)), CONCAT(SUBSTR(pess_rg,1,2),'.',SUBSTR(pess_rg,3,3),'.',SUBSTR(pess_rg,6,3),
+                    '-',SUBSTR(pess_rg,9,1)), pess_celular, pess_fone, pess_email, INITCAP(end_rua), INITCAP(end_bairro)
+                    , end_numero, INITCAP(end_cidade), end_estado from cliente
+                    INNER JOIN pessoas ON clie_pessoa_id = pess_id
+                    INNER JOIN endereco ON pess_end_id = end_id
+                    WHERE clie_id = {self.id}''')
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+        return row
+
     def get_cliente_by_id(self):
         config = Banco()
         params = config.get_params()
