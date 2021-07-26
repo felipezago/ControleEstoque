@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
+from PIL.ImageQt import ImageQt
+from PyQt5.QtPrintSupport import QPrinter, QPrintDialog
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtCore import QSize
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap, QIcon, QPainter
 from Funcoes.configdb import Banco
 import psycopg2
 from pycep_correios import get_address_from_cep, WebService
 import bcrypt
+import tempfile
+from pdf2image import convert_from_path
 
 
 def LimpaFrame(frame):
@@ -221,6 +226,25 @@ def show_msg(tipo_msg="erro", title="", mensagem=""):
 def get_endereco(cep):
     address = get_address_from_cep(cep, webservice=WebService.CORREIOS)
     return address
+
+
+def print_dialog(self, img):
+    printer = QPrinter(QPrinter.HighResolution)
+    dialog = QPrintDialog(printer, self)
+
+    if dialog.exec_() == QPrintDialog.Accepted:
+        with tempfile.TemporaryDirectory() as path:
+            images = convert_from_path("../PDF/" + img, dpi=300, output_folder=path)
+            painter = QPainter()
+            painter.begin(printer)
+            for i, image in enumerate(images):
+                if i > 0:
+                    printer.newPage()
+                rect = painter.viewport()
+                img = ImageQt(image)
+                img_scaled = img.scaled(rect.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+                painter.drawImage(rect, img_scaled)
+            painter.end()
 
 
 if __name__ == '__main__':

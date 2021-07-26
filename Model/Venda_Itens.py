@@ -52,13 +52,15 @@ class Vendas:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f"""
-            SELECT venda_prod_serv_id, CASE 
-                                            WHEN venda_tipo = 'PRODUTO' THEN prod_desc
-                                            WHEN venda_tipo = 'SERVIÇO' THEN serv_desc 
-                                        END, 
-                                        venda_qtd, venda_valor, (venda_qtd * venda_valor), venda_desconto, 
-                                        ROUND(venda_valor * venda_qtd - venda_desconto) AS total
-                                        FROM vendas_itens
+            SELECT venda_prod_serv_id, 
+            CASE 
+            WHEN venda_tipo = 'PRODUTO' THEN prod_desc
+            WHEN venda_tipo = 'SERVIÇO' THEN serv_desc 
+            END, 
+            venda_qtd, CONCAT('R$ ', venda_valor) , CONCAT('R$ ', (venda_qtd * venda_valor::numeric)), 
+            CONCAT('R$ ', (venda_desconto)::numeric),
+            CONCAT('R$ ', (venda_valor * venda_qtd - venda_desconto)::numeric) AS total
+            FROM vendas_itens
             INNER JOIN produtos ON venda_prod_serv_id = prod_id
             LEFT JOIN servicos ON venda_prod_serv_id = serv_id
             WHERE venda_id = {self.id_venda}
@@ -68,3 +70,4 @@ class Vendas:
         cur.close()
         conn.close()
         return select
+

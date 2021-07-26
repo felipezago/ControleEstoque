@@ -1,3 +1,5 @@
+from site import venv
+
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from Model.Venda_Tmp import Venda_Tmp
@@ -56,7 +58,6 @@ class VendaTemp(QMainWindow):
         self.venda_selecionada = Venda_Tmp()
 
         self.venda_fin = Venda_Fin()
-        self.venda_fin.venda = Venda_Tmp()
 
         self.linha_selecionada = None
         self.codigo_cliente = None
@@ -294,7 +295,7 @@ class VendaTemp(QMainWindow):
         venda.status = status
 
         venda.inserir_venda()
-        self.venda_fin.venda.id_venda = Venda_Tmp.get_cod_venda()
+        self.venda_fin.venda_id = Venda_Tmp.get_cod_venda()
 
         self.limpa_campos_item()
         self.atualiza_tabela()
@@ -550,8 +551,7 @@ class VendaTemp(QMainWindow):
     @staticmethod
     def delete_fins():
         v_fin = Venda_Fin()
-        v_fin.venda = Venda_Tmp()
-        v_fin.venda.id = Venda_Tmp.get_cod_venda()
+        v_fin.venda_id = Venda_Tmp.get_cod_venda()
         v_fin.delete_fin_by_venda()
 
     def limpa_tela(self):

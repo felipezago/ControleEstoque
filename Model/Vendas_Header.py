@@ -39,7 +39,8 @@ class Vendas_Header:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT venda_valor_total, venda_total_descontos, (venda_valor_total + venda_total_descontos) "
+        cur.execute(f"SELECT venda_valor_total::numeric, venda_total_descontos::numeric, "
+                    f"(venda_valor_total + venda_total_descontos)::numeric "
                     f"FROM vendas"
                     f" WHERE venda_id = {self.id}")
         row = cur.fetchone()

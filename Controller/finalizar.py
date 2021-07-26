@@ -103,14 +103,13 @@ class Finalizar(QMainWindow):
         if self.ui.cb_pagamento.currentIndex() != 0:
             v_fin = Venda_Fin()
             v_fin.finalizadoras = Finalizadoras()
-            v_fin.venda = Venda_Tmp()
+            v_fin.venda_id = Venda_Tmp.get_cod_venda()
 
             indice_fin = self.ui.cb_pagamento.currentIndex()
             fin_id = self.ui.cb_pagamento.itemData(indice_fin)[0]
 
             v_fin.valor = float(self.ui.tx_valor.text())
             v_fin.finalizadoras.id = fin_id
-            v_fin.venda.id_venda = Venda_Tmp.get_cod_venda()
 
             try:
                 v_fin.inserir_fin_venda()
@@ -200,7 +199,7 @@ class Finalizar(QMainWindow):
         self.ui.tb_fin.setRowCount(0)
 
         v_fin = Venda_Fin()
-        v_fin.id_venda = Venda_Tmp.get_cod_venda()
+        v_fin.venda_id = Venda_Tmp.get_cod_venda()
 
         dados = v_fin.get_fins_venda()
 

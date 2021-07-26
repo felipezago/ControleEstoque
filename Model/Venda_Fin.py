@@ -15,7 +15,7 @@ class Venda_Fin:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT SUM(vendas_fin_valor) FROM vendas_fin WHERE vendas_id = {self.venda_id}')
+        cur.execute(f'SELECT SUM(vendas_fin_valor)::numeric FROM vendas_fin WHERE vendas_id = {self.venda_id}')
         row = cur.fetchone()
         cur.close()
         conn.close()
