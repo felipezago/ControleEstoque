@@ -148,6 +148,19 @@ class Finalizar(QMainWindow):
 
                     Vendas.inserir_venda()
                     Venda_Tmp.delete_venda()
+
+                    reply = QMessageBox.question(self, 'Imprimir?', f'Deseja imprimir o relatório da venda?',
+                                                 QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+
+                    if reply == QMessageBox.Yes:
+                        from Funcoes.funcoes import print_dialog
+                        from Funcoes.pdf_venda import gerar_pdf
+
+                        veiculo = v.veiculo.get_veic_by_placa()
+
+                        gerar_pdf(header.id, "04325195000109", veiculo[1])
+                        print_dialog(self, "venda.pdf")
+
                     self.close()
 
                 self.set_lbls()

@@ -234,7 +234,7 @@ def print_dialog(self, img):
 
     if dialog.exec_() == QPrintDialog.Accepted:
         with tempfile.TemporaryDirectory() as path:
-            images = convert_from_path("../PDF/" + img, dpi=300, output_folder=path)
+            images = convert_from_path("PDF/" + img, dpi=300, output_folder=path)
             painter = QPainter()
             painter.begin(printer)
             for i, image in enumerate(images):
