@@ -35,7 +35,7 @@ border: none</string>
    <widget class="QLabel" name="lb_FormProdutos">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>20</x>
       <y>10</y>
       <width>880</width>
       <height>30</height>
@@ -54,40 +54,10 @@ border-bottom: 2px solid #A2A2A2
      <string>FICHA CADASTRAL CLIENTE</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_Id">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
+   <widget class="QLabel" name="lb_nome">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>50</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border: 1px solid #A2A2A2;
-color: #000;
-font-size: 14px;
-font-family: &quot;Arial&quot;;
-font-weight: bold;
-
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lb_FormProdutos_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
+      <x>230</x>
       <y>60</y>
       <width>150</width>
       <height>20</height>
@@ -108,9 +78,9 @@ color: #797979
    <widget class="QLineEdit" name="tx_nome">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>85</y>
-      <width>641</width>
+      <x>230</x>
+      <y>80</y>
+      <width>421</width>
       <height>25</height>
      </rect>
     </property>
@@ -133,7 +103,7 @@ border: 1px solid red;
      <string>NOME COMPLETO</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormProdutos_3">
+   <widget class="QLabel" name="lb_cpfcnpj">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -154,7 +124,7 @@ color: #797979
      <string>CPF</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormProdutos_4">
+   <widget class="QLabel" name="lb_rg">
     <property name="geometry">
      <rect>
       <x>236</x>
@@ -871,10 +841,79 @@ border: 1px solid red;
       <normaloff>../../Imagens/search.png</normaloff>../../Imagens/search.png</iconset>
     </property>
    </widget>
+   <widget class="QLabel" name="lb_FormProdutos_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>TIPO DE CLIENTE</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_nivel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>201</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>PESSOA FISICA</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>PESSOA JURÍDICA</string>
+     </property>
+    </item>
+   </widget>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>tx_Id</tabstop>
   <tabstop>tx_nome</tabstop>
   <tabstop>tx_cpf</tabstop>
   <tabstop>tx_rg</tabstop>

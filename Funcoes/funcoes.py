@@ -246,6 +246,17 @@ def print_dialog(self, img):
                 painter.drawImage(rect, img_scaled)
             painter.end()
 
+    remove_pdf("venda")
+
+
+def remove_pdf(desc):
+    import os
+
+    dir_img = f"PDF/{desc}.png"
+
+    if os.path.isfile(dir_img):
+        os.remove(dir_img)
+
 
 if __name__ == '__main__':
     print(formatar_rg("139941357"))

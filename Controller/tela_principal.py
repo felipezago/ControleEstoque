@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QShortcut, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut, QLabel
 from PyQt5 import QtCore
 from Model.Operador import Operador
 from Funcoes.funcoes import exec_app
@@ -24,12 +24,14 @@ class TelaPrincipal(QMainWindow):
         from Funcoes.configdb import Banco
         from View.tela_principal import Ui_MainWindow
         from Model.Pessoa import Pessoa
+        from Model.Usuario import Usuario
         from PyQt5 import QtGui
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.dialogs = list()
 
+        self.usuario_operador = Usuario()
         self.pessoa_operador = Pessoa()
 
         palete = QtGui.QPalette()
@@ -54,9 +56,18 @@ class TelaPrincipal(QMainWindow):
         # setando variaveis
         self.ui.lbl_ip.setText("IP: " + retorna_ip())
         self.ui.lbl_bd.setText("Base de dados: " + Banco().get_params()['database'])
-        self.pessoa_operador.id = Operador.get_operador_atual()[0]
-        self.nome = self.pessoa_operador.get_pessoa_usuario_by_id()[3]
-        self.ui.lbl_usuario.setText("Usuário: " + self.nome)
+        self.usuario_operador.id = Operador.get_operador_atual()[0]
+        self.pessoa_operador.id = self.usuario_operador.get_usuario_by_id()[1]
+
+        nome = str(self.pessoa_operador.get_pessoa_usuario_by_id()[3]).title()
+        nivel = self.usuario_operador.get_usuario_by_id()[5]
+        self.ui.lbl_usuario.setText("Usuário: " + nome)
+
+        if nivel == "VENDEDOR":
+            self.ui.actionCadastroEmpresas.setVisible(False)
+            self.ui.actionCadastroUsuarios.setVisible(False)
+            self.ui.actionVisualizaEmpresas.setVisible(False)
+            self.ui.menuConfigura_o.menuAction().setVisible(False)
 
         # actions cadastro
         self.ui.actionCadastroUsuarios.triggered.connect(self.cadastro_usuarios)

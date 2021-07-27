@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication
+from Funcoes.funcoes import centralizar
 
 
 class Login(QMainWindow):
@@ -12,7 +13,7 @@ class Login(QMainWindow):
 
         # background images
         palete = QtGui.QPalette()
-        image = QtGui.QPixmap(resource_path('../Imagens/bg.png'))
+        image = QtGui.QPixmap(resource_path('../Imagens/login_bg.png'))
         brush = QtGui.QBrush(image)
         palete.setBrush(QtGui.QPalette.Background, brush)
         self.setPalette(palete)
@@ -27,16 +28,21 @@ class Login(QMainWindow):
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
 
         # eventos
-        self.ui.bt_login.clicked.connect(self.validarLogin)
+        self.ui.bt_login.clicked.connect(self.validar_login)
         self.ui.tx_user.returnPressed.connect(self.ui.tx_senha.setFocus)
-        self.ui.tx_senha.returnPressed.connect(self.validarLogin)
+        self.ui.tx_senha.returnPressed.connect(self.validar_login)
 
         self.usuarios = Usuario.get_todos_usuarios()
-        self.ui.bt_cadastrar.clicked.connect(self.cadastrar)
+
+        if self.usuarios:
+            self.ui.bt_cadastrar.hide()
+        else:
+            self.ui.bt_cadastrar.setHidden(False)
+            self.ui.bt_cadastrar.clicked.connect(self.cadastrar)
 
         self.operador = None
 
-    def validarLogin(self):
+    def validar_login(self):
         from Funcoes.configdb import Banco
         import psycopg2
         from Funcoes.funcoes import verificar_criptografia, exec_app
@@ -57,11 +63,11 @@ class Login(QMainWindow):
             # se encontrar o usuário
             if linha is not None:
                 # pega a senha e codifica
-                passwd = linha[3].encode()
+                passwd = linha[4].encode()
                 # se a senha criptografada bater
                 if verificar_criptografia(senha.encode(), passwd):
                     if not Operador.verifica_operador_ativo():
-                        Operador.inserir_operador(linha[1])
+                        Operador.inserir_operador(linha[0])
                         self.operador = Operador.get_operador_atual()
 
                     from Controller.tela_principal import TelaPrincipal
@@ -95,7 +101,6 @@ class Login(QMainWindow):
 
 def exec_login():
     import sys
-    from Funcoes.funcoes import centralizar
 
     app = QApplication(sys.argv)
     form = Login()

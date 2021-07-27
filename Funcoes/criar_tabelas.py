@@ -31,11 +31,17 @@ def create_tables():
             CREATE TABLE IF NOT EXISTS usuarios (
                 usu_id SERIAL PRIMARY KEY,
                 usu_pessoa_id INT,
+                usu_emp_cnpj VARCHAR(20),
                 usu_nome VARCHAR(255) NOT NULL UNIQUE,
                 usu_senha TEXT NOT NULL,
+                usu_nivel_acesso VARCHAR(20),
                 CONSTRAINT fk_usu_pess
                     FOREIGN KEY(usu_pessoa_id) 
                         REFERENCES pessoas(pess_id)
+                        ON DELETE CASCADE,
+                CONSTRAINT fk_usu_emp
+                    FOREIGN KEY(usu_emp_cnpj) 
+                        REFERENCES empresas(emp_cnpj)
                         ON DELETE CASCADE
             )
             """,
@@ -48,7 +54,6 @@ def create_tables():
             CREATE TABLE IF NOT EXISTS empresas (
                 emp_cnpj VARCHAR PRIMARY KEY,
                 emp_end_id INT,
-                emp_usuario_id INT,
                 emp_razaosocial VARCHAR(100) NOT NULL,
                 emp_nomefantasia VARCHAR(100) NOT NULL,
                 emp_inscricaoestadual VARCHAR(40),
@@ -58,10 +63,6 @@ def create_tables():
                 CONSTRAINT fk_emp_end
                     FOREIGN KEY(emp_end_id) 
                         REFERENCES endereco(end_id)
-                        ON DELETE CASCADE,
-                 CONSTRAINT fk_emp_usu
-                    FOREIGN KEY(emp_usuario_id) 
-                        REFERENCES usuarios(usu_id)
                         ON DELETE CASCADE
             )
             """,
@@ -229,8 +230,9 @@ def create_tables():
                            celular VARCHAR,
                            tipo VARCHAR,
                            usuario VARCHAR,
-                           senha VARCHAR
-
+                           senha VARCHAR,
+                           emp_cnpj VARCHAR,
+                           nivel_acesso VARCHAR
                    ) 
                    AS $$
                    DECLARE
@@ -249,8 +251,8 @@ def create_tables():
                        RETURNING pess_id INTO f_pess_id;
 
                        -- inserindo usuário
-                       INSERT INTO usuarios (usu_pessoa_id, usu_nome, usu_senha)
-                       VALUEs(f_pess_id, usuario, senha);
+                       INSERT INTO usuarios (usu_pessoa_id, usu_emp_cnpj, usu_nome, usu_senha, usu_nivel_acesso)
+                       VALUEs(f_pess_id, emp_cnpj, usuario, senha, nivel_acesso);
 
                    END;
                    $$
@@ -321,8 +323,7 @@ def create_tables():
                                inscricao VARCHAR,
                                fone VARCHAR,
                                site VARCHAR,
-                               email VARCHAR,
-                               usuario_logado INT
+                               email VARCHAR
                        ) 
                    AS $$
                    DECLARE
@@ -334,9 +335,10 @@ def create_tables():
                        RETURNING end_id INTO f_end_id;
 
                        -- inserindo empresa
-                           INSERT INTO empresas (emp_cnpj, emp_end_id, emp_usuario_id, emp_razaosocial, emp_nomefantasia, 
+                           INSERT INTO empresas (emp_cnpj, emp_end_id, emp_razaosocial, emp_nomefantasia
+                           , 
                                                  emp_inscricaoestadual, emp_email, emp_fone, emp_site) 
-                           VALUES (cnpj, f_end_id, usuario_logado, razaosocial, nomefantasia, inscricao, email,
+                           VALUES (cnpj, f_end_id, razaosocial, nomefantasia, inscricao, email,
                                   fone, site);
 
                        END;

@@ -245,3 +245,33 @@ class Empresa:
         finally:
             if conn is not None:
                 conn.close()
+
+    def ler_imagem_empresas_pdf(self, path_to_dir):
+        conn = None
+        try:
+            config = Banco()
+            params = config.get_params()
+            conn = psycopg2.connect(**params)
+            cur = conn.cursor()
+            cur.execute(""" SELECT emp_nomefantasia, img_ext, img_dados
+                            FROM emp_img
+                            INNER JOIN empresas on empresas.emp_cnpj = emp_img.emp_cnpj
+                            WHERE empresas.emp_cnpj = %s """,
+                        (self.cnpj,))
+            blob = cur.fetchone()
+
+            if blob is not None:
+                open(path_to_dir + str(blob[0]).replace(" ", "").strip() + '.' + blob[1], 'wb').write(blob[2])
+
+                cur.close()
+            else:
+                return False
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+            return False
+        else:
+            return True
+        finally:
+            if conn is not None:
+                conn.close()

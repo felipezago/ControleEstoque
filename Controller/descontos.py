@@ -72,7 +72,7 @@ class Descontos(QMainWindow):
                 if not self.tela_principal.recebeu_desconto_subtotal:
                     if valor <= 99.9:
                         if indice == 1:
-                            self.desconto_total += self.total * porcentagem
+                            self.desconto_total += float(self.total) * porcentagem
                             desconto_itens = self.desconto_total / Venda_Tmp.qtd_itens()
                             dados = Venda_Tmp.get_venda_atual()
 
@@ -263,9 +263,9 @@ class Descontos(QMainWindow):
                 self.ui.tb_itens_venda.setItem(i, 5, QTableWidgetItem(f"{linha[7]:.2f}"))
 
                 # item
-                if linha[5] == "SERVIÇO":
+                if linha[4] == "SERVIÇO":
                     serv = Servicos()
-                    serv.id = linha[4]
+                    serv.id = linha[3]
                     servico = serv.get_servico_by_id()
                     self.ui.tb_itens_venda.setItem(i, 1, QTableWidgetItem(str(servico[1])))
                     self.ui.tb_itens_venda.setItem(i, 2, QTableWidgetItem(str(servico[2])))

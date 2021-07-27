@@ -2,14 +2,16 @@ import psycopg2
 from Funcoes.configdb import Banco
 from Funcoes.funcoes import show_msg
 from Model.Pessoa import Pessoa
+from Model.Empresa import Empresa
 
 
 class Usuario:
-    def __init__(self, id="", pessoa: Pessoa = "", nome="", senha=""):
+    def __init__(self, id="", pessoa: Pessoa = "", empresa: Empresa = "", nome="", senha=""):
         self.nome = nome
         self.senha = senha
         self.id = id
         self.pessoa = pessoa
+        self.empresa = empresa
 
     def get_usuario_by_id(self):
         config = Banco()

@@ -35,16 +35,13 @@ def gerar_pdf(venda_id, emp_cnpj, clie_id):
 
     header = Vendas_Header()
     header.id = venda_id
-
     header_venda = header.get_venda_pdf()
-    print(header_venda)
 
     c = Cliente()
     c.id = clie_id
     cliente = c.get_cliente_pdf()
 
     pdf_venda = PDF_Venda(empresa=empresa, cliente=cliente)
-
     pdf_venda.set_font('helvetica', 'B', 10)
     pdf_venda.text(5, 85, "Venda:")
     pdf_venda.ln(55)
@@ -75,6 +72,3 @@ def gerar_pdf(venda_id, emp_cnpj, clie_id):
     pdf_venda.alias_nb_pages()
     pdf_venda.output("PDF/venda.pdf")
 
-
-if __name__ == '__main__':
-    gerar_pdf(7, '04325195000109', 4)

@@ -46,8 +46,24 @@ class PDF(FPDF):
         self.cell(380, 520, 'Pagina ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
     def imagex(self):
+        from Model.Empresa import Empresa
+        from Funcoes.funcoes import formatar_cpf_rg
+        import os
+
         self.set_xy(5, 5)
-        self.image("/home/felipe/Imagens/lz_mecanica.png", link='', type='', w=30, h=30)
+        emp = Empresa()
+        emp.cnpj = formatar_cpf_rg(self.empresa[5])
+        emp.nome_fantasia = self.empresa[0]
+
+        emp.ler_imagem_empresas_pdf("temp/")
+        nome_img = emp.nome_fantasia.upper().strip().replace(' ', '')
+        dir_img = f"temp/{nome_img}.png"
+
+        if os.path.isfile(dir_img):
+            self.image(dir_img, link='', type='', w=28, h=31)
+            os.remove(dir_img)
+        else:
+            self.image("Imagens/logo_fzr.png", link='', type='', w=28, h=31)
 
     def informacoes_cliente(self):
         self.set_font('helvetica', 'B', 10)

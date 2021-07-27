@@ -482,7 +482,7 @@ padding: 2px;
   <widget class="QLabel" name="lb_tituloClientes_4">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>520</x>
      <y>480</y>
      <width>161</width>
      <height>21</height>
@@ -1205,7 +1205,7 @@ background-color: #40a286
   <widget class="QLabel" name="lb_tituloClientes_5">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>550</x>
      <y>500</y>
      <width>131</width>
      <height>21</height>
@@ -1260,7 +1260,7 @@ margin-left: 30pt;</string>
   <widget class="QLabel" name="lb_tituloClientes_6">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>540</x>
      <y>520</y>
      <width>141</width>
      <height>21</height>
@@ -1359,7 +1359,7 @@ QPushButton:hover{
   <widget class="QLabel" name="lb_tituloClientes_7">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>540</x>
      <y>540</y>
      <width>141</width>
      <height>16</height>

@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 
 class Operador:
-    def __init__(self, usuario):
+    def __init__(self, usuario=""):
         self.usuario = usuario
 
     @staticmethod

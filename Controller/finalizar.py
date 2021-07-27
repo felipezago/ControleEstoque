@@ -123,6 +123,8 @@ class Finalizar(QMainWindow):
                     from Model.Venda_Itens import Vendas
                     from Model.Veiculo import Veiculo
                     from Model.Vendas_Header import Vendas_Header
+                    from Model.Usuario import Usuario
+                    from Model.Operador import Operador
 
                     self.tela_principal.finalizou = True
 
@@ -158,7 +160,12 @@ class Finalizar(QMainWindow):
 
                         veiculo = v.veiculo.get_veic_by_placa()
 
-                        gerar_pdf(header.id, "04325195000109", veiculo[1])
+                        usuario_operador = Usuario()
+                        usuario_operador.id = Operador.get_operador_atual()[0]
+                        usu = usuario_operador.get_usuario_by_id()
+                        cnpj = usu[2]
+
+                        gerar_pdf(header.id, cnpj, veiculo[1])
                         print_dialog(self, "venda.pdf")
 
                     self.close()

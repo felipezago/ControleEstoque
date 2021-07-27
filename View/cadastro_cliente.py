@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'View/UI/cadastro_clientes.ui'
+# Form implementation generated from reading ui file 'UI/cadastro_clientes.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -21,7 +21,7 @@ class Ui_ct_FormClientes(object):
 "border: none")
         self.fr_FormClientes.setObjectName("fr_FormClientes")
         self.lb_FormProdutos = QtWidgets.QLabel(self.fr_FormClientes)
-        self.lb_FormProdutos.setGeometry(QtCore.QRect(100, 10, 880, 30))
+        self.lb_FormProdutos.setGeometry(QtCore.QRect(20, 10, 880, 30))
         self.lb_FormProdutos.setStyleSheet("QLabel{\n"
 "font-size: 14px;\n"
 "font-family: \"Arial\";\n"
@@ -30,32 +30,17 @@ class Ui_ct_FormClientes(object):
 "border-bottom: 2px solid #A2A2A2\n"
 "}")
         self.lb_FormProdutos.setObjectName("lb_FormProdutos")
-        self.tx_Id = QtWidgets.QLineEdit(self.fr_FormClientes)
-        self.tx_Id.setEnabled(False)
-        self.tx_Id.setGeometry(QtCore.QRect(20, 10, 50, 30))
-        self.tx_Id.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border: 1px solid #A2A2A2;\n"
-"color: #000;\n"
-"font-size: 14px;\n"
-"font-family: \"Arial\";\n"
-"font-weight: bold;\n"
-"\n"
-"}")
-        self.tx_Id.setText("")
-        self.tx_Id.setAlignment(QtCore.Qt.AlignCenter)
-        self.tx_Id.setObjectName("tx_Id")
-        self.lb_FormProdutos_2 = QtWidgets.QLabel(self.fr_FormClientes)
-        self.lb_FormProdutos_2.setGeometry(QtCore.QRect(20, 60, 150, 20))
-        self.lb_FormProdutos_2.setStyleSheet("QLabel{\n"
+        self.lb_nome = QtWidgets.QLabel(self.fr_FormClientes)
+        self.lb_nome.setGeometry(QtCore.QRect(230, 60, 150, 20))
+        self.lb_nome.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
 "font-weight: bold;\n"
 "color: #797979\n"
 "}")
-        self.lb_FormProdutos_2.setObjectName("lb_FormProdutos_2")
+        self.lb_nome.setObjectName("lb_nome")
         self.tx_nome = QtWidgets.QLineEdit(self.fr_FormClientes)
-        self.tx_nome.setGeometry(QtCore.QRect(20, 85, 641, 25))
+        self.tx_nome.setGeometry(QtCore.QRect(230, 80, 421, 25))
         self.tx_nome.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_nome.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -68,24 +53,24 @@ class Ui_ct_FormClientes(object):
 "border: 1px solid red;\n"
 "}")
         self.tx_nome.setObjectName("tx_nome")
-        self.lb_FormProdutos_3 = QtWidgets.QLabel(self.fr_FormClientes)
-        self.lb_FormProdutos_3.setGeometry(QtCore.QRect(20, 120, 190, 20))
-        self.lb_FormProdutos_3.setStyleSheet("QLabel{\n"
+        self.lb_cpfcnpj = QtWidgets.QLabel(self.fr_FormClientes)
+        self.lb_cpfcnpj.setGeometry(QtCore.QRect(20, 120, 190, 20))
+        self.lb_cpfcnpj.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
 "font-weight: bold;\n"
 "color: #797979\n"
 "}")
-        self.lb_FormProdutos_3.setObjectName("lb_FormProdutos_3")
-        self.lb_FormProdutos_4 = QtWidgets.QLabel(self.fr_FormClientes)
-        self.lb_FormProdutos_4.setGeometry(QtCore.QRect(236, 120, 190, 20))
-        self.lb_FormProdutos_4.setStyleSheet("QLabel{\n"
+        self.lb_cpfcnpj.setObjectName("lb_cpfcnpj")
+        self.lb_rg = QtWidgets.QLabel(self.fr_FormClientes)
+        self.lb_rg.setGeometry(QtCore.QRect(236, 120, 190, 20))
+        self.lb_rg.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
 "font-weight: bold;\n"
 "color: #797979\n"
 "}")
-        self.lb_FormProdutos_4.setObjectName("lb_FormProdutos_4")
+        self.lb_rg.setObjectName("lb_rg")
         self.lb_FormProdutos_5 = QtWidgets.QLabel(self.fr_FormClientes)
         self.lb_FormProdutos_5.setGeometry(QtCore.QRect(20, 180, 196, 20))
         self.lb_FormProdutos_5.setStyleSheet("QLabel{\n"
@@ -398,13 +383,51 @@ class Ui_ct_FormClientes(object):
         self.bt_busca_cep.setGeometry(QtCore.QRect(120, 300, 31, 31))
         self.bt_busca_cep.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("View/UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_busca_cep.setIcon(icon)
         self.bt_busca_cep.setObjectName("bt_busca_cep")
+        self.lb_FormProdutos_3 = QtWidgets.QLabel(self.fr_FormClientes)
+        self.lb_FormProdutos_3.setGeometry(QtCore.QRect(20, 60, 161, 20))
+        self.lb_FormProdutos_3.setStyleSheet("QLabel{\n"
+"font-size: 12px;\n"
+"font-family: \"Arial Unicode MS\";\n"
+"font-weight: bold;\n"
+"color: #797979\n"
+"}")
+        self.lb_FormProdutos_3.setObjectName("lb_FormProdutos_3")
+        self.cb_nivel = QtWidgets.QComboBox(self.fr_FormClientes)
+        self.cb_nivel.setGeometry(QtCore.QRect(20, 80, 201, 25))
+        self.cb_nivel.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.cb_nivel.setStyleSheet("QComboBox{\n"
+"background: #CFCFCF;\n"
+"border-radius: 2px;\n"
+"color: #000;\n"
+"font: 13px \"Arial\" ;\n"
+"text-transform: uppercase\n"
+"}\n"
+"QComboBox:Focus {\n"
+"border: 1px solid red;\n"
+"}\n"
+" QComboBox::drop-down {\n"
+"     subcontrol-origin: padding;\n"
+"     subcontrol-position: top right;\n"
+"     width: 25px;\n"
+"     border-left-width: 1px;\n"
+"     border-left-color: darkgray;\n"
+"     border-left-style: solid; /* just a single line */\n"
+"     border-top-right-radius: 3px; /* same radius as the QComboBox */\n"
+"     border-bottom-right-radius: 3px;\n"
+" }\n"
+"QComboBox::down-arrow {\n"
+"     image: url(\"+self.resourcepath(\'Images/down.png\')+\");\n"
+" }\n"
+"")
+        self.cb_nivel.setObjectName("cb_nivel")
+        self.cb_nivel.addItem("")
+        self.cb_nivel.addItem("")
 
         self.retranslateUi(ct_FormClientes)
         QtCore.QMetaObject.connectSlotsByName(ct_FormClientes)
-        ct_FormClientes.setTabOrder(self.tx_Id, self.tx_nome)
         ct_FormClientes.setTabOrder(self.tx_nome, self.tx_cpf)
         ct_FormClientes.setTabOrder(self.tx_cpf, self.tx_rg)
         ct_FormClientes.setTabOrder(self.tx_rg, self.tx_Celular)
@@ -422,10 +445,10 @@ class Ui_ct_FormClientes(object):
         _translate = QtCore.QCoreApplication.translate
         ct_FormClientes.setWindowTitle(_translate("ct_FormClientes", "Cadastro de Clientes"))
         self.lb_FormProdutos.setText(_translate("ct_FormClientes", "FICHA CADASTRAL CLIENTE"))
-        self.lb_FormProdutos_2.setText(_translate("ct_FormClientes", "NOME"))
+        self.lb_nome.setText(_translate("ct_FormClientes", "NOME"))
         self.tx_nome.setPlaceholderText(_translate("ct_FormClientes", "NOME COMPLETO"))
-        self.lb_FormProdutos_3.setText(_translate("ct_FormClientes", "CPF"))
-        self.lb_FormProdutos_4.setText(_translate("ct_FormClientes", "RG"))
+        self.lb_cpfcnpj.setText(_translate("ct_FormClientes", "CPF"))
+        self.lb_rg.setText(_translate("ct_FormClientes", "RG"))
         self.lb_FormProdutos_5.setText(_translate("ct_FormClientes", "CELULAR"))
         self.tx_Celular.setInputMask(_translate("ct_FormClientes", "(00) 00000-0000"))
         self.tx_Celular.setText(_translate("ct_FormClientes", "() -"))
@@ -447,3 +470,6 @@ class Ui_ct_FormClientes(object):
         self.lb_FormProdutos_14.setText(_translate("ct_FormClientes", "CIDADE"))
         self.lb_FormProdutos_15.setText(_translate("ct_FormClientes", "ESTADO"))
         self.bt_busca_cep.setAccessibleName(_translate("ct_FormClientes", "BUSCA CEP"))
+        self.lb_FormProdutos_3.setText(_translate("ct_FormClientes", "TIPO DE CLIENTE"))
+        self.cb_nivel.setItemText(0, _translate("ct_FormClientes", "PESSOA FISICA"))
+        self.cb_nivel.setItemText(1, _translate("ct_FormClientes", "PESSOA JURÍDICA"))

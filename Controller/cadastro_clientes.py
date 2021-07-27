@@ -6,7 +6,6 @@ class CadastroClientes(QMainWindow):
         super(CadastroClientes, self).__init__(parent)
         from View.cadastro_cliente import Ui_ct_FormClientes
         from PyQt5 import QtCore
-        from Model.Cliente import Cliente
 
         self.ui = Ui_ct_FormClientes()
         self.ui.setupUi(self)
@@ -15,9 +14,6 @@ class CadastroClientes(QMainWindow):
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
-
-        self.novo_id = Cliente.get_new_cliente()
-        self.ui.tx_Id.setText(str(self.novo_id))
 
         self.ui.tx_nome.setMaxLength(60)
         self.ui.tx_Email.setMaxLength(50)
@@ -32,6 +28,21 @@ class CadastroClientes(QMainWindow):
         self.ui.tx_Cep.returnPressed.connect(self.busca_cep)
         self.ui.bt_busca_cep.clicked.connect(self.busca_cep)
         self.ui.tx_Cep.textChanged.connect(self.enable_cidade_estado)
+        self.ui.cb_nivel.currentIndexChanged.connect(self.altera_tipo_cliente)
+
+    def altera_tipo_cliente(self):
+        if self.ui.cb_nivel.currentIndex() == 0:
+            self.ui.lb_rg.show()
+            self.ui.tx_rg.show()
+            self.ui.lb_nome.setText("NOME")
+            self.ui.lb_cpfcnpj.setText("CPF")
+            self.ui.tx_cpf.setInputMask("###.###.###-##")
+        else:
+            self.ui.lb_rg.hide()
+            self.ui.tx_rg.hide()
+            self.ui.lb_nome.setText("NOME FANTASIA")
+            self.ui.lb_cpfcnpj.setText("CNPJ")
+            self.ui.tx_cpf.setInputMask("##.###.###/####-##")
 
     def enable_cidade_estado(self):
         if not self.ui.tx_Cidade.isEnabled():

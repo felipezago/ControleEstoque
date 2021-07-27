@@ -35,7 +35,7 @@ border: none</string>
    <widget class="QLabel" name="lb_FormFornecedor_21">
     <property name="geometry">
      <rect>
-      <x>670</x>
+      <x>680</x>
       <y>60</y>
       <width>150</width>
       <height>20</height>
@@ -131,8 +131,8 @@ color: #797979
    <widget class="QLabel" name="lb_FormFornecedor_23">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>120</y>
+      <x>680</x>
+      <y>115</y>
       <width>150</width>
       <height>20</height>
      </rect>
@@ -510,7 +510,7 @@ color: #797979
 }</string>
     </property>
     <property name="text">
-     <string>Email</string>
+     <string>EMAIL</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="tx_Cidade">
@@ -550,8 +550,8 @@ border: 1px solid red;
    <widget class="QLineEdit" name="tx_senha">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>145</y>
+      <x>680</x>
+      <y>140</y>
       <width>300</width>
       <height>25</height>
      </rect>
@@ -693,7 +693,7 @@ background-color: #40a286
      <rect>
       <x>20</x>
       <y>315</y>
-      <width>131</width>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -725,7 +725,7 @@ border: 1px solid red;
    <widget class="QLineEdit" name="tx_usuario">
     <property name="geometry">
      <rect>
-      <x>670</x>
+      <x>680</x>
       <y>85</y>
       <width>300</width>
       <height>25</height>
@@ -927,8 +927,8 @@ border: 1px solid red;
    <widget class="QLineEdit" name="tx_senha2">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>205</y>
+      <x>680</x>
+      <y>200</y>
       <width>300</width>
       <height>25</height>
      </rect>
@@ -958,8 +958,8 @@ border: 1px solid red;
    <widget class="QLabel" name="lb_FormFornecedor_24">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>180</y>
+      <x>680</x>
+      <y>175</y>
       <width>271</width>
       <height>20</height>
      </rect>
@@ -974,6 +974,193 @@ color: #797979
     </property>
     <property name="text">
      <string>DIGITE A SENHA NOVAMENTE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_busca_cep">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>310</y>
+      <width>21</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="accessibleName">
+     <string>BUSCA CEP</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../Imagens/search.png</normaloff>../../Imagens/search.png</iconset>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_nivel">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>320</y>
+      <width>291</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>SELECIONE</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>VENDEDOR</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>GERENTE</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="cb_empresa">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>260</y>
+      <width>271</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>SELECIONE</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_3">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>300</y>
+      <width>215</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>NÍVEL DE ACESSO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_9">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>240</y>
+      <width>215</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>EMPRESA</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_add_emp">
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>260</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #7AB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
