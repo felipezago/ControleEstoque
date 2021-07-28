@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import QMainWindow
 
 
 class CadastroEmpresas(QMainWindow):
-    def __init__(self):
-        super(CadastroEmpresas, self).__init__()
+    def __init__(self, parent=None):
+        super(CadastroEmpresas, self).__init__(parent)
         from View.cadastro_empresa import Ui_ct_empresa
         from PyQt5 import QtCore
         from Funcoes.funcoes import IconeBotaoMenu, resource_path
@@ -129,63 +129,37 @@ class CadastroEmpresas(QMainWindow):
 
     def salvar(self):
         from PyQt5.QtWidgets import QMessageBox
-        from Model.Operador import Operador
-        from Funcoes.funcoes import formatar_cpf_rg
-        from Funcoes.configdb import Banco
-        from Model.Usuario import Usuario
+        from Funcoes.funcoes import retirar_formatacao
         from Model.Empresa import Empresa
-        from Model.Pessoa import Pessoa
-        import psycopg2
 
-        # campos empresa
-        nome_fantasia = self.ui.tx_NomeFantasia.text().upper()
-        razao_social = self.ui.tx_RazaoSocial.text().upper()
-        cnpj = self.ui.tx_Cnpj.text().upper()
-        inscricao = self.ui.tx_IE.text().upper()
-        fone = self.ui.tx_TelefoneEmpresa.text().lower()
-        site = self.ui.tx_SiteEmpresa.text().upper()
-        email = self.ui.tx_EmailEmpresa.text()
+        emp_inserir = Empresa()
 
-        # campos endereço
-        cep = self.ui.tx_CepEmpresa.text().upper()
-        rua = self.ui.tx_Endereco.text().upper()
-        nro = self.ui.tx_NumEmpresa.text().upper()
-        bairro = self.ui.tx_BairroEmpresa.text().upper()
-        cidade = self.ui.tx_CidadeEmpresa.text().upper()
-        estado = self.ui.tx_EstadoEmpresa.text().upper()
+        emp_inserir.nome_fantasia = self.ui.tx_NomeFantasia.text().upper()
+        emp_inserir.razao_social = self.ui.tx_RazaoSocial.text().upper()
+        emp_inserir.cnpj = retirar_formatacao(self.ui.tx_Cnpj.text().upper())
+        emp_inserir.inscricao = self.ui.tx_IE.text().upper()
+        emp_inserir.fone = self.ui.tx_TelefoneEmpresa.text().lower()
+        emp_inserir.site = self.ui.tx_SiteEmpresa.text().upper()
+        emp_inserir.email = self.ui.tx_EmailEmpresa.text()
+        emp_inserir.cep = self.ui.tx_CepEmpresa.text().upper()
+        emp_inserir.rua = self.ui.tx_Endereco.text().upper()
+        emp_inserir.nro = self.ui.tx_NumEmpresa.text().upper()
+        emp_inserir.bairro = self.ui.tx_BairroEmpresa.text().upper()
+        emp_inserir.cidade = self.ui.tx_CidadeEmpresa.text().upper()
+        emp_inserir.estado = self.ui.tx_EstadoEmpresa.text().upper()
 
-        conn = None
         try:
-            config = Banco()
-            params = config.get_params()
-            conn = psycopg2.connect(**params)
-            cur = conn.cursor()
-
-            usu_id = Operador.get_operador_atual()[0]
-            usuario = Usuario()
-            usuario.pessoa = Pessoa()
-            usuario.pessoa.id = int(usu_id)
-            u = usuario.get_usuario_by_pessoa()
-
-            cur.execute(f"CALL add_empresa(\'{rua}\', \'{bairro}\', \'{nro}\', \'{cidade}\', \'{estado}\', "
-                        f"\'{cep}\', \'{formatar_cpf_rg(cnpj)}\', \'{nome_fantasia}\', \'{razao_social}\',"
-                        f"\'{inscricao}\', \'{fone}\', \'{site}\', \'{email}\', "
-                        f"{u[0]})")
-            conn.commit()
-            cur.close()
+            emp_inserir.inserir()
 
             if self.caminho_img:
-                emp = Empresa()
-                emp.cnpj = formatar_cpf_rg(cnpj)
-                emp.gravar_imagem_empresas(self.caminho_img, "png")
+                emp_inserir.cnpj = retirar_formatacao(emp_inserir.cnpj)
+                emp_inserir.gravar_imagem_empresas(self.caminho_img, "png")
 
         except Exception as error:
             print(error)
             QMessageBox.about(self, "Erro", str(error))
         else:
             QMessageBox.about(self, "Sucesso", "Cadastro efetuado com sucesso!")
-
-        conn.close()
 
     def sair(self):
         self.close()

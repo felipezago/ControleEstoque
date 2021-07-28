@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>443</height>
+    <width>678</width>
+    <height>460</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@ border: none</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>681</width>
      <height>500</height>
     </rect>
    </property>
@@ -35,8 +35,8 @@ border: none</string>
    <widget class="QLabel" name="lb_FormFornecedor_21">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>60</y>
+      <x>20</x>
+      <y>240</y>
       <width>150</width>
       <height>20</height>
      </rect>
@@ -86,53 +86,11 @@ border: 1px solid red;
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormFornecedor_27">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>290</y>
-      <width>50</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: bold;
-color: #797979
-}</string>
-    </property>
-    <property name="text">
-     <string>Nº</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lb_FormFornecedor_28">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>290</y>
-      <width>50</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: bold;
-color: #797979
-}</string>
-    </property>
-    <property name="text">
-     <string>CEP</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="lb_FormFornecedor_23">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>115</y>
+      <x>20</x>
+      <y>295</y>
       <width>150</width>
       <height>20</height>
      </rect>
@@ -147,27 +105,6 @@ color: #797979
     </property>
     <property name="text">
      <string>SENHA</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lb_FormFornecedor_20">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>345</y>
-      <width>120</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: bold;
-color: #797979
-}</string>
-    </property>
-    <property name="text">
-     <string>BAIRRO</string>
     </property>
    </widget>
    <widget class="QLabel" name="lb_FormFornecedor_17">
@@ -221,27 +158,6 @@ border: 1px solid red;
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormFornecedor_26">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>345</y>
-      <width>120</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: bold;
-color: #797979
-}</string>
-    </property>
-    <property name="text">
-     <string>CIDADE</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="tx_Telefone">
     <property name="geometry">
      <rect>
@@ -293,27 +209,6 @@ color: #797979
      <string>TELEFONE</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormFornecedor_16">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>345</y>
-      <width>70</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: bold;
-color: #797979
-}</string>
-    </property>
-    <property name="text">
-     <string>ESTADO</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="lb_FormFornecedor_6">
     <property name="geometry">
      <rect>
@@ -333,74 +228,6 @@ color: #797979
     </property>
     <property name="text">
      <string>RG</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="tx_Bairro">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>370</y>
-      <width>260</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border-radius: 2px;
-color: #000;
-font: 13px &quot;Arial&quot; ;
-text-transform: uppercase
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="tx_Estado">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>370</y>
-      <width>70</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border-radius: 2px;
-color: #000;
-font: 13px &quot;Arial&quot; ;
-text-transform: uppercase
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="tx_cpf">
@@ -431,40 +258,6 @@ border: 1px solid red;
     </property>
     <property name="text">
      <string>..-</string>
-    </property>
-    <property name="placeholderText">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="tx_Num">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>315</y>
-      <width>70</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border-radius: 2px;
-color: #000;
-font: 13px &quot;Arial&quot; ;
-text-transform: uppercase
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
     <property name="placeholderText">
      <string/>
@@ -513,45 +306,11 @@ color: #797979
      <string>EMAIL</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_Cidade">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>370</y>
-      <width>260</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border-radius: 2px;
-color: #000;
-font: 13px &quot;Arial&quot; ;
-text-transform: uppercase
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="tx_senha">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>140</y>
+      <x>20</x>
+      <y>320</y>
       <width>300</width>
       <height>25</height>
      </rect>
@@ -581,8 +340,8 @@ border: 1px solid red;
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>400</y>
+      <x>-330</x>
+      <y>420</y>
       <width>1000</width>
       <height>40</height>
      </rect>
@@ -688,45 +447,11 @@ background-color: #40a286
      </property>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="tx_cep">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>315</y>
-      <width>101</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border-radius: 2px;
-color: #000;
-font: 13px &quot;Arial&quot; ;
-text-transform: uppercase
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-    </property>
-    <property name="inputMask">
-     <string>99999-999</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>123456789</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="tx_usuario">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>85</y>
+      <x>20</x>
+      <y>265</y>
       <width>300</width>
       <height>25</height>
      </rect>
@@ -749,27 +474,6 @@ border: 1px solid red;
      <string>Usuário</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormFornecedor_29">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>290</y>
-      <width>250</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: bold;
-color: #797979
-}</string>
-    </property>
-    <property name="text">
-     <string>ENDEREÇO</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="lb_FormFornecedor_9">
     <property name="geometry">
      <rect>
@@ -789,40 +493,6 @@ color: #797979
     </property>
     <property name="text">
      <string>CELULAR</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="tx_Endereco">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>315</y>
-      <width>400</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border-radius: 2px;
-color: #000;
-font: 13px &quot;Arial&quot; ;
-text-transform: uppercase
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="tx_Email">
@@ -873,29 +543,6 @@ color: #797979
      <string>CPF</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormFornecedor_31">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>250</y>
-      <width>630</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 14px;
-font-family: &quot;Arial&quot;;
-font-weight: normal;
-
-border-bottom: 2px solid #A2A2A2;
-color: #797979
-}</string>
-    </property>
-    <property name="text">
-     <string>ENDEREÇO</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="tx_nome">
     <property name="geometry">
      <rect>
@@ -927,8 +574,8 @@ border: 1px solid red;
    <widget class="QLineEdit" name="tx_senha2">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>200</y>
+      <x>20</x>
+      <y>380</y>
       <width>300</width>
       <height>25</height>
      </rect>
@@ -958,8 +605,8 @@ border: 1px solid red;
    <widget class="QLabel" name="lb_FormFornecedor_24">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>175</y>
+      <x>20</x>
+      <y>355</y>
       <width>271</width>
       <height>20</height>
      </rect>
@@ -976,31 +623,11 @@ color: #797979
      <string>DIGITE A SENHA NOVAMENTE</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="bt_busca_cep">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>310</y>
-      <width>21</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="accessibleName">
-     <string>BUSCA CEP</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../../Imagens/search.png</normaloff>../../Imagens/search.png</iconset>
-    </property>
-   </widget>
    <widget class="QComboBox" name="cb_nivel">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>320</y>
+      <x>350</x>
+      <y>340</y>
       <width>291</width>
       <height>25</height>
      </rect>
@@ -1053,8 +680,8 @@ QComboBox::down-arrow {
    <widget class="QComboBox" name="cb_empresa">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>260</y>
+      <x>350</x>
+      <y>270</y>
       <width>271</width>
       <height>25</height>
      </rect>
@@ -1094,8 +721,8 @@ QComboBox::down-arrow {
    <widget class="QLabel" name="lb_FormProdutos_3">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>300</y>
+      <x>350</x>
+      <y>310</y>
       <width>215</width>
       <height>20</height>
      </rect>
@@ -1115,7 +742,7 @@ color: #797979
    <widget class="QLabel" name="lb_FormProdutos_9">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>350</x>
       <y>240</y>
       <width>215</width>
       <height>20</height>
@@ -1136,8 +763,8 @@ color: #797979
    <widget class="QPushButton" name="bt_add_emp">
     <property name="geometry">
      <rect>
-      <x>950</x>
-      <y>260</y>
+      <x>620</x>
+      <y>270</y>
       <width>25</width>
       <height>25</height>
      </rect>
@@ -1172,14 +799,24 @@ background-color: #40a286
   <tabstop>tx_Celular</tabstop>
   <tabstop>tx_Telefone</tabstop>
   <tabstop>tx_Email</tabstop>
-  <tabstop>tx_cep</tabstop>
-  <tabstop>tx_Endereco</tabstop>
-  <tabstop>tx_Num</tabstop>
-  <tabstop>tx_Bairro</tabstop>
-  <tabstop>tx_Cidade</tabstop>
-  <tabstop>tx_Estado</tabstop>
   <tabstop>tx_usuario</tabstop>
   <tabstop>tx_senha</tabstop>
+  <tabstop>tx_senha2</tabstop>
+  <tabstop>cb_empresa</tabstop>
+  <tabstop>bt_add_emp</tabstop>
+  <tabstop>cb_nivel</tabstop>
+  <tabstop>tx_Celular_2</tabstop>
+  <tabstop>tx_rg_2</tabstop>
+  <tabstop>tx_Telefone_2</tabstop>
+  <tabstop>tx_cpf_2</tabstop>
+  <tabstop>tx_senha_2</tabstop>
+  <tabstop>tx_usuario_2</tabstop>
+  <tabstop>tx_Email_2</tabstop>
+  <tabstop>tx_nome_2</tabstop>
+  <tabstop>tx_senha2_2</tabstop>
+  <tabstop>cb_nivel_2</tabstop>
+  <tabstop>cb_empresa_2</tabstop>
+  <tabstop>bt_add_emp_2</tabstop>
  </tabstops>
  <resources/>
  <connections/>

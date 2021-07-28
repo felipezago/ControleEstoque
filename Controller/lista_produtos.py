@@ -287,7 +287,7 @@ class ListaProdutos(QMainWindow):
         self.produto_selecionado.fornecedor = Fornecedor()
         self.produto_selecionado.fornecedor.id = p[1]
         forn_selecionado = self.produto_selecionado.fornecedor.get_fornecedor_by_id()
-        self.produto_selecionado.fornecedor.nome = forn_selecionado[2]
+        self.produto_selecionado.fornecedor.nome = forn_selecionado[1]
 
         # categoria
         self.produto_selecionado.categoria = Categoria()
@@ -357,7 +357,7 @@ class ListaProdutos(QMainWindow):
             indice_forn = self.ui.cb_fornecedor.currentIndex()
             prod_editar.fornecedor.id = self.ui.cb_fornecedor.itemData(indice_forn)[0]
             forn_editar = prod_editar.fornecedor.get_fornecedor_by_id()
-            nome_forn = forn_editar[2]
+            nome_forn = forn_editar[1]
             itens.append(nome_forn)
 
             prod_editar.categoria = Categoria()

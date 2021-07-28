@@ -94,11 +94,11 @@ class CadastroVeiculos(QMainWindow):
         from Model.Veiculo import Veiculo
         from Model.Pessoa import Pessoa
         from PyQt5.QtWidgets import QMessageBox
-        from Funcoes.funcoes import formatar_cpf_rg
+        from Funcoes.funcoes import retirar_formatacao
         v = Veiculo()
         v.cliente = Pessoa()
 
-        v.placa = formatar_cpf_rg(self.ui.tx_placa.text().upper())
+        v.placa = retirar_formatacao(self.ui.tx_placa.text().upper())
         v.marca = self.ui.tx_marca.text().upper()
         v.modelo = self.ui.tx_modelo.text().upper()
 

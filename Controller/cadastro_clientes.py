@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QInputDialog, QLineEdit, QMessageBox
 from psycopg2.extensions import JSON
 from Funcoes.APIs import get_empresa_from_cnpj
-from Funcoes.funcoes import formatar_cpf_rg
+from Funcoes.funcoes import retirar_formatacao
 
 
 class CadastroClientes(QMainWindow):
@@ -77,11 +77,11 @@ class CadastroClientes(QMainWindow):
             self.dialog_cnpj()
 
     def preenche_campos_cnpj(self, dados: JSON):
-        self.ui.tx_cpf.setText(formatar_cpf_rg(dados['cnpj']))
+        self.ui.tx_cpf.setText(retirar_formatacao(dados['cnpj']))
         self.ui.tx_nome.setText(dados['fantasia'])
         self.ui.tx_Email.setText(dados['email'])
         self.ui.tx_Telefone.setText(dados['telefone'])
-        self.ui.tx_Cep.setText(formatar_cpf_rg(dados['cep']))
+        self.ui.tx_Cep.setText(retirar_formatacao(dados['cep']))
         self.ui.tx_Cidade.setText(dados['municipio'])
         self.ui.tx_Estado.setText(dados['uf'])
         self.ui.tx_Bairro.setText(dados['bairro'])
@@ -89,7 +89,7 @@ class CadastroClientes(QMainWindow):
         self.ui.tx_Numero.setText(dados['numero'])
 
     def busca_cnpj(self):
-        text = str(formatar_cpf_rg(self.ui.tx_cpf.text())).strip()
+        text = str(retirar_formatacao(self.ui.tx_cpf.text())).strip()
         response = get_empresa_from_cnpj(text)
         self.limpa_campos()
         if response.status_code == 200:
@@ -105,13 +105,13 @@ class CadastroClientes(QMainWindow):
             QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
 
     def dialog_cnpj(self):
-        from Funcoes.funcoes import formatar_cpf_rg
+        from Funcoes.funcoes import retirar_formatacao
 
         while True:
             text, ok = QInputDialog().getText(self, "CNPJ Online",
                                               "Informe o CNPJ para buscar os dados da empresa: ", QLineEdit.Normal)
             if ok and text:
-                text = str(formatar_cpf_rg(text)).strip()
+                text = str(retirar_formatacao(text)).strip()
                 response = get_empresa_from_cnpj(text)
                 if response.status_code == 200:
                     dados = response.json()
@@ -197,44 +197,29 @@ class CadastroClientes(QMainWindow):
             self.salvar()
 
     def salvar(self):
-        import psycopg2
         from PyQt5.QtWidgets import QMessageBox
-        from Funcoes.configdb import Banco
-        from Funcoes.funcoes import formatar_cpf_rg
+        from Model.Cliente import Cliente
 
-        # campos usuário
-        nome = self.ui.tx_nome.text().upper()
-        cpf = self.ui.tx_cpf.text().upper()
-        rg = self.ui.tx_rg.text().upper()
-        telefone = self.ui.tx_Telefone.text().upper()
-        email = self.ui.tx_Email.text().lower()
-        celular = self.ui.tx_Celular.text().upper()
-        tipo = "FISICA" if self.ui.cb_nivel.currentIndex() == 0 else "JURIDICA"
+        cli_inserir = Cliente()
+        cli_inserir.nome = self.ui.tx_nome.text().upper()
+        cli_inserir.cpf = self.ui.tx_cpf.text().upper()
+        cli_inserir.rg = self.ui.tx_rg.text().upper()
+        cli_inserir.telefone = self.ui.tx_Telefone.text().upper()
+        cli_inserir.email = self.ui.tx_Email.text().lower()
+        cli_inserir.celular = self.ui.tx_Celular.text().upper()
+        cli_inserir.tipo = "FISICA" if self.ui.cb_nivel.currentIndex() == 0 else "JURIDICA"
+        cli_inserir.cep = self.ui.tx_Cep.text().upper()
+        cli_inserir.rua = self.ui.tx_Endereco.text().upper()
+        cli_inserir.nro = self.ui.tx_Numero.text().upper()
+        cli_inserir.bairro = self.ui.tx_Bairro.text().upper()
+        cli_inserir.cidade = self.ui.tx_Cidade.text().upper()
+        cli_inserir.estado = self.ui.tx_Estado.text().upper()
 
-        # campos endereço
-        cep = self.ui.tx_Cep.text().upper()
-        rua = self.ui.tx_Endereco.text().upper()
-        nro = self.ui.tx_Numero.text().upper()
-        bairro = self.ui.tx_Bairro.text().upper()
-        cidade = self.ui.tx_Cidade.text().upper()
-        estado = self.ui.tx_Estado.text().upper()
-
-        conn = None
         try:
-            config = Banco()
-            params = config.get_params()
-            conn = psycopg2.connect(**params)
-            cur = conn.cursor()
-            cur.execute(f"CALL add_clientes(\'{rua}\', \'{bairro}\', \'{nro}\', \'{cidade}\', \'{estado}\', "
-                        f"\'{cep}\', \'{formatar_cpf_rg(cpf)}\', \'{nome}\', \'{telefone}\',\'{email}\', "
-                        f"\'{formatar_cpf_rg(rg)}\', \'{celular}\', 'CLIENTE', \'{tipo}\')")
-            conn.commit()
-            cur.close()
-
+            cli_inserir.inserir()
         except Exception as error:
             QMessageBox.about(self, "Erro", str(error))
         else:
             QMessageBox.about(self, "Sucesso", "Cadastro efetuado com sucesso!")
 
-        conn.close()
         self.limpa_campos()

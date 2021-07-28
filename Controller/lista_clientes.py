@@ -2,10 +2,7 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Cliente import Cliente
 from PyQt5 import QtCore
-from Model.Endereco import Endereco
-from Model.Pessoa import Pessoa
-from Funcoes.funcoes import formatar_cpf, formatar_rg
-from Funcoes.funcoes import formatar_cpf, formatar_rg
+from Funcoes.funcoes import formatar_cpf, formatar_rg, formatar_cnpj
 
 
 class EventFilter(QtCore.QObject):
@@ -37,7 +34,6 @@ class ListaClientes(QMainWindow):
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
 
         self.cliente_selecionado = Cliente()
-        self.cliente_selecionado.pessoa = Pessoa()
         self.linha_selecionada = None
         self.adicionando = False
         self.filtrado = False
@@ -50,7 +46,6 @@ class ListaClientes(QMainWindow):
         self.ui.bt_salvar.clicked.connect(self.editar)
         self.ui.bt_refresh.clicked.connect(self.dados_tabela)
         self.ui.bt_excluir.clicked.connect(self.excluir)
-        self.ui.bt_novo.clicked.connect(self.novo)
 
         # ação da busca
         self.ui.bt_busca.clicked.connect(self.buscar)
@@ -171,12 +166,11 @@ class ListaClientes(QMainWindow):
         self.ui.tb_clientes.setRowCount(0)
 
         cli = Cliente()
-        cli.pessoa = Pessoa()
 
         if self.ui.cb_clientes.currentIndex() == 1:
-            cli.pessoa.nome = self.ui.tx_busca.text()
-            if cli.pessoa.nome:
-                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_nome", cli.pessoa.nome.upper(), 'CLIENTE')
+            cli.nome = self.ui.tx_busca.text()
+            if cli.nome:
+                dados = cli.get_cliente_by_desc("clie_nome", cli.nome.upper())
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -190,17 +184,17 @@ class ListaClientes(QMainWindow):
                 self.dados_tabela()
                 return
         elif self.ui.cb_clientes.currentIndex() == 2:
-            cli.pessoa.cpf = self.ui.tx_busca.text()
-            if cli.pessoa.cpf:
-                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_cpf_cnpj", cli.pessoa.cpf, 'CLIENTE')
+            cli.cpf = self.ui.tx_busca.text()
+            if cli.cpf:
+                dados = cli.get_cliente_by_desc("clie_cpf_cnpj", cli.cpf)
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
                 return
         else:
-            cli.pessoa.rg = self.ui.tx_busca.text()
-            if cli.pessoa.rg:
-                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_rg", cli.pessoa.rg, 'CLIENTE')
+            cli.rg = self.ui.tx_busca.text()
+            if cli.rg:
+                dados = cli.get_cliente_by_desc("clie_rg", cli.rg)
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -213,7 +207,15 @@ class ListaClientes(QMainWindow):
             for i, linha in enumerate(dados):
                 self.ui.tb_clientes.insertRow(i)
                 for j in range(0, 13):
-                    self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
+                    if j == 1:
+                        if len(linha[j]) >= 14:
+                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
+                        else:
+                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
+                    elif j == 5:
+                        self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_rg(str(linha[j]))))
+                    else:
+                        self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")
@@ -231,46 +233,24 @@ class ListaClientes(QMainWindow):
         self.cliente_selecionado.id = tb.item(tb.currentRow(), 0).text()
         c = self.cliente_selecionado.get_cliente_by_id()
 
-        # pessoa
         if c is not None:
-            # pessoa
-            if c is not None:
-                self.cliente_selecionado.pessoa = Pessoa()
-                self.cliente_selecionado.pessoa.id = c[1]
-                p = self.cliente_selecionado.pessoa.get_pessoa_cliente_by_id()
-                self.cliente_selecionado.pessoa.cpf = p[2]
-                self.cliente_selecionado.pessoa.nome = p[3]
-                self.cliente_selecionado.pessoa.fone = p[4]
-                self.cliente_selecionado.pessoa.email = p[5]
-                self.cliente_selecionado.pessoa.rg = p[6]
-                self.cliente_selecionado.pessoa.celular = p[7]
+            self.cliente_selecionado.cpf = c[1]
 
-                # endereço
-                self.cliente_selecionado.pessoa.endereco = Endereco()
-                self.cliente_selecionado.pessoa.endereco.id = p[1]
-                end_selecionado = self.cliente_selecionado.pessoa.endereco.get_endereco_by_id()
-                self.cliente_selecionado.pessoa.endereco.rua = end_selecionado[1]
-                self.cliente_selecionado.pessoa.endereco.bairro = end_selecionado[2]
-                self.cliente_selecionado.pessoa.endereco.numero = end_selecionado[3]
-                self.cliente_selecionado.pessoa.endereco.cidade = end_selecionado[4]
-                self.cliente_selecionado.pessoa.endereco.estado = end_selecionado[5]
-                self.cliente_selecionado.pessoa.endereco.cep = end_selecionado[6]
+            # setando os edits
+            self.ui.tx_id.setText(self.cliente_selecionado.id)
+            self.ui.tx_cpf.setText(self.cliente_selecionado.cpf)
+            self.ui.tx_nome.setText(self.cliente_selecionado.nome)
+            self.ui.tx_fone.setText(self.cliente_selecionado.fone)
+            self.ui.tx_email.setText(self.cliente_selecionado.email)
+            self.ui.tx_rg.setText(self.cliente_selecionado.rg)
+            self.ui.tx_celular.setText(self.cliente_selecionado.celular)
 
-                # setando os edits
-                self.ui.tx_id.setText(self.cliente_selecionado.id)
-                self.ui.tx_cpf.setText(self.cliente_selecionado.pessoa.cpf)
-                self.ui.tx_nome.setText(self.cliente_selecionado.pessoa.nome)
-                self.ui.tx_fone.setText(self.cliente_selecionado.pessoa.fone)
-                self.ui.tx_email.setText(self.cliente_selecionado.pessoa.email)
-                self.ui.tx_rg.setText(self.cliente_selecionado.pessoa.rg)
-                self.ui.tx_celular.setText(self.cliente_selecionado.pessoa.celular)
-
-                self.ui.tx_rua.setText(self.cliente_selecionado.pessoa.endereco.rua)
-                self.ui.tx_bairro.setText(self.cliente_selecionado.pessoa.endereco.bairro)
-                self.ui.tx_numero.setText(self.cliente_selecionado.pessoa.endereco.numero)
-                self.ui.tx_cidade.setText(self.cliente_selecionado.pessoa.endereco.cidade)
-                self.ui.tx_estado.setText(self.cliente_selecionado.pessoa.endereco.estado)
-                self.ui.tx_cep.setText(self.cliente_selecionado.pessoa.endereco.cep)
+            self.ui.tx_rua.setText(self.cliente_selecionado.rua)
+            self.ui.tx_bairro.setText(self.cliente_selecionado.bairro)
+            self.ui.tx_numero.setText(self.cliente_selecionado.numero)
+            self.ui.tx_cidade.setText(self.cliente_selecionado.cidade)
+            self.ui.tx_estado.setText(self.cliente_selecionado.estado)
+            self.ui.tx_cep.setText(self.cliente_selecionado.cep)
 
     def dados_tabela(self):
         self.cliente_selecionado.id = None
@@ -290,7 +270,10 @@ class ListaClientes(QMainWindow):
                 if j == 5:
                     self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((linha[5]))))
                 elif j == 1:
-                    self.ui.tb_clientes.setItem(i, 1, QTableWidgetItem(formatar_cpf((linha[1]))))
+                    if len(linha[j]) >= 14:
+                        self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
+                    else:
+                        self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
                 else:
                     self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
@@ -299,7 +282,7 @@ class ListaClientes(QMainWindow):
             self.adicionando = False
 
     def editar(self):
-        from Funcoes.funcoes import formatar_cpf_rg
+        from Funcoes.funcoes import retirar_formatacao
 
         if self.cliente_selecionado.id:
             itens = list()
@@ -307,57 +290,58 @@ class ListaClientes(QMainWindow):
             cli_editar = Cliente()
             cli_editar.id = self.ui.tx_id.text()
             itens.append(cli_editar.id)
-
-            cli_editar.pessoa = Pessoa()
-            cli_editar.pessoa.id = self.cliente_selecionado.pessoa.id
-            cli_editar.pessoa.cpf = formatar_cpf_rg(self.ui.tx_cpf.text())
-            itens.append(cli_editar.pessoa.cpf)
-            cli_editar.pessoa.nome = self.ui.tx_nome.text()
-            itens.append(cli_editar.pessoa.nome)
-            cli_editar.pessoa.fone = self.ui.tx_fone.text()
-            itens.append(cli_editar.pessoa.fone)
-            cli_editar.pessoa.email = self.ui.tx_email.text()
-            itens.append(cli_editar.pessoa.email)
-            cli_editar.pessoa.rg = formatar_cpf_rg(self.ui.tx_rg.text())
-            itens.append(cli_editar.pessoa.rg)
-            cli_editar.pessoa.celular = self.ui.tx_celular.text()
-            itens.append(cli_editar.pessoa.celular)
-
-            cli_editar.pessoa.endereco = Endereco()
-            cli_editar.pessoa.endereco.id = self.cliente_selecionado.pessoa.endereco.id
-            cli_editar.pessoa.endereco.rua = self.ui.tx_rua.text().upper()
-            itens.append(cli_editar.pessoa.endereco.rua)
-            cli_editar.pessoa.endereco.bairro = self.ui.tx_bairro.text().upper()
-            itens.append(cli_editar.pessoa.endereco.bairro)
-            cli_editar.pessoa.endereco.numero = self.ui.tx_numero.text().upper()
-            itens.append(cli_editar.pessoa.endereco.numero)
-            cli_editar.pessoa.endereco.cidade = self.ui.tx_cidade.text().upper()
-            itens.append(cli_editar.pessoa.endereco.cidade)
-            cli_editar.pessoa.endereco.estado = self.ui.tx_estado.text().upper()
-            itens.append(cli_editar.pessoa.endereco.estado)
-            cli_editar.pessoa.endereco.cep = formatar_cpf_rg(self.ui.tx_cep.text())
-            itens.append(cli_editar.pessoa.endereco.cep)
+            cli_editar.cpf = retirar_formatacao(self.ui.tx_cpf.text())
+            itens.append(cli_editar.cpf)
+            cli_editar.nome = self.ui.tx_nome.text()
+            itens.append(cli_editar.nome)
+            cli_editar.fone = self.ui.tx_fone.text()
+            itens.append(cli_editar.fone)
+            cli_editar.email = self.ui.tx_email.text()
+            itens.append(cli_editar.email)
+            cli_editar.rg = retirar_formatacao(self.ui.tx_rg.text())
+            itens.append(cli_editar.rg)
+            cli_editar.celular = self.ui.tx_celular.text()
+            itens.append(cli_editar.celular)
+            cli_editar.rua = self.ui.tx_rua.text().upper()
+            itens.append(cli_editar.rua)
+            cli_editar.bairro = self.ui.tx_bairro.text().upper()
+            itens.append(cli_editar.bairro)
+            cli_editar.numero = self.ui.tx_numero.text().upper()
+            itens.append(cli_editar.numero)
+            cli_editar.cidade = self.ui.tx_cidade.text().upper()
+            itens.append(cli_editar.cidade)
+            cli_editar.estado = self.ui.tx_estado.text().upper()
+            itens.append(cli_editar.estado)
+            cli_editar.cep = retirar_formatacao(self.ui.tx_cep.text())
+            itens.append(cli_editar.cep)
 
             try:
-                cli_editar.pessoa.editar()
-                cli_editar.pessoa.endereco.editar()
+                cli_editar.editar()
             except Exception as error:
                 QMessageBox.warning(self, "Erro", str(error))
             else:
                 self.ui.tb_clientes.setFocus()
 
                 for i in range(0, 13):
-                    self.ui.tb_clientes.setItem(self.linha_selecionada, i, QTableWidgetItem(itens[i]))
-
-                self.ui.tb_clientes.setItem(self.linha_selecionada, 1, QTableWidgetItem(formatar_cpf((itens[1]))))
-                self.ui.tb_clientes.setItem(self.linha_selecionada, 5, QTableWidgetItem(formatar_rg((itens[5]))))
+                    if i == 1:
+                        if len(itens[i]) >= 14:
+                            self.ui.tb_clientes.setItem(self.linha_selecionada, i,
+                                                        QTableWidgetItem(formatar_cnpj(str(itens[i]))))
+                        else:
+                            self.ui.tb_clientes.setItem(self.linha_selecionada, i,
+                                                        QTableWidgetItem(formatar_cpf(str(itens[i]))))
+                    elif i == 5:
+                        self.ui.tb_clientes.setItem(self.linha_selecionada, 5,
+                                                    QTableWidgetItem(formatar_rg((itens[5]))))
+                    else:
+                        self.ui.tb_clientes.setItem(self.linha_selecionada, i, QTableWidgetItem(itens[i]))
         else:
             QMessageBox.warning(self, "Atenção!", "Favor selecionar alguma linha!")
 
     def excluir(self):
         if self.cliente_selecionado.id:
             reply = QMessageBox.question(self, 'Excluir?', f'Tem certeza que deseja excluir o cliente: '
-                                                           f'{self.cliente_selecionado.pessoa.nome}?',
+                                                           f'{self.cliente_selecionado.nome}?',
                                          QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
 
             if reply == QMessageBox.Yes:

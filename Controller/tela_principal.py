@@ -57,10 +57,9 @@ class TelaPrincipal(QMainWindow):
         self.ui.lbl_ip.setText("IP: " + retorna_ip())
         self.ui.lbl_bd.setText("Base de dados: " + Banco().get_params()['database'])
         self.usuario_operador.id = Operador.get_operador_atual()[0]
-        self.pessoa_operador.id = self.usuario_operador.get_usuario_by_id()[1]
 
-        nome = str(self.pessoa_operador.get_pessoa_usuario_by_id()[3]).title()
-        nivel = self.usuario_operador.get_usuario_by_id()[5]
+        nome = str(self.usuario_operador.get_usuario_by_id()[2]).title()
+        nivel = self.usuario_operador.get_usuario_by_id()[8]
         self.ui.lbl_usuario.setText("Usuário: " + nome)
 
         if nivel == "VENDEDOR":
@@ -68,6 +67,10 @@ class TelaPrincipal(QMainWindow):
             self.ui.actionCadastroUsuarios.setVisible(False)
             self.ui.actionVisualizaEmpresas.setVisible(False)
             self.ui.menuConfigura_o.menuAction().setVisible(False)
+            self.ui.actionVisualizaUsuarios.triggered.connect(self.visualiza_usuario)
+        else:
+            self.ui.actionVisualizaUsuarios.triggered.connect(self.visualiza_usuarios)
+            self.ui.actionVisualizaUsuarios.setText("Usuarios")
 
         # actions cadastro
         self.ui.actionCadastroUsuarios.triggered.connect(self.cadastro_usuarios)
@@ -83,8 +86,7 @@ class TelaPrincipal(QMainWindow):
         # actions visualizar
         self.ui.actionVisualizaCategorias.triggered.connect(self.visualiza_categorias)
         self.ui.actionVisualizaServicos.triggered.connect(self.visualiza_servicos)
-        self.ui.actionVisualizaEndereco.triggered.connect(self.visualiza_endereco)
-        self.ui.actionVisualizaUsuarios.triggered.connect(self.visualiza_usuario)
+        self.ui.actionVisualizaEndereco.setVisible(False)
         self.ui.actionVisualizaEmpresas.triggered.connect(self.visualiza_empresas)
         self.ui.actionVisualizaClientes.triggered.connect(self.visualiza_clientes)
         self.ui.actionVisualizaVeiculos.triggered.connect(self.visualiza_veiculos)
@@ -168,6 +170,13 @@ class TelaPrincipal(QMainWindow):
         l_usu = ListaUsuario()
         exec_app(l_usu)
         self.dialogs.append(l_usu)
+
+    def visualiza_usuarios(self):
+        from Controller.lista_usuarios import ListaUsuario
+
+        l_usus = ListaUsuario()
+        exec_app(l_usus)
+        self.dialogs.append(l_usus)
 
     def visualiza_endereco(self):
         from Controller.lista_endereco import ListaEndereco

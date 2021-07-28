@@ -35,7 +35,7 @@ border: none</string>
    <widget class="QLabel" name="lb_FormFornecedor">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>20</x>
       <y>10</y>
       <width>880</width>
       <height>30</height>
@@ -52,36 +52,6 @@ border-bottom: 2px solid #A2A2A2
     </property>
     <property name="text">
      <string>FICHA CADASTRAL FORNECEDOR</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="tx_Id">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>50</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border: 1px solid #A2A2A2;
-color: #000;
-font-size: 14px;
-font-family: &quot;Arial&quot;;
-font-weight: bold;
-
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="lb_FormFornecedor_2">
@@ -769,7 +739,6 @@ border: 1px solid red;
   </widget>
  </widget>
  <tabstops>
-  <tabstop>tx_Id</tabstop>
   <tabstop>tx_NomeFantasia</tabstop>
   <tabstop>tx_cnpj</tabstop>
   <tabstop>tx_Telefone</tabstop>

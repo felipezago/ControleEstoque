@@ -3,7 +3,7 @@ from PyQt5.QtCore import Qt
 from Model.Fornecedor import Fornecedor
 from PyQt5 import QtCore
 from Model.Endereco import Endereco
-from Funcoes.funcoes import formatar_cnpj, formatar_cpf_rg
+from Funcoes.funcoes import formatar_cnpj, retirar_formatacao
 
 
 class EventFilter(QtCore.QObject):
@@ -31,6 +31,7 @@ class ListaFornecedor(QMainWindow):
         self.setFixedSize(self.size())
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
+
         # removendo opção de maximizar
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
 
@@ -196,65 +197,20 @@ class ListaFornecedor(QMainWindow):
                 return
 
         if dados:
-
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
             if type(dados) == list:
                 for i, linha in enumerate(dados):
-                    # Fornecedor
                     id_fornecedor = QTableWidgetItem(str(linha[0]))
                     self.ui.tb_fornecedores.insertRow(i)
                     self.ui.tb_fornecedores.setItem(i, 0, id_fornecedor)
 
-                    for j in range(2, 6):
-                        item_emp = linha[j]
-                        self.ui.tb_fornecedores.setItem(i, j-1, QTableWidgetItem(str(item_emp)))
-
-                    self.ui.tb_fornecedores.setItem(i, 2, QTableWidgetItem(formatar_cnpj(str(linha[3]))))
-
-                    # endereco
-                    end = Endereco()
-                    end.id = int(linha[1])
-                    emp_end = end.get_endereco_by_id()
-                    item = list()
-
-                    for n in range(1, 7):
-                        item.append(emp_end[n])
-
-                    aux = 1
-                    for m in range(5, 11):
-                        self.ui.tb_fornecedores.setItem(i, m, QTableWidgetItem(str(emp_end[aux])))
-                        aux += 1
-
-                    item.clear()
-            else:
-                # Fornecedor
-                id_fornecedor = QTableWidgetItem(str(dados[0]))
-                self.ui.tb_fornecedores.insertRow(0)
-                self.ui.tb_fornecedores.setItem(0, 0, id_fornecedor)
-
-                for j in range(2, 6):
-                    item_emp = dados[j]
-                    self.ui.tb_fornecedores.setItem(0, j - 1, QTableWidgetItem(str(item_emp)))
-
-                self.ui.tb_fornecedores.setItem(0, 2, QTableWidgetItem(formatar_cnpj(str(dados[3]))))
-
-                # endereco
-                end = Endereco()
-                end.id = int(dados[1])
-                emp_end = end.get_endereco_by_id()
-                item = list()
-
-                for n in range(1, 7):
-                    item.append(emp_end[n])
-
-                aux = 1
-                for m in range(5, 11):
-                    self.ui.tb_fornecedores.setItem(0, m, QTableWidgetItem(str(emp_end[aux])))
-                    aux += 1
-
-                item.clear()
+                    for j in range(0, 11):
+                        if j == 2:
+                            self.ui.tb_fornecedores.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
+                        else:
+                            self.ui.tb_fornecedores.setItem(i, j, QTableWidgetItem(str(linha[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")
@@ -273,35 +229,29 @@ class ListaFornecedor(QMainWindow):
         c = self.fornecedor_selecionado.get_fornecedor_by_id()
 
         if c is not None:
-            self.fornecedor_selecionado.nome = c[2]
-            self.fornecedor_selecionado.cnpj = c[3]
-            self.fornecedor_selecionado.email = c[4]
-            self.fornecedor_selecionado.fone = c[5]
+            self.fornecedor_selecionado.nome = c[1]
+            self.fornecedor_selecionado.cnpj = c[2]
+            self.fornecedor_selecionado.email = c[3]
+            self.fornecedor_selecionado.fone = c[4]
+            self.fornecedor_selecionado.rua = c[5]
+            self.fornecedor_selecionado.bairro = c[6]
+            self.fornecedor_selecionado.numero = c[7]
+            self.fornecedor_selecionado.cidade = c[8]
+            self.fornecedor_selecionado.estado = c[9]
+            self.fornecedor_selecionado.cep = c[10]
 
-        # endereço
-        self.fornecedor_selecionado.endereco = Endereco()
-        self.fornecedor_selecionado.endereco.id = c[1]
-        end_selecionado = self.fornecedor_selecionado.endereco.get_endereco_by_id()
-        self.fornecedor_selecionado.endereco.rua = end_selecionado[1]
-        self.fornecedor_selecionado.endereco.bairro = end_selecionado[2]
-        self.fornecedor_selecionado.endereco.numero = end_selecionado[3]
-        self.fornecedor_selecionado.endereco.cidade = end_selecionado[4]
-        self.fornecedor_selecionado.endereco.estado = end_selecionado[5]
-        self.fornecedor_selecionado.endereco.cep = end_selecionado[6]
-
-        # setando os edits
-        self.ui.tx_cnpj.setText(self.fornecedor_selecionado.cnpj)
-        self.ui.tx_nome_fantasia.setText(self.fornecedor_selecionado.nome)
-        self.ui.tx_email.setText(self.fornecedor_selecionado.email)
-        self.ui.tx_fone.setText(self.fornecedor_selecionado.fone)
-        self.ui.tx_id.setText(self.fornecedor_selecionado.id)
-
-        self.ui.tx_rua.setText(self.fornecedor_selecionado.endereco.rua)
-        self.ui.tx_bairro.setText(self.fornecedor_selecionado.endereco.bairro)
-        self.ui.tx_numero.setText(self.fornecedor_selecionado.endereco.numero)
-        self.ui.tx_cidade.setText(self.fornecedor_selecionado.endereco.cidade)
-        self.ui.tx_estado.setText(self.fornecedor_selecionado.endereco.estado)
-        self.ui.tx_cep.setText(self.fornecedor_selecionado.endereco.cep)
+            # setando os edits
+            self.ui.tx_cnpj.setText(self.fornecedor_selecionado.cnpj)
+            self.ui.tx_nome_fantasia.setText(self.fornecedor_selecionado.nome)
+            self.ui.tx_email.setText(self.fornecedor_selecionado.email)
+            self.ui.tx_fone.setText(self.fornecedor_selecionado.fone)
+            self.ui.tx_id.setText(self.fornecedor_selecionado.id)
+            self.ui.tx_rua.setText(self.fornecedor_selecionado.rua)
+            self.ui.tx_bairro.setText(self.fornecedor_selecionado.bairro)
+            self.ui.tx_numero.setText(self.fornecedor_selecionado.numero)
+            self.ui.tx_cidade.setText(self.fornecedor_selecionado.cidade)
+            self.ui.tx_estado.setText(self.fornecedor_selecionado.estado)
+            self.ui.tx_cep.setText(self.fornecedor_selecionado.cep)
 
     def dados_tabela(self):
         self.fornecedor_selecionado.id = None
@@ -332,31 +282,27 @@ class ListaFornecedor(QMainWindow):
             itens.append(forn_editar.id)
             forn_editar.nome = self.ui.tx_nome_fantasia.text().upper()
             itens.append(forn_editar.nome)
-            forn_editar.cnpj = formatar_cpf_rg(self.ui.tx_cnpj.text())
+            forn_editar.cnpj = retirar_formatacao(self.ui.tx_cnpj.text())
             itens.append(forn_editar.cnpj)
             forn_editar.email = self.ui.tx_email.text()
             itens.append(forn_editar.email)
             forn_editar.fone = self.ui.tx_fone.text()
             itens.append(forn_editar.fone)
-
-            forn_editar.endereco = Endereco()
-            forn_editar.endereco.id = self.fornecedor_selecionado.get_fornecedor_by_id()[1]
-            forn_editar.endereco.rua = self.ui.tx_rua.text().upper()
-            itens.append(forn_editar.endereco.rua)
-            forn_editar.endereco.bairro = self.ui.tx_bairro.text().upper()
-            itens.append(forn_editar.endereco.bairro)
-            forn_editar.endereco.numero = self.ui.tx_numero.text().upper()
-            itens.append(forn_editar.endereco.numero)
-            forn_editar.endereco.cidade = self.ui.tx_cidade.text().upper()
-            itens.append(forn_editar.endereco.cidade)
-            forn_editar.endereco.estado = self.ui.tx_estado.text().upper()
-            itens.append(forn_editar.endereco.estado)
-            forn_editar.endereco.cep = formatar_cpf_rg(self.ui.tx_cep.text())
-            itens.append(forn_editar.endereco.cep)
+            forn_editar.rua = self.ui.tx_rua.text().upper()
+            itens.append(forn_editar.rua)
+            forn_editar.bairro = self.ui.tx_bairro.text().upper()
+            itens.append(forn_editar.bairro)
+            forn_editar.numero = self.ui.tx_numero.text().upper()
+            itens.append(forn_editar.numero)
+            forn_editar.cidade = self.ui.tx_cidade.text().upper()
+            itens.append(forn_editar.cidade)
+            forn_editar.estado = self.ui.tx_estado.text().upper()
+            itens.append(forn_editar.estado)
+            forn_editar.cep = retirar_formatacao(self.ui.tx_cep.text())
+            itens.append(forn_editar.cep)
 
             try:
                 forn_editar.editar()
-                forn_editar.endereco.editar()
             except Exception as error:
                 QMessageBox.warning(self, "Erro", str(error))
             else:

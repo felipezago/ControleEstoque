@@ -3,24 +3,39 @@ from Funcoes.configdb import Banco
 from Model.Pessoa import Pessoa
 
 
-class Cliente:
-    def __init__(self, id="", pessoa: Pessoa = ""):
-        self.id = id
-        self.pessoa = pessoa
+class Cliente(Pessoa):
+    def __init__(self, id_cli=""):
+        super().__init__(id_cli)
+        self.id = id_cli
+
+    @staticmethod
+    def get_cliente_by_desc(campo, desc):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(
+            f'''SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, clie_rua, 
+                clie_bairro, clie_numero, clie_cidade, clie_estado, clie_cep FROM cliente 
+                WHERE {campo} like \'%{desc}%\' '''
+        )
+        row = cur.fetchall()
+        conn.close()
+        cur.close()
+        return row
 
     def get_cliente_pdf(self):
         config = Banco()
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'''SELECT INITCAP(pess_nome), 
-                    CONCAT(SUBSTR(pess_cpf_cnpj,1,3),'.',SUBSTR(pess_cpf_cnpj,4,3),'.',SUBSTR(pess_cpf_cnpj,7,3),'-',
-                    SUBSTR(pess_cpf_cnpj,10,2)), CONCAT(SUBSTR(pess_rg,1,2),'.',SUBSTR(pess_rg,3,3),'.',SUBSTR(pess_rg,6,3),
-                    '-',SUBSTR(pess_rg,9,1)), pess_celular, pess_fone, pess_email, INITCAP(end_rua), INITCAP(end_bairro)
-                    , end_numero, INITCAP(end_cidade), end_estado from cliente
-                    INNER JOIN pessoas ON clie_pessoa_id = pess_id
-                    INNER JOIN endereco ON pess_end_id = end_id
-                    WHERE clie_id = {self.id}''')
+        cur.execute(
+            f'''SELECT INITCAP(clie_nome), 
+                CONCAT(SUBSTR(clie_cpf_cnpj,1,3),'.',SUBSTR(clie_cpf_cnpj,4,3),'.',SUBSTR(clie_cpf_cnpj,7,3),'-',
+                SUBSTR(clie_cpf_cnpj,10,2)), CONCAT(SUBSTR(clie_rg,1,2),'.',SUBSTR(clie_rg,3,3),'.',SUBSTR(clie_rg,6,3),
+                '-',SUBSTR(clie_rg,9,1)), clie_celular, clie_fone, clie_email, INITCAP(clie_rua), INITCAP(clie_bairro)
+                , clie_numero, INITCAP(clie_cidade), clie_estado from cliente
+                WHERE clie_id = {self.id}''')
         row = cur.fetchone()
         cur.close()
         conn.close()
@@ -42,25 +57,10 @@ class Cliente:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT clie_id, pess_cpf_cnpj, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
-                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
-                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
-                    f"INNER JOIN endereco ON pess_end_id = end_id WHERE clie_id = {self.id}")
+        cur.execute(f"SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, clie_rua,"
+                    f"clie_bairro, clie_numero, clie_cidade, clie_estado, clie_cep FROM cliente "
+                    f" WHERE clie_id = {self.id}")
         row = cur.fetchall()
-        cur.close()
-        conn.close()
-        return row
-
-    def get_cliente_by_pessoa(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute(f"SELECT clie_id, pess_cpf_cnpj, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
-                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
-                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
-                    f"INNER JOIN endereco ON pess_end_id = end_id WHERE clie_pessoa_id = {self.pessoa.id}")
-        row = cur.fetchone()
         cur.close()
         conn.close()
         return row
@@ -72,26 +72,8 @@ class Cliente:
         cur = conn.cursor()
         cur.execute(f"DELETE FROM cliente WHERE clie_id = {self.id}")
         conn.commit()
-        cur.execute(f"DELETE FROM pessoas WHERE pess_id = {self.pessoa.id}")
-        conn.commit()
         cur.close()
         conn.close()
-
-    @staticmethod
-    def get_new_cliente():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute('SELECT max(clie_id) FROM cliente')
-        row = cur.fetchone()
-        cur.close()
-        conn.close()
-
-        if row[0] is None:
-            return 1
-        else:
-            return int(row[0]) + 1
 
     @staticmethod
     def get_todos_clientes():
@@ -111,10 +93,8 @@ class Cliente:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT clie_id, pess_cpf_cnpj, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
-                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
-                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
-                    f"INNER JOIN endereco ON pess_end_id = end_id")
+        cur.execute(f"SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, end_rua, "
+                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente ")
         lista_clientes = cur.fetchall()
         cur.close()
         conn.close()
@@ -131,3 +111,32 @@ class Cliente:
         cur.close()
         conn.close()
         return qtd
+
+    def inserir(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"INSERT INTO cliente (clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_tipo, "
+                    f"clie_rua, clie_bairro, clie_numero, clie_cidade, clie_estado, clie_cep) VALUES "
+                    f"(\'{self.cpf}\', \'{self.nome}\', \'{self.fone}\', \'{self.email}\', \'{self.rg}\', "
+                    f"\'{self.tipo}\', \'{self.rua}\', \'{self.bairro}\', \'{self.numero}\', \'{self.cidade}\', "
+                    f"\'{self.estado}\', \'{self.cep}\')")
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    def editar(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"UPDATE cliente SET clie_cpf_cnpj = \'{self.cpf}\', clie_nome = \'{self.nome}\',"
+                    f" clie_fone = \'{self.fone}\', clie_email = \'{self.email}\', clie_rg = \'{self.rg}\', "
+                    f"clie_tipo = \'{self.tipo}\', clie_rua = \'{self.rua}\', clie_bairro = \'{self.bairro}\', "
+                    f"clie_numero = \'{self.numero}\', clie_cidade = \'{self.cidade}\', clie_estado = \'{self.estado}\', "
+                    f"clie_cep = \'{self.cep}\' "
+                    f"WHERE clie_id = {self.id}")
+        conn.commit()
+        cur.close()
+        conn.close()

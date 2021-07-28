@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'View/UI/lista_clientes.ui'
+# Form implementation generated from reading ui file 'UI/lista_usuarios.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Frame(object):
     def setupUi(self, Frame):
         Frame.setObjectName("Frame")
-        Frame.resize(982, 610)
+        Frame.resize(919, 573)
         Frame.setStyleSheet("background: #FFF;")
-        self.fr_titulo_clientes = QtWidgets.QFrame(Frame)
-        self.fr_titulo_clientes.setGeometry(QtCore.QRect(0, 0, 981, 60))
-        self.fr_titulo_clientes.setStyleSheet("")
-        self.fr_titulo_clientes.setObjectName("fr_titulo_clientes")
-        self.lb_tituloClientes_2 = QtWidgets.QLabel(self.fr_titulo_clientes)
+        self.fr_titulo_servicos = QtWidgets.QFrame(Frame)
+        self.fr_titulo_servicos.setGeometry(QtCore.QRect(0, 0, 921, 60))
+        self.fr_titulo_servicos.setStyleSheet("")
+        self.fr_titulo_servicos.setObjectName("fr_titulo_servicos")
+        self.lb_tituloClientes_2 = QtWidgets.QLabel(self.fr_titulo_servicos)
         self.lb_tituloClientes_2.setGeometry(QtCore.QRect(10, 15, 200, 30))
         font = QtGui.QFont()
         font.setFamily("DejaVu Sans")
@@ -30,8 +30,8 @@ class Ui_Frame(object):
         self.lb_tituloClientes_2.setFont(font)
         self.lb_tituloClientes_2.setStyleSheet("color: rgb(0, 0, 0)")
         self.lb_tituloClientes_2.setObjectName("lb_tituloClientes_2")
-        self.bt_novo = QtWidgets.QPushButton(self.fr_titulo_clientes)
-        self.bt_novo.setGeometry(QtCore.QRect(820, 10, 151, 41))
+        self.bt_novo = QtWidgets.QPushButton(self.fr_titulo_servicos)
+        self.bt_novo.setGeometry(QtCore.QRect(750, 10, 161, 41))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(10)
@@ -50,11 +50,11 @@ class Ui_Frame(object):
 "}")
         self.bt_novo.setIconSize(QtCore.QSize(75, 35))
         self.bt_novo.setObjectName("bt_novo")
-        self.tb_clientes = QtWidgets.QTableWidget(Frame)
-        self.tb_clientes.setGeometry(QtCore.QRect(0, 100, 971, 211))
-        self.tb_clientes.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.tb_clientes.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tb_clientes.setStyleSheet("QTableView{\n"
+        self.tb_usuario = QtWidgets.QTableWidget(Frame)
+        self.tb_usuario.setGeometry(QtCore.QRect(0, 110, 911, 191))
+        self.tb_usuario.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.tb_usuario.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tb_usuario.setStyleSheet("QTableView{\n"
 "color: #797979;\n"
 "font-weight: bold;\n"
 "font-size: 13px;\n"
@@ -78,54 +78,44 @@ class Ui_Frame(object):
 "}\n"
 "\n"
 "")
-        self.tb_clientes.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.tb_clientes.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.tb_clientes.setAutoScrollMargin(20)
-        self.tb_clientes.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tb_clientes.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
-        self.tb_clientes.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-        self.tb_clientes.setShowGrid(False)
-        self.tb_clientes.setGridStyle(QtCore.Qt.NoPen)
-        self.tb_clientes.setWordWrap(False)
-        self.tb_clientes.setRowCount(1)
-        self.tb_clientes.setObjectName("tb_clientes")
-        self.tb_clientes.setColumnCount(13)
+        self.tb_usuario.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.tb_usuario.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.tb_usuario.setAutoScrollMargin(20)
+        self.tb_usuario.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tb_usuario.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+        self.tb_usuario.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.tb_usuario.setShowGrid(False)
+        self.tb_usuario.setGridStyle(QtCore.Qt.NoPen)
+        self.tb_usuario.setWordWrap(False)
+        self.tb_usuario.setRowCount(1)
+        self.tb_usuario.setObjectName("tb_usuario")
+        self.tb_usuario.setColumnCount(8)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setVerticalHeaderItem(0, item)
+        self.tb_usuario.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(0, item)
+        self.tb_usuario.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(1, item)
+        self.tb_usuario.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(2, item)
+        self.tb_usuario.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(3, item)
+        self.tb_usuario.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(4, item)
+        self.tb_usuario.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(5, item)
+        self.tb_usuario.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(6, item)
+        self.tb_usuario.setHorizontalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(7, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(9, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(10, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(11, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tb_clientes.setHorizontalHeaderItem(12, item)
-        self.tb_clientes.horizontalHeader().setDefaultSectionSize(120)
-        self.tb_clientes.horizontalHeader().setHighlightSections(False)
-        self.tb_clientes.horizontalHeader().setStretchLastSection(True)
-        self.tb_clientes.verticalHeader().setVisible(False)
-        self.tb_clientes.verticalHeader().setDefaultSectionSize(50)
-        self.tb_clientes.verticalHeader().setMinimumSectionSize(20)
+        self.tb_usuario.setHorizontalHeaderItem(7, item)
+        self.tb_usuario.horizontalHeader().setDefaultSectionSize(120)
+        self.tb_usuario.horizontalHeader().setHighlightSections(False)
+        self.tb_usuario.horizontalHeader().setStretchLastSection(True)
+        self.tb_usuario.verticalHeader().setVisible(False)
+        self.tb_usuario.verticalHeader().setDefaultSectionSize(50)
+        self.tb_usuario.verticalHeader().setMinimumSectionSize(20)
         self.lb_FormProdutos_6 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_6.setGeometry(QtCore.QRect(70, 360, 181, 20))
+        self.lb_FormProdutos_6.setGeometry(QtCore.QRect(80, 340, 181, 20))
         self.lb_FormProdutos_6.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -134,7 +124,7 @@ class Ui_Frame(object):
 "}")
         self.lb_FormProdutos_6.setObjectName("lb_FormProdutos_6")
         self.tx_cpf = QtWidgets.QLineEdit(Frame)
-        self.tx_cpf.setGeometry(QtCore.QRect(70, 380, 141, 25))
+        self.tx_cpf.setGeometry(QtCore.QRect(80, 360, 181, 25))
         self.tx_cpf.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_cpf.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -149,7 +139,7 @@ class Ui_Frame(object):
         self.tx_cpf.setPlaceholderText("")
         self.tx_cpf.setObjectName("tx_cpf")
         self.fr_botoes = QtWidgets.QFrame(Frame)
-        self.fr_botoes.setGeometry(QtCore.QRect(0, 580, 991, 30))
+        self.fr_botoes.setGeometry(QtCore.QRect(-70, 540, 991, 30))
         self.fr_botoes.setStyleSheet("background:#E1DFE0;\n"
 "border: none;")
         self.fr_botoes.setObjectName("fr_botoes")
@@ -213,7 +203,7 @@ class Ui_Frame(object):
         self.bt_excluir.setIconSize(QtCore.QSize(75, 35))
         self.bt_excluir.setObjectName("bt_excluir")
         self.tx_id = QtWidgets.QLineEdit(Frame)
-        self.tx_id.setGeometry(QtCore.QRect(10, 380, 51, 25))
+        self.tx_id.setGeometry(QtCore.QRect(10, 360, 61, 25))
         self.tx_id.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_id.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -225,12 +215,11 @@ class Ui_Frame(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_id.setInputMask("")
         self.tx_id.setText("")
         self.tx_id.setPlaceholderText("")
         self.tx_id.setObjectName("tx_id")
         self.lb_FormProdutos_7 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_7.setGeometry(QtCore.QRect(10, 360, 61, 20))
+        self.lb_FormProdutos_7.setGeometry(QtCore.QRect(10, 340, 61, 20))
         self.lb_FormProdutos_7.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -239,7 +228,7 @@ class Ui_Frame(object):
 "}")
         self.lb_FormProdutos_7.setObjectName("lb_FormProdutos_7")
         self.lb_FormProdutos_8 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_8.setGeometry(QtCore.QRect(220, 360, 111, 20))
+        self.lb_FormProdutos_8.setGeometry(QtCore.QRect(270, 340, 111, 20))
         self.lb_FormProdutos_8.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -248,7 +237,7 @@ class Ui_Frame(object):
 "}")
         self.lb_FormProdutos_8.setObjectName("lb_FormProdutos_8")
         self.tx_nome = QtWidgets.QLineEdit(Frame)
-        self.tx_nome.setGeometry(QtCore.QRect(220, 380, 301, 25))
+        self.tx_nome.setGeometry(QtCore.QRect(270, 360, 181, 25))
         self.tx_nome.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_nome.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -264,10 +253,10 @@ class Ui_Frame(object):
         self.tx_nome.setText("")
         self.tx_nome.setPlaceholderText("")
         self.tx_nome.setObjectName("tx_nome")
-        self.tx_rg = QtWidgets.QLineEdit(Frame)
-        self.tx_rg.setGeometry(QtCore.QRect(10, 440, 121, 25))
-        self.tx_rg.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_rg.setStyleSheet("QLineEdit{\n"
+        self.tx_fone = QtWidgets.QLineEdit(Frame)
+        self.tx_fone.setGeometry(QtCore.QRect(460, 360, 181, 25))
+        self.tx_fone.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_fone.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -277,10 +266,12 @@ class Ui_Frame(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_rg.setPlaceholderText("")
-        self.tx_rg.setObjectName("tx_rg")
+        self.tx_fone.setInputMask("")
+        self.tx_fone.setText("")
+        self.tx_fone.setPlaceholderText("")
+        self.tx_fone.setObjectName("tx_fone")
         self.lb_FormProdutos_9 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_9.setGeometry(QtCore.QRect(10, 420, 131, 20))
+        self.lb_FormProdutos_9.setGeometry(QtCore.QRect(460, 340, 111, 20))
         self.lb_FormProdutos_9.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -289,7 +280,7 @@ class Ui_Frame(object):
 "}")
         self.lb_FormProdutos_9.setObjectName("lb_FormProdutos_9")
         self.lb_FormProdutos_10 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_10.setGeometry(QtCore.QRect(730, 360, 111, 20))
+        self.lb_FormProdutos_10.setGeometry(QtCore.QRect(650, 340, 111, 20))
         self.lb_FormProdutos_10.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -298,7 +289,7 @@ class Ui_Frame(object):
 "}")
         self.lb_FormProdutos_10.setObjectName("lb_FormProdutos_10")
         self.tx_email = QtWidgets.QLineEdit(Frame)
-        self.tx_email.setGeometry(QtCore.QRect(730, 380, 241, 25))
+        self.tx_email.setGeometry(QtCore.QRect(650, 360, 261, 25))
         self.tx_email.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_email.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -315,7 +306,7 @@ class Ui_Frame(object):
         self.tx_email.setPlaceholderText("")
         self.tx_email.setObjectName("tx_email")
         self.lb_FormProdutos_11 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_11.setGeometry(QtCore.QRect(140, 420, 111, 20))
+        self.lb_FormProdutos_11.setGeometry(QtCore.QRect(10, 390, 111, 20))
         self.lb_FormProdutos_11.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -323,8 +314,34 @@ class Ui_Frame(object):
 "color: #797979\n"
 "}")
         self.lb_FormProdutos_11.setObjectName("lb_FormProdutos_11")
+        self.tx_rg = QtWidgets.QLineEdit(Frame)
+        self.tx_rg.setGeometry(QtCore.QRect(10, 410, 181, 25))
+        self.tx_rg.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_rg.setStyleSheet("QLineEdit{\n"
+"background: #CFCFCF;\n"
+"border-radius: 2px;\n"
+"color: #000;\n"
+"padding-left: 3px;\n"
+"font: 13px \"Arial\" \n"
+"}\n"
+"QLineEdit:Focus {\n"
+"border: 1px solid red;\n"
+"}")
+        self.tx_rg.setInputMask("")
+        self.tx_rg.setText("")
+        self.tx_rg.setPlaceholderText("")
+        self.tx_rg.setObjectName("tx_rg")
+        self.lb_FormProdutos_12 = QtWidgets.QLabel(Frame)
+        self.lb_FormProdutos_12.setGeometry(QtCore.QRect(200, 390, 111, 20))
+        self.lb_FormProdutos_12.setStyleSheet("QLabel{\n"
+"font-size: 12px;\n"
+"font-family: \"Arial Unicode MS\";\n"
+"font-weight: bold;\n"
+"color: #797979\n"
+"}")
+        self.lb_FormProdutos_12.setObjectName("lb_FormProdutos_12")
         self.tx_celular = QtWidgets.QLineEdit(Frame)
-        self.tx_celular.setGeometry(QtCore.QRect(140, 440, 121, 25))
+        self.tx_celular.setGeometry(QtCore.QRect(200, 410, 241, 25))
         self.tx_celular.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_celular.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -336,21 +353,14 @@ class Ui_Frame(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
+        self.tx_celular.setInputMask("")
+        self.tx_celular.setText("")
         self.tx_celular.setPlaceholderText("")
         self.tx_celular.setObjectName("tx_celular")
-        self.lb_FormProdutos_12 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_12.setGeometry(QtCore.QRect(530, 360, 111, 20))
-        self.lb_FormProdutos_12.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormProdutos_12.setObjectName("lb_FormProdutos_12")
-        self.tx_fone = QtWidgets.QLineEdit(Frame)
-        self.tx_fone.setGeometry(QtCore.QRect(530, 380, 191, 25))
-        self.tx_fone.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_fone.setStyleSheet("QLineEdit{\n"
+        self.tx_login = QtWidgets.QLineEdit(Frame)
+        self.tx_login.setGeometry(QtCore.QRect(460, 410, 181, 25))
+        self.tx_login.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_login.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -360,10 +370,21 @@ class Ui_Frame(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_fone.setPlaceholderText("")
-        self.tx_fone.setObjectName("tx_fone")
+        self.tx_login.setInputMask("")
+        self.tx_login.setText("")
+        self.tx_login.setPlaceholderText("")
+        self.tx_login.setObjectName("tx_login")
+        self.lb_FormProdutos_13 = QtWidgets.QLabel(Frame)
+        self.lb_FormProdutos_13.setGeometry(QtCore.QRect(460, 390, 111, 20))
+        self.lb_FormProdutos_13.setStyleSheet("QLabel{\n"
+"font-size: 12px;\n"
+"font-family: \"Arial Unicode MS\";\n"
+"font-weight: bold;\n"
+"color: #797979\n"
+"}")
+        self.lb_FormProdutos_13.setObjectName("lb_FormProdutos_13")
         self.lb_FormProdutos = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos.setGeometry(QtCore.QRect(10, 480, 971, 30))
+        self.lb_FormProdutos.setGeometry(QtCore.QRect(10, 440, 901, 30))
         self.lb_FormProdutos.setStyleSheet("QLabel{\n"
 "font-size: 14px;\n"
 "font-family: \"Arial\";\n"
@@ -373,7 +394,7 @@ class Ui_Frame(object):
 "}")
         self.lb_FormProdutos.setObjectName("lb_FormProdutos")
         self.lb_FormProdutos_14 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_14.setGeometry(QtCore.QRect(790, 520, 111, 20))
+        self.lb_FormProdutos_14.setGeometry(QtCore.QRect(10, 480, 111, 20))
         self.lb_FormProdutos_14.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -381,10 +402,10 @@ class Ui_Frame(object):
 "color: #797979\n"
 "}")
         self.lb_FormProdutos_14.setObjectName("lb_FormProdutos_14")
-        self.tx_rua = QtWidgets.QLineEdit(Frame)
-        self.tx_rua.setGeometry(QtCore.QRect(790, 540, 181, 25))
-        self.tx_rua.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_rua.setStyleSheet("QLineEdit{\n"
+        self.tx_senha_antiga = QtWidgets.QLineEdit(Frame)
+        self.tx_senha_antiga.setGeometry(QtCore.QRect(10, 500, 181, 25))
+        self.tx_senha_antiga.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_senha_antiga.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -394,13 +415,12 @@ class Ui_Frame(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_rua.setInputMask("")
-        self.tx_rua.setText("")
-        self.tx_rua.setEchoMode(QtWidgets.QLineEdit.Normal)
-        self.tx_rua.setPlaceholderText("")
-        self.tx_rua.setObjectName("tx_rua")
+        self.tx_senha_antiga.setInputMask("")
+        self.tx_senha_antiga.setText("")
+        self.tx_senha_antiga.setPlaceholderText("")
+        self.tx_senha_antiga.setObjectName("tx_senha_antiga")
         self.lb_FormProdutos_15 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_15.setGeometry(QtCore.QRect(160, 520, 111, 20))
+        self.lb_FormProdutos_15.setGeometry(QtCore.QRect(200, 480, 111, 20))
         self.lb_FormProdutos_15.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -408,10 +428,10 @@ class Ui_Frame(object):
 "color: #797979\n"
 "}")
         self.lb_FormProdutos_15.setObjectName("lb_FormProdutos_15")
-        self.tx_bairro = QtWidgets.QLineEdit(Frame)
-        self.tx_bairro.setGeometry(QtCore.QRect(160, 540, 241, 25))
-        self.tx_bairro.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_bairro.setStyleSheet("QLineEdit{\n"
+        self.tx_nova_senha = QtWidgets.QLineEdit(Frame)
+        self.tx_nova_senha.setGeometry(QtCore.QRect(200, 500, 241, 25))
+        self.tx_nova_senha.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_nova_senha.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -421,13 +441,12 @@ class Ui_Frame(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_bairro.setInputMask("")
-        self.tx_bairro.setText("")
-        self.tx_bairro.setEchoMode(QtWidgets.QLineEdit.Normal)
-        self.tx_bairro.setPlaceholderText("")
-        self.tx_bairro.setObjectName("tx_bairro")
+        self.tx_nova_senha.setInputMask("")
+        self.tx_nova_senha.setText("")
+        self.tx_nova_senha.setPlaceholderText("")
+        self.tx_nova_senha.setObjectName("tx_nova_senha")
         self.lb_FormProdutos_2 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_2.setGeometry(QtCore.QRect(10, 320, 971, 30))
+        self.lb_FormProdutos_2.setGeometry(QtCore.QRect(10, 300, 901, 30))
         self.lb_FormProdutos_2.setStyleSheet("QLabel{\n"
 "font-size: 14px;\n"
 "font-family: \"Arial\";\n"
@@ -436,10 +455,10 @@ class Ui_Frame(object):
 "border-bottom: 2px solid #A2A2A2\n"
 "}")
         self.lb_FormProdutos_2.setObjectName("lb_FormProdutos_2")
-        self.tx_numero = QtWidgets.QLineEdit(Frame)
-        self.tx_numero.setGeometry(QtCore.QRect(410, 540, 101, 25))
-        self.tx_numero.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_numero.setStyleSheet("QLineEdit{\n"
+        self.tx_nova_senha_2 = QtWidgets.QLineEdit(Frame)
+        self.tx_nova_senha_2.setGeometry(QtCore.QRect(450, 500, 241, 25))
+        self.tx_nova_senha_2.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_nova_senha_2.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -449,13 +468,12 @@ class Ui_Frame(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_numero.setInputMask("")
-        self.tx_numero.setText("")
-        self.tx_numero.setEchoMode(QtWidgets.QLineEdit.Normal)
-        self.tx_numero.setPlaceholderText("")
-        self.tx_numero.setObjectName("tx_numero")
+        self.tx_nova_senha_2.setInputMask("")
+        self.tx_nova_senha_2.setText("")
+        self.tx_nova_senha_2.setPlaceholderText("")
+        self.tx_nova_senha_2.setObjectName("tx_nova_senha_2")
         self.lb_FormProdutos_16 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_16.setGeometry(QtCore.QRect(410, 520, 181, 20))
+        self.lb_FormProdutos_16.setGeometry(QtCore.QRect(450, 480, 181, 20))
         self.lb_FormProdutos_16.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -463,87 +481,8 @@ class Ui_Frame(object):
 "color: #797979\n"
 "}")
         self.lb_FormProdutos_16.setObjectName("lb_FormProdutos_16")
-        self.lb_FormProdutos_17 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_17.setGeometry(QtCore.QRect(520, 520, 111, 20))
-        self.lb_FormProdutos_17.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormProdutos_17.setObjectName("lb_FormProdutos_17")
-        self.tx_cidade = QtWidgets.QLineEdit(Frame)
-        self.tx_cidade.setGeometry(QtCore.QRect(520, 540, 191, 25))
-        self.tx_cidade.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_cidade.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"padding-left: 3px;\n"
-"font: 13px \"Arial\" \n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_cidade.setInputMask("")
-        self.tx_cidade.setText("")
-        self.tx_cidade.setEchoMode(QtWidgets.QLineEdit.Normal)
-        self.tx_cidade.setPlaceholderText("")
-        self.tx_cidade.setObjectName("tx_cidade")
-        self.lb_FormProdutos_18 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_18.setGeometry(QtCore.QRect(720, 520, 61, 20))
-        self.lb_FormProdutos_18.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormProdutos_18.setObjectName("lb_FormProdutos_18")
-        self.tx_estado = QtWidgets.QLineEdit(Frame)
-        self.tx_estado.setGeometry(QtCore.QRect(720, 540, 61, 25))
-        self.tx_estado.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_estado.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"padding-left: 3px;\n"
-"font: 13px \"Arial\" \n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_estado.setInputMask("")
-        self.tx_estado.setText("")
-        self.tx_estado.setEchoMode(QtWidgets.QLineEdit.Normal)
-        self.tx_estado.setPlaceholderText("")
-        self.tx_estado.setObjectName("tx_estado")
-        self.tx_cep = QtWidgets.QLineEdit(Frame)
-        self.tx_cep.setGeometry(QtCore.QRect(10, 540, 101, 25))
-        self.tx_cep.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_cep.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"padding-left: 3px;\n"
-"font: 13px \"Arial\" \n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_cep.setEchoMode(QtWidgets.QLineEdit.Normal)
-        self.tx_cep.setPlaceholderText("")
-        self.tx_cep.setObjectName("tx_cep")
-        self.lb_FormProdutos_19 = QtWidgets.QLabel(Frame)
-        self.lb_FormProdutos_19.setGeometry(QtCore.QRect(10, 520, 141, 20))
-        self.lb_FormProdutos_19.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormProdutos_19.setObjectName("lb_FormProdutos_19")
         self.bt_refresh = QtWidgets.QPushButton(Frame)
-        self.bt_refresh.setGeometry(QtCore.QRect(950, 60, 30, 31))
+        self.bt_refresh.setGeometry(QtCore.QRect(880, 60, 30, 31))
         font = QtGui.QFont()
         font.setFamily("Arial")
         self.bt_refresh.setFont(font)
@@ -556,7 +495,7 @@ class Ui_Frame(object):
         self.bt_refresh.setIcon(icon)
         self.bt_refresh.setObjectName("bt_refresh")
         self.tx_busca = QtWidgets.QLineEdit(Frame)
-        self.tx_busca.setGeometry(QtCore.QRect(190, 60, 731, 31))
+        self.tx_busca.setGeometry(QtCore.QRect(190, 60, 661, 31))
         font = QtGui.QFont()
         font.setFamily("Arial")
         self.tx_busca.setFont(font)
@@ -566,10 +505,10 @@ class Ui_Frame(object):
 "}\n"
 "")
         self.tx_busca.setObjectName("tx_busca")
-        self.cb_clientes = QtWidgets.QComboBox(Frame)
-        self.cb_clientes.setGeometry(QtCore.QRect(10, 60, 171, 31))
-        self.cb_clientes.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.cb_clientes.setStyleSheet("QComboBox{\n"
+        self.cb_opc = QtWidgets.QComboBox(Frame)
+        self.cb_opc.setGeometry(QtCore.QRect(10, 60, 171, 31))
+        self.cb_opc.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.cb_opc.setStyleSheet("QComboBox{\n"
 "background: #fff;\n"
 "color: #000;\n"
 "font: 13px \"Arial\" ;\n"
@@ -592,10 +531,10 @@ class Ui_Frame(object):
 "     image: url(\"Imagens/down.png\");\n"
 " }\n"
 "")
-        self.cb_clientes.setObjectName("cb_clientes")
-        self.cb_clientes.addItem("")
+        self.cb_opc.setObjectName("cb_opc")
+        self.cb_opc.addItem("")
         self.bt_busca = QtWidgets.QPushButton(Frame)
-        self.bt_busca.setGeometry(QtCore.QRect(920, 60, 30, 31))
+        self.bt_busca.setGeometry(QtCore.QRect(850, 60, 30, 31))
         font = QtGui.QFont()
         font.setFamily("Arial")
         self.bt_busca.setFont(font)
@@ -607,94 +546,50 @@ class Ui_Frame(object):
         icon1.addPixmap(QtGui.QPixmap("Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_busca.setIcon(icon1)
         self.bt_busca.setObjectName("bt_busca")
-        self.bt_busca_cep = QtWidgets.QPushButton(Frame)
-        self.bt_busca_cep.setGeometry(QtCore.QRect(110, 540, 31, 25))
-        self.bt_busca_cep.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_busca_cep.setIcon(icon2)
-        self.bt_busca_cep.setObjectName("bt_busca_cep")
 
         self.retranslateUi(Frame)
         QtCore.QMetaObject.connectSlotsByName(Frame)
-        Frame.setTabOrder(self.tx_id, self.tx_cpf)
-        Frame.setTabOrder(self.tx_cpf, self.tx_nome)
-        Frame.setTabOrder(self.tx_nome, self.tx_fone)
-        Frame.setTabOrder(self.tx_fone, self.tx_email)
-        Frame.setTabOrder(self.tx_email, self.tx_rg)
-        Frame.setTabOrder(self.tx_rg, self.tx_celular)
-        Frame.setTabOrder(self.tx_celular, self.tx_cep)
-        Frame.setTabOrder(self.tx_cep, self.bt_busca_cep)
-        Frame.setTabOrder(self.bt_busca_cep, self.tx_bairro)
-        Frame.setTabOrder(self.tx_bairro, self.tx_numero)
-        Frame.setTabOrder(self.tx_numero, self.tx_cidade)
-        Frame.setTabOrder(self.tx_cidade, self.tx_estado)
-        Frame.setTabOrder(self.tx_estado, self.tx_rua)
-        Frame.setTabOrder(self.tx_rua, self.tb_clientes)
-        Frame.setTabOrder(self.tb_clientes, self.cb_clientes)
 
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate
-        Frame.setWindowTitle(_translate("Frame", "Lista de Clientes"))
-        self.lb_tituloClientes_2.setText(_translate("Frame", "CLIENTES"))
-        self.bt_novo.setText(_translate("Frame", "NOVO CLIENTE"))
-        item = self.tb_clientes.verticalHeaderItem(0)
+        Frame.setWindowTitle(_translate("Frame", "Lista de Usuário"))
+        self.lb_tituloClientes_2.setText(_translate("Frame", "USUÁRIOS"))
+        self.bt_novo.setText(_translate("Frame", "NOVO USUÁRIO"))
+        item = self.tb_usuario.verticalHeaderItem(0)
         item.setText(_translate("Frame", "1"))
-        item = self.tb_clientes.horizontalHeaderItem(0)
+        item = self.tb_usuario.horizontalHeaderItem(0)
         item.setText(_translate("Frame", "ID"))
-        item = self.tb_clientes.horizontalHeaderItem(1)
-        item.setText(_translate("Frame", "CPF/CNPJ"))
-        item = self.tb_clientes.horizontalHeaderItem(2)
+        item = self.tb_usuario.horizontalHeaderItem(1)
+        item.setText(_translate("Frame", "CPF"))
+        item = self.tb_usuario.horizontalHeaderItem(2)
         item.setText(_translate("Frame", "NOME"))
-        item = self.tb_clientes.horizontalHeaderItem(3)
-        item.setText(_translate("Frame", "FONE"))
-        item = self.tb_clientes.horizontalHeaderItem(4)
+        item = self.tb_usuario.horizontalHeaderItem(3)
+        item.setText(_translate("Frame", "TELEFONE"))
+        item = self.tb_usuario.horizontalHeaderItem(4)
         item.setText(_translate("Frame", "EMAIL"))
-        item = self.tb_clientes.horizontalHeaderItem(5)
+        item = self.tb_usuario.horizontalHeaderItem(5)
         item.setText(_translate("Frame", "RG"))
-        item = self.tb_clientes.horizontalHeaderItem(6)
+        item = self.tb_usuario.horizontalHeaderItem(6)
         item.setText(_translate("Frame", "CELULAR"))
-        item = self.tb_clientes.horizontalHeaderItem(7)
-        item.setText(_translate("Frame", "RUA"))
-        item = self.tb_clientes.horizontalHeaderItem(8)
-        item.setText(_translate("Frame", "BAIRRO"))
-        item = self.tb_clientes.horizontalHeaderItem(9)
-        item.setText(_translate("Frame", "NUMERO"))
-        item = self.tb_clientes.horizontalHeaderItem(10)
-        item.setText(_translate("Frame", "CIDADE"))
-        item = self.tb_clientes.horizontalHeaderItem(11)
-        item.setText(_translate("Frame", "ESTADO"))
-        item = self.tb_clientes.horizontalHeaderItem(12)
-        item.setText(_translate("Frame", "CEP"))
+        item = self.tb_usuario.horizontalHeaderItem(7)
+        item.setText(_translate("Frame", "USUARIO (LOGIN)"))
         self.lb_FormProdutos_6.setText(_translate("Frame", "CPF"))
-        self.tx_cpf.setInputMask(_translate("Frame", "###.###.###-##"))
         self.bt_cancelar.setText(_translate("Frame", "CANCELAR"))
         self.bt_salvar.setText(_translate("Frame", "EDITAR"))
         self.bt_excluir.setText(_translate("Frame", "EXCLUIR"))
         self.lb_FormProdutos_7.setText(_translate("Frame", "ID"))
-        self.lb_FormProdutos_8.setText(_translate("Frame", "NOME "))
-        self.tx_rg.setInputMask(_translate("Frame", "##.###.###-#"))
-        self.tx_rg.setText(_translate("Frame", "..---"))
-        self.lb_FormProdutos_9.setText(_translate("Frame", "RG"))
+        self.lb_FormProdutos_8.setText(_translate("Frame", "NOME"))
+        self.lb_FormProdutos_9.setText(_translate("Frame", "TELEFONE"))
         self.lb_FormProdutos_10.setText(_translate("Frame", "EMAIL"))
-        self.lb_FormProdutos_11.setText(_translate("Frame", "CELULAR"))
-        self.tx_celular.setInputMask(_translate("Frame", "(##) #####-####"))
-        self.tx_celular.setText(_translate("Frame", "() ------"))
-        self.lb_FormProdutos_12.setText(_translate("Frame", "FONE"))
-        self.tx_fone.setInputMask(_translate("Frame", "(##) ####-####"))
-        self.tx_fone.setText(_translate("Frame", "() ---"))
-        self.lb_FormProdutos.setText(_translate("Frame", "ENDEREÇO"))
-        self.lb_FormProdutos_14.setText(_translate("Frame", "RUA"))
-        self.lb_FormProdutos_15.setText(_translate("Frame", "BAIRRO"))
+        self.lb_FormProdutos_11.setText(_translate("Frame", "RG"))
+        self.lb_FormProdutos_12.setText(_translate("Frame", "CELULAR"))
+        self.lb_FormProdutos_13.setText(_translate("Frame", "LOGIN"))
+        self.lb_FormProdutos.setText(_translate("Frame", "ALTERAR SENHA"))
+        self.lb_FormProdutos_14.setText(_translate("Frame", "SENHA ANTIGA"))
+        self.lb_FormProdutos_15.setText(_translate("Frame", "NOVA SENHA"))
         self.lb_FormProdutos_2.setText(_translate("Frame", "ALTERAR INFORMAÇÕES"))
-        self.lb_FormProdutos_16.setText(_translate("Frame", "NUMERO"))
-        self.lb_FormProdutos_17.setText(_translate("Frame", "CIDADE"))
-        self.lb_FormProdutos_18.setText(_translate("Frame", "ESTADO"))
-        self.tx_cep.setInputMask(_translate("Frame", "#####-###"))
-        self.tx_cep.setText(_translate("Frame", "-----"))
-        self.lb_FormProdutos_19.setText(_translate("Frame", "CEP"))
+        self.lb_FormProdutos_16.setText(_translate("Frame", "CONFIRME A NOVA SENHA"))
         self.bt_refresh.setToolTip(_translate("Frame", "ATUALIZAR TABELA"))
         self.tx_busca.setPlaceholderText(_translate("Frame", "PROCURAR POR..."))
-        self.cb_clientes.setItemText(0, _translate("Frame", "SELECIONE"))
+        self.cb_opc.setItemText(0, _translate("Frame", "SELECIONE"))
         self.bt_busca.setToolTip(_translate("Frame", "BUSCAR"))
-        self.bt_busca_cep.setAccessibleName(_translate("Frame", "BUSCA CEP"))

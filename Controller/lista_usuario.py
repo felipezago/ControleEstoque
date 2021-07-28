@@ -67,27 +67,25 @@ class ListaUsuario(QMainWindow):
 
         self.usuario_selecionado.id = int(tb.item(tb.currentRow(), 0).text())
         usu = self.usuario_selecionado.get_usuario_by_id()
-        self.usuario_selecionado.nome = usu[2]
-        self.usuario_selecionado.pessoa = Pessoa()
-        self.usuario_selecionado.pessoa.id = usu[1]
 
-        pess = self.usuario_selecionado.pessoa.get_pessoa_usuario_by_id()
-        self.usuario_selecionado.pessoa.cpf = pess[2]
-        self.usuario_selecionado.pessoa.nome = pess[3]
-        self.usuario_selecionado.pessoa.fone = pess[4]
-        self.usuario_selecionado.pessoa.email = pess[5]
-        self.usuario_selecionado.pessoa.rg = pess[6]
-        self.usuario_selecionado.pessoa.celular = pess[7]
+        if usu is not None:
+            self.usuario_selecionado.cpf = usu[1]
+            self.usuario_selecionado.nome = usu[2]
+            self.usuario_selecionado.fone = usu[3]
+            self.usuario_selecionado.email = usu[4]
+            self.usuario_selecionado.rg = usu[5]
+            self.usuario_selecionado.celular = usu[6]
+            self.usuario_selecionado.login = usu[7]
 
-        # setando os edits
-        self.ui.tx_id.setText(str(self.usuario_selecionado.id))
-        self.ui.tx_cpf.setText(self.usuario_selecionado.pessoa.cpf)
-        self.ui.tx_nome.setText(self.usuario_selecionado.pessoa.nome)
-        self.ui.tx_fone.setText(self.usuario_selecionado.pessoa.fone)
-        self.ui.tx_email.setText(self.usuario_selecionado.pessoa.email)
-        self.ui.tx_rg.setText(self.usuario_selecionado.pessoa.rg)
-        self.ui.tx_celular.setText(self.usuario_selecionado.pessoa.celular)
-        self.ui.tx_login.setText(self.usuario_selecionado.nome)
+            # setando os edits
+            self.ui.tx_id.setText(str(self.usuario_selecionado.id))
+            self.ui.tx_cpf.setText(self.usuario_selecionado.cpf)
+            self.ui.tx_nome.setText(self.usuario_selecionado.nome)
+            self.ui.tx_fone.setText(self.usuario_selecionado.fone)
+            self.ui.tx_email.setText(self.usuario_selecionado.email)
+            self.ui.tx_rg.setText(self.usuario_selecionado.rg)
+            self.ui.tx_celular.setText(self.usuario_selecionado.celular)
+            self.ui.tx_login.setText(self.usuario_selecionado.nome)
 
     def editar(self):
         from Funcoes.funcoes import verificar_criptografia
@@ -98,22 +96,20 @@ class ListaUsuario(QMainWindow):
             usu_editar = Usuario()
             usu_editar.id = self.ui.tx_id.text()
             itens.append(usu_editar.id)
-            usu_editar.pessoa = Pessoa()
-            usu_editar.pessoa.id = self.usuario_selecionado.get_usuario_by_id()[1]
-            usu_editar.pessoa.cpf = self.ui.tx_cpf.text().upper()
-            itens.append(usu_editar.pessoa.cpf)
-            usu_editar.pessoa.nome = self.ui.tx_nome.text().upper()
-            itens.append(usu_editar.pessoa.nome)
-            usu_editar.pessoa.fone = self.ui.tx_fone.text().upper()
-            itens.append(usu_editar.pessoa.fone)
-            usu_editar.pessoa.email = self.ui.tx_email.text().upper()
-            itens.append(usu_editar.pessoa.email)
-            usu_editar.pessoa.rg = self.ui.tx_rg.text().upper()
-            itens.append(usu_editar.pessoa.rg)
-            usu_editar.pessoa.celular = self.ui.tx_celular.text().upper()
-            itens.append(usu_editar.pessoa.celular)
+            usu_editar.cpf = self.ui.tx_cpf.text().upper()
+            itens.append(usu_editar.cpf)
+            usu_editar.nome = self.ui.tx_nome.text().upper()
+            itens.append(usu_editar.nome)
+            usu_editar.fone = self.ui.tx_fone.text().upper()
+            itens.append(usu_editar.fone)
+            usu_editar.email = self.ui.tx_email.text().upper()
+            itens.append(usu_editar.email)
+            usu_editar.rg = self.ui.tx_rg.text().upper()
+            itens.append(usu_editar.rg)
+            usu_editar.celular = self.ui.tx_celular.text().upper()
+            itens.append(usu_editar.celular)
             usu_editar.nome = self.ui.tx_login.text()
-            itens.append(usu_editar.pessoa.nome)
+            itens.append(usu_editar.nome)
 
             if self.ui.tx_senha_antiga:
                 senha = str(usu_editar.get_senha_criptografada()[0]).encode()
@@ -128,12 +124,11 @@ class ListaUsuario(QMainWindow):
 
             try:
                 usu_editar.editar()
-                usu_editar.pessoa.editar()
             except Exception as error:
                 QMessageBox.warning(self, "Erro", str(error))
             else:
                 self.ui.tb_usuario.setFocus()
-                for c in range(1, 8):
+                for c in range(0, 8):
                     self.ui.tb_usuario.setItem(self.linha_selecionada, c, QTableWidgetItem(itens[c]))
         else:
             QMessageBox.warning(self, "Atenção!", "Favor selecionar alguma linha!")
@@ -158,10 +153,9 @@ class ListaUsuario(QMainWindow):
 
         operador = Operador.get_operador_atual()
         usu = Usuario()
-        usu.pessoa = Pessoa()
-        usu.pessoa.id = operador[0]
+        usu.id = operador[0]
 
-        dados_usuario = usu.get_usuario_by_pessoa()
+        dados_usuario = usu.get_usuario_by_id()
 
         self.ui.tb_usuario.insertRow(0)
 

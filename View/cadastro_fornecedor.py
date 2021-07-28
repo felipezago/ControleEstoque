@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'View/UI/cadastro_fornecedor.ui'
+# Form implementation generated from reading ui file 'UI/cadastro_fornecedor.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -15,13 +15,15 @@ class Ui_ct_FormFornecedor(object):
     def setupUi(self, ct_FormFornecedor):
         ct_FormFornecedor.setObjectName("ct_FormFornecedor")
         ct_FormFornecedor.resize(653, 371)
+        ct_FormFornecedor.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        ct_FormFornecedor.setFrameShadow(QtWidgets.QFrame.Raised)
         self.fr_FormFornecedor = QtWidgets.QFrame(ct_FormFornecedor)
         self.fr_FormFornecedor.setGeometry(QtCore.QRect(0, 0, 1000, 500))
         self.fr_FormFornecedor.setStyleSheet("background: #FFF;\n"
 "border: none")
         self.fr_FormFornecedor.setObjectName("fr_FormFornecedor")
         self.lb_FormFornecedor = QtWidgets.QLabel(self.fr_FormFornecedor)
-        self.lb_FormFornecedor.setGeometry(QtCore.QRect(100, 10, 880, 30))
+        self.lb_FormFornecedor.setGeometry(QtCore.QRect(20, 10, 880, 30))
         self.lb_FormFornecedor.setStyleSheet("QLabel{\n"
 "font-size: 14px;\n"
 "font-family: \"Arial\";\n"
@@ -30,21 +32,6 @@ class Ui_ct_FormFornecedor(object):
 "border-bottom: 2px solid #A2A2A2\n"
 "}")
         self.lb_FormFornecedor.setObjectName("lb_FormFornecedor")
-        self.tx_Id = QtWidgets.QLineEdit(self.fr_FormFornecedor)
-        self.tx_Id.setEnabled(False)
-        self.tx_Id.setGeometry(QtCore.QRect(20, 10, 50, 30))
-        self.tx_Id.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border: 1px solid #A2A2A2;\n"
-"color: #000;\n"
-"font-size: 14px;\n"
-"font-family: \"Arial\";\n"
-"font-weight: bold;\n"
-"\n"
-"}")
-        self.tx_Id.setText("")
-        self.tx_Id.setAlignment(QtCore.Qt.AlignCenter)
-        self.tx_Id.setObjectName("tx_Id")
         self.lb_FormFornecedor_2 = QtWidgets.QLabel(self.fr_FormFornecedor)
         self.lb_FormFornecedor_2.setGeometry(QtCore.QRect(20, 60, 150, 20))
         self.lb_FormFornecedor_2.setStyleSheet("QLabel{\n"
@@ -351,13 +338,12 @@ class Ui_ct_FormFornecedor(object):
         self.bt_busca_cep.setGeometry(QtCore.QRect(130, 240, 21, 31))
         self.bt_busca_cep.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("View/UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_busca_cep.setIcon(icon)
         self.bt_busca_cep.setObjectName("bt_busca_cep")
 
         self.retranslateUi(ct_FormFornecedor)
         QtCore.QMetaObject.connectSlotsByName(ct_FormFornecedor)
-        ct_FormFornecedor.setTabOrder(self.tx_Id, self.tx_NomeFantasia)
         ct_FormFornecedor.setTabOrder(self.tx_NomeFantasia, self.tx_cnpj)
         ct_FormFornecedor.setTabOrder(self.tx_cnpj, self.tx_Telefone)
         ct_FormFornecedor.setTabOrder(self.tx_Telefone, self.tx_Email)

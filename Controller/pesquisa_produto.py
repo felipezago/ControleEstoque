@@ -216,7 +216,7 @@ class PesquisaProdutos(QMainWindow):
         self.produto_selecionado.fornecedor = Fornecedor()
         self.produto_selecionado.fornecedor.id = p[1]
         forn_selecionado = self.produto_selecionado.fornecedor.get_fornecedor_by_id()
-        self.produto_selecionado.fornecedor.nome = forn_selecionado[2]
+        self.produto_selecionado.fornecedor.nome = forn_selecionado[1]
 
         # categoria
         self.produto_selecionado.categoria = Categoria()

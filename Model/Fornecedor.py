@@ -3,10 +3,10 @@ from Funcoes.configdb import Banco
 from Model.Endereco import Endereco
 
 
-class Fornecedor:
-    def __init__(self, id_forn="", endereco: Endereco = "", nome="", cnpj="", email="", fone=""):
+class Fornecedor(Endereco):
+    def __init__(self, id_forn="", nome="", cnpj="", email="", fone=""):
+        super().__init__()
         self.id = id_forn
-        self.endereco = endereco
         self.nome = nome
         self.cnpj = cnpj
         self.email = email
@@ -17,27 +17,12 @@ class Fornecedor:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM fornecedor WHERE forn_id = \'{self.id}\'')
+        cur.execute(f'SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, forn_numero, '
+                    f'forn_cidade, forn_estado, forn_cep FROM fornecedor FROM fornecedor WHERE forn_id = \'{self.id}\'')
         row = cur.fetchone()
         cur.close()
         conn.close()
         return row
-
-    @staticmethod
-    def get_new_fornecedor():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute('SELECT max(forn_id) FROM fornecedor')
-        row = cur.fetchone()
-        cur.close()
-        conn.close()
-
-        if row[0] is None:
-            return 1
-        else:
-            return int(row[0]) + 1
 
     def delete_fornecedor_by_id(self):
         config = Banco()
@@ -67,9 +52,8 @@ class Fornecedor:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, end_rua, end_bairro, end_numero, "
-                    f"end_cidade, end_estado, end_cep FROM fornecedor "
-                    f"INNER JOIN endereco ON forn_end_id = end_id "
+        cur.execute(f"SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, forn_numero, "
+                    f"forn_cidade, forn_estado, forn_cep FROM fornecedor "
                     f"ORDER BY forn_id")
         lista_fornecedores = cur.fetchall()
         cur.close()
@@ -105,7 +89,9 @@ class Fornecedor:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM fornecedor WHERE {campo} like \'%{desc}%\' ORDER BY forn_id')
+        cur.execute(f'SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, forn_numero, '
+                    f'forn_cidade, forn_estado, forn_cep FROM fornecedor WHERE {campo} like \'%{desc}%\' '
+                    f'ORDER BY forn_id')
         row = cur.fetchall()
         cur.close()
         conn.close()
@@ -115,3 +101,16 @@ class Fornecedor:
                 return a
         else:
             return row
+
+    def inserir(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"INSERT INTO fornecedor (forn_fone, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, "
+                    f"forn_numero, forn_cidade, forn_estado, forn_cep) VALUES "
+                    f"(\'{self.nome}\', \'{self.cnpj}\', \'{self.email}\', \'{self.email}\', \'{self.rua}\', "
+                    f"\'{self.bairro}\', \'{self.numero}\', \'{self.cidade}\', \'{self.estado}\', \'{self.cep}\')")
+        conn.commit()
+        cur.close()
+        conn.close()

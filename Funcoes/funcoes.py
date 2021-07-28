@@ -77,7 +77,7 @@ def exec_app(obj):
     centralizar(app)
 
 
-def formatar_cpf_rg(cpf):
+def retirar_formatacao(cpf):
     cpf_formatado = str(cpf).replace('.', '')
     cpf_formatado = cpf_formatado.replace('-', '')
     cpf_formatado = cpf_formatado.replace('/', '')

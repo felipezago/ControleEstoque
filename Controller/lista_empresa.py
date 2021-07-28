@@ -2,8 +2,7 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Empresa import Empresa
 from PyQt5 import QtCore
-from Model.Endereco import Endereco
-from Funcoes.funcoes import formatar_cnpj, formatar_cpf_rg
+from Funcoes.funcoes import formatar_cnpj, retirar_formatacao
 from PyQt5.QtGui import QPixmap
 
 
@@ -72,6 +71,7 @@ class ListaEmpresa(QMainWindow):
         self.ui.tx_cep.textChanged.connect(self.enable_cidade_estado)
 
         self.set_tx_enabled(False)
+        self.ui.tx_cnpj.setEnabled(False)
 
         for i in range(0, 13):
             self.ui.tb_empresa.horizontalHeaderItem(i).setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
@@ -203,7 +203,7 @@ class ListaEmpresa(QMainWindow):
         texto = self.ui.tx_busca.text()
         tamanho = len(texto)
         if self.ui.cb_empresa.currentIndex() in (0, 3):
-            if not texto[tamanho-1:tamanho].isnumeric():
+            if not texto[tamanho - 1:tamanho].isnumeric():
                 self.ui.tx_busca.setText(texto[:tamanho - 1])
 
     def preenche_combo(self):
@@ -291,79 +291,73 @@ class ListaEmpresa(QMainWindow):
         self.linha_selecionada = tb.currentRow()
 
         self.empresa_selecionada.cnpj = tb.item(tb.currentRow(), 0).text()
-        self.empresa_selecionada.cnpj = formatar_cpf_rg(self.empresa_selecionada.cnpj)
+        self.empresa_selecionada.cnpj = retirar_formatacao(self.empresa_selecionada.cnpj)
         c = self.empresa_selecionada.get_empresa_by_cnpj_all()
 
         if c is not None:
-            self.empresa_selecionada.razao_social = c[3]
-            self.empresa_selecionada.nome_fantasia = c[4]
-            self.empresa_selecionada.inscricao_estadual = c[5]
-            self.empresa_selecionada.email = c[6]
-            self.empresa_selecionada.fone = c[7]
-            self.empresa_selecionada.site = c[8]
+            self.empresa_selecionada.razao_social = c[1]
+            self.empresa_selecionada.nome_fantasia = c[2]
+            self.empresa_selecionada.inscricao_estadual = c[3]
+            self.empresa_selecionada.email = c[4]
+            self.empresa_selecionada.fone = c[5]
+            self.empresa_selecionada.site = c[6]
+            self.empresa_selecionada.rua = c[7]
+            self.empresa_selecionada.bairro = c[8]
+            self.empresa_selecionada.numero = c[9]
+            self.empresa_selecionada.cidade = c[10]
+            self.empresa_selecionada.estado = c[11]
+            self.empresa_selecionada.cep = c[12]
 
-        # endereço
-        self.empresa_selecionada.endereco = Endereco()
-        self.empresa_selecionada.endereco.id = c[1]
-        end_selecionado = self.empresa_selecionada.endereco.get_endereco_by_id()
-        self.empresa_selecionada.endereco.rua = end_selecionado[1]
-        self.empresa_selecionada.endereco.bairro = end_selecionado[2]
-        self.empresa_selecionada.endereco.numero = end_selecionado[3]
-        self.empresa_selecionada.endereco.cidade = end_selecionado[4]
-        self.empresa_selecionada.endereco.estado = end_selecionado[5]
-        self.empresa_selecionada.endereco.cep = end_selecionado[6]
-
-        # setando os edits
-        self.ui.tx_cnpj.setText(self.empresa_selecionada.cnpj)
-        self.ui.tx_razao_social.setText(self.empresa_selecionada.razao_social)
-        self.ui.tx_nome_fantasia.setText(self.empresa_selecionada.nome_fantasia)
-        self.ui.tx_inscricao.setText(self.empresa_selecionada.inscricao_estadual)
-        self.ui.tx_email.setText(self.empresa_selecionada.email)
-        self.ui.tx_fone.setText(self.empresa_selecionada.fone)
-        self.ui.tx_site.setText(self.empresa_selecionada.site)
-
-        self.ui.tx_rua.setText(self.empresa_selecionada.endereco.rua)
-        self.ui.tx_bairro.setText(self.empresa_selecionada.endereco.bairro)
-        self.ui.tx_numero.setText(self.empresa_selecionada.endereco.numero)
-        self.ui.tx_cidade.setText(self.empresa_selecionada.endereco.cidade)
-        self.ui.tx_estado.setText(self.empresa_selecionada.endereco.estado)
-        self.ui.tx_cep.setText(self.empresa_selecionada.endereco.cep)
+            # setando os edits
+            self.ui.tx_cnpj.setText(self.empresa_selecionada.cnpj)
+            self.ui.tx_razao_social.setText(self.empresa_selecionada.razao_social)
+            self.ui.tx_nome_fantasia.setText(self.empresa_selecionada.nome_fantasia)
+            self.ui.tx_inscricao.setText(self.empresa_selecionada.inscricao_estadual)
+            self.ui.tx_email.setText(self.empresa_selecionada.email)
+            self.ui.tx_fone.setText(self.empresa_selecionada.fone)
+            self.ui.tx_site.setText(self.empresa_selecionada.site)
+            self.ui.tx_rua.setText(self.empresa_selecionada.rua)
+            self.ui.tx_bairro.setText(self.empresa_selecionada.bairro)
+            self.ui.tx_numero.setText(self.empresa_selecionada.numero)
+            self.ui.tx_cidade.setText(self.empresa_selecionada.cidade)
+            self.ui.tx_estado.setText(self.empresa_selecionada.estado)
+            self.ui.tx_cep.setText(self.empresa_selecionada.cep)
 
         if not self.empresa_selecionada.ler_imagem_empresas(self, "temp/"):
             self.add_img_padrao()
 
     def dados_tabela(self):
-            self.empresa_selecionada.cnpj = None
-            self.ui.tx_busca.setText("")
-            self.filtrado = False
-            self.ui.bt_refresh.setEnabled(False)
-            self.limpa_campos()
-            self.ui.tb_empresa.clearContents()
-            self.ui.tb_empresa.setRowCount(0)
-            self.ui.bt_refresh.setEnabled(False)
+        self.empresa_selecionada.cnpj = None
+        self.ui.tx_busca.setText("")
+        self.filtrado = False
+        self.ui.bt_refresh.setEnabled(False)
+        self.limpa_campos()
+        self.ui.tb_empresa.clearContents()
+        self.ui.tb_empresa.setRowCount(0)
+        self.ui.bt_refresh.setEnabled(False)
 
-            dados = Empresa.get_todas_empresas_tabela()
+        dados = Empresa.get_todas_empresas_tabela()
 
-            if type(dados) == list:
-                for i, linha in enumerate(dados):
-                    # empresa
-                    cnpj = QTableWidgetItem(formatar_cnpj(str(linha[0])))
-                    self.ui.tb_empresa.insertRow(i)
-                    self.ui.tb_empresa.setItem(i, 0, cnpj)
+        if type(dados) == list:
+            for i, linha in enumerate(dados):
+                # empresa
+                cnpj = QTableWidgetItem(formatar_cnpj(str(linha[0])))
+                self.ui.tb_empresa.insertRow(i)
+                self.ui.tb_empresa.setItem(i, 0, cnpj)
 
-                    for j in range(1, 13):
-                        self.ui.tb_empresa.setItem(i, j, QTableWidgetItem(str(linha[j])))
+                for j in range(1, 13):
+                    self.ui.tb_empresa.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
-            if self.adicionando:
-                self.ui.tb_empresa.selectRow(self.ui.tb_empresa.rowCount() - 1)
-                self.adicionando = False
+        if self.adicionando:
+            self.ui.tb_empresa.selectRow(self.ui.tb_empresa.rowCount() - 1)
+            self.adicionando = False
 
     def editar(self):
         if self.empresa_selecionada.cnpj:
             itens = list()
 
             emp_editar = Empresa()
-            emp_editar.cnpj = formatar_cpf_rg(self.ui.tx_cnpj.text())
+            emp_editar.cnpj = retirar_formatacao(self.ui.tx_cnpj.text())
             itens.append(emp_editar.cnpj)
             emp_editar.razao_social = self.ui.tx_razao_social.text().upper()
             itens.append(emp_editar.razao_social)
@@ -377,27 +371,21 @@ class ListaEmpresa(QMainWindow):
             itens.append(emp_editar.fone)
             emp_editar.site = self.ui.tx_site.text()
             itens.append(emp_editar.site)
-
-            emp_editar.endereco = Endereco()
-            emp_editar.endereco.id = self.empresa_selecionada.get_endereco_empresa()
-            emp_editar.endereco.rua = self.ui.tx_rua.text().upper()
-            itens.append(emp_editar.endereco.rua)
-            emp_editar.endereco.bairro = self.ui.tx_bairro.text().upper()
-            itens.append(emp_editar.endereco.bairro)
-            emp_editar.endereco.numero = self.ui.tx_numero.text().upper()
-            itens.append(emp_editar.endereco.numero)
-            emp_editar.endereco.cidade = self.ui.tx_cidade.text().upper()
-            itens.append(emp_editar.endereco.cidade)
-            emp_editar.endereco.estado = self.ui.tx_estado.text().upper()
-            itens.append(emp_editar.endereco.estado)
-            emp_editar.endereco.cep = formatar_cpf_rg(self.ui.tx_cep.text())
-            itens.append(emp_editar.endereco.cep)
+            emp_editar.rua = self.ui.tx_rua.text().upper()
+            itens.append(emp_editar.rua)
+            emp_editar.bairro = self.ui.tx_bairro.text().upper()
+            itens.append(emp_editar.bairro)
+            emp_editar.numero = self.ui.tx_numero.text().upper()
+            itens.append(emp_editar.numero)
+            emp_editar.cidade = self.ui.tx_cidade.text().upper()
+            itens.append(emp_editar.cidade)
+            emp_editar.estado = self.ui.tx_estado.text().upper()
+            itens.append(emp_editar.estado)
+            emp_editar.cep = retirar_formatacao(self.ui.tx_cep.text())
+            itens.append(emp_editar.cep)
 
             try:
-                if emp_editar.cnpj != self.empresa_selecionada.cnpj:
-                    emp_editar.alterar_cnpj(emp_editar.cnpj, self.empresa_selecionada.cnpj)
                 emp_editar.editar()
-                emp_editar.endereco.editar()
 
                 if self.caminho_img:
                     if self.empresa_selecionada.check_imagem() is not None:

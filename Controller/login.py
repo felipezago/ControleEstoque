@@ -57,13 +57,13 @@ class Login(QMainWindow):
             params = config.get_params()
             conn = psycopg2.connect(**params)
             cur = conn.cursor()
-            cur.execute(f'SELECT * FROM usuarios WHERE usu_nome = LOWER(\'{self.usuarios}\')')
+            cur.execute(f'SELECT * FROM usuarios WHERE usu_login = LOWER(\'{self.usuarios}\')')
             linha = cur.fetchone()
 
             # se encontrar o usuário
             if linha is not None:
                 # pega a senha e codifica
-                passwd = linha[4].encode()
+                passwd = linha[3].encode()
                 # se a senha criptografada bater
                 if verificar_criptografia(senha.encode(), passwd):
                     if not Operador.verifica_operador_ativo():

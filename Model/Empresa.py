@@ -3,12 +3,11 @@ from Funcoes.configdb import Banco
 from Model.Endereco import Endereco
 
 
-class Empresa:
-    def __init__(self, cnpj="", endereco: Endereco = "", usuario="", razao_social="", nome_fantasia="",
-                 inscricao_estadual="",
-                 email="", fone="", site=""):
+class Empresa(Endereco):
+    def __init__(self, cnpj="", usuario="", razao_social="", nome_fantasia="", inscricao_estadual="", email="", fone="",
+                 site=""):
+        super().__init__()
         self.cnpj = cnpj
-        self.endereco = endereco
         self.usuario = usuario
         self.razao_social = razao_social
         self.nome_fantasia = nome_fantasia
@@ -24,8 +23,7 @@ class Empresa:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
-                    f'emp_site, end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep FROM empresas '
-                    f'INNER JOIN endereco ON emp_end_id = end_id '
+                    f'emp_site, emp_rua, emp_bairro, emp_numero, emp_cidade, emp_estado, emp_cep FROM empresas '
                     f'WHERE {campo} like \'%{desc}%\''
                     f'ORDER BY emp_nomefantasia')
         row = cur.fetchall()
@@ -40,10 +38,9 @@ class Empresa:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f"""
-        SELECT INITCAP(emp_nomefantasia), INITCAP(end_rua), end_numero, INITCAP(end_bairro), emp_fone, 
+        SELECT INITCAP(emp_nomefantasia), INITCAP(emp_rua), emp_numero, INITCAP(emp_bairro), emp_fone, 
         CONCAT(SUBSTR(emp_cnpj,1,2),'.',SUBSTR(emp_cnpj,3,3),'.',SUBSTR(emp_cnpj,6,3),'/',SUBSTR(emp_cnpj,9,4), '-', 
-        SUBSTR(emp_cnpj,13,2)), initcap(end_cidade), end_estado, emp_inscricaoestadual FROM empresas
-        INNER JOIN endereco ON emp_end_id = end_id
+        SUBSTR(emp_cnpj,13,2)), initcap(emp_cidade), emp_estado, emp_inscricaoestadual FROM empresas
         WHERE emp_cnpj = \'{self.cnpj}\'""")
         row = cur.fetchone()
         cur.close()
@@ -57,25 +54,12 @@ class Empresa:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
-                    f'emp_site, end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep FROM empresas '
-                    f'INNER JOIN endereco ON emp_end_id = end_id '
+                    f'emp_site, emp_rua, emp_bairro, emp_numero, emp_cidade, emp_estado, emp_cep FROM empresas '
                     f'WHERE emp_cnpj = \'{self.cnpj}\'')
         row = cur.fetchall()
         cur.close()
         conn.close()
         return row
-
-    def get_endereco_empresa(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute(f'SELECT emp_end_id FROM empresas WHERE emp_cnpj = \'{self.cnpj}\'')
-        row = cur.fetchone()
-        cur.close()
-        conn.close()
-        for a in row:
-            return a
 
     def get_empresa_by_cnpj_all(self):
         config = Banco()
@@ -108,8 +92,7 @@ class Empresa:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
-                    f'emp_site, end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep FROM empresas '
-                    f'INNER JOIN endereco ON emp_end_id = end_id '
+                    f'emp_site, emp_rua, emp_bairro, emp_numero, emp_cidade, emp_estado, emp_cep FROM empresas '
                     f'ORDER BY emp_nomefantasia')
         row = cur.fetchall()
         cur.close()
@@ -133,9 +116,11 @@ class Empresa:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"UPDATE empresas SET emp_cnpj = \'{self.cnpj}\', emp_razaosocial = \'{self.razao_social}\', "
+        cur.execute(f"UPDATE empresas SET emp_razaosocial = \'{self.razao_social}\', "
                     f"emp_nomefantasia = \'{self.nome_fantasia}\', emp_inscricaoestadual = \'{self.inscricao_estadual}"
-                    f"\', emp_email = \'{self.email}\', emp_fone = \'{self.fone}\', emp_site = \'{self.site}\' "
+                    f"\', emp_email = \'{self.email}\', emp_fone = \'{self.fone}\', emp_site = \'{self.site}\',  "
+                    f"emp_rua = \'{self.rua}\', emp_bairro = \'{self.bairro}\', emp_numero = \'{self.numero}\',"
+                    f"emp_cidade = \'{self.cidade}\', emp_estado = \'{self.estado}\', emp_cep = \'{self.cep}\'"
                     f"WHERE emp_cnpj = \'{self.cnpj}\'")
         conn.commit()
         cur.close()
@@ -147,18 +132,6 @@ class Empresa:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f"DELETE FROM empresas WHERE emp_cnpj = \'{self.cnpj}\'")
-        conn.commit()
-        cur.close()
-        conn.close()
-
-    @staticmethod
-    def alterar_cnpj(novo_cnpj, cnpj_antigo):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute(f"UPDATE empresas SET emp_cnpj = \'{novo_cnpj}\' "
-                    f"WHERE emp_cnpj = \'{cnpj_antigo}\'")
         conn.commit()
         cur.close()
         conn.close()
@@ -275,3 +248,20 @@ class Empresa:
         finally:
             if conn is not None:
                 conn.close()
+
+    def inserir(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"""
+            INSERT INTO empresas (emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email,emp_fone
+                    , emp_site, emp_rua, emp_bairro, emp_numero, emp_cidade, emp_estado, emp_cep) VALUES 
+                    (\'{self.cnpj}\', \'{self.razao_social}\', \'{self.nome_fantasia}\', \'{self.inscricao_estadual}
+                    \', \'{self.email}\', \'{self.fone}\',  \'{self.site}\', \'{self.rua}\', \'{self.bairro}\', 
+                    \'{self.numero}\', \'{self.cidade}\', \'{self.estado}\', \'{self.cep}\')
+                """
+                    )
+        conn.commit()
+        cur.close()
+        conn.close()

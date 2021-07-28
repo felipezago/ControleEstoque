@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
+from Model.Fornecedor import Fornecedor
 
 
 class CadastroFornecedor(QMainWindow):
@@ -6,7 +7,6 @@ class CadastroFornecedor(QMainWindow):
         super(CadastroFornecedor, self).__init__(parent)
         from View.cadastro_fornecedor import Ui_ct_FormFornecedor
         from PyQt5 import QtCore
-        from Model.Fornecedor import Fornecedor
 
         # setando View
         self.ui = Ui_ct_FormFornecedor()
@@ -22,10 +22,6 @@ class CadastroFornecedor(QMainWindow):
         self.ui.bt_busca_cep.clicked.connect(self.busca_cep)
         self.ui.tx_Cep.returnPressed.connect(self.busca_cep)
         self.ui.tx_Cep.textChanged.connect(self.enable_cidade_estado)
-
-        # setando novo ID
-        self.novo_id = Fornecedor.get_new_fornecedor()
-        self.ui.tx_Id.setText(str(self.novo_id))
 
         self.ui.tx_NomeFantasia.setMaxLength(50)
         self.ui.tx_Email.setMaxLength(60)
@@ -96,43 +92,27 @@ class CadastroFornecedor(QMainWindow):
 
     def salvar(self):
         from PyQt5.QtWidgets import QMessageBox
-        from Funcoes.configdb import Banco
-        import psycopg2
-        from Funcoes.funcoes import formatar_cpf_rg
 
+        forn_inserir = Fornecedor()
 
-        # campos fornecedor
-        nome = self.ui.tx_NomeFantasia.text().upper()
-        cnpj = self.ui.tx_cnpj.text().upper()
-        telefone = self.ui.tx_Telefone.text().upper()
-        email = self.ui.tx_Email.text().lower()
+        forn_inserir.nome = self.ui.tx_NomeFantasia.text().upper()
+        forn_inserir.cnpj = self.ui.tx_cnpj.text().upper()
+        forn_inserir.telefone = self.ui.tx_Telefone.text().upper()
+        forn_inserir.email = self.ui.tx_Email.text().lower()
+        forn_inserir.cep = self.ui.tx_Cep.text().upper()
+        forn_inserir.rua = self.ui.tx_Endereco.text().upper()
+        forn_inserir.nro = self.ui.tx_Numero.text().upper()
+        forn_inserir.bairro = self.ui.tx_Bairro.text().upper()
+        forn_inserir.cidade = self.ui.tx_Cidade.text().upper()
+        forn_inserir.estado = self.ui.tx_Estado.text().upper()
 
-        # campos endereço
-        cep = self.ui.tx_Cep.text().upper()
-        rua = self.ui.tx_Endereco.text().upper()
-        nro = self.ui.tx_Numero.text().upper()
-        bairro = self.ui.tx_Bairro.text().upper()
-        cidade = self.ui.tx_Cidade.text().upper()
-        estado = self.ui.tx_Estado.text().upper()
-
-        conn = None
         try:
-            config = Banco()
-            params = config.get_params()
-            conn = psycopg2.connect(**params)
-            cur = conn.cursor()
-            cur.execute(f"CALL add_fornecedor(\'{rua}\', \'{bairro}\', \'{nro}\', \'{cidade}\', \'{estado}\', "
-                        f"\'{cep}\', \'{formatar_cpf_rg(cnpj)}\', \'{nome}\', \'{telefone}\',\'{email}\') ")
-            conn.commit()
-            cur.close()
-
+            forn_inserir.editar()
         except Exception as error:
             QMessageBox.about(self, "Erro", str(error))
         else:
             QMessageBox.about(self, "Sucesso", "Cadastro efetuado com sucesso!")
             self.fechar()
-
-        conn.close()
 
     def fechar(self):
         self.close()

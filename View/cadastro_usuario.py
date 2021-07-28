@@ -14,16 +14,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ct_FormUsuario(object):
     def setupUi(self, ct_FormUsuario):
         ct_FormUsuario.setObjectName("ct_FormUsuario")
-        ct_FormUsuario.resize(1000, 443)
+        ct_FormUsuario.resize(678, 460)
         ct_FormUsuario.setStyleSheet("background: #FFF;\n"
 "border: none")
         self.fr_FormUsuario = QtWidgets.QFrame(ct_FormUsuario)
-        self.fr_FormUsuario.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+        self.fr_FormUsuario.setGeometry(QtCore.QRect(0, 0, 681, 500))
         self.fr_FormUsuario.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.fr_FormUsuario.setFrameShadow(QtWidgets.QFrame.Raised)
         self.fr_FormUsuario.setObjectName("fr_FormUsuario")
         self.lb_FormFornecedor_21 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_21.setGeometry(QtCore.QRect(680, 60, 150, 20))
+        self.lb_FormFornecedor_21.setGeometry(QtCore.QRect(20, 240, 150, 20))
         self.lb_FormFornecedor_21.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -45,26 +45,8 @@ class Ui_ct_FormUsuario(object):
 "}")
         self.tx_Celular.setPlaceholderText("")
         self.tx_Celular.setObjectName("tx_Celular")
-        self.lb_FormFornecedor_27 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_27.setGeometry(QtCore.QRect(580, 290, 50, 20))
-        self.lb_FormFornecedor_27.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormFornecedor_27.setObjectName("lb_FormFornecedor_27")
-        self.lb_FormFornecedor_28 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_28.setGeometry(QtCore.QRect(20, 290, 50, 20))
-        self.lb_FormFornecedor_28.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormFornecedor_28.setObjectName("lb_FormFornecedor_28")
         self.lb_FormFornecedor_23 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_23.setGeometry(QtCore.QRect(680, 115, 150, 20))
+        self.lb_FormFornecedor_23.setGeometry(QtCore.QRect(20, 295, 150, 20))
         self.lb_FormFornecedor_23.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -72,15 +54,6 @@ class Ui_ct_FormUsuario(object):
 "color: #797979\n"
 "}")
         self.lb_FormFornecedor_23.setObjectName("lb_FormFornecedor_23")
-        self.lb_FormFornecedor_20 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_20.setGeometry(QtCore.QRect(20, 345, 120, 20))
-        self.lb_FormFornecedor_20.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormFornecedor_20.setObjectName("lb_FormFornecedor_20")
         self.lb_FormFornecedor_17 = QtWidgets.QLabel(self.fr_FormUsuario)
         self.lb_FormFornecedor_17.setGeometry(QtCore.QRect(20, 60, 150, 20))
         self.lb_FormFornecedor_17.setStyleSheet("QLabel{\n"
@@ -104,15 +77,6 @@ class Ui_ct_FormUsuario(object):
 "}")
         self.tx_rg.setPlaceholderText("")
         self.tx_rg.setObjectName("tx_rg")
-        self.lb_FormFornecedor_26 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_26.setGeometry(QtCore.QRect(300, 345, 120, 20))
-        self.lb_FormFornecedor_26.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormFornecedor_26.setObjectName("lb_FormFornecedor_26")
         self.tx_Telefone = QtWidgets.QLineEdit(self.fr_FormUsuario)
         self.tx_Telefone.setGeometry(QtCore.QRect(236, 205, 196, 25))
         self.tx_Telefone.setFocusPolicy(QtCore.Qt.WheelFocus)
@@ -136,15 +100,6 @@ class Ui_ct_FormUsuario(object):
 "color: #797979\n"
 "}")
         self.lb_FormFornecedor_30.setObjectName("lb_FormFornecedor_30")
-        self.lb_FormFornecedor_16 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_16.setGeometry(QtCore.QRect(580, 345, 70, 20))
-        self.lb_FormFornecedor_16.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormFornecedor_16.setObjectName("lb_FormFornecedor_16")
         self.lb_FormFornecedor_6 = QtWidgets.QLabel(self.fr_FormUsuario)
         self.lb_FormFornecedor_6.setGeometry(QtCore.QRect(236, 120, 190, 20))
         self.lb_FormFornecedor_6.setStyleSheet("QLabel{\n"
@@ -154,40 +109,6 @@ class Ui_ct_FormUsuario(object):
 "color: #797979\n"
 "}")
         self.lb_FormFornecedor_6.setObjectName("lb_FormFornecedor_6")
-        self.tx_Bairro = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_Bairro.setGeometry(QtCore.QRect(20, 370, 260, 25))
-        self.tx_Bairro.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_Bairro.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"font: 13px \"Arial\" ;\n"
-"text-transform: uppercase\n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_Bairro.setInputMask("")
-        self.tx_Bairro.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.tx_Bairro.setPlaceholderText("")
-        self.tx_Bairro.setObjectName("tx_Bairro")
-        self.tx_Estado = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_Estado.setGeometry(QtCore.QRect(580, 370, 70, 25))
-        self.tx_Estado.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_Estado.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"font: 13px \"Arial\" ;\n"
-"text-transform: uppercase\n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_Estado.setInputMask("")
-        self.tx_Estado.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.tx_Estado.setPlaceholderText("")
-        self.tx_Estado.setObjectName("tx_Estado")
         self.tx_cpf = QtWidgets.QLineEdit(self.fr_FormUsuario)
         self.tx_cpf.setGeometry(QtCore.QRect(20, 145, 196, 25))
         self.tx_cpf.setFocusPolicy(QtCore.Qt.WheelFocus)
@@ -202,23 +123,6 @@ class Ui_ct_FormUsuario(object):
 "}")
         self.tx_cpf.setPlaceholderText("")
         self.tx_cpf.setObjectName("tx_cpf")
-        self.tx_Num = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_Num.setGeometry(QtCore.QRect(580, 315, 70, 25))
-        self.tx_Num.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_Num.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"font: 13px \"Arial\" ;\n"
-"text-transform: uppercase\n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_Num.setInputMask("")
-        self.tx_Num.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.tx_Num.setPlaceholderText("")
-        self.tx_Num.setObjectName("tx_Num")
         self.lb_FormFornecedor = QtWidgets.QLabel(self.fr_FormUsuario)
         self.lb_FormFornecedor.setGeometry(QtCore.QRect(20, 10, 971, 30))
         self.lb_FormFornecedor.setStyleSheet("QLabel{\n"
@@ -238,25 +142,8 @@ class Ui_ct_FormUsuario(object):
 "color: #797979\n"
 "}")
         self.lb_FormFornecedor_25.setObjectName("lb_FormFornecedor_25")
-        self.tx_Cidade = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_Cidade.setGeometry(QtCore.QRect(300, 370, 260, 25))
-        self.tx_Cidade.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_Cidade.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"font: 13px \"Arial\" ;\n"
-"text-transform: uppercase\n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_Cidade.setInputMask("")
-        self.tx_Cidade.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.tx_Cidade.setPlaceholderText("")
-        self.tx_Cidade.setObjectName("tx_Cidade")
         self.tx_senha = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_senha.setGeometry(QtCore.QRect(680, 140, 300, 25))
+        self.tx_senha.setGeometry(QtCore.QRect(20, 320, 300, 25))
         self.tx_senha.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_senha.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -271,7 +158,7 @@ class Ui_ct_FormUsuario(object):
         self.tx_senha.setEchoMode(QtWidgets.QLineEdit.Password)
         self.tx_senha.setObjectName("tx_senha")
         self.frame = QtWidgets.QFrame(self.fr_FormUsuario)
-        self.frame.setGeometry(QtCore.QRect(0, 400, 1000, 40))
+        self.frame.setGeometry(QtCore.QRect(-330, 420, 1000, 40))
         self.frame.setStyleSheet("border-bottom: 2px solid #CCC;\n"
 "background: #F7F7F7")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -317,23 +204,8 @@ class Ui_ct_FormUsuario(object):
 "}")
         self.bt_Voltar.setIconSize(QtCore.QSize(75, 35))
         self.bt_Voltar.setObjectName("bt_Voltar")
-        self.tx_cep = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_cep.setGeometry(QtCore.QRect(20, 315, 101, 25))
-        self.tx_cep.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_cep.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"font: 13px \"Arial\" ;\n"
-"text-transform: uppercase\n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_cep.setAlignment(QtCore.Qt.AlignCenter)
-        self.tx_cep.setObjectName("tx_cep")
         self.tx_usuario = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_usuario.setGeometry(QtCore.QRect(680, 85, 300, 25))
+        self.tx_usuario.setGeometry(QtCore.QRect(20, 265, 300, 25))
         self.tx_usuario.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_usuario.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -345,15 +217,6 @@ class Ui_ct_FormUsuario(object):
 "border: 1px solid red;\n"
 "}")
         self.tx_usuario.setObjectName("tx_usuario")
-        self.lb_FormFornecedor_29 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_29.setGeometry(QtCore.QRect(160, 290, 250, 20))
-        self.lb_FormFornecedor_29.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial Unicode MS\";\n"
-"font-weight: bold;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormFornecedor_29.setObjectName("lb_FormFornecedor_29")
         self.lb_FormFornecedor_9 = QtWidgets.QLabel(self.fr_FormUsuario)
         self.lb_FormFornecedor_9.setGeometry(QtCore.QRect(20, 180, 196, 20))
         self.lb_FormFornecedor_9.setStyleSheet("QLabel{\n"
@@ -363,23 +226,6 @@ class Ui_ct_FormUsuario(object):
 "color: #797979\n"
 "}")
         self.lb_FormFornecedor_9.setObjectName("lb_FormFornecedor_9")
-        self.tx_Endereco = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_Endereco.setGeometry(QtCore.QRect(160, 315, 400, 25))
-        self.tx_Endereco.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_Endereco.setStyleSheet("QLineEdit{\n"
-"background: #CFCFCF;\n"
-"border-radius: 2px;\n"
-"color: #000;\n"
-"font: 13px \"Arial\" ;\n"
-"text-transform: uppercase\n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_Endereco.setInputMask("")
-        self.tx_Endereco.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.tx_Endereco.setPlaceholderText("")
-        self.tx_Endereco.setObjectName("tx_Endereco")
         self.tx_Email = QtWidgets.QLineEdit(self.fr_FormUsuario)
         self.tx_Email.setGeometry(QtCore.QRect(452, 205, 196, 25))
         self.tx_Email.setFocusPolicy(QtCore.Qt.WheelFocus)
@@ -403,17 +249,6 @@ class Ui_ct_FormUsuario(object):
 "color: #797979\n"
 "}")
         self.lb_FormFornecedor_18.setObjectName("lb_FormFornecedor_18")
-        self.lb_FormFornecedor_31 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_31.setGeometry(QtCore.QRect(20, 250, 630, 30))
-        self.lb_FormFornecedor_31.setStyleSheet("QLabel{\n"
-"font-size: 14px;\n"
-"font-family: \"Arial\";\n"
-"font-weight: normal;\n"
-"\n"
-"border-bottom: 2px solid #A2A2A2;\n"
-"color: #797979\n"
-"}")
-        self.lb_FormFornecedor_31.setObjectName("lb_FormFornecedor_31")
         self.tx_nome = QtWidgets.QLineEdit(self.fr_FormUsuario)
         self.tx_nome.setGeometry(QtCore.QRect(20, 85, 630, 25))
         self.tx_nome.setFocusPolicy(QtCore.Qt.WheelFocus)
@@ -429,7 +264,7 @@ class Ui_ct_FormUsuario(object):
 "}")
         self.tx_nome.setObjectName("tx_nome")
         self.tx_senha2 = QtWidgets.QLineEdit(self.fr_FormUsuario)
-        self.tx_senha2.setGeometry(QtCore.QRect(680, 200, 300, 25))
+        self.tx_senha2.setGeometry(QtCore.QRect(20, 380, 300, 25))
         self.tx_senha2.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_senha2.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -444,7 +279,7 @@ class Ui_ct_FormUsuario(object):
         self.tx_senha2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.tx_senha2.setObjectName("tx_senha2")
         self.lb_FormFornecedor_24 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormFornecedor_24.setGeometry(QtCore.QRect(680, 175, 271, 20))
+        self.lb_FormFornecedor_24.setGeometry(QtCore.QRect(20, 355, 271, 20))
         self.lb_FormFornecedor_24.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -452,15 +287,8 @@ class Ui_ct_FormUsuario(object):
 "color: #797979\n"
 "}")
         self.lb_FormFornecedor_24.setObjectName("lb_FormFornecedor_24")
-        self.bt_busca_cep = QtWidgets.QPushButton(self.fr_FormUsuario)
-        self.bt_busca_cep.setGeometry(QtCore.QRect(130, 310, 21, 31))
-        self.bt_busca_cep.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_busca_cep.setIcon(icon)
-        self.bt_busca_cep.setObjectName("bt_busca_cep")
         self.cb_nivel = QtWidgets.QComboBox(self.fr_FormUsuario)
-        self.cb_nivel.setGeometry(QtCore.QRect(680, 320, 291, 25))
+        self.cb_nivel.setGeometry(QtCore.QRect(350, 340, 291, 25))
         self.cb_nivel.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.cb_nivel.setStyleSheet("QComboBox{\n"
 "background: #CFCFCF;\n"
@@ -491,7 +319,7 @@ class Ui_ct_FormUsuario(object):
         self.cb_nivel.addItem("")
         self.cb_nivel.addItem("")
         self.cb_empresa = QtWidgets.QComboBox(self.fr_FormUsuario)
-        self.cb_empresa.setGeometry(QtCore.QRect(680, 260, 271, 25))
+        self.cb_empresa.setGeometry(QtCore.QRect(350, 270, 271, 25))
         self.cb_empresa.setStyleSheet("QComboBox{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
@@ -519,7 +347,7 @@ class Ui_ct_FormUsuario(object):
         self.cb_empresa.setObjectName("cb_empresa")
         self.cb_empresa.addItem("")
         self.lb_FormProdutos_3 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormProdutos_3.setGeometry(QtCore.QRect(680, 300, 215, 20))
+        self.lb_FormProdutos_3.setGeometry(QtCore.QRect(350, 310, 215, 20))
         self.lb_FormProdutos_3.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -528,7 +356,7 @@ class Ui_ct_FormUsuario(object):
 "}")
         self.lb_FormProdutos_3.setObjectName("lb_FormProdutos_3")
         self.lb_FormProdutos_9 = QtWidgets.QLabel(self.fr_FormUsuario)
-        self.lb_FormProdutos_9.setGeometry(QtCore.QRect(680, 240, 215, 20))
+        self.lb_FormProdutos_9.setGeometry(QtCore.QRect(350, 240, 215, 20))
         self.lb_FormProdutos_9.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -537,7 +365,7 @@ class Ui_ct_FormUsuario(object):
 "}")
         self.lb_FormProdutos_9.setObjectName("lb_FormProdutos_9")
         self.bt_add_emp = QtWidgets.QPushButton(self.fr_FormUsuario)
-        self.bt_add_emp.setGeometry(QtCore.QRect(950, 260, 25, 25))
+        self.bt_add_emp.setGeometry(QtCore.QRect(620, 270, 25, 25))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(16)
@@ -561,14 +389,12 @@ class Ui_ct_FormUsuario(object):
         ct_FormUsuario.setTabOrder(self.tx_rg, self.tx_Celular)
         ct_FormUsuario.setTabOrder(self.tx_Celular, self.tx_Telefone)
         ct_FormUsuario.setTabOrder(self.tx_Telefone, self.tx_Email)
-        ct_FormUsuario.setTabOrder(self.tx_Email, self.tx_cep)
-        ct_FormUsuario.setTabOrder(self.tx_cep, self.tx_Endereco)
-        ct_FormUsuario.setTabOrder(self.tx_Endereco, self.tx_Num)
-        ct_FormUsuario.setTabOrder(self.tx_Num, self.tx_Bairro)
-        ct_FormUsuario.setTabOrder(self.tx_Bairro, self.tx_Cidade)
-        ct_FormUsuario.setTabOrder(self.tx_Cidade, self.tx_Estado)
-        ct_FormUsuario.setTabOrder(self.tx_Estado, self.tx_usuario)
+        ct_FormUsuario.setTabOrder(self.tx_Email, self.tx_usuario)
         ct_FormUsuario.setTabOrder(self.tx_usuario, self.tx_senha)
+        ct_FormUsuario.setTabOrder(self.tx_senha, self.tx_senha2)
+        ct_FormUsuario.setTabOrder(self.tx_senha2, self.cb_empresa)
+        ct_FormUsuario.setTabOrder(self.cb_empresa, self.bt_add_emp)
+        ct_FormUsuario.setTabOrder(self.bt_add_emp, self.cb_nivel)
 
     def retranslateUi(self, ct_FormUsuario):
         _translate = QtCore.QCoreApplication.translate
@@ -576,16 +402,11 @@ class Ui_ct_FormUsuario(object):
         self.lb_FormFornecedor_21.setText(_translate("ct_FormUsuario", "USUÁRIO"))
         self.tx_Celular.setInputMask(_translate("ct_FormUsuario", "(00) 00000-0000"))
         self.tx_Celular.setText(_translate("ct_FormUsuario", "() -"))
-        self.lb_FormFornecedor_27.setText(_translate("ct_FormUsuario", "Nº"))
-        self.lb_FormFornecedor_28.setText(_translate("ct_FormUsuario", "CEP"))
         self.lb_FormFornecedor_23.setText(_translate("ct_FormUsuario", "SENHA"))
-        self.lb_FormFornecedor_20.setText(_translate("ct_FormUsuario", "BAIRRO"))
         self.lb_FormFornecedor_17.setText(_translate("ct_FormUsuario", "NOME COMPLETO"))
         self.tx_rg.setInputMask(_translate("ct_FormUsuario", "00.000.000-0"))
-        self.lb_FormFornecedor_26.setText(_translate("ct_FormUsuario", "CIDADE"))
         self.tx_Telefone.setInputMask(_translate("ct_FormUsuario", "(00) 0000-0000"))
         self.lb_FormFornecedor_30.setText(_translate("ct_FormUsuario", "TELEFONE"))
-        self.lb_FormFornecedor_16.setText(_translate("ct_FormUsuario", "ESTADO"))
         self.lb_FormFornecedor_6.setText(_translate("ct_FormUsuario", "RG"))
         self.tx_cpf.setInputMask(_translate("ct_FormUsuario", "000.000.000-00"))
         self.tx_cpf.setText(_translate("ct_FormUsuario", "..-"))
@@ -594,17 +415,12 @@ class Ui_ct_FormUsuario(object):
         self.tx_senha.setPlaceholderText(_translate("ct_FormUsuario", "Senha"))
         self.bt_salvarUsuario.setText(_translate("ct_FormUsuario", "SALVAR"))
         self.bt_Voltar.setText(_translate("ct_FormUsuario", "VOLTAR"))
-        self.tx_cep.setInputMask(_translate("ct_FormUsuario", "99999-999"))
-        self.tx_cep.setPlaceholderText(_translate("ct_FormUsuario", "123456789"))
         self.tx_usuario.setPlaceholderText(_translate("ct_FormUsuario", "Usuário"))
-        self.lb_FormFornecedor_29.setText(_translate("ct_FormUsuario", "ENDEREÇO"))
         self.lb_FormFornecedor_9.setText(_translate("ct_FormUsuario", "CELULAR"))
         self.lb_FormFornecedor_18.setText(_translate("ct_FormUsuario", "CPF"))
-        self.lb_FormFornecedor_31.setText(_translate("ct_FormUsuario", "ENDEREÇO"))
         self.tx_nome.setPlaceholderText(_translate("ct_FormUsuario", "nome completo"))
         self.tx_senha2.setPlaceholderText(_translate("ct_FormUsuario", "Digite sua senha novamente"))
         self.lb_FormFornecedor_24.setText(_translate("ct_FormUsuario", "DIGITE A SENHA NOVAMENTE"))
-        self.bt_busca_cep.setAccessibleName(_translate("ct_FormUsuario", "BUSCA CEP"))
         self.cb_nivel.setItemText(0, _translate("ct_FormUsuario", "SELECIONE"))
         self.cb_nivel.setItemText(1, _translate("ct_FormUsuario", "VENDEDOR"))
         self.cb_nivel.setItemText(2, _translate("ct_FormUsuario", "GERENTE"))

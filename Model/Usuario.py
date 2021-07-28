@@ -5,34 +5,38 @@ from Model.Pessoa import Pessoa
 from Model.Empresa import Empresa
 
 
-class Usuario:
-    def __init__(self, id="", pessoa: Pessoa = "", empresa: Empresa = "", nome="", senha=""):
-        self.nome = nome
+class Usuario(Pessoa):
+    def __init__(self, id_usu="", login="", senha="", empresa: Empresa = "", nivel=""):
+        super().__init__()
+        self.login = login
         self.senha = senha
-        self.id = id
-        self.pessoa = pessoa
+        self.id = id_usu
         self.empresa = empresa
+        self.nivel = nivel
+
+    @staticmethod
+    def get_usu_by_desc(campo, desc):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(
+            f'''SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login '
+                    f'FROM usuarios WHERE {campo} like \'%{desc}%\' '''
+        )
+        row = cur.fetchall()
+        conn.close()
+        cur.close()
+        return row
 
     def get_usuario_by_id(self):
         config = Banco()
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM usuarios WHERE usu_id = {self.id}')
-        row = cur.fetchone()
-        cur.close()
-        conn.close()
-        return row
-
-    def get_usuario_by_pessoa(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute(f'SELECT usu_id, pess_cpf_cnpj, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, usu_nome '
-                    f'FROM usuarios '
-                    f'INNER JOIN pessoas ON usu_pessoa_id = pess_id '
-                    f'WHERE usu_pessoa_id = {self.pessoa.id}')
+        cur.execute(f'SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login, '
+                    f'usu_nivel_acesso '
+                    f'FROM usuarios WHERE usu_id = {self.id}')
         row = cur.fetchone()
         cur.close()
         conn.close()
@@ -50,10 +54,11 @@ class Usuario:
             show_msg(title="Erro", mensagem="Erro no banco")
         else:
             cur = conn.cursor()
-            cur.execute(f"SELECT * FROM usuarios ORDER BY usu_id")
-            lista_end = cur.fetchall()
+            cur.execute(f"SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login FROM "
+                        f"usuarios ORDER BY usu_id")
+            lista = cur.fetchall()
             cur.close()
-            return lista_end
+            return lista
         finally:
             if conn is not None:
                 conn.close()
@@ -66,7 +71,8 @@ class Usuario:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         if self.senha:
-            cur.execute(f"UPDATE usuarios SET usu_nome = \'{self.nome}\', usu_senha = \'{criptografar_senha(self.senha)}\'"
+            cur.execute(f"UPDATE usuarios SET usu_nome = \'{self.nome}\', "
+                        f"usu_senha = \'{criptografar_senha(self.senha)}\'"
                         f"WHERE usu_id = {self.id}")
             conn.commit()
             print("Senha alterada com sucesso!")
@@ -88,3 +94,43 @@ class Usuario:
         cur.close()
         conn.close()
         return senha
+
+    def inserir(self):
+        from Funcoes.funcoes import criptografar_senha, retirar_formatacao
+
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(
+            f"INSERT INTO usuarios (usu_emp_cnpj, usu_login, usu_senha, usu_nivel_acesso, usu_cpf,"
+            f" usu_nome, usu_fone, usu_email, usu_rg, usu_celular) VALUES "
+            f"(\'{retirar_formatacao(self.empresa.cnpj)}\', \'{self.login}\', \'{criptografar_senha(self.senha)}\', "
+            f"\'{self.nivel}\', \'{retirar_formatacao(self.cpf)}\', \'{self.nome}\', \'{self.fone}\', \'{self.email}\',"
+            f"\'{retirar_formatacao(self.rg)}\', \'{self.celular}\')"
+        )
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    @staticmethod
+    def qtd_usu():
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"SELECT COUNT(*) FROM usuarios")
+        qtd = cur.fetchall()
+        cur.close()
+        conn.close()
+        return qtd
+
+    def delete_usuario_by_id(self):
+        config = Banco()
+        params = config.get_params()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(f"DELETE FROM usuarios WHERE usu_id = \'{self.id}\'")
+        conn.commit()
+        cur.close()
+        conn.close()

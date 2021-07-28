@@ -47,12 +47,12 @@ class PDF(FPDF):
 
     def imagex(self):
         from Model.Empresa import Empresa
-        from Funcoes.funcoes import formatar_cpf_rg
+        from Funcoes.funcoes import retirar_formatacao
         import os
 
         self.set_xy(5, 5)
         emp = Empresa()
-        emp.cnpj = formatar_cpf_rg(self.empresa[5])
+        emp.cnpj = retirar_formatacao(self.empresa[5])
         emp.nome_fantasia = self.empresa[0]
 
         emp.ler_imagem_empresas_pdf("temp/")

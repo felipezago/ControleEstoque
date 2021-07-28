@@ -1,76 +1,75 @@
 def create_tables():
-    comm = {"criar_endereco": """
-            CREATE TABLE IF NOT EXISTS endereco (
-                end_id SERIAL PRIMARY KEY,
-                end_rua VARCHAR(60) NOT NULL,
-                end_bairro VARCHAR(60) NOT NULL,
-                end_numero VARCHAR(10) NOT NULL,
-                end_cidade VARCHAR(50) NOT NULL,
-                end_estado VARCHAR(2) NOT NULL,
-                end_CEP varchar(15)
-            )
-            """,
-            "criar_pessoas": """
-            CREATE TABLE IF NOT EXISTS pessoas (
-                pess_id SERIAL PRIMARY KEY,
-                pess_end_id INT,
-                pess_cpf_cnpj VARCHAR(15) NOT NULL,
-                pess_nome VARCHAR(60) NOT NULL,
-                pess_fone VARCHAR(40),
-                pess_email VARCHAR(50) NOT NULL,
-                pess_rg VARCHAR(13),
-                pess_celular VARCHAR(25),
-                pess_tipo VARCHAR(50) NOT NULL,
-                CONSTRAINT fk_pess_end
-                    FOREIGN KEY(pess_end_id) 
-                        REFERENCES endereco(end_id)
-                        ON DELETE CASCADE
-            )
-            """,
+    comm = {"criar_cliente": """
+               CREATE TABLE IF NOT EXISTS cliente (
+                   clie_id SERIAL PRIMARY KEY,
+                   clie_cpf_cnpj VARCHAR(15) NOT NULL,
+                   clie_nome VARCHAR(60) NOT NULL,
+                   clie_fone VARCHAR(40),
+                   clie_email VARCHAR(50) NOT NULL,
+                   clie_rg VARCHAR(13),
+                   clie_celular VARCHAR(25),
+                   clie_tipo VARCHAR(20),
+                   clie_rua VARCHAR(60) NOT NULL,
+                   clie_bairro VARCHAR(60) NOT NULL,
+                   clie_numero VARCHAR(10),
+                   clie_cidade VARCHAR(50) NOT NULL,
+                   clie_estado VARCHAR(2) NOT NULL,
+                   clie_CEP varchar(15)                      
+               )
+               """,
+            "criar_veiculo": """
+               CREATE TABLE IF NOT EXISTS veiculo (
+                   veic_placa VARCHAR(15) PRIMARY KEY,
+                   veic_clie_id INT,
+                   veic_marca VARCHAR(50) NOT NULL,
+                   veic_modelo VARCHAR(60) NOT NULL,
+                   CONSTRAINT fk_veic_clie
+                       FOREIGN KEY(veic_clie_id) 
+                           REFERENCES cliente(clie_id)
+                           ON DELETE CASCADE        
+               )
+               """,
+            "criar_empresas": """
+                CREATE TABLE IF NOT EXISTS empresas (
+                    emp_cnpj VARCHAR PRIMARY KEY,
+                    emp_razaosocial VARCHAR(100) NOT NULL,
+                    emp_nomefantasia VARCHAR(100) NOT NULL,
+                    emp_inscricaoestadual VARCHAR(40),
+                    emp_email VARCHAR(40) NOT NULL,
+                    emp_fone VARCHAR(20) NOT NULL,
+                    emp_site VARCHAR(100),
+                    emp_rua VARCHAR(60) NOT NULL,
+                    emp_bairro VARCHAR(60) NOT NULL,
+                    emp_numero VARCHAR(10),
+                    emp_cidade VARCHAR(50) NOT NULL,
+                    emp_estado VARCHAR(2) NOT NULL,
+                    emp_CEP varchar(15)
+                )
+                """,
+
             "criar_usuarios": """
             CREATE TABLE IF NOT EXISTS usuarios (
                 usu_id SERIAL PRIMARY KEY,
-                usu_pessoa_id INT,
                 usu_emp_cnpj VARCHAR(20),
-                usu_nome VARCHAR(255) NOT NULL UNIQUE,
+                usu_login VARCHAR(255) NOT NULL UNIQUE,
                 usu_senha TEXT NOT NULL,
                 usu_nivel_acesso VARCHAR(20),
-                usu_cpf_cnpj VARCHAR(15) NOT NULL,
+                usu_cpf VARCHAR(15) NOT NULL,
                 usu_nome VARCHAR(60) NOT NULL,
                 usu_fone VARCHAR(40),
                 usu_email VARCHAR(50) NOT NULL,
                 usu_rg VARCHAR(13),
                 usu_celular VARCHAR(25),
-                CONSTRAINT fk_usu_pess
-                    FOREIGN KEY(usu_pessoa_id) 
-                        REFERENCES pessoas(pess_id)
-                        ON DELETE CASCADE,
                 CONSTRAINT fk_usu_emp
                     FOREIGN KEY(usu_emp_cnpj) 
                         REFERENCES empresas(emp_cnpj)
-                        ON DELETE CASCADE
+                        ON DELETE CASCADE ON UPDATE CASCADE
             )
             """,
             "criar_operador": """
                 CREATE TABLE IF NOT EXISTS operador (
                     ope_id INT PRIMARY KEY           
                 )
-            """,
-            "criar_empresas": """
-            CREATE TABLE IF NOT EXISTS empresas (
-                emp_cnpj VARCHAR PRIMARY KEY,
-                emp_end_id INT,
-                emp_razaosocial VARCHAR(100) NOT NULL,
-                emp_nomefantasia VARCHAR(100) NOT NULL,
-                emp_inscricaoestadual VARCHAR(40),
-                emp_email VARCHAR(40) NOT NULL,
-                emp_fone VARCHAR(20) NOT NULL,
-                emp_site VARCHAR(100),
-                CONSTRAINT fk_emp_end
-                    FOREIGN KEY(emp_end_id) 
-                        REFERENCES endereco(end_id)
-                        ON DELETE CASCADE
-            )
             """,
             "criar_emp_img": """
                CREATE TABLE IF NOT EXISTS emp_img (
@@ -82,41 +81,20 @@ def create_tables():
                        ON UPDATE CASCADE ON DELETE CASCADE
                )
                """,
-            "criar_cliente": """
-           CREATE TABLE IF NOT EXISTS cliente (
-               clie_id SERIAL PRIMARY KEY,
-               clie_pessoa_id INT,
-               clie_tipo VARCHAR(20),
-               CONSTRAINT fk_clie_pess
-                   FOREIGN KEY(clie_pessoa_id) 
-                       REFERENCES pessoas(pess_id)
-                       ON DELETE CASCADE      
-           )
-           """,
-            "criar_veiculo": """
-           CREATE TABLE IF NOT EXISTS veiculo (
-               veic_placa VARCHAR(15) PRIMARY KEY,
-               veic_clie_id INT,
-               veic_marca VARCHAR(50) NOT NULL,
-               veic_modelo VARCHAR(60) NOT NULL,
-               CONSTRAINT fk_veic_clie
-                   FOREIGN KEY(veic_clie_id) 
-                       REFERENCES cliente(clie_id)
-                       ON DELETE CASCADE        
-           )
-           """,
+
             "criar_fornecedor": """
            CREATE TABLE IF NOT EXISTS fornecedor (
                forn_id SERIAL PRIMARY KEY,
-               forn_end_id INT,
                forn_nome VARCHAR(50) NOT NULL,
                forn_cnpj VARCHAR(20) NOT NULL,            
                forn_email VARCHAR(60) NOT NULL,
                forn_fone VARCHAR(50),
-               CONSTRAINT fk_forn_end
-                   FOREIGN KEY(forn_end_id) 
-                       REFERENCES endereco(end_id)
-                       ON DELETE CASCADE         
+               forn_rua VARCHAR(60) NOT NULL,
+               forn_bairro VARCHAR(60) NOT NULL,
+               forn_numero VARCHAR(10),
+               forn_cidade VARCHAR(50) NOT NULL,
+               forn_estado VARCHAR(2) NOT NULL,
+               forn_CEP varchar(15)       
            )
            """,
             "criar_categoria": """
@@ -165,6 +143,7 @@ def create_tables():
             "criar_vendatmp": """
            CREATE TABLE IF NOT EXISTS venda_tmp (
                venda_cod_interno SERIAL PRIMARY KEY,
+               venda_clie_id INT,
                venda_veic_placa VARCHAR(15),
                venda_id INT NOT NULL,
                venda_prod_serv_id INT NOT NULL,
@@ -173,9 +152,12 @@ def create_tables():
                venda_valor FLOAT NOT NULL,
                venda_desconto FLOAT,
                venda_datahora TIMESTAMP,
-               FOREIGN KEY (venda_veic_placa)
-                   REFERENCES veiculo (veic_placa)
-                   ON UPDATE CASCADE ON DELETE CASCADE
+               FOREIGN KEY (venda_clie_id)
+                    REFERENCES cliente (clie_id)
+                        ON UPDATE CASCADE ON DELETE CASCADE,
+                FOREIGN KEY (venda_veic_placa)
+                    REFERENCES veiculo (veic_placa)
+                        ON UPDATE CASCADE ON DELETE CASCADE 
            )
            """,
             "criar_venda": """
@@ -210,91 +192,20 @@ def create_tables():
             "criar_venda_cabeçalho": """
                        CREATE TABLE IF NOT EXISTS vendas (
                            venda_id INT PRIMARY KEY,
+                           venda_clie_id INT,
                            venda_veic_placa VARCHAR(15),
                            venda_qtd_itens INT,
                            venda_total_descontos FLOAT,
                            venda_valor_total FLOAT,
                            venda_status VARCHAR(50),
-                            FOREIGN KEY (venda_veic_placa)
+                           FOREIGN KEY (venda_clie_id)
+                               REFERENCES cliente (clie_id)
+                               ON UPDATE CASCADE ON DELETE CASCADE,
+                           FOREIGN KEY (venda_veic_placa)
                                REFERENCES veiculo (veic_placa)
                                ON UPDATE CASCADE ON DELETE CASCADE 
                        )
                        """,
-
-            "criar_procedure_usuario": """
-                   CREATE OR REPLACE PROCEDURE add_usuario(
-                           rua VARCHAR,
-                           bairro VARCHAR,
-                           nro VARCHAR,
-                           cidade VARCHAR,
-                           estado VARCHAR,
-                           cep VARCHAR,
-                           cpf VARCHAR,
-                           nome VARCHAR,
-                           fone VARCHAR,
-                           email VARCHAR,
-                           rg VARCHAR,
-                           celular VARCHAR,
-                           tipo VARCHAR,
-                           usuario VARCHAR,
-                           senha VARCHAR,
-                           emp_cnpj VARCHAR,
-                           nivel_acesso VARCHAR
-                   ) 
-                   AS $$
-                   DECLARE
-                       f_end_id INT;
-                       f_pess_id INT;
-                   BEGIN
-                       -- inserindo endereço
-                       INSERT INTO endereco (end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep)
-                       VALUES (rua, bairro, nro, cidade, estado, cep)
-                       RETURNING end_id INTO f_end_id;
-
-                       -- inserindo pessoa
-                       INSERT INTO pessoas (pess_end_id, pess_cpf_cnpj, pess_nome, pess_fone, 
-                       pess_email, pess_rg, pess_celular, pess_tipo)
-                       VALUES(f_end_id, cpf, nome, fone, email, rg, celular, tipo)
-                       RETURNING pess_id INTO f_pess_id;
-
-                       -- inserindo usuário
-                       INSERT INTO usuarios (usu_pessoa_id, usu_emp_cnpj, usu_nome, usu_senha, usu_nivel_acesso)
-                       VALUEs(f_pess_id, emp_cnpj, usuario, senha, nivel_acesso);
-
-                   END;
-                   $$
-                   LANGUAGE PLPGSQL;
-
-               """,
-            "criar_procedure_fornecedor": """
-           CREATE OR REPLACE PROCEDURE add_fornecedor(
-                           rua VARCHAR,
-                           bairro VARCHAR,
-                           nro VARCHAR,
-                           cidade VARCHAR,
-                           estado VARCHAR,
-                           cep VARCHAR,
-                           cnpj VARCHAR,
-                           nome VARCHAR,
-                           fone VARCHAR,
-                           email VARCHAR                                                
-                   ) 
-                   AS $$
-                   DECLARE
-                       f_end_id INT;
-                   BEGIN
-                       -- inserindo endereço
-                       INSERT INTO endereco (end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep)
-                       VALUES (rua, bairro, nro, cidade, estado, cep)
-                       RETURNING end_id INTO f_end_id;
-
-                       -- inserindo fornecedor
-                       INSERT INTO fornecedor (forn_end_id, forn_nome, forn_cnpj, forn_email, forn_fone)
-                       VALUEs(f_end_id, nome, cnpj, email, fone);
-                   END;
-                   $$
-                   LANGUAGE PLPGSQL;
-           """,
             "criar_function_prod": """
            CREATE OR REPLACE FUNCTION add_prod(
                descricao VARCHAR,
@@ -315,83 +226,6 @@ def create_tables():
                RETURN f_prod_id;
            END;
            $$ LANGUAGE plpgsql;
-           """,
-            "criar_procedure_empresa": """
-           CREATE OR REPLACE PROCEDURE add_empresa(
-                               rua VARCHAR,
-                               bairro VARCHAR,
-                               nro VARCHAR,
-                               cidade VARCHAR,
-                               estado VARCHAR,
-                               cep VARCHAR,            	
-                               cnpj VARCHAR,
-                               nomefantasia VARCHAR, 
-                               razaosocial VARCHAR,
-                               inscricao VARCHAR,
-                               fone VARCHAR,
-                               site VARCHAR,
-                               email VARCHAR
-                       ) 
-                   AS $$
-                   DECLARE
-                       f_end_id INT;
-                   BEGIN
-                       -- inserindo endereço
-                       INSERT INTO endereco (end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep)
-                       VALUES (rua, bairro, nro, cidade, estado, cep)
-                       RETURNING end_id INTO f_end_id;
-
-                       -- inserindo empresa
-                           INSERT INTO empresas (emp_cnpj, emp_end_id, emp_razaosocial, emp_nomefantasia
-                           , 
-                                                 emp_inscricaoestadual, emp_email, emp_fone, emp_site) 
-                           VALUES (cnpj, f_end_id, razaosocial, nomefantasia, inscricao, email,
-                                  fone, site);
-
-                       END;
-                   $$
-                   LANGUAGE PLPGSQL;
-           """,
-            "criar_procedure_clientes": """
-           CREATE OR REPLACE PROCEDURE add_clientes(
-                           rua VARCHAR,
-                           bairro VARCHAR,
-                           nro VARCHAR,
-                           cidade VARCHAR,
-                           estado VARCHAR,
-                           cep VARCHAR,
-                           cpf VARCHAR,
-                           nome VARCHAR,
-                           fone VARCHAR,
-                           email VARCHAR,
-                           rg VARCHAR,
-                           celular VARCHAR,
-                           tipo VARCHAR,
-                           tipo_cliente VARCHAR                      
-                   ) 
-                   AS $$
-                   DECLARE
-                       f_end_id INT;
-                       f_pess_id INT;
-                   BEGIN
-                       -- inserindo endereço
-                       INSERT INTO endereco (end_rua, end_bairro, end_numero, end_cidade, end_estado, end_cep)
-                       VALUES (rua, bairro, nro, cidade, estado, cep)
-                       RETURNING end_id INTO f_end_id;
-
-                       -- inserindo pessoa
-                       INSERT INTO pessoas (pess_end_id, pess_cpf_cnpj, pess_nome, pess_fone, 
-                       pess_email, pess_rg, pess_celular, pess_tipo)
-                       VALUES(f_end_id, cpf, nome, fone, email, rg, celular, tipo)
-                       RETURNING pess_id INTO f_pess_id;
-
-                       -- inserindo CLIENTE
-                       INSERT INTO cliente (clie_pessoa_id, clie_tipo)
-                       VALUES(f_pess_id, tipo_cliente);
-
-                   END;
-                   $$
-                   LANGUAGE PLPGSQL;
            """
             }
 
