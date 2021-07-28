@@ -456,7 +456,7 @@ class Ui_ct_FormUsuario(object):
         self.bt_busca_cep.setGeometry(QtCore.QRect(130, 310, 21, 31))
         self.bt_busca_cep.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_busca_cep.setIcon(icon)
         self.bt_busca_cep.setObjectName("bt_busca_cep")
         self.cb_nivel = QtWidgets.QComboBox(self.fr_FormUsuario)
@@ -572,7 +572,7 @@ class Ui_ct_FormUsuario(object):
 
     def retranslateUi(self, ct_FormUsuario):
         _translate = QtCore.QCoreApplication.translate
-        ct_FormUsuario.setWindowTitle(_translate("ct_FormUsuario", "Frame"))
+        ct_FormUsuario.setWindowTitle(_translate("ct_FormUsuario", "Cadastro de Usuários"))
         self.lb_FormFornecedor_21.setText(_translate("ct_FormUsuario", "USUÁRIO"))
         self.tx_Celular.setInputMask(_translate("ct_FormUsuario", "(00) 00000-0000"))
         self.tx_Celular.setText(_translate("ct_FormUsuario", "() -"))

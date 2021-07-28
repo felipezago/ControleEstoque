@@ -29,7 +29,7 @@ class Usuario:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT usu_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, usu_nome '
+        cur.execute(f'SELECT usu_id, pess_cpf_cnpj, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, usu_nome '
                     f'FROM usuarios '
                     f'INNER JOIN pessoas ON usu_pessoa_id = pess_id '
                     f'WHERE usu_pessoa_id = {self.pessoa.id}')

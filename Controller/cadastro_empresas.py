@@ -49,7 +49,7 @@ class CadastroEmpresas(QMainWindow):
             self.ui.tx_EstadoEmpresa.setEnabled(True)
 
     def busca_cep(self):
-        from Funcoes.funcoes import get_endereco
+        from Funcoes.APIs import get_endereco
         from PyQt5.QtWidgets import QMessageBox
 
         if not self.ui.tx_CepEmpresa.text() == '-':

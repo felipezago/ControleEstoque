@@ -102,7 +102,7 @@ class ListaClientes(QMainWindow):
             self.ui.tx_estado.setEnabled(True)
 
     def busca_cep(self):
-        from Funcoes.funcoes import get_endereco
+        from Funcoes.APIs import get_endereco
         from PyQt5.QtWidgets import QMessageBox
 
         self.ui.tx_cidade.setEnabled(True)
@@ -192,7 +192,7 @@ class ListaClientes(QMainWindow):
         elif self.ui.cb_clientes.currentIndex() == 2:
             cli.pessoa.cpf = self.ui.tx_busca.text()
             if cli.pessoa.cpf:
-                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_cpf", cli.pessoa.cpf, 'CLIENTE')
+                dados = cli.pessoa.get_pessoa_by_desc_tabela("pess_cpf_cnpj", cli.pessoa.cpf, 'CLIENTE')
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()

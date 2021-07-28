@@ -1,33 +1,12 @@
 # -*- coding: utf-8 -*-
 from PIL.ImageQt import ImageQt
 from PyQt5.QtPrintSupport import QPrinter, QPrintDialog
-from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtCore import QSize
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QIcon, QPainter
-from Funcoes.configdb import Banco
-import psycopg2
-from pycep_correios import get_address_from_cep, WebService
 import bcrypt
 import tempfile
 from pdf2image import convert_from_path
-
-
-def LimpaFrame(frame):
-    for i in range(len(frame.children())):
-        frame.children()[i].deleteLater()
-
-
-def DesativaBotao(frame, botao):
-    for filho in frame.findChildren(QPushButton):
-        filho.setEnabled(True)
-
-    botao.setEnabled(False)
-
-
-def ativaBotoes(self, frame):
-    for filho in frame.findChildren(QPushButton):
-        filho.setEnabled(True)
 
 
 def IconeBotaoTopo(botao, imagem):
@@ -38,37 +17,6 @@ def IconeBotaoTopo(botao, imagem):
     #                              QIcon.Normal, QIcon.Off))
     botao.setIcon(icon)
     botao.setIconSize(QSize(50, 35))
-
-    # Mascara Telefone
-
-
-def TelefoneMask(self, telefone):
-    if len(telefone) == 11:
-        self.tx_Telefone.setInputMask("(00) 00000-0000")
-    else:
-        self.tx_Telefone.setInputMask("(00) 0000-0000")
-    pass
-
-
-# Formatando numero de telefone as tabelas
-def formatoNumTelefone(self, telefone):
-    import re
-
-    if telefone:
-        telefone = re.sub('[^0-9]+', '', telefone)
-        if len(telefone) == 11:
-            formato = re.sub('(\d{2})(\d{5})(\d{4})',
-                             r'(\1) \2-\3', telefone)
-
-        elif len(telefone) == 10:
-            formato = re.sub('(\d{2})(\d{4})(\d{4})',
-                             r'(\1) \2-\3', telefone)
-        else:
-            formato = ""
-    else:
-        formato = ""
-
-    return formato
 
 
 def verificar_criptografia(senha, senhaCriptografada):
@@ -123,8 +71,8 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-def exec_app(object):
-    app = object
+def exec_app(obj):
+    app = obj
     app.show()
     centralizar(app)
 
@@ -162,54 +110,6 @@ def retorna_ip():
     return s.getsockname()[0]
 
 
-def gravar_imagem_produtos(prod_id, path_to_file, file_extension):
-    """ insert a BLOB into a table """
-    conn = None
-    try:
-        # read data from a picture
-        drawing = open(path_to_file, 'rb').read()
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute("INSERT INTO prod_img(prod_id, img_ext, img_dados) " +
-                    "VALUES(%s,%s,%s)",
-                    (prod_id, file_extension, psycopg2.Binary(drawing)))
-        conn.commit()
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-
-
-def ler_imagem_produtos(part_id, path_to_dir):
-    conn = None
-    try:
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute(""" SELECT prod_desc, img_ext, img_dados
-                        FROM prod_img
-                        INNER JOIN produtos on produtos.prod_id = prod_img.prod_id
-                        WHERE produtos.prod_id = %s """,
-                    (part_id,))
-        blob = cur.fetchone()
-        open(path_to_dir + blob[0] + '.' + blob[1], 'wb').write(blob[2])
-
-        # colocando a imagem em um label
-        # self.ui.label.setPixmap(QPixmap(path_to_dir + blob[0] + '.' + blob[1]).scaledToWidth(
-        # 150, Qt.TransformationMode(Qt.FastTransformation)))
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-
-
 def show_msg(tipo_msg="erro", title="", mensagem=""):
     from PyQt5.QtWidgets import QMessageBox
     msg = QMessageBox()
@@ -221,11 +121,6 @@ def show_msg(tipo_msg="erro", title="", mensagem=""):
     msg.setText(mensagem)
     msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
     msg.exec_()
-
-
-def get_endereco(cep):
-    address = get_address_from_cep(cep, webservice=WebService.CORREIOS)
-    return address
 
 
 def print_dialog(self, img):

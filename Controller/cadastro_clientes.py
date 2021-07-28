@@ -1,4 +1,7 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QInputDialog, QLineEdit, QMessageBox
+from psycopg2.extensions import JSON
+from Funcoes.APIs import get_empresa_from_cnpj
+from Funcoes.funcoes import formatar_cpf_rg
 
 
 class CadastroClientes(QMainWindow):
@@ -29,20 +32,106 @@ class CadastroClientes(QMainWindow):
         self.ui.bt_busca_cep.clicked.connect(self.busca_cep)
         self.ui.tx_Cep.textChanged.connect(self.enable_cidade_estado)
         self.ui.cb_nivel.currentIndexChanged.connect(self.altera_tipo_cliente)
+        self.ui.bt_busca_cnpj.clicked.connect(self.busca_cnpj)
+
+        self.ui.bt_busca_cnpj.hide()
+
+    def limpa_campos(self):
+        self.ui.tx_cpf.setText("")
+        self.ui.tx_nome.setText("")
+        self.ui.tx_Email.setText("")
+        self.ui.tx_Telefone.setText("")
+        self.ui.tx_Cep.setText("")
+        self.ui.tx_Cidade.setText("")
+        self.ui.tx_Estado.setText("")
+        self.ui.tx_Bairro.setText("")
+        self.ui.tx_Endereco.setText("")
+        self.ui.tx_Numero.setText("")
+        self.ui.tx_rg.setText("")
+        self.ui.lb_celular.setText("")
 
     def altera_tipo_cliente(self):
         if self.ui.cb_nivel.currentIndex() == 0:
+            self.limpa_campos()
             self.ui.lb_rg.show()
             self.ui.tx_rg.show()
+            self.ui.tx_Celular.show()
+            self.ui.lb_celular.show()
             self.ui.lb_nome.setText("NOME")
+            self.ui.tx_nome.setPlaceholderText("NOME COMPLETO")
             self.ui.lb_cpfcnpj.setText("CPF")
             self.ui.tx_cpf.setInputMask("###.###.###-##")
+            self.ui.bt_busca_cnpj.hide()
         else:
+            self.limpa_campos()
             self.ui.lb_rg.hide()
             self.ui.tx_rg.hide()
+            self.ui.bt_busca_cnpj.show()
+            self.ui.tx_Celular.hide()
+            self.ui.lb_celular.hide()
             self.ui.lb_nome.setText("NOME FANTASIA")
+            self.ui.tx_nome.setPlaceholderText("NOME FANTASIA")
             self.ui.lb_cpfcnpj.setText("CNPJ")
             self.ui.tx_cpf.setInputMask("##.###.###/####-##")
+
+            self.dialog_cnpj()
+
+    def preenche_campos_cnpj(self, dados: JSON):
+        self.ui.tx_cpf.setText(formatar_cpf_rg(dados['cnpj']))
+        self.ui.tx_nome.setText(dados['fantasia'])
+        self.ui.tx_Email.setText(dados['email'])
+        self.ui.tx_Telefone.setText(dados['telefone'])
+        self.ui.tx_Cep.setText(formatar_cpf_rg(dados['cep']))
+        self.ui.tx_Cidade.setText(dados['municipio'])
+        self.ui.tx_Estado.setText(dados['uf'])
+        self.ui.tx_Bairro.setText(dados['bairro'])
+        self.ui.tx_Endereco.setText(dados['logradouro'])
+        self.ui.tx_Numero.setText(dados['numero'])
+
+    def busca_cnpj(self):
+        text = str(formatar_cpf_rg(self.ui.tx_cpf.text())).strip()
+        response = get_empresa_from_cnpj(text)
+        self.limpa_campos()
+        if response.status_code == 200:
+            dados = response.json()
+            if dados['status'] == "OK":
+                self.preenche_campos_cnpj(dados)
+            elif dados['status'] == "ERRO" and dados['message'] == 'CNPJ inválido':
+                QMessageBox.warning(self, "Erro", "CNPJ Inválido.")
+            else:
+                QMessageBox.warning(self, "Erro", "Erro ao buscar CNPJ.")
+
+        elif response.status_code == 500:
+            QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
+
+    def dialog_cnpj(self):
+        from Funcoes.funcoes import formatar_cpf_rg
+
+        while True:
+            text, ok = QInputDialog().getText(self, "CNPJ Online",
+                                              "Informe o CNPJ para buscar os dados da empresa: ", QLineEdit.Normal)
+            if ok and text:
+                text = str(formatar_cpf_rg(text)).strip()
+                response = get_empresa_from_cnpj(text)
+                if response.status_code == 200:
+                    dados = response.json()
+                    if dados['status'] == "OK":
+                        self.preenche_campos_cnpj(dados)
+                        break
+                    elif dados['status'] == "ERRO" and dados['message'] == 'CNPJ inválido':
+                        q = QMessageBox.question(self, "Erro", "CNPJ Inválido, Deseja buscar novamente?")
+
+                        if q == QMessageBox.No:
+                            break
+                    else:
+                        q = QMessageBox.question(self, "Erro", "Erro ao buscar CNPJ, Deseja buscar novamente?")
+
+                        if q == QMessageBox.No:
+                            break
+                elif response.status_code == 500:
+                    QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
+            else:
+                break
 
     def enable_cidade_estado(self):
         if not self.ui.tx_Cidade.isEnabled():
@@ -51,7 +140,7 @@ class CadastroClientes(QMainWindow):
             self.ui.tx_Estado.setEnabled(True)
 
     def busca_cep(self):
-        from Funcoes.funcoes import get_endereco
+        from Funcoes.APIs import get_endereco
         from PyQt5.QtWidgets import QMessageBox
 
         self.ui.tx_Cidade.setEnabled(True)
@@ -120,6 +209,7 @@ class CadastroClientes(QMainWindow):
         telefone = self.ui.tx_Telefone.text().upper()
         email = self.ui.tx_Email.text().lower()
         celular = self.ui.tx_Celular.text().upper()
+        tipo = "FISICA" if self.ui.cb_nivel.currentIndex() == 0 else "JURIDICA"
 
         # campos endereço
         cep = self.ui.tx_Cep.text().upper()
@@ -137,7 +227,7 @@ class CadastroClientes(QMainWindow):
             cur = conn.cursor()
             cur.execute(f"CALL add_clientes(\'{rua}\', \'{bairro}\', \'{nro}\', \'{cidade}\', \'{estado}\', "
                         f"\'{cep}\', \'{formatar_cpf_rg(cpf)}\', \'{nome}\', \'{telefone}\',\'{email}\', "
-                        f"\'{formatar_cpf_rg(rg)}\', \'{celular}\', 'CLIENTE')")
+                        f"\'{formatar_cpf_rg(rg)}\', \'{celular}\', 'CLIENTE', \'{tipo}\')")
             conn.commit()
             cur.close()
 
@@ -147,3 +237,4 @@ class CadastroClientes(QMainWindow):
             QMessageBox.about(self, "Sucesso", "Cadastro efetuado com sucesso!")
 
         conn.close()
+        self.limpa_campos()

@@ -113,7 +113,7 @@ class ListaEmpresa(QMainWindow):
             self.ui.tx_estado.setEnabled(True)
 
     def busca_cep(self):
-        from Funcoes.funcoes import get_endereco
+        from Funcoes.APIs import get_endereco
         from PyQt5.QtWidgets import QMessageBox
 
         self.ui.tx_cidade.setEnabled(True)

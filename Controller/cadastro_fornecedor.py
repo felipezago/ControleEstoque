@@ -42,7 +42,7 @@ class CadastroFornecedor(QMainWindow):
             self.ui.tx_Estado.setEnabled(True)
 
     def busca_cep(self):
-        from Funcoes.funcoes import get_endereco
+        from Funcoes.APIs import get_endereco
         from PyQt5.QtWidgets import QMessageBox
 
         if not self.ui.tx_Cep.text() == '-':

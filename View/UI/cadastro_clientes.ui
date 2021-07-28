@@ -145,10 +145,10 @@ color: #797979
      <string>RG</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormProdutos_5">
+   <widget class="QLabel" name="lb_celular">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>450</x>
       <y>180</y>
       <width>196</width>
       <height>20</height>
@@ -169,7 +169,7 @@ color: #797979
    <widget class="QLineEdit" name="tx_Celular">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>450</x>
       <y>205</y>
       <width>196</width>
       <height>25</height>
@@ -447,7 +447,7 @@ border: 1px solid red;
    <widget class="QLabel" name="lb_FormProdutos_23">
     <property name="geometry">
      <rect>
-      <x>452</x>
+      <x>20</x>
       <y>180</y>
       <width>190</width>
       <height>20</height>
@@ -462,7 +462,7 @@ color: #797979
 }</string>
     </property>
     <property name="text">
-     <string>Email</string>
+     <string>EMAIL</string>
     </property>
    </widget>
    <widget class="QLabel" name="lb_FormProdutos_24">
@@ -489,7 +489,7 @@ color: #797979
    <widget class="QLineEdit" name="tx_Email">
     <property name="geometry">
      <rect>
-      <x>452</x>
+      <x>20</x>
       <y>205</y>
       <width>196</width>
       <height>25</height>
@@ -911,6 +911,82 @@ QComboBox::down-arrow {
      </property>
     </item>
    </widget>
+   <widget class="QPushButton" name="bt_busca_cnpj">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>139</y>
+      <width>120</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ActionsContextMenu</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: #7AB32E;
+color: #FFF
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string>BUSCAR CNPJ</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>75</width>
+      <height>35</height>
+     </size>
+    </property>
+   </widget>
+   <zorder>lb_FormProdutos</zorder>
+   <zorder>lb_nome</zorder>
+   <zorder>tx_nome</zorder>
+   <zorder>lb_cpfcnpj</zorder>
+   <zorder>lb_rg</zorder>
+   <zorder>lb_celular</zorder>
+   <zorder>tx_Celular</zorder>
+   <zorder>lb_FormProdutos_8</zorder>
+   <zorder>tx_Cep</zorder>
+   <zorder>lb_FormProdutos_10</zorder>
+   <zorder>fr_BotoesFormProdutos</zorder>
+   <zorder>tx_cpf</zorder>
+   <zorder>lb_FormProdutos_23</zorder>
+   <zorder>lb_FormProdutos_24</zorder>
+   <zorder>tx_Email</zorder>
+   <zorder>tx_Telefone</zorder>
+   <zorder>lb_FormProdutos_11</zorder>
+   <zorder>tx_Endereco</zorder>
+   <zorder>lb_FormProdutos_12</zorder>
+   <zorder>tx_Numero</zorder>
+   <zorder>tx_Bairro</zorder>
+   <zorder>lb_FormProdutos_13</zorder>
+   <zorder>tx_Cidade</zorder>
+   <zorder>lb_FormProdutos_14</zorder>
+   <zorder>lb_FormProdutos_15</zorder>
+   <zorder>tx_Estado</zorder>
+   <zorder>bt_busca_cep</zorder>
+   <zorder>lb_FormProdutos_3</zorder>
+   <zorder>cb_nivel</zorder>
+   <zorder>bt_busca_cnpj</zorder>
+   <zorder>tx_rg</zorder>
   </widget>
  </widget>
  <tabstops>

@@ -14,7 +14,7 @@ def create_tables():
             CREATE TABLE IF NOT EXISTS pessoas (
                 pess_id SERIAL PRIMARY KEY,
                 pess_end_id INT,
-                pess_cpf VARCHAR(11) NOT NULL,
+                pess_cpf_cnpj VARCHAR(15) NOT NULL,
                 pess_nome VARCHAR(60) NOT NULL,
                 pess_fone VARCHAR(40),
                 pess_email VARCHAR(50) NOT NULL,
@@ -35,6 +35,12 @@ def create_tables():
                 usu_nome VARCHAR(255) NOT NULL UNIQUE,
                 usu_senha TEXT NOT NULL,
                 usu_nivel_acesso VARCHAR(20),
+                usu_cpf_cnpj VARCHAR(15) NOT NULL,
+                usu_nome VARCHAR(60) NOT NULL,
+                usu_fone VARCHAR(40),
+                usu_email VARCHAR(50) NOT NULL,
+                usu_rg VARCHAR(13),
+                usu_celular VARCHAR(25),
                 CONSTRAINT fk_usu_pess
                     FOREIGN KEY(usu_pessoa_id) 
                         REFERENCES pessoas(pess_id)
@@ -80,6 +86,7 @@ def create_tables():
            CREATE TABLE IF NOT EXISTS cliente (
                clie_id SERIAL PRIMARY KEY,
                clie_pessoa_id INT,
+               clie_tipo VARCHAR(20),
                CONSTRAINT fk_clie_pess
                    FOREIGN KEY(clie_pessoa_id) 
                        REFERENCES pessoas(pess_id)
@@ -245,7 +252,7 @@ def create_tables():
                        RETURNING end_id INTO f_end_id;
 
                        -- inserindo pessoa
-                       INSERT INTO pessoas (pess_end_id, pess_cpf, pess_nome, pess_fone, 
+                       INSERT INTO pessoas (pess_end_id, pess_cpf_cnpj, pess_nome, pess_fone, 
                        pess_email, pess_rg, pess_celular, pess_tipo)
                        VALUES(f_end_id, cpf, nome, fone, email, rg, celular, tipo)
                        RETURNING pess_id INTO f_pess_id;
@@ -359,7 +366,8 @@ def create_tables():
                            email VARCHAR,
                            rg VARCHAR,
                            celular VARCHAR,
-                           tipo VARCHAR                      
+                           tipo VARCHAR,
+                           tipo_cliente VARCHAR                      
                    ) 
                    AS $$
                    DECLARE
@@ -372,14 +380,14 @@ def create_tables():
                        RETURNING end_id INTO f_end_id;
 
                        -- inserindo pessoa
-                       INSERT INTO pessoas (pess_end_id, pess_cpf, pess_nome, pess_fone, 
+                       INSERT INTO pessoas (pess_end_id, pess_cpf_cnpj, pess_nome, pess_fone, 
                        pess_email, pess_rg, pess_celular, pess_tipo)
                        VALUES(f_end_id, cpf, nome, fone, email, rg, celular, tipo)
                        RETURNING pess_id INTO f_pess_id;
 
                        -- inserindo CLIENTE
-                       INSERT INTO cliente (clie_pessoa_id)
-                       VALUES(f_pess_id);
+                       INSERT INTO cliente (clie_pessoa_id, clie_tipo)
+                       VALUES(f_pess_id, tipo_cliente);
 
                    END;
                    $$

@@ -14,8 +14,8 @@ class Cliente:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f'''SELECT INITCAP(pess_nome), 
-                    CONCAT(SUBSTR(pess_cpf,1,3),'.',SUBSTR(pess_cpf,4,3),'.',SUBSTR(pess_cpf,7,3),'-',
-                    SUBSTR(pess_cpf,10,2)), CONCAT(SUBSTR(pess_rg,1,2),'.',SUBSTR(pess_rg,3,3),'.',SUBSTR(pess_rg,6,3),
+                    CONCAT(SUBSTR(pess_cpf_cnpj,1,3),'.',SUBSTR(pess_cpf_cnpj,4,3),'.',SUBSTR(pess_cpf_cnpj,7,3),'-',
+                    SUBSTR(pess_cpf_cnpj,10,2)), CONCAT(SUBSTR(pess_rg,1,2),'.',SUBSTR(pess_rg,3,3),'.',SUBSTR(pess_rg,6,3),
                     '-',SUBSTR(pess_rg,9,1)), pess_celular, pess_fone, pess_email, INITCAP(end_rua), INITCAP(end_bairro)
                     , end_numero, INITCAP(end_cidade), end_estado from cliente
                     INNER JOIN pessoas ON clie_pessoa_id = pess_id
@@ -42,7 +42,7 @@ class Cliente:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT clie_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
+        cur.execute(f"SELECT clie_id, pess_cpf_cnpj, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
                     f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
                     f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
                     f"INNER JOIN endereco ON pess_end_id = end_id WHERE clie_id = {self.id}")
@@ -56,7 +56,7 @@ class Cliente:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT clie_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
+        cur.execute(f"SELECT clie_id, pess_cpf_cnpj, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
                     f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
                     f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
                     f"INNER JOIN endereco ON pess_end_id = end_id WHERE clie_pessoa_id = {self.pessoa.id}")
@@ -111,7 +111,7 @@ class Cliente:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT clie_id, pess_cpf, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
+        cur.execute(f"SELECT clie_id, pess_cpf_cnpj, pess_nome, pess_fone, pess_email, pess_rg, pess_celular, end_rua, "
                     f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente "
                     f"INNER JOIN pessoas ON clie_pessoa_id = pess_id "
                     f"INNER JOIN endereco ON pess_end_id = end_id")

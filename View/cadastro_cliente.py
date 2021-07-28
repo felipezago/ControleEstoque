@@ -71,17 +71,17 @@ class Ui_ct_FormClientes(object):
 "color: #797979\n"
 "}")
         self.lb_rg.setObjectName("lb_rg")
-        self.lb_FormProdutos_5 = QtWidgets.QLabel(self.fr_FormClientes)
-        self.lb_FormProdutos_5.setGeometry(QtCore.QRect(20, 180, 196, 20))
-        self.lb_FormProdutos_5.setStyleSheet("QLabel{\n"
+        self.lb_celular = QtWidgets.QLabel(self.fr_FormClientes)
+        self.lb_celular.setGeometry(QtCore.QRect(450, 180, 196, 20))
+        self.lb_celular.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
 "font-weight: bold;\n"
 "color: #797979\n"
 "}")
-        self.lb_FormProdutos_5.setObjectName("lb_FormProdutos_5")
+        self.lb_celular.setObjectName("lb_celular")
         self.tx_Celular = QtWidgets.QLineEdit(self.fr_FormClientes)
-        self.tx_Celular.setGeometry(QtCore.QRect(20, 205, 196, 25))
+        self.tx_Celular.setGeometry(QtCore.QRect(450, 205, 196, 25))
         self.tx_Celular.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_Celular.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -203,7 +203,7 @@ class Ui_ct_FormClientes(object):
         self.tx_cpf.setPlaceholderText("")
         self.tx_cpf.setObjectName("tx_cpf")
         self.lb_FormProdutos_23 = QtWidgets.QLabel(self.fr_FormClientes)
-        self.lb_FormProdutos_23.setGeometry(QtCore.QRect(452, 180, 190, 20))
+        self.lb_FormProdutos_23.setGeometry(QtCore.QRect(20, 180, 190, 20))
         self.lb_FormProdutos_23.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -221,7 +221,7 @@ class Ui_ct_FormClientes(object):
 "}")
         self.lb_FormProdutos_24.setObjectName("lb_FormProdutos_24")
         self.tx_Email = QtWidgets.QLineEdit(self.fr_FormClientes)
-        self.tx_Email.setGeometry(QtCore.QRect(452, 205, 196, 25))
+        self.tx_Email.setGeometry(QtCore.QRect(20, 205, 196, 25))
         self.tx_Email.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_Email.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -383,7 +383,7 @@ class Ui_ct_FormClientes(object):
         self.bt_busca_cep.setGeometry(QtCore.QRect(120, 300, 31, 31))
         self.bt_busca_cep.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_busca_cep.setIcon(icon)
         self.bt_busca_cep.setObjectName("bt_busca_cep")
         self.lb_FormProdutos_3 = QtWidgets.QLabel(self.fr_FormClientes)
@@ -425,6 +425,57 @@ class Ui_ct_FormClientes(object):
         self.cb_nivel.setObjectName("cb_nivel")
         self.cb_nivel.addItem("")
         self.cb_nivel.addItem("")
+        self.bt_busca_cnpj = QtWidgets.QPushButton(self.fr_FormClientes)
+        self.bt_busca_cnpj.setGeometry(QtCore.QRect(230, 139, 120, 31))
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_busca_cnpj.setFont(font)
+        self.bt_busca_cnpj.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.bt_busca_cnpj.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.bt_busca_cnpj.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
+        self.bt_busca_cnpj.setStyleSheet("QPushButton {\n"
+"background-color: #7AB32E;\n"
+"color: #FFF\n"
+" }\n"
+"QPushButton:hover{\n"
+"background-color: #40a286\n"
+"}")
+        self.bt_busca_cnpj.setIconSize(QtCore.QSize(75, 35))
+        self.bt_busca_cnpj.setObjectName("bt_busca_cnpj")
+        self.lb_FormProdutos.raise_()
+        self.lb_nome.raise_()
+        self.tx_nome.raise_()
+        self.lb_cpfcnpj.raise_()
+        self.lb_rg.raise_()
+        self.lb_celular.raise_()
+        self.tx_Celular.raise_()
+        self.lb_FormProdutos_8.raise_()
+        self.tx_Cep.raise_()
+        self.lb_FormProdutos_10.raise_()
+        self.fr_BotoesFormProdutos.raise_()
+        self.tx_cpf.raise_()
+        self.lb_FormProdutos_23.raise_()
+        self.lb_FormProdutos_24.raise_()
+        self.tx_Email.raise_()
+        self.tx_Telefone.raise_()
+        self.lb_FormProdutos_11.raise_()
+        self.tx_Endereco.raise_()
+        self.lb_FormProdutos_12.raise_()
+        self.tx_Numero.raise_()
+        self.tx_Bairro.raise_()
+        self.lb_FormProdutos_13.raise_()
+        self.tx_Cidade.raise_()
+        self.lb_FormProdutos_14.raise_()
+        self.lb_FormProdutos_15.raise_()
+        self.tx_Estado.raise_()
+        self.bt_busca_cep.raise_()
+        self.lb_FormProdutos_3.raise_()
+        self.cb_nivel.raise_()
+        self.bt_busca_cnpj.raise_()
+        self.tx_rg.raise_()
 
         self.retranslateUi(ct_FormClientes)
         QtCore.QMetaObject.connectSlotsByName(ct_FormClientes)
@@ -449,7 +500,7 @@ class Ui_ct_FormClientes(object):
         self.tx_nome.setPlaceholderText(_translate("ct_FormClientes", "NOME COMPLETO"))
         self.lb_cpfcnpj.setText(_translate("ct_FormClientes", "CPF"))
         self.lb_rg.setText(_translate("ct_FormClientes", "RG"))
-        self.lb_FormProdutos_5.setText(_translate("ct_FormClientes", "CELULAR"))
+        self.lb_celular.setText(_translate("ct_FormClientes", "CELULAR"))
         self.tx_Celular.setInputMask(_translate("ct_FormClientes", "(00) 00000-0000"))
         self.tx_Celular.setText(_translate("ct_FormClientes", "() -"))
         self.tx_rg.setInputMask(_translate("ct_FormClientes", "00.000.000-0"))
@@ -461,7 +512,7 @@ class Ui_ct_FormClientes(object):
         self.bt_Salvar.setText(_translate("ct_FormClientes", "SALVAR"))
         self.tx_cpf.setInputMask(_translate("ct_FormClientes", "000.000.000-00"))
         self.tx_cpf.setText(_translate("ct_FormClientes", "..-"))
-        self.lb_FormProdutos_23.setText(_translate("ct_FormClientes", "Email"))
+        self.lb_FormProdutos_23.setText(_translate("ct_FormClientes", "EMAIL"))
         self.lb_FormProdutos_24.setText(_translate("ct_FormClientes", "TELEFONE"))
         self.tx_Telefone.setInputMask(_translate("ct_FormClientes", "(00) 0000-0000"))
         self.lb_FormProdutos_11.setText(_translate("ct_FormClientes", "ENDEREÇO"))
@@ -473,3 +524,4 @@ class Ui_ct_FormClientes(object):
         self.lb_FormProdutos_3.setText(_translate("ct_FormClientes", "TIPO DE CLIENTE"))
         self.cb_nivel.setItemText(0, _translate("ct_FormClientes", "PESSOA FISICA"))
         self.cb_nivel.setItemText(1, _translate("ct_FormClientes", "PESSOA JURÍDICA"))
+        self.bt_busca_cnpj.setText(_translate("ct_FormClientes", "BUSCAR CNPJ"))
