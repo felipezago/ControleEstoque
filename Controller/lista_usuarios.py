@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
+
+from Model.Empresa import Empresa
 from Model.Usuario import Usuario
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore
@@ -65,7 +67,7 @@ class ListaUsuario(QMainWindow):
         self.ui.tx_celular.setEnabled(False)
         self.ui.tx_email.setEnabled(False)
 
-        for c in range(0, 8):
+        for c in range(0, 10):
             self.ui.tb_usuario.horizontalHeaderItem(c).setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
         self.ui.tb_usuario.setColumnWidth(0, 20)
@@ -75,7 +77,9 @@ class ListaUsuario(QMainWindow):
         self.ui.tb_usuario.setColumnWidth(4, 200)
         self.ui.tb_usuario.setColumnWidth(5, 100)
         self.ui.tb_usuario.setColumnWidth(6, 150)
-        self.ui.tb_usuario.setColumnWidth(7, 100)
+        self.ui.tb_usuario.setColumnWidth(7, 130)
+        self.ui.tb_usuario.setColumnWidth(8, 100)
+        self.ui.tb_usuario.setColumnWidth(9, 150)
 
         self.preenche_combo()
         self.dados_tabela()
@@ -106,8 +110,20 @@ class ListaUsuario(QMainWindow):
         self.ui.cb_opc.addItem("CPF")
         self.ui.cb_opc.addItem("RG")
 
+        self.ui.cb_nivel.clear()
+        self.ui.cb_nivel.addItem("VENDEDOR")
+        self.ui.cb_nivel.addItem("GERENTE")
+
     def sair(self):
         self.close()
+
+    def preenche_combo_empresas(self):
+        self.ui.cb_empresa.clear()
+        todas_empresas = Empresa.get_todas_empresas()
+
+        for contador, e in enumerate(todas_empresas):
+            self.ui.cb_empresa.addItem(e[2])
+            self.ui.cb_empresa.setItemData(contador, e)
 
     def linha_clicada(self):
         self.ui.tx_rg.setEnabled(True)
@@ -116,6 +132,7 @@ class ListaUsuario(QMainWindow):
         self.ui.tx_nome.setEnabled(True)
         self.ui.tx_celular.setEnabled(True)
         self.ui.tx_email.setEnabled(True)
+        self.preenche_combo_empresas()
 
         tb = self.ui.tb_usuario
         self.linha_selecionada = tb.currentRow()
@@ -131,6 +148,13 @@ class ListaUsuario(QMainWindow):
             self.usuario_selecionado.rg = usu[5]
             self.usuario_selecionado.celular = usu[6]
             self.usuario_selecionado.login = usu[7]
+            self.usuario_selecionado.nivel = usu[8]
+
+            self.usuario_selecionado.empresa = Empresa()
+            self.usuario_selecionado.empresa.cnpj = usu[10]
+            emp = self.usuario_selecionado.empresa.get_empresa_by_cnpj()
+
+            self.usuario_selecionado.empresa.nome_fantasia = emp[0][2]
 
             # setando os edits
             self.ui.tx_id.setText(str(self.usuario_selecionado.id))
@@ -140,7 +164,13 @@ class ListaUsuario(QMainWindow):
             self.ui.tx_email.setText(self.usuario_selecionado.email)
             self.ui.tx_rg.setText(self.usuario_selecionado.rg)
             self.ui.tx_celular.setText(self.usuario_selecionado.celular)
-            self.ui.tx_login.setText(self.usuario_selecionado.nome)
+            self.ui.tx_login.setText(self.usuario_selecionado.login.lower())
+
+            indice_emp = self.ui.cb_empresa.findText(self.usuario_selecionado.empresa.nome_fantasia)
+            self.ui.cb_empresa.setCurrentIndex(indice_emp)
+
+            indice_nivel = self.ui.cb_nivel.findText(self.usuario_selecionado.nivel)
+            self.ui.cb_nivel.setCurrentIndex(indice_nivel)
 
     def editar(self):
         from Funcoes.funcoes import verificar_criptografia
@@ -157,14 +187,21 @@ class ListaUsuario(QMainWindow):
             itens.append(usu_editar.nome)
             usu_editar.fone = self.ui.tx_fone.text().upper()
             itens.append(usu_editar.fone)
-            usu_editar.email = self.ui.tx_email.text().upper()
+            usu_editar.email = self.ui.tx_email.text()
             itens.append(usu_editar.email)
             usu_editar.rg = self.ui.tx_rg.text().upper()
             itens.append(usu_editar.rg)
-            usu_editar.celular = self.ui.tx_celular.text().upper()
+            usu_editar.celular = self.ui.tx_celular.text()
             itens.append(usu_editar.celular)
-            usu_editar.nome = self.ui.tx_login.text()
-            itens.append(usu_editar.nome)
+            usu_editar.login = self.ui.tx_login.text()
+            itens.append(usu_editar.login)
+            usu_editar.nivel = self.ui.cb_nivel.itemText(self.ui.cb_nivel.currentIndex())
+            itens.append(usu_editar.nivel)
+            usu_editar.empresa = Empresa()
+            index_emp = self.ui.cb_empresa.currentIndex()
+            usu_editar.empresa.cnpj = self.ui.cb_empresa.itemData(index_emp)[0]
+            usu_editar.empresa.nome_fantasia = self.ui.cb_empresa.itemData(index_emp)[2]
+            itens.append(usu_editar.empresa.nome_fantasia)
 
             if self.ui.tx_senha_antiga:
                 senha = str(usu_editar.get_senha_criptografada()[0]).encode()
@@ -183,8 +220,15 @@ class ListaUsuario(QMainWindow):
                 QMessageBox.warning(self, "Erro", str(error))
             else:
                 self.ui.tb_usuario.setFocus()
-                for c in range(0, 8):
-                    self.ui.tb_usuario.setItem(self.linha_selecionada, c, QTableWidgetItem(itens[c]))
+                for c in range(0, 10):
+                    if c == 1:
+                        self.ui.tb_usuario.setItem(self.linha_selecionada, c,
+                                                   QTableWidgetItem(formatar_cpf(str(itens[c]))))
+                    elif c == 5:
+                        self.ui.tb_usuario.setItem(self.linha_selecionada, c,
+                                                   QTableWidgetItem(formatar_rg(str(itens[c]))))
+                    else:
+                        self.ui.tb_usuario.setItem(self.linha_selecionada, c, QTableWidgetItem(itens[c]))
         else:
             QMessageBox.warning(self, "Atenção!", "Favor selecionar alguma linha!")
 
@@ -197,7 +241,7 @@ class ListaUsuario(QMainWindow):
         if self.ui.cb_opc.currentIndex() == 1:
             usu.nome = self.ui.tx_busca.text()
             if usu.nome:
-                dados = usu.get_usu_by_desc("clie_nome", usu.nome.upper())
+                dados = usu.get_usu_by_desc("usu_nome", usu.nome.upper())
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -213,7 +257,7 @@ class ListaUsuario(QMainWindow):
         elif self.ui.cb_opc.currentIndex() == 2:
             usu.cpf = self.ui.tx_busca.text()
             if usu.cpf:
-                dados = usu.get_usu_by_desc("clie_cpf", usu.cpf)
+                dados = usu.get_usu_by_desc("usu_cpf", usu.cpf)
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -221,7 +265,7 @@ class ListaUsuario(QMainWindow):
         else:
             usu.rg = self.ui.tx_busca.text()
             if usu.rg:
-                dados = usu.get_usu_by_desc("clie_rg", usu.rg)
+                dados = usu.get_usu_by_desc("usu_rg", usu.rg)
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -231,15 +275,25 @@ class ListaUsuario(QMainWindow):
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
-            for i, linha in enumerate(dados):
-                self.ui.tb_usuario.insertRow(i)
-                for j in range(0, 8):
+            if isinstance(dados, list):
+                for i, linha in enumerate(dados):
+                    self.ui.tb_usuario.insertRow(i)
+                    for j in range(0, 10):
+                        if j == 1:
+                            self.ui.tb_usuario.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
+                        elif j == 5:
+                            self.ui.tb_usuario.setItem(i, j, QTableWidgetItem(formatar_rg(str(linha[j]))))
+                        else:
+                            self.ui.tb_usuario.setItem(i, j, QTableWidgetItem(str(linha[j])))
+            else:
+                self.ui.tb_usuario.insertRow(0)
+                for j in range(0, 10):
                     if j == 1:
-                        self.ui.tb_usuario.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
+                        self.ui.tb_usuario.setItem(0, j, QTableWidgetItem(formatar_cpf(str(dados[j]))))
                     elif j == 5:
-                        self.ui.tb_usuario.setItem(i, j, QTableWidgetItem(formatar_rg(str(linha[j]))))
+                        self.ui.tb_usuario.setItem(0, j, QTableWidgetItem(formatar_rg(str(dados[j]))))
                     else:
-                        self.ui.tb_usuario.setItem(i, j, QTableWidgetItem(str(linha[j])))
+                        self.ui.tb_usuario.setItem(0, j, QTableWidgetItem(str(dados[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")
@@ -262,7 +316,7 @@ class ListaUsuario(QMainWindow):
 
         for i, linha in enumerate(dados):
             self.ui.tb_usuario.insertRow(i)
-            for j in range(0, 8):
+            for j in range(0, 10):
                 if j == 5:
                     self.ui.tb_usuario.setItem(i, 5, QTableWidgetItem(formatar_rg((linha[5]))))
                 elif j == 1:
@@ -339,3 +393,4 @@ class ListaUsuario(QMainWindow):
         self.ui.tx_cpf.setText("")
         self.ui.tx_nome.setText("")
         self.ui.tx_celular.setText("")
+        self.ui.tx_login.setText("")

@@ -1,5 +1,3 @@
-import psycopg2
-from Funcoes.configdb import Banco
 from Model.Endereco import Endereco
 
 

@@ -11,10 +11,15 @@ class EventFilter(QtCore.QObject):
         if event.type() == QtCore.QEvent.ActivationChange:
             if self.parent().isActiveWindow():
                 # Reseta CB Categorias
-                if obj.ui.cb_CategoriaProduto.currentIndex() == 0:
-                    obj.preenche_combo_categorias()
-                if obj.ui.cb_forn.currentIndex() == 0:
+                if obj.adicionando_forn:
+                    obj.adicionando_forn = False
                     obj.preenche_combo_fornecedores()
+                    obj.ui.cb_forn.setCurrentIndex(obj.indice_forn)
+
+                if obj.adicionando_cat:
+                    obj.adicionando_cat = False
+                    obj.preenche_combo_categorias()
+                    obj.ui.cb_CategoriaProduto.setCurrentIndex(obj.indice_cat)
 
         return QtCore.QObject.eventFilter(self, obj, event)
 
@@ -34,6 +39,10 @@ class CadastroProdutos(QMainWindow):
         self.setFixedSize(self.size())
 
         self.caminho_img = None
+        self.adicionando_forn = False
+        self.adicionando_cat = False
+        self.indice_forn = 0
+        self.indice_cat = 0
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
@@ -90,19 +99,22 @@ class CadastroProdutos(QMainWindow):
         from Controller.cadastro_fornecedor import CadastroFornecedor
         from Funcoes.funcoes import exec_app
 
-        self.ui.cb_forn.setCurrentIndex(0)
         cad_forn = CadastroFornecedor()
         exec_app(cad_forn)
         self.dialogs.append(cad_forn)
+        self.adicionando_forn = True
+        self.indice_forn = self.ui.cb_forn.currentIndex()
 
     def add_categoria(self):
         from Controller.cadastro_categoria import CadastroCategoria
         from Funcoes.funcoes import exec_app
 
-        self.ui.cb_CategoriaProduto.setCurrentIndex(0)
         cad_cat = CadastroCategoria()
         exec_app(cad_cat)
         self.dialogs.append(cad_cat)
+
+        self.adicionando_cat = True
+        self.indice_cat = self.ui.cb_CategoriaProduto.currentIndex()
 
     def upload_imagem(self):
         from PyQt5.QtCore import Qt
@@ -149,7 +161,7 @@ class CadastroProdutos(QMainWindow):
 
         for contador, f in enumerate(todos_fornecedores):
             contador += 1
-            self.ui.cb_forn.addItem(f[2])
+            self.ui.cb_forn.addItem(f[1])
             self.ui.cb_forn.setItemData(contador, f)
 
     def validar_campos(self):
@@ -172,8 +184,8 @@ class CadastroProdutos(QMainWindow):
 
     def salvar(self):
         from PyQt5.QtWidgets import QMessageBox
-        from Funcoes.funcoes import gravar_imagem_produtos
         from Funcoes.configdb import Banco
+        from Model.Produtos import Produtos
 
         import psycopg2
 
@@ -205,7 +217,9 @@ class CadastroProdutos(QMainWindow):
             cur.close()
 
             if self.caminho_img:
-                gravar_imagem_produtos(new_id[0], self.caminho_img, "png")
+                prod_img = Produtos()
+                prod_img.id = new_id[0]
+                prod_img.gravar_imagem_produtos(self.caminho_img, "png")
 
         except Exception as error:
             print(error)
@@ -214,6 +228,18 @@ class CadastroProdutos(QMainWindow):
             QMessageBox.about(self, "Sucesso", "Cadastro efetuado com sucesso!")
 
         conn.close()
+        self.limpa_campos()
 
     def fechar(self):
         self.close()
+
+    def limpa_campos(self):
+        self.del_img()
+        self.ui.tx_marca.setText("")
+        self.ui.tx_codbarras.setText("")
+        self.ui.tx_DescricaoProduto.setText("")
+        self.ui.tx_EstoqueMaximoProduto.setText("")
+        self.ui.tx_ValorUnitarioProduto.setText("")
+        self.ui.tx_PorcentagemVarejo.setText("")
+        self.ui.cb_forn.setCurrentIndex(0)
+        self.ui.cb_CategoriaProduto.setCurrentIndex(0)

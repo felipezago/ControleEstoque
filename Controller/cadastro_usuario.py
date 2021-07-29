@@ -61,7 +61,7 @@ class CadastroUsuario(QMainWindow):
 
         for contador, f in enumerate(todos_fornecedores):
             contador += 1
-            self.ui.cb_empresa.addItem(f[4])
+            self.ui.cb_empresa.addItem(f[2])
             self.ui.cb_empresa.setItemData(contador, f)
 
     def fechar(self):

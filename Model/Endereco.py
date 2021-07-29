@@ -1,7 +1,3 @@
-import psycopg2
-from Funcoes.configdb import Banco
-
-
 class Endereco:
     def __init__(self, rua="", bairro="", numero="", cidade="", estado="", cep=""):
         self.rua = rua

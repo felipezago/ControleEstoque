@@ -21,8 +21,10 @@ class Usuario(Pessoa):
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(
-            f'''SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login '
-                    f'FROM usuarios WHERE {campo} like \'%{desc}%\' '''
+            (f'SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login, '
+             f'usu_nivel_acesso, emp_nomefantasia, emp_cnpj FROM usuarios '
+             f'INNER JOIN empresas ON emp_cnpj = usu_emp_cnpj '
+             f' WHERE {campo} like \'%{desc}%\' ')
         )
         row = cur.fetchall()
         conn.close()
@@ -35,8 +37,9 @@ class Usuario(Pessoa):
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f'SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login, '
-                    f'usu_nivel_acesso '
-                    f'FROM usuarios WHERE usu_id = {self.id}')
+                    f'usu_nivel_acesso, emp_nomefantasia, emp_cnpj FROM usuarios '
+                    f'INNER JOIN empresas ON emp_cnpj = usu_emp_cnpj '
+                    f'WHERE usu_id = {self.id}')
         row = cur.fetchone()
         cur.close()
         conn.close()
@@ -54,8 +57,10 @@ class Usuario(Pessoa):
             show_msg(title="Erro", mensagem="Erro no banco")
         else:
             cur = conn.cursor()
-            cur.execute(f"SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login FROM "
-                        f"usuarios ORDER BY usu_id")
+            cur.execute(f'SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login, '
+                        f'usu_nivel_acesso, emp_nomefantasia FROM usuarios '
+                        f'INNER JOIN empresas ON emp_cnpj = usu_emp_cnpj '
+                        f'ORDER BY usu_id')
             lista = cur.fetchall()
             cur.close()
             return lista
@@ -71,14 +76,20 @@ class Usuario(Pessoa):
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         if self.senha:
-            cur.execute(f"UPDATE usuarios SET usu_nome = \'{self.nome}\', "
+            cur.execute(f"UPDATE usuarios SET usu_login = \'{self.login}\', usu_nivel_acesso = \'{self.nivel}\',"
+                        f"usu_cpf = \'{self.cpf}\', usu_nome = \'{self.nome}\', usu_fone = \'{self.fone}\',"
+                        f"usu_email = \'{self.email}\', usu_rg = \'{self.rg}\', usu_celular = \'{self.celular}\',"
+                        f"usu_emp_cnpj = \'{self.empresa.cnpj}\', "
                         f"usu_senha = \'{criptografar_senha(self.senha)}\'"
                         f"WHERE usu_id = {self.id}")
             conn.commit()
             print("Senha alterada com sucesso!")
         else:
             cur.execute(
-                f"UPDATE usuarios SET usu_nome = \'{self.nome}\' "
+                f"UPDATE usuarios SET usu_login = \'{self.login}\', usu_nivel_acesso = \'{self.nivel}\',"
+                f"usu_cpf = \'{self.cpf}\', usu_nome = \'{self.nome}\', usu_fone = \'{self.fone}\',"
+                f"usu_email = \'{self.email}\', usu_rg = \'{self.rg}\', usu_celular = \'{self.celular}\',"
+                f"usu_emp_cnpj = \'{self.empresa.cnpj}\' "
                 f"WHERE usu_id = {self.id}")
             conn.commit()
         cur.close()

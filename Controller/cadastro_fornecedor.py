@@ -1,4 +1,8 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QInputDialog, QLineEdit
+from psycopg2.extensions import JSON
+
+from Funcoes.APIs import get_empresa_from_cnpj
+from Funcoes.funcoes import retirar_formatacao
 from Model.Fornecedor import Fornecedor
 
 
@@ -22,6 +26,7 @@ class CadastroFornecedor(QMainWindow):
         self.ui.bt_busca_cep.clicked.connect(self.busca_cep)
         self.ui.tx_Cep.returnPressed.connect(self.busca_cep)
         self.ui.tx_Cep.textChanged.connect(self.enable_cidade_estado)
+        self.ui.bt_busca_cnpj.clicked.connect(self.busca_cnpj)
 
         self.ui.tx_NomeFantasia.setMaxLength(50)
         self.ui.tx_Email.setMaxLength(60)
@@ -30,6 +35,77 @@ class CadastroFornecedor(QMainWindow):
         self.ui.tx_Cidade.setMaxLength(50)
         self.ui.tx_Estado.setMaxLength(2)
         self.ui.tx_Bairro.setMaxLength(60)
+
+    def limpa_campos(self):
+        self.ui.tx_cnpj.setText("")
+        self.ui.tx_Email.setText("")
+        self.ui.tx_Telefone.setText("")
+        self.ui.tx_Cep.setText("")
+        self.ui.tx_Cidade.setText("")
+        self.ui.tx_Estado.setText("")
+        self.ui.tx_Bairro.setText("")
+        self.ui.tx_Endereco.setText("")
+        self.ui.tx_Numero.setText("")
+
+    def preenche_campos_cnpj(self, dados: JSON):
+        self.ui.tx_cnpj.setText(retirar_formatacao(dados['cnpj']))
+        self.ui.tx_NomeFantasia.setText(dados['fantasia'])
+        self.ui.tx_Email.setText(dados['email'])
+        self.ui.tx_Telefone.setText(dados['telefone'])
+        self.ui.tx_Cep.setText(retirar_formatacao(dados['cep']))
+        self.ui.tx_Cidade.setText(dados['municipio'])
+        self.ui.tx_Estado.setText(dados['uf'])
+        self.ui.tx_Bairro.setText(dados['bairro'])
+        self.ui.tx_Endereco.setText(dados['logradouro'])
+        self.ui.tx_Numero.setText(dados['numero'])
+
+    def busca_cnpj(self):
+        if self.ui.tx_cnpj.text() != "../-----":
+            text = str(retirar_formatacao(self.ui.tx_cnpj.text())).strip()
+            response = get_empresa_from_cnpj(text)
+            self.limpa_campos()
+            if response.status_code == 200:
+                dados = response.json()
+                if dados['status'] == "OK":
+                    self.preenche_campos_cnpj(dados)
+                elif dados['status'] == "ERRO" and dados['message'] == 'CNPJ inválido':
+                    QMessageBox.warning(self, "Erro", "CNPJ Inválido.")
+                else:
+                    QMessageBox.warning(self, "Erro", "Erro ao buscar CNPJ.")
+
+            elif response.status_code == 500:
+                QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
+        else:
+            self.dialog_cnpj()
+
+    def dialog_cnpj(self):
+        from Funcoes.funcoes import retirar_formatacao
+
+        while True:
+            text, ok = QInputDialog().getText(self, "CNPJ Online",
+                                              "Informe o CNPJ para buscar os dados da empresa: ", QLineEdit.Normal)
+            if ok and text:
+                text = str(retirar_formatacao(text)).strip()
+                response = get_empresa_from_cnpj(text)
+                if response.status_code == 200:
+                    dados = response.json()
+                    if dados['status'] == "OK":
+                        self.preenche_campos_cnpj(dados)
+                        break
+                    elif dados['status'] == "ERRO" and dados['message'] == 'CNPJ inválido':
+                        q = QMessageBox.question(self, "Erro", "CNPJ Inválido, Deseja buscar novamente?")
+
+                        if q == QMessageBox.No:
+                            break
+                    else:
+                        q = QMessageBox.question(self, "Erro", "Erro ao buscar CNPJ, Deseja buscar novamente?")
+
+                        if q == QMessageBox.No:
+                            break
+                elif response.status_code == 500:
+                    QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
+            else:
+                break
 
     def enable_cidade_estado(self):
         if not self.ui.tx_Cidade.isEnabled():
@@ -92,22 +168,23 @@ class CadastroFornecedor(QMainWindow):
 
     def salvar(self):
         from PyQt5.QtWidgets import QMessageBox
+        from Funcoes.funcoes import retirar_formatacao
 
         forn_inserir = Fornecedor()
 
         forn_inserir.nome = self.ui.tx_NomeFantasia.text().upper()
-        forn_inserir.cnpj = self.ui.tx_cnpj.text().upper()
-        forn_inserir.telefone = self.ui.tx_Telefone.text().upper()
+        forn_inserir.cnpj = retirar_formatacao(self.ui.tx_cnpj.text().upper())
+        forn_inserir.fone = self.ui.tx_Telefone.text().upper()
         forn_inserir.email = self.ui.tx_Email.text().lower()
-        forn_inserir.cep = self.ui.tx_Cep.text().upper()
+        forn_inserir.cep = retirar_formatacao(self.ui.tx_Cep.text().upper())
         forn_inserir.rua = self.ui.tx_Endereco.text().upper()
-        forn_inserir.nro = self.ui.tx_Numero.text().upper()
+        forn_inserir.numero = self.ui.tx_Numero.text().upper()
         forn_inserir.bairro = self.ui.tx_Bairro.text().upper()
         forn_inserir.cidade = self.ui.tx_Cidade.text().upper()
         forn_inserir.estado = self.ui.tx_Estado.text().upper()
 
         try:
-            forn_inserir.editar()
+            forn_inserir.inserir()
         except Exception as error:
             QMessageBox.about(self, "Erro", str(error))
         else:

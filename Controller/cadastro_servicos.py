@@ -57,8 +57,14 @@ class CadastroServicos(QMainWindow):
         else:
             QMessageBox.about(self, "Sucesso", "Cadastro efetuado com sucesso!")
 
+        self.limpa_campos()
+
     def converter_virgula(self):
         valor = str(self.ui.tx_ValorUnitarioProduto.text())
         virgula = valor.find(',')
         if virgula > 0:
             self.ui.tx_ValorUnitarioProduto.setText(valor.replace(",", "."))
+
+    def limpa_campos(self):
+        self.ui.tx_ValorUnitarioProduto.setText("")
+        self.ui.tx_DescricaoServico.setText("")

@@ -1,9 +1,10 @@
 import psycopg2
 from Funcoes.configdb import Banco
+from Model.Cliente import Cliente
 
 
 class Veiculo:
-    def __init__(self, placa="", cliente="", marca="", modelo=""):
+    def __init__(self, placa="", cliente: Cliente = "", marca="", modelo=""):
         self.placa = placa
         self.cliente = cliente
         self.marca = marca
@@ -38,21 +39,8 @@ class Veiculo:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT * FROM veiculo")
-        row = cur.fetchall()
-        cur.close()
-        conn.close()
-        return row
-
-    @staticmethod
-    def get_todos_veiculos_tb():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute(f"SELECT veic_placa, veic_marca, veic_modelo, pess_nome FROM veiculo "
-                    f"INNER JOIN cliente ON veic_clie_id = clie_id "
-                    f"INNER JOIN pessoas ON clie_pessoa_id = pess_id ")
+        cur.execute(f"SELECT veic_placa, veic_marca, veic_modelo, clie_nome FROM veiculo "
+                    f"INNER JOIN cliente ON veic_clie_id = clie_id ")
         row = cur.fetchall()
         cur.close()
         conn.close()
@@ -76,7 +64,8 @@ class Veiculo:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM veiculo WHERE {campo} like \'%{desc}%\'')
+        cur.execute(f'SELECT veic_placa, veic_marca, veic_modelo, clie_nome FROM veiculo '
+                    f'INNER JOIN cliente ON veic_clie_id = clie_id WHERE {campo} like \'%{desc}%\'')
         row = cur.fetchall()
         conn.close()
         cur.close()
@@ -87,18 +76,20 @@ class Veiculo:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM veiculo WHERE veic_placa = \'{self.placa}\'')
+        cur.execute(f'SELECT veic_placa, veic_marca, veic_modelo, clie_nome FROM veiculo '
+                    f'INNER JOIN cliente ON veic_clie_id = clie_id WHERE veic_placa = \'{self.placa}\'')
         row = cur.fetchone()
         conn.close()
         cur.close()
         return row
 
-    def get_veic_by_pessoa(self):
+    def get_veic_by_cliente(self, op):
         config = Banco()
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM veiculo WHERE veic_clie_id = {self.cliente.id}')
+        cur.execute(f'SELECT veic_placa, veic_marca, veic_modelo, clie_nome FROM veiculo '
+                    f'INNER JOIN cliente ON veic_clie_id = clie_id WHERE veic_clie_id {op} {self.cliente.id}')
         row = cur.fetchall()
         conn.close()
         cur.close()

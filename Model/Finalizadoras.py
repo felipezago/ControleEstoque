@@ -86,7 +86,7 @@ class Finalizadoras:
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f"SELECT MAX(fin_id) FROM finalizadoras")
-        id = cur.fetchall()
+        id = cur.fetchone()
         cur.close()
         conn.close()
         return id

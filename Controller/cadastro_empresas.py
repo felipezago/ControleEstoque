@@ -1,4 +1,7 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QInputDialog, QMessageBox, QLineEdit
+from psycopg2.extensions import JSON
+from Funcoes.APIs import get_empresa_from_cnpj
+from Funcoes.funcoes import retirar_formatacao
 
 
 class CadastroEmpresas(QMainWindow):
@@ -11,7 +14,7 @@ class CadastroEmpresas(QMainWindow):
         self.ui = Ui_ct_empresa()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(1000, 445)
+        self.setFixedSize(self.size())
 
         self.caminho_img = None
 
@@ -41,6 +44,68 @@ class CadastroEmpresas(QMainWindow):
         self.ui.tx_CepEmpresa.returnPressed.connect(self.busca_cep)
         self.ui.tx_CepEmpresa.textChanged.connect(self.enable_cidade_estado)
         self.ui.bt_busca_cep.clicked.connect(self.busca_cep)
+        self.ui.bt_busca_cnpj.clicked.connect(self.busca_cnpj)
+
+    def preenche_campos_cnpj(self, dados: JSON):
+        self.ui.tx_Cnpj.setText(retirar_formatacao(dados['cnpj']))
+        self.ui.tx_NomeFantasia.setText(dados['fantasia'])
+        self.ui.tx_RazaoSocial.setText(dados['nome'])
+        self.ui.tx_EmailEmpresa.setText(dados['email'])
+        self.ui.tx_TelefoneEmpresa.setText(dados['telefone'])
+        self.ui.tx_CepEmpresa.setText(retirar_formatacao(dados['cep']))
+        self.ui.tx_CidadeEmpresa.setText(dados['municipio'])
+        self.ui.tx_EstadoEmpresa.setText(dados['uf'])
+        self.ui.tx_BairroEmpresa.setText(dados['bairro'])
+        self.ui.tx_Endereco.setText(dados['logradouro'])
+        self.ui.tx_NumEmpresa.setText(dados['numero'])
+
+    def busca_cnpj(self):
+        if self.ui.tx_Cnpj.text() != "../-----":
+            text = str(retirar_formatacao(self.ui.tx_Cnpj.text())).strip()
+            response = get_empresa_from_cnpj(text)
+            self.limpa_campos()
+            if response.status_code == 200:
+                dados = response.json()
+                if dados['status'] == "OK":
+                    self.preenche_campos_cnpj(dados)
+                elif dados['status'] == "ERRO" and dados['message'] == 'CNPJ inválido':
+                    QMessageBox.warning(self, "Erro", "CNPJ Inválido.")
+                else:
+                    QMessageBox.warning(self, "Erro", "Erro ao buscar CNPJ.")
+
+            elif response.status_code == 500:
+                QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
+        else:
+            self.dialog_cnpj()
+
+    def dialog_cnpj(self):
+        from Funcoes.funcoes import retirar_formatacao
+
+        while True:
+            text, ok = QInputDialog().getText(self, "CNPJ Online",
+                                              "Informe o CNPJ para buscar os dados da empresa: ", QLineEdit.Normal)
+            if ok and text:
+                text = str(retirar_formatacao(text)).strip()
+                response = get_empresa_from_cnpj(text)
+                if response.status_code == 200:
+                    dados = response.json()
+                    if dados['status'] == "OK":
+                        self.preenche_campos_cnpj(dados)
+                        break
+                    elif dados['status'] == "ERRO" and dados['message'] == 'CNPJ inválido':
+                        q = QMessageBox.question(self, "Erro", "CNPJ Inválido, Deseja buscar novamente?")
+
+                        if q == QMessageBox.No:
+                            break
+                    else:
+                        q = QMessageBox.question(self, "Erro", "Erro ao buscar CNPJ, Deseja buscar novamente?")
+
+                        if q == QMessageBox.No:
+                            break
+                elif response.status_code == 500:
+                    QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
+            else:
+                break
 
     def enable_cidade_estado(self):
         if not self.ui.tx_CidadeEmpresa.isEnabled():
@@ -137,7 +202,7 @@ class CadastroEmpresas(QMainWindow):
         emp_inserir.nome_fantasia = self.ui.tx_NomeFantasia.text().upper()
         emp_inserir.razao_social = self.ui.tx_RazaoSocial.text().upper()
         emp_inserir.cnpj = retirar_formatacao(self.ui.tx_Cnpj.text().upper())
-        emp_inserir.inscricao = self.ui.tx_IE.text().upper()
+        emp_inserir.inscricao_estadual = self.ui.tx_IE.text().upper()
         emp_inserir.fone = self.ui.tx_TelefoneEmpresa.text().lower()
         emp_inserir.site = self.ui.tx_SiteEmpresa.text().upper()
         emp_inserir.email = self.ui.tx_EmailEmpresa.text()
@@ -163,3 +228,17 @@ class CadastroEmpresas(QMainWindow):
 
     def sair(self):
         self.close()
+
+    def limpa_campos(self):
+        self.ui.tx_Cnpj.setText("")
+        self.ui.tx_NomeFantasia.setText("")
+        self.ui.tx_RazaoSocial.setText("")
+        self.ui.tx_EmailEmpresa.setText("")
+        self.ui.tx_TelefoneEmpresa.setText("")
+        self.ui.tx_SiteEmpresa.setText("")
+        self.ui.tx_CepEmpresa.setText("")
+        self.ui.tx_CidadeEmpresa.setText("")
+        self.ui.tx_EstadoEmpresa.setText("")
+        self.ui.tx_BairroEmpresa.setText("")
+        self.ui.tx_Endereco.setText("")
+        self.ui.tx_NumEmpresa.setText("")

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>919</width>
-    <height>573</height>
+    <height>562</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -232,6 +232,16 @@ padding: 2px;
      <string>USUARIO (LOGIN)</string>
     </property>
    </column>
+   <column>
+    <property name="text">
+     <string>NIVEL</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EMPRESA</string>
+    </property>
+   </column>
   </widget>
   <widget class="QLabel" name="lb_FormProdutos_6">
    <property name="geometry">
@@ -285,8 +295,8 @@ border: 1px solid red;
   <widget class="QFrame" name="fr_botoes">
    <property name="geometry">
     <rect>
-     <x>-70</x>
-     <y>540</y>
+     <x>-60</x>
+     <y>530</y>
      <width>991</width>
      <height>30</height>
     </rect>
@@ -673,7 +683,7 @@ color: #797979
     <rect>
      <x>10</x>
      <y>410</y>
-     <width>181</width>
+     <width>131</width>
      <height>25</height>
     </rect>
    </property>
@@ -723,44 +733,10 @@ color: #797979
     <string>CELULAR</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="tx_celular">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>410</y>
-     <width>241</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::WheelFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLineEdit{
-background: #CFCFCF;
-border-radius: 2px;
-color: #000;
-padding-left: 3px;
-font: 13px &quot;Arial&quot; 
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-   </property>
-   <property name="inputMask">
-    <string/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="placeholderText">
-    <string/>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="tx_login">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>340</x>
      <y>410</y>
      <width>181</width>
      <height>25</height>
@@ -794,7 +770,7 @@ border: 1px solid red;
   <widget class="QLabel" name="lb_FormProdutos_13">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>340</x>
      <y>390</y>
      <width>111</width>
      <height>20</height>
@@ -885,6 +861,9 @@ border: 1px solid red;
    <property name="text">
     <string/>
    </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
    <property name="placeholderText">
     <string/>
    </property>
@@ -939,6 +918,9 @@ border: 1px solid red;
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
    </property>
    <property name="placeholderText">
     <string/>
@@ -995,6 +977,9 @@ border: 1px solid red;
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
    </property>
    <property name="placeholderText">
     <string/>
@@ -1157,6 +1142,219 @@ QComboBox::down-arrow {
    <property name="icon">
     <iconset>
      <normaloff>../Imagens/search.png</normaloff>../Imagens/search.png</iconset>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cb_empresa">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>410</y>
+     <width>211</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }
+</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>SELECIONE</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="cb_nivel">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>410</y>
+     <width>161</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }
+</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>SELECIONE</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>VENDEDOR</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GERENTE</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="lb_FormProdutos_17">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>390</y>
+     <width>215</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+   </property>
+   <property name="text">
+    <string>EMPRESA</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lb_FormProdutos_3">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>390</y>
+     <width>141</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+   </property>
+   <property name="text">
+    <string>NÍVEL DE ACESSO</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lb_FormProdutos_18">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>390</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+   </property>
+   <property name="text">
+    <string>CELULAR</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="tx_celular">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>410</y>
+     <width>181</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::WheelFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+padding-left: 3px;
+font: 13px &quot;Arial&quot; 
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lb_FormProdutos_19">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>390</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+   </property>
+   <property name="text">
+    <string>CELULAR</string>
    </property>
   </widget>
  </widget>

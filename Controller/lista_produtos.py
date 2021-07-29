@@ -157,7 +157,7 @@ class ListaProdutos(QMainWindow):
 
         for contador, f in enumerate(todos_fornecedores):
             contador += 1
-            self.ui.cb_fornecedor.addItem(f[2])
+            self.ui.cb_fornecedor.addItem(f[1])
             self.ui.cb_fornecedor.setItemData(contador - 1, f)
 
     def limpa_campo_busca(self):
@@ -398,6 +398,8 @@ class ListaProdutos(QMainWindow):
                     self.produto_selecionado.delete()
                     self.produto_selecionado.id = None
                     self.del_img()
+                    self.ui.cb_categoria.clear()
+                    self.ui.cb_fornecedor.clear()
                 except Exception as error:
                     QMessageBox.warning(self, "Erro", str(error))
                 else:

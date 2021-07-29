@@ -13,10 +13,9 @@ class CadastroClientes(QMainWindow):
         self.ui = Ui_ct_FormClientes()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(669, 440)
+        self.setFixedSize(self.size())
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
-        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
 
         self.ui.tx_nome.setMaxLength(60)
         self.ui.tx_Email.setMaxLength(50)
@@ -35,6 +34,9 @@ class CadastroClientes(QMainWindow):
         self.ui.bt_busca_cnpj.clicked.connect(self.busca_cnpj)
 
         self.ui.bt_busca_cnpj.hide()
+
+    def resizeEvent(self, a0):
+        self.setFixedSize(self.size())
 
     def limpa_campos(self):
         self.ui.tx_cpf.setText("")
@@ -89,20 +91,23 @@ class CadastroClientes(QMainWindow):
         self.ui.tx_Numero.setText(dados['numero'])
 
     def busca_cnpj(self):
-        text = str(retirar_formatacao(self.ui.tx_cpf.text())).strip()
-        response = get_empresa_from_cnpj(text)
-        self.limpa_campos()
-        if response.status_code == 200:
-            dados = response.json()
-            if dados['status'] == "OK":
-                self.preenche_campos_cnpj(dados)
-            elif dados['status'] == "ERRO" and dados['message'] == 'CNPJ inválido':
-                QMessageBox.warning(self, "Erro", "CNPJ Inválido.")
-            else:
-                QMessageBox.warning(self, "Erro", "Erro ao buscar CNPJ.")
+        if self.ui.tx_cpf.text() != "../--":
+            text = str(retirar_formatacao(self.ui.tx_cpf.text())).strip()
+            response = get_empresa_from_cnpj(text)
+            self.limpa_campos()
+            if response.status_code == 200:
+                dados = response.json()
+                if dados['status'] == "OK":
+                    self.preenche_campos_cnpj(dados)
+                elif dados['status'] == "ERRO" and dados['message'] == 'CNPJ inválido':
+                    QMessageBox.warning(self, "Erro", "CNPJ Inválido.")
+                else:
+                    QMessageBox.warning(self, "Erro", "Erro ao buscar CNPJ.")
 
-        elif response.status_code == 500:
-            QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
+            elif response.status_code == 500:
+                QMessageBox.warning(self, "Erro", "Erro interno do Servidor.")
+        else:
+            self.dialog_cnpj()
 
     def dialog_cnpj(self):
         from Funcoes.funcoes import retirar_formatacao
@@ -202,15 +207,15 @@ class CadastroClientes(QMainWindow):
 
         cli_inserir = Cliente()
         cli_inserir.nome = self.ui.tx_nome.text().upper()
-        cli_inserir.cpf = self.ui.tx_cpf.text().upper()
-        cli_inserir.rg = self.ui.tx_rg.text().upper()
-        cli_inserir.telefone = self.ui.tx_Telefone.text().upper()
+        cli_inserir.cpf = retirar_formatacao(self.ui.tx_cpf.text().upper())
+        cli_inserir.rg = retirar_formatacao(self.ui.tx_rg.text()) if self.ui.tx_rg.text() != "..-" else "ISENTO"
         cli_inserir.email = self.ui.tx_Email.text().lower()
-        cli_inserir.celular = self.ui.tx_Celular.text().upper()
+        cli_inserir.celular = self.ui.tx_Celular.text().upper() if self.ui.tx_Celular.text() != "() -" else "ISENTO"
         cli_inserir.tipo = "FISICA" if self.ui.cb_nivel.currentIndex() == 0 else "JURIDICA"
         cli_inserir.cep = self.ui.tx_Cep.text().upper()
         cli_inserir.rua = self.ui.tx_Endereco.text().upper()
-        cli_inserir.nro = self.ui.tx_Numero.text().upper()
+        cli_inserir.numero = self.ui.tx_Numero.text().upper()
+        cli_inserir.fone = self.ui.tx_Telefone.text().upper()
         cli_inserir.bairro = self.ui.tx_Bairro.text().upper()
         cli_inserir.cidade = self.ui.tx_Cidade.text().upper()
         cli_inserir.estado = self.ui.tx_Estado.text().upper()
@@ -223,3 +228,4 @@ class CadastroClientes(QMainWindow):
             QMessageBox.about(self, "Sucesso", "Cadastro efetuado com sucesso!")
 
         self.limpa_campos()
+        self.ui.cb_nivel.setCurrentIndex(0)

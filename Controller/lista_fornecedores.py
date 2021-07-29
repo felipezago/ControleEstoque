@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Fornecedor import Fornecedor
 from PyQt5 import QtCore
-from Model.Endereco import Endereco
 from Funcoes.funcoes import formatar_cnpj, retirar_formatacao
 
 
@@ -200,10 +199,10 @@ class ListaFornecedor(QMainWindow):
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
-            if type(dados) == list:
+            if isinstance(dados, list):
                 for i, linha in enumerate(dados):
-                    id_fornecedor = QTableWidgetItem(str(linha[0]))
                     self.ui.tb_fornecedores.insertRow(i)
+                    id_fornecedor = QTableWidgetItem(str(linha[0]))
                     self.ui.tb_fornecedores.setItem(i, 0, id_fornecedor)
 
                     for j in range(0, 11):
@@ -211,6 +210,16 @@ class ListaFornecedor(QMainWindow):
                             self.ui.tb_fornecedores.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
                         else:
                             self.ui.tb_fornecedores.setItem(i, j, QTableWidgetItem(str(linha[j])))
+            else:
+                self.ui.tb_fornecedores.insertRow(0)
+                id_fornecedor = QTableWidgetItem(str(dados[0]))
+                self.ui.tb_fornecedores.setItem(0, 0, id_fornecedor)
+
+                for j in range(0, 11):
+                    if j == 2:
+                        self.ui.tb_fornecedores.setItem(0, j, QTableWidgetItem(formatar_cnpj(str(dados[j]))))
+                    else:
+                        self.ui.tb_fornecedores.setItem(0, j, QTableWidgetItem(str(dados[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")

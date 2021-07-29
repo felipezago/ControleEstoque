@@ -2,7 +2,7 @@ def create_tables():
     comm = {"criar_cliente": """
                CREATE TABLE IF NOT EXISTS cliente (
                    clie_id SERIAL PRIMARY KEY,
-                   clie_cpf_cnpj VARCHAR(15) NOT NULL,
+                   clie_cpf_cnpj VARCHAR(15) NOT NULL UNIQUE,
                    clie_nome VARCHAR(60) NOT NULL,
                    clie_fone VARCHAR(40),
                    clie_email VARCHAR(50) NOT NULL,

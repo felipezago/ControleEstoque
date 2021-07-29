@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'View/UI/cadastro_empresa.ui'
+# Form implementation generated from reading ui file 'UI/cadastro_empresa.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ct_empresa(object):
     def setupUi(self, ct_empresa):
         ct_empresa.setObjectName("ct_empresa")
-        ct_empresa.resize(1000, 445)
+        ct_empresa.resize(876, 431)
         ct_empresa.setStyleSheet("background: #FFF;\n"
 "border: none")
         self.fr_empresa = QtWidgets.QFrame(ct_empresa)
@@ -23,7 +23,7 @@ class Ui_ct_empresa(object):
         self.fr_empresa.setFrameShadow(QtWidgets.QFrame.Raised)
         self.fr_empresa.setObjectName("fr_empresa")
         self.lb_FormFornecedor_21 = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_FormFornecedor_21.setGeometry(QtCore.QRect(670, 60, 150, 20))
+        self.lb_FormFornecedor_21.setGeometry(QtCore.QRect(670, 50, 150, 20))
         self.lb_FormFornecedor_21.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -55,7 +55,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_27.setObjectName("lb_FormFornecedor_27")
         self.tx_RazaoSocial = QtWidgets.QLineEdit(self.fr_empresa)
-        self.tx_RazaoSocial.setGeometry(QtCore.QRect(345, 85, 305, 25))
+        self.tx_RazaoSocial.setGeometry(QtCore.QRect(20, 135, 321, 25))
         self.tx_RazaoSocial.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_RazaoSocial.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -78,7 +78,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_28.setObjectName("lb_FormFornecedor_28")
         self.lb_FormFornecedor_20 = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_FormFornecedor_20.setGeometry(QtCore.QRect(20, 340, 120, 20))
+        self.lb_FormFornecedor_20.setGeometry(QtCore.QRect(660, 285, 120, 20))
         self.lb_FormFornecedor_20.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -87,7 +87,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_20.setObjectName("lb_FormFornecedor_20")
         self.lb_FormFornecedor_17 = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_FormFornecedor_17.setGeometry(QtCore.QRect(20, 60, 150, 20))
+        self.lb_FormFornecedor_17.setGeometry(QtCore.QRect(350, 110, 150, 20))
         self.lb_FormFornecedor_17.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -96,7 +96,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_17.setObjectName("lb_FormFornecedor_17")
         self.tx_IE = QtWidgets.QLineEdit(self.fr_empresa)
-        self.tx_IE.setGeometry(QtCore.QRect(236, 145, 196, 25))
+        self.tx_IE.setGeometry(QtCore.QRect(350, 75, 196, 25))
         self.tx_IE.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_IE.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -110,7 +110,7 @@ class Ui_ct_empresa(object):
         self.tx_IE.setPlaceholderText("")
         self.tx_IE.setObjectName("tx_IE")
         self.lb_FormFornecedor_26 = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_FormFornecedor_26.setGeometry(QtCore.QRect(300, 340, 120, 20))
+        self.lb_FormFornecedor_26.setGeometry(QtCore.QRect(20, 340, 120, 20))
         self.lb_FormFornecedor_26.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -142,7 +142,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_30.setObjectName("lb_FormFornecedor_30")
         self.lb_FormFornecedor_16 = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_FormFornecedor_16.setGeometry(QtCore.QRect(580, 340, 70, 20))
+        self.lb_FormFornecedor_16.setGeometry(QtCore.QRect(300, 340, 70, 20))
         self.lb_FormFornecedor_16.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -151,7 +151,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_16.setObjectName("lb_FormFornecedor_16")
         self.lb_FormFornecedor_6 = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_FormFornecedor_6.setGeometry(QtCore.QRect(236, 120, 190, 20))
+        self.lb_FormFornecedor_6.setGeometry(QtCore.QRect(350, 50, 190, 20))
         self.lb_FormFornecedor_6.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -160,7 +160,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_6.setObjectName("lb_FormFornecedor_6")
         self.tx_BairroEmpresa = QtWidgets.QLineEdit(self.fr_empresa)
-        self.tx_BairroEmpresa.setGeometry(QtCore.QRect(20, 365, 260, 25))
+        self.tx_BairroEmpresa.setGeometry(QtCore.QRect(660, 310, 201, 25))
         self.tx_BairroEmpresa.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_BairroEmpresa.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -177,7 +177,7 @@ class Ui_ct_empresa(object):
         self.tx_BairroEmpresa.setPlaceholderText("")
         self.tx_BairroEmpresa.setObjectName("tx_BairroEmpresa")
         self.tx_EstadoEmpresa = QtWidgets.QLineEdit(self.fr_empresa)
-        self.tx_EstadoEmpresa.setGeometry(QtCore.QRect(580, 365, 70, 25))
+        self.tx_EstadoEmpresa.setGeometry(QtCore.QRect(300, 365, 70, 25))
         self.tx_EstadoEmpresa.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_EstadoEmpresa.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -194,7 +194,7 @@ class Ui_ct_empresa(object):
         self.tx_EstadoEmpresa.setPlaceholderText("")
         self.tx_EstadoEmpresa.setObjectName("tx_EstadoEmpresa")
         self.tx_Cnpj = QtWidgets.QLineEdit(self.fr_empresa)
-        self.tx_Cnpj.setGeometry(QtCore.QRect(20, 145, 196, 25))
+        self.tx_Cnpj.setGeometry(QtCore.QRect(20, 75, 196, 25))
         self.tx_Cnpj.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_Cnpj.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -208,7 +208,7 @@ class Ui_ct_empresa(object):
         self.tx_Cnpj.setPlaceholderText("")
         self.tx_Cnpj.setObjectName("tx_Cnpj")
         self.tx_NumEmpresa = QtWidgets.QLineEdit(self.fr_empresa)
-        self.tx_NumEmpresa.setGeometry(QtCore.QRect(580, 310, 70, 25))
+        self.tx_NumEmpresa.setGeometry(QtCore.QRect(579, 310, 71, 25))
         self.tx_NumEmpresa.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_NumEmpresa.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -244,7 +244,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_25.setObjectName("lb_FormFornecedor_25")
         self.lb_FormFornecedor_22 = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_FormFornecedor_22.setGeometry(QtCore.QRect(345, 60, 150, 20))
+        self.lb_FormFornecedor_22.setGeometry(QtCore.QRect(20, 110, 150, 20))
         self.lb_FormFornecedor_22.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -253,7 +253,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_22.setObjectName("lb_FormFornecedor_22")
         self.tx_CidadeEmpresa = QtWidgets.QLineEdit(self.fr_empresa)
-        self.tx_CidadeEmpresa.setGeometry(QtCore.QRect(300, 365, 260, 25))
+        self.tx_CidadeEmpresa.setGeometry(QtCore.QRect(20, 365, 260, 25))
         self.tx_CidadeEmpresa.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_CidadeEmpresa.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -270,7 +270,7 @@ class Ui_ct_empresa(object):
         self.tx_CidadeEmpresa.setPlaceholderText("")
         self.tx_CidadeEmpresa.setObjectName("tx_CidadeEmpresa")
         self.frame = QtWidgets.QFrame(self.fr_empresa)
-        self.frame.setGeometry(QtCore.QRect(0, 410, 1000, 40))
+        self.frame.setGeometry(QtCore.QRect(-120, 400, 1000, 40))
         self.frame.setStyleSheet("border-bottom: 2px solid #CCC;\n"
 "background: #F7F7F7")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -380,7 +380,7 @@ class Ui_ct_empresa(object):
         self.tx_EmailEmpresa.setPlaceholderText("")
         self.tx_EmailEmpresa.setObjectName("tx_EmailEmpresa")
         self.lb_FormFornecedor_18 = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_FormFornecedor_18.setGeometry(QtCore.QRect(20, 120, 190, 20))
+        self.lb_FormFornecedor_18.setGeometry(QtCore.QRect(20, 50, 190, 20))
         self.lb_FormFornecedor_18.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -389,7 +389,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_18.setObjectName("lb_FormFornecedor_18")
         self.lb_LogoEmpresa = QtWidgets.QLabel(self.fr_empresa)
-        self.lb_LogoEmpresa.setGeometry(QtCore.QRect(670, 80, 300, 225))
+        self.lb_LogoEmpresa.setGeometry(QtCore.QRect(670, 70, 191, 171))
         self.lb_LogoEmpresa.setStyleSheet("border: 1px solid #A2A2A2;\n"
 "")
         self.lb_LogoEmpresa.setText("")
@@ -407,7 +407,7 @@ class Ui_ct_empresa(object):
 "}")
         self.lb_FormFornecedor_31.setObjectName("lb_FormFornecedor_31")
         self.tx_NomeFantasia = QtWidgets.QLineEdit(self.fr_empresa)
-        self.tx_NomeFantasia.setGeometry(QtCore.QRect(20, 85, 305, 25))
+        self.tx_NomeFantasia.setGeometry(QtCore.QRect(350, 135, 305, 25))
         self.tx_NomeFantasia.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_NomeFantasia.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -421,7 +421,7 @@ class Ui_ct_empresa(object):
 "}")
         self.tx_NomeFantasia.setObjectName("tx_NomeFantasia")
         self.bt_AddLogo = QtWidgets.QPushButton(self.fr_empresa)
-        self.bt_AddLogo.setGeometry(QtCore.QRect(940, 270, 25, 25))
+        self.bt_AddLogo.setGeometry(QtCore.QRect(830, 210, 25, 25))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(16)
@@ -438,7 +438,7 @@ class Ui_ct_empresa(object):
         self.bt_AddLogo.setText("")
         self.bt_AddLogo.setObjectName("bt_AddLogo")
         self.bt_DelLogo = QtWidgets.QPushButton(self.fr_empresa)
-        self.bt_DelLogo.setGeometry(QtCore.QRect(940, 270, 25, 25))
+        self.bt_DelLogo.setGeometry(QtCore.QRect(830, 210, 25, 25))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(16)
@@ -458,9 +458,29 @@ class Ui_ct_empresa(object):
         self.bt_busca_cep.setGeometry(QtCore.QRect(120, 310, 31, 21))
         self.bt_busca_cep.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("View/UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_busca_cep.setIcon(icon)
         self.bt_busca_cep.setObjectName("bt_busca_cep")
+        self.bt_busca_cnpj = QtWidgets.QPushButton(self.fr_empresa)
+        self.bt_busca_cnpj.setGeometry(QtCore.QRect(220, 70, 120, 31))
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_busca_cnpj.setFont(font)
+        self.bt_busca_cnpj.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.bt_busca_cnpj.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.bt_busca_cnpj.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
+        self.bt_busca_cnpj.setStyleSheet("QPushButton {\n"
+"background-color: #7AB32E;\n"
+"color: #FFF\n"
+" }\n"
+"QPushButton:hover{\n"
+"background-color: #40a286\n"
+"}")
+        self.bt_busca_cnpj.setIconSize(QtCore.QSize(75, 35))
+        self.bt_busca_cnpj.setObjectName("bt_busca_cnpj")
         self.lb_LogoEmpresa.raise_()
         self.bt_DelLogo.raise_()
         self.lb_FormFornecedor_21.raise_()
@@ -495,13 +515,14 @@ class Ui_ct_empresa(object):
         self.tx_NomeFantasia.raise_()
         self.bt_AddLogo.raise_()
         self.bt_busca_cep.raise_()
+        self.bt_busca_cnpj.raise_()
 
         self.retranslateUi(ct_empresa)
         QtCore.QMetaObject.connectSlotsByName(ct_empresa)
-        ct_empresa.setTabOrder(self.tx_NomeFantasia, self.tx_RazaoSocial)
-        ct_empresa.setTabOrder(self.tx_RazaoSocial, self.tx_Cnpj)
         ct_empresa.setTabOrder(self.tx_Cnpj, self.tx_IE)
-        ct_empresa.setTabOrder(self.tx_IE, self.tx_TelefoneEmpresa)
+        ct_empresa.setTabOrder(self.tx_IE, self.tx_RazaoSocial)
+        ct_empresa.setTabOrder(self.tx_RazaoSocial, self.tx_NomeFantasia)
+        ct_empresa.setTabOrder(self.tx_NomeFantasia, self.tx_TelefoneEmpresa)
         ct_empresa.setTabOrder(self.tx_TelefoneEmpresa, self.tx_SiteEmpresa)
         ct_empresa.setTabOrder(self.tx_SiteEmpresa, self.tx_EmailEmpresa)
         ct_empresa.setTabOrder(self.tx_EmailEmpresa, self.tx_CepEmpresa)
@@ -530,7 +551,7 @@ class Ui_ct_empresa(object):
         self.lb_FormFornecedor_16.setText(_translate("ct_empresa", "ESTADO"))
         self.lb_FormFornecedor_6.setText(_translate("ct_empresa", "IE"))
         self.tx_Cnpj.setInputMask(_translate("ct_empresa", "##.###.###/####-##"))
-        self.tx_Cnpj.setText(_translate("ct_empresa", "../---"))
+        self.tx_Cnpj.setText(_translate("ct_empresa", "../----"))
         self.lb_FormFornecedor.setText(_translate("ct_empresa", "DADOS DA EMPRESA"))
         self.lb_FormFornecedor_25.setText(_translate("ct_empresa", "Email"))
         self.lb_FormFornecedor_22.setText(_translate("ct_empresa", "RAZÃO SOCIAL"))
@@ -546,3 +567,4 @@ class Ui_ct_empresa(object):
         self.bt_AddLogo.setToolTip(_translate("ct_empresa", "<html><head/><body><p>CADASTRAR IMGEM</p></body></html>"))
         self.bt_DelLogo.setToolTip(_translate("ct_empresa", "<html><head/><body><p>Deletar Imagem</p></body></html>"))
         self.bt_busca_cep.setAccessibleName(_translate("ct_empresa", "BUSCA CEP"))
+        self.bt_busca_cnpj.setText(_translate("ct_empresa", "BUSCAR CNPJ"))

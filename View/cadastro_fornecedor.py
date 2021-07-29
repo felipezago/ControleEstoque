@@ -15,8 +15,6 @@ class Ui_ct_FormFornecedor(object):
     def setupUi(self, ct_FormFornecedor):
         ct_FormFornecedor.setObjectName("ct_FormFornecedor")
         ct_FormFornecedor.resize(653, 371)
-        ct_FormFornecedor.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        ct_FormFornecedor.setFrameShadow(QtWidgets.QFrame.Raised)
         self.fr_FormFornecedor = QtWidgets.QFrame(ct_FormFornecedor)
         self.fr_FormFornecedor.setGeometry(QtCore.QRect(0, 0, 1000, 500))
         self.fr_FormFornecedor.setStyleSheet("background: #FFF;\n"
@@ -33,7 +31,7 @@ class Ui_ct_FormFornecedor(object):
 "}")
         self.lb_FormFornecedor.setObjectName("lb_FormFornecedor")
         self.lb_FormFornecedor_2 = QtWidgets.QLabel(self.fr_FormFornecedor)
-        self.lb_FormFornecedor_2.setGeometry(QtCore.QRect(20, 60, 150, 20))
+        self.lb_FormFornecedor_2.setGeometry(QtCore.QRect(370, 60, 150, 20))
         self.lb_FormFornecedor_2.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -42,7 +40,7 @@ class Ui_ct_FormFornecedor(object):
 "}")
         self.lb_FormFornecedor_2.setObjectName("lb_FormFornecedor_2")
         self.tx_NomeFantasia = QtWidgets.QLineEdit(self.fr_FormFornecedor)
-        self.tx_NomeFantasia.setGeometry(QtCore.QRect(20, 85, 401, 25))
+        self.tx_NomeFantasia.setGeometry(QtCore.QRect(370, 80, 271, 25))
         self.tx_NomeFantasia.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_NomeFantasia.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -56,7 +54,7 @@ class Ui_ct_FormFornecedor(object):
 "}")
         self.tx_NomeFantasia.setObjectName("tx_NomeFantasia")
         self.lb_FormFornecedor_3 = QtWidgets.QLabel(self.fr_FormFornecedor)
-        self.lb_FormFornecedor_3.setGeometry(QtCore.QRect(430, 60, 190, 20))
+        self.lb_FormFornecedor_3.setGeometry(QtCore.QRect(20, 60, 190, 20))
         self.lb_FormFornecedor_3.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -168,7 +166,7 @@ class Ui_ct_FormFornecedor(object):
         self.bt_Salvar.setIconSize(QtCore.QSize(75, 35))
         self.bt_Salvar.setObjectName("bt_Salvar")
         self.tx_cnpj = QtWidgets.QLineEdit(self.fr_FormFornecedor)
-        self.tx_cnpj.setGeometry(QtCore.QRect(430, 85, 221, 25))
+        self.tx_cnpj.setGeometry(QtCore.QRect(20, 80, 221, 25))
         self.tx_cnpj.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_cnpj.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -341,11 +339,31 @@ class Ui_ct_FormFornecedor(object):
         icon.addPixmap(QtGui.QPixmap("UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_busca_cep.setIcon(icon)
         self.bt_busca_cep.setObjectName("bt_busca_cep")
+        self.bt_busca_cnpj = QtWidgets.QPushButton(self.fr_FormFornecedor)
+        self.bt_busca_cnpj.setGeometry(QtCore.QRect(250, 80, 111, 31))
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_busca_cnpj.setFont(font)
+        self.bt_busca_cnpj.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.bt_busca_cnpj.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.bt_busca_cnpj.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
+        self.bt_busca_cnpj.setStyleSheet("QPushButton {\n"
+"background-color: #7AB32E;\n"
+"color: #FFF\n"
+" }\n"
+"QPushButton:hover{\n"
+"background-color: #40a286\n"
+"}")
+        self.bt_busca_cnpj.setIconSize(QtCore.QSize(75, 35))
+        self.bt_busca_cnpj.setObjectName("bt_busca_cnpj")
 
         self.retranslateUi(ct_FormFornecedor)
         QtCore.QMetaObject.connectSlotsByName(ct_FormFornecedor)
-        ct_FormFornecedor.setTabOrder(self.tx_NomeFantasia, self.tx_cnpj)
-        ct_FormFornecedor.setTabOrder(self.tx_cnpj, self.tx_Telefone)
+        ct_FormFornecedor.setTabOrder(self.tx_cnpj, self.tx_NomeFantasia)
+        ct_FormFornecedor.setTabOrder(self.tx_NomeFantasia, self.tx_Telefone)
         ct_FormFornecedor.setTabOrder(self.tx_Telefone, self.tx_Email)
         ct_FormFornecedor.setTabOrder(self.tx_Email, self.tx_Cep)
         ct_FormFornecedor.setTabOrder(self.tx_Cep, self.bt_busca_cep)
@@ -380,3 +398,4 @@ class Ui_ct_FormFornecedor(object):
         self.lb_FormFornecedor_14.setText(_translate("ct_FormFornecedor", "CIDADE"))
         self.lb_FormFornecedor_15.setText(_translate("ct_FormFornecedor", "ESTADO"))
         self.bt_busca_cep.setAccessibleName(_translate("ct_FormFornecedor", "BUSCA CEP"))
+        self.bt_busca_cnpj.setText(_translate("ct_FormFornecedor", "BUSCAR CNPJ"))

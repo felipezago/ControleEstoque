@@ -18,7 +18,7 @@ class Fornecedor(Endereco):
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         cur.execute(f'SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, forn_numero, '
-                    f'forn_cidade, forn_estado, forn_cep FROM fornecedor FROM fornecedor WHERE forn_id = \'{self.id}\'')
+                    f'forn_cidade, forn_estado, forn_cep FROM fornecedor WHERE forn_id = \'{self.id}\'')
         row = cur.fetchone()
         cur.close()
         conn.close()
@@ -107,9 +107,9 @@ class Fornecedor(Endereco):
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"INSERT INTO fornecedor (forn_fone, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, "
+        cur.execute(f"INSERT INTO fornecedor (forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, "
                     f"forn_numero, forn_cidade, forn_estado, forn_cep) VALUES "
-                    f"(\'{self.nome}\', \'{self.cnpj}\', \'{self.email}\', \'{self.email}\', \'{self.rua}\', "
+                    f"(\'{self.nome}\', \'{self.cnpj}\', \'{self.email}\', \'{self.fone}\', \'{self.rua}\', "
                     f"\'{self.bairro}\', \'{self.numero}\', \'{self.cidade}\', \'{self.estado}\', \'{self.cep}\')")
         conn.commit()
         cur.close()

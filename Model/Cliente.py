@@ -46,21 +46,11 @@ class Cliente(Pessoa):
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM cliente WHERE clie_id = {self.id}')
+        cur.execute(
+            f'SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, clie_rua,'
+            f'clie_bairro, clie_numero, clie_cidade, clie_estado, clie_cep FROM cliente WHERE clie_id = {self.id}'
+        )
         row = cur.fetchone()
-        cur.close()
-        conn.close()
-        return row
-
-    def get_cliente_by_id_tabela(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute(f"SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, clie_rua,"
-                    f"clie_bairro, clie_numero, clie_cidade, clie_estado, clie_cep FROM cliente "
-                    f" WHERE clie_id = {self.id}")
-        row = cur.fetchall()
         cur.close()
         conn.close()
         return row
@@ -81,20 +71,9 @@ class Cliente(Pessoa):
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"SELECT * FROM cliente")
-        lista_clientes = cur.fetchall()
-        cur.close()
-        conn.close()
-        return lista_clientes
-
-    @staticmethod
-    def get_todos_clientes_tabela():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-        cur.execute(f"SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, end_rua, "
-                    f"end_bairro, end_numero, end_cidade, end_estado, end_cep FROM cliente ")
+        cur.execute(
+            f"SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, clie_rua, "
+            f"clie_bairro, clie_numero, clie_cidade, clie_estado, clie_cep FROM cliente ")
         lista_clientes = cur.fetchall()
         cur.close()
         conn.close()
@@ -117,11 +96,13 @@ class Cliente(Pessoa):
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"INSERT INTO cliente (clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_tipo, "
-                    f"clie_rua, clie_bairro, clie_numero, clie_cidade, clie_estado, clie_cep) VALUES "
-                    f"(\'{self.cpf}\', \'{self.nome}\', \'{self.fone}\', \'{self.email}\', \'{self.rg}\', "
-                    f"\'{self.tipo}\', \'{self.rua}\', \'{self.bairro}\', \'{self.numero}\', \'{self.cidade}\', "
-                    f"\'{self.estado}\', \'{self.cep}\')")
+        cur.execute(
+            f"INSERT INTO cliente (clie_cpf_cnpj, clie_nome, clie_fone, clie_celular, clie_email, clie_rg, clie_tipo, "
+            f"clie_rua, clie_bairro, clie_numero, clie_cidade, clie_estado, clie_cep) VALUES "
+            f"(\'{self.cpf}\', \'{self.nome}\', \'{self.fone}\', \'{self.celular}\', \'{self.email}\', \'{self.rg}\', "
+            f"\'{self.tipo}\', \'{self.rua}\', \'{self.bairro}\', \'{self.numero}\', \'{self.cidade}\', "
+            f"\'{self.estado}\', \'{self.cep}\')"
+        )
         conn.commit()
         cur.close()
         conn.close()

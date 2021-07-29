@@ -46,6 +46,7 @@ class ListaClientes(QMainWindow):
         self.ui.bt_salvar.clicked.connect(self.editar)
         self.ui.bt_refresh.clicked.connect(self.dados_tabela)
         self.ui.bt_excluir.clicked.connect(self.excluir)
+        self.ui.bt_novo.clicked.connect(self.novo)
 
         # ação da busca
         self.ui.bt_busca.clicked.connect(self.buscar)
@@ -178,7 +179,7 @@ class ListaClientes(QMainWindow):
         elif self.ui.cb_clientes.currentIndex() == 0:
             if self.ui.tx_busca.text():
                 cli.id = self.ui.tx_busca.text()
-                dados = cli.get_cliente_by_id_tabela()
+                dados = cli.get_cliente_by_id()
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
@@ -229,15 +230,39 @@ class ListaClientes(QMainWindow):
 
         tb = self.ui.tb_clientes
         self.linha_selecionada = tb.currentRow()
-
         self.cliente_selecionado.id = tb.item(tb.currentRow(), 0).text()
         c = self.cliente_selecionado.get_cliente_by_id()
 
         if c is not None:
             self.cliente_selecionado.cpf = c[1]
+            self.cliente_selecionado.nome = c[2]
+            self.cliente_selecionado.fone = c[3]
+            self.cliente_selecionado.email = c[4]
+            self.cliente_selecionado.rg = c[5]
+            self.cliente_selecionado.celular = c[6]
+            self.cliente_selecionado.rua = c[7]
+            self.cliente_selecionado.bairro = c[8]
+            self.cliente_selecionado.numero = c[9]
+            self.cliente_selecionado.cidade = c[10]
+            self.cliente_selecionado.estado = c[11]
+            self.cliente_selecionado.cep = c[12]
 
             # setando os edits
             self.ui.tx_id.setText(self.cliente_selecionado.id)
+            if len(self.cliente_selecionado.cpf) >= 14:
+                self.ui.tx_cpf.setInputMask("##.###.###/####-##")
+                self.ui.tx_rg.setEnabled(False)
+                self.ui.tx_celular.setEnabled(False)
+                self.ui.tx_celular.setInputMask("")
+                self.ui.tx_rg.setInputMask("")
+                self.ui.tx_celular.setText("ISENTO")
+                self.ui.tx_celular.setText("ISENTO")
+            else:
+                self.ui.tx_cpf.setInputMask("###.###.###-##")
+                self.ui.tx_rg.setEnabled(True)
+                self.ui.tx_celular.setEnabled(True)
+                self.ui.tx_celular.setInputMask("(##) #####-####")
+                self.ui.tx_rg.setInputMask("##.###.###-#")
             self.ui.tx_cpf.setText(self.cliente_selecionado.cpf)
             self.ui.tx_nome.setText(self.cliente_selecionado.nome)
             self.ui.tx_fone.setText(self.cliente_selecionado.fone)
@@ -262,13 +287,16 @@ class ListaClientes(QMainWindow):
         self.ui.tb_clientes.setRowCount(0)
         self.ui.bt_refresh.setEnabled(False)
 
-        dados = Cliente.get_todos_clientes_tabela()
+        dados = Cliente.get_todos_clientes()
 
         for i, linha in enumerate(dados):
             self.ui.tb_clientes.insertRow(i)
             for j in range(0, 13):
                 if j == 5:
-                    self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((linha[5]))))
+                    if linha[5] != "ISENTO":
+                        self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((linha[5]))))
+                    else:
+                        self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(linha[5]))
                 elif j == 1:
                     if len(linha[j]) >= 14:
                         self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
@@ -331,8 +359,12 @@ class ListaClientes(QMainWindow):
                             self.ui.tb_clientes.setItem(self.linha_selecionada, i,
                                                         QTableWidgetItem(formatar_cpf(str(itens[i]))))
                     elif i == 5:
-                        self.ui.tb_clientes.setItem(self.linha_selecionada, 5,
+                        if itens[5] != "ISENTO":
+                            self.ui.tb_clientes.setItem(self.linha_selecionada, 5,
                                                     QTableWidgetItem(formatar_rg((itens[5]))))
+                        else:
+                            self.ui.tb_clientes.setItem(self.linha_selecionada, 5,
+                                                        QTableWidgetItem(itens[5]))
                     else:
                         self.ui.tb_clientes.setItem(self.linha_selecionada, i, QTableWidgetItem(itens[i]))
         else:

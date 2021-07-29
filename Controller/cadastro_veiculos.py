@@ -10,8 +10,10 @@ class EventFilter(QtCore.QObject):
     def eventFilter(self, obj, event):
         if event.type() == QtCore.QEvent.ActivationChange:
             if self.parent().isActiveWindow():
-                if obj.ui.cb_cliente.currentIndex() == 0:
+                if obj.adicionando:
+                    obj.adicionando = False
                     obj.preenche_combo()
+                    obj.ui.cb_cliente.setCurrentIndex(obj.indice_cb)
 
         return QtCore.QObject.eventFilter(self, obj, event)
 
@@ -28,6 +30,8 @@ class CadastroVeiculos(QMainWindow):
         self.setFixedSize(562, 283)
 
         self.tela = parent
+        self.indice_cb = 0
+        self.adicionando = False
 
         IconeBotaoMenu(self.ui.bt_add_cliente,
                        resource_path('../Imagens/edit-add.png'))
@@ -49,29 +53,27 @@ class CadastroVeiculos(QMainWindow):
         from Funcoes.funcoes import exec_app
         from Controller.cadastro_clientes import CadastroClientes
 
-        clie = CadastroClientes()
+        clie = CadastroClientes(self)
         exec_app(clie)
         self.dialogs.append(clie)
+
+        self.adicionando = True
+        self.indice_cb = self.ui.cb_cliente.currentIndex()
 
     def fechar(self):
         self.close()
 
     def preenche_combo(self):
         from Model.Cliente import Cliente
-        from Model.Pessoa import Pessoa
 
         self.ui.cb_cliente.clear()
         self.ui.cb_cliente.addItem("SELECIONE")
-        todos_clientes = Cliente.get_todos_clientes()
 
-        pessoa = Pessoa()
+        todos_clientes = Cliente.get_todos_clientes()
 
         for contador, v in enumerate(todos_clientes):
             contador += 1
-            pessoa.id = v[1]
-            nome_pessoa = pessoa.get_pessoa_cliente_by_id()[3]
-            # Descrição da CB
-            self.ui.cb_cliente.addItem(nome_pessoa)
+            self.ui.cb_cliente.addItem(v[2])
             self.ui.cb_cliente.setItemData(contador, v)
 
         if self.tela:
@@ -113,3 +115,10 @@ class CadastroVeiculos(QMainWindow):
             QMessageBox.about(self, "Erro", str(error))
         else:
             QMessageBox.about(self, "Sucesso", "Cadastro efetuado com sucesso!")
+
+        self.limpa_campos()
+
+    def limpa_campos(self):
+        self.ui.tx_marca.setText("")
+        self.ui.tx_placa.setText("")
+        self.ui.tx_modelo.setText("")
