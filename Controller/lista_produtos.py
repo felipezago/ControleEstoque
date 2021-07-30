@@ -25,7 +25,7 @@ class ListaProdutos(QMainWindow):
     def __init__(self, parent=None):
         super(ListaProdutos, self).__init__(parent)
         from View.lista_produtos import Ui_Frame
-        from Funcoes.funcoes import IconeBotaoMenu, resource_path
+        from Funcoes.utils import IconeBotaoMenu, resource_path
         from PyQt5.QtGui import QIntValidator, QDoubleValidator
 
         self.ui = Ui_Frame()
@@ -135,7 +135,7 @@ class ListaProdutos(QMainWindow):
 
     def novo(self):
         from Controller.cadastro_produtos import CadastroProdutos
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando = True
         c = CadastroProdutos()

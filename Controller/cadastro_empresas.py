@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QInputDialog, QMessageBox, QLineEdit
 from psycopg2.extensions import JSON
 from Funcoes.APIs import get_empresa_from_cnpj
-from Funcoes.funcoes import retirar_formatacao
+from Funcoes.utils import retirar_formatacao
 
 
 class CadastroEmpresas(QMainWindow):
@@ -9,7 +9,7 @@ class CadastroEmpresas(QMainWindow):
         super(CadastroEmpresas, self).__init__(parent)
         from View.cadastro_empresa import Ui_ct_empresa
         from PyQt5 import QtCore
-        from Funcoes.funcoes import IconeBotaoMenu, resource_path
+        from Funcoes.utils import IconeBotaoMenu, resource_path
 
         self.ui = Ui_ct_empresa()
         self.ui.setupUi(self)
@@ -79,7 +79,7 @@ class CadastroEmpresas(QMainWindow):
             self.dialog_cnpj()
 
     def dialog_cnpj(self):
-        from Funcoes.funcoes import retirar_formatacao
+        from Funcoes.utils import retirar_formatacao
 
         while True:
             text, ok = QInputDialog().getText(self, "CNPJ Online",
@@ -194,7 +194,7 @@ class CadastroEmpresas(QMainWindow):
 
     def salvar(self):
         from PyQt5.QtWidgets import QMessageBox
-        from Funcoes.funcoes import retirar_formatacao
+        from Funcoes.utils import retirar_formatacao
         from Model.Empresa import Empresa
 
         emp_inserir = Empresa()

@@ -63,7 +63,7 @@ class Finalizar(QMainWindow):
 
     def add_fin(self):
         from Controller.cadastro_finalizadoras import CadastroFinalizadoras
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando_fin = True
         c = CadastroFinalizadoras()
@@ -125,6 +125,7 @@ class Finalizar(QMainWindow):
                     from Model.Vendas_Header import Vendas_Header
                     from Model.Usuario import Usuario
                     from Model.Operador import Operador
+                    from Model.Cliente import Cliente
 
                     self.tela_principal.finalizou = True
 
@@ -133,15 +134,24 @@ class Finalizar(QMainWindow):
 
                     v = Venda_Tmp()
                     v.veiculo = Veiculo()
-                    indice_veic = self.tela_principal.ui.cb_veiculo.currentIndex()
-                    veic_placa = self.tela_principal.ui.cb_veiculo.itemData(indice_veic)[0]
-                    v.veiculo.placa = veic_placa
-                    v.update_cliente()
 
                     header = Vendas_Header()
                     header.veiculo = Veiculo()
+                    header.cliente = Cliente()
                     header.id = Venda_Tmp.get_cod_venda()
-                    header.veiculo.placa = veic_placa
+
+                    indice_veic = self.tela_principal.ui.cb_veiculo.currentIndex()
+                    if indice_veic != 0:
+                        v.veiculo = Veiculo()
+                        veic_placa = self.tela_principal.ui.cb_veiculo.itemData(indice_veic)[0]
+                        v.veiculo.placa = veic_placa
+                        header.veiculo.placa = veic_placa
+
+                    v.cliente = Cliente()
+                    v.cliente.id = self.tela_principal.cliente_selecionado.id
+                    header.cliente.id = self.tela_principal.cliente_selecionado.id
+                    v.update_cliente()
+
                     header.qtd_itens = Venda_Tmp.qtd_itens()
                     header.total_descontos = Venda_Tmp.soma_descontos()
                     header.valor_total = Venda_Tmp.retorna_total()
@@ -155,17 +165,15 @@ class Finalizar(QMainWindow):
                                                  QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
 
                     if reply == QMessageBox.Yes:
-                        from Funcoes.funcoes import print_dialog
-                        from Funcoes.pdf_venda import gerar_pdf
-
-                        veiculo = v.veiculo.get_veic_by_placa()
+                        from Funcoes.utils import print_dialog
+                        from Funcoes.PDF.pdf_venda import gerar_pdf
 
                         usuario_operador = Usuario()
                         usuario_operador.id = Operador.get_operador_atual()[0]
                         usu = usuario_operador.get_usuario_by_id()
-                        cnpj = usu[2]
+                        cnpj = usu[10]
 
-                        gerar_pdf(header.id, cnpj, veiculo[1])
+                        gerar_pdf(header.id, cnpj, v.cliente.id)
                         print_dialog(self, "venda.pdf")
 
                     self.close()

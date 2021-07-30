@@ -1,13 +1,15 @@
 import psycopg2
 from Funcoes.configdb import Banco
 from Model.Veiculo import Veiculo
+from Model.Cliente import Cliente
 
 
 class Venda_Tmp:
-    def __init__(self, cod_interno="", veiculo: Veiculo = "", id_venda="", id_prod_serv="", tipo="", qtd="", valor="", desconto="",
-                 data_hora="", status=""):
+    def __init__(self, cod_interno="", cliente: Cliente = "", veiculo: Veiculo = "", id_venda="", id_prod_serv="",
+                 tipo="", qtd="", valor="", desconto="", data_hora="", status=""):
         self.cod_interno = cod_interno
         self.veiculo = veiculo
+        self.cliente = cliente
         self.id_venda = id_venda
         self.id_prod_serv = id_prod_serv
         self.tipo = tipo
@@ -167,7 +169,13 @@ class Venda_Tmp:
         params = config.get_params()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(f"UPDATE venda_tmp SET venda_veic_placa = \'{self.veiculo.placa}\'")
+
+        if self.veiculo.placa:
+            cur.execute(f"UPDATE venda_tmp SET venda_clie_id = \'{self.cliente.id}\', "
+                        f"venda_veic_placa = \'{self.veiculo.placa}\'")
+        else:
+            cur.execute(f"UPDATE venda_tmp SET venda_clie_id = \'{self.cliente.id}\', "
+                        f"venda_veic_placa = null")
         conn.commit()
         cur.close()
         conn.close()

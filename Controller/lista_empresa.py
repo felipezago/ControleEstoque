@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Empresa import Empresa
 from PyQt5 import QtCore
-from Funcoes.funcoes import formatar_cnpj, retirar_formatacao
+from Funcoes.utils import formatar_cnpj, retirar_formatacao
 from PyQt5.QtGui import QPixmap
 
 
@@ -24,7 +24,7 @@ class ListaEmpresa(QMainWindow):
     def __init__(self, parent=None):
         super(ListaEmpresa, self).__init__(parent)
         from View.lista_empresa import Ui_Frame
-        from Funcoes.funcoes import IconeBotaoMenu, resource_path
+        from Funcoes.utils import IconeBotaoMenu, resource_path
 
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
@@ -189,7 +189,7 @@ class ListaEmpresa(QMainWindow):
 
     def novo(self):
         from Controller.cadastro_empresas import CadastroEmpresas
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando = True
         c = CadastroEmpresas()

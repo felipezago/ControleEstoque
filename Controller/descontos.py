@@ -79,9 +79,9 @@ class Descontos(QMainWindow):
                             for item in dados:
                                 item_venda = Venda_Tmp()
                                 item_venda.cod_interno = item[0]
-                                item_venda.desconto = item[7]
-                                item_venda.valor = item[6]
-                                item_venda.qtd = item[5]
+                                item_venda.desconto = item[8]
+                                item_venda.valor = item[7]
+                                item_venda.qtd = item[6]
                                 total_item = item_venda.valor * item_venda.qtd
 
                                 desconto_total = item_venda.desconto + desconto_itens
@@ -132,9 +132,9 @@ class Descontos(QMainWindow):
                         for item in dados:
                             item_venda = Venda_Tmp()
                             item_venda.cod_interno = item[0]
-                            item_venda.desconto = item[7]
-                            item_venda.valor = item[6]
-                            item_venda.qtd = item[5]
+                            item_venda.desconto = item[8]
+                            item_venda.valor = item[7]
+                            item_venda.qtd = item[6]
                             total_item = item_venda.valor * item_venda.qtd
 
                             desconto_total = item_venda.desconto + desconto_itens
@@ -184,9 +184,9 @@ class Descontos(QMainWindow):
             for item in dados:
                 item_venda = Venda_Tmp()
                 item_venda.cod_interno = item[0]
-                item_venda.desconto = item[7]
-                item_venda.valor = item[6]
-                item_venda.qtd = item[5]
+                item_venda.desconto = item[8]
+                item_venda.valor = item[7]
+                item_venda.qtd = item[6]
                 total_item = item_venda.valor * item_venda.qtd
 
                 if not item_venda.desconto == (total_item - 0.01):
@@ -221,6 +221,7 @@ class Descontos(QMainWindow):
                     self.tela_principal.recebeu_desconto = False
                     self.tela_principal.excluiu_descontos = True
                     self.desconto_total = 0
+                    self.total = Venda_Tmp.retorna_total()
                     self.total_item = 0
                     self.linha_selecionada = None
                 except Exception as error:
@@ -254,24 +255,24 @@ class Descontos(QMainWindow):
 
         if type(dados) == list:
             for i, linha in enumerate(dados):
-                total = int(linha[5]) * float(linha[6])
+                total = int(linha[6]) * float(linha[7])
 
                 self.ui.tb_itens_venda.insertRow(i)
                 self.ui.tb_itens_venda.setItem(i, 0, QTableWidgetItem(str(linha[0])))
-                self.ui.tb_itens_venda.setItem(i, 3, QTableWidgetItem(str(linha[5])))
+                self.ui.tb_itens_venda.setItem(i, 3, QTableWidgetItem(str(linha[6])))
                 self.ui.tb_itens_venda.setItem(i, 4, QTableWidgetItem(f"{total:.2f}"))
-                self.ui.tb_itens_venda.setItem(i, 5, QTableWidgetItem(f"{linha[7]:.2f}"))
+                self.ui.tb_itens_venda.setItem(i, 5, QTableWidgetItem(f"{linha[8]:.2f}"))
 
                 # item
-                if linha[4] == "SERVIÇO":
+                if linha[5] == "SERVIÇO":
                     serv = Servicos()
-                    serv.id = linha[3]
+                    serv.id = linha[4]
                     servico = serv.get_servico_by_id()
                     self.ui.tb_itens_venda.setItem(i, 1, QTableWidgetItem(str(servico[1])))
                     self.ui.tb_itens_venda.setItem(i, 2, QTableWidgetItem(str(servico[2])))
                 else:
                     p = Produtos()
-                    p.id = linha[3]
+                    p.id = linha[4]
                     produto = p.get_produto_by_id()
                     self.ui.tb_itens_venda.setItem(i, 1, QTableWidgetItem(str(produto[5])))
                     self.ui.tb_itens_venda.setItem(i, 2, QTableWidgetItem(str(produto[7])))

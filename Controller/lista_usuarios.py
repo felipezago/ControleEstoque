@@ -4,7 +4,7 @@ from Model.Empresa import Empresa
 from Model.Usuario import Usuario
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore
-from Funcoes.funcoes import formatar_cpf, formatar_rg
+from Funcoes.utils import formatar_cpf, formatar_rg
 
 
 class EventFilter(QtCore.QObject):
@@ -86,7 +86,7 @@ class ListaUsuario(QMainWindow):
 
     def novo(self):
         from Controller.cadastro_usuario import CadastroUsuario
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando = True
         c = CadastroUsuario()
@@ -173,7 +173,7 @@ class ListaUsuario(QMainWindow):
             self.ui.cb_nivel.setCurrentIndex(indice_nivel)
 
     def editar(self):
-        from Funcoes.funcoes import verificar_criptografia
+        from Funcoes.utils import verificar_criptografia
 
         if self.usuario_selecionado.id:
             itens = list()

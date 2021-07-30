@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Fornecedor import Fornecedor
 from PyQt5 import QtCore
-from Funcoes.funcoes import formatar_cnpj, retirar_formatacao
+from Funcoes.utils import formatar_cnpj, retirar_formatacao
 
 
 class EventFilter(QtCore.QObject):
@@ -138,7 +138,7 @@ class ListaFornecedor(QMainWindow):
 
     def novo(self):
         from Controller.cadastro_fornecedor import CadastroFornecedor
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando = True
         c = CadastroFornecedor()

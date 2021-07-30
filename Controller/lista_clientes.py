@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Cliente import Cliente
 from PyQt5 import QtCore
-from Funcoes.funcoes import formatar_cpf, formatar_rg, formatar_cnpj
+from Funcoes.utils import formatar_cpf, formatar_rg, formatar_cnpj
 
 
 class EventFilter(QtCore.QObject):
@@ -135,7 +135,7 @@ class ListaClientes(QMainWindow):
 
     def novo(self):
         from Controller.cadastro_clientes import CadastroClientes
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando = True
         c = CadastroClientes()
@@ -156,7 +156,7 @@ class ListaClientes(QMainWindow):
         self.ui.cb_clientes.clear()
         self.ui.cb_clientes.addItem("ID")
         self.ui.cb_clientes.addItem("NOME")
-        self.ui.cb_clientes.addItem("CPF")
+        self.ui.cb_clientes.addItem("CPF/CNPJ")
         self.ui.cb_clientes.addItem("RG")
 
     def sair(self):
@@ -310,7 +310,7 @@ class ListaClientes(QMainWindow):
             self.adicionando = False
 
     def editar(self):
-        from Funcoes.funcoes import retirar_formatacao
+        from Funcoes.utils import retirar_formatacao
 
         if self.cliente_selecionado.id:
             itens = list()

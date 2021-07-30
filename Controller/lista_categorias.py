@@ -67,7 +67,7 @@ class ListaCategorias(QMainWindow):
 
     def nova_categoria(self):
         from Controller.cadastro_categoria import CadastroCategoria
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando_categoria = True
         c = CadastroCategoria()

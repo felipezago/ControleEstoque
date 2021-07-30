@@ -153,5 +153,16 @@ def remove_pdf(desc):
         os.remove(dir_img)
 
 
+def except_hook(type, value, tb):
+    from Model.Venda_Tmp import Venda_Tmp
+    from PyQt5.QtWidgets import qApp
+    from Controller.tela_principal import TelaPrincipal
+
+    print(type, value, tb)
+    Venda_Tmp.delete_venda()
+    TelaPrincipal.kill_thread = True
+    qApp.quit()
+
+
 if __name__ == '__main__':
     print(formatar_rg("139941357"))

@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut, QLabel
 from PyQt5 import QtCore
 from Model.Operador import Operador
-from Funcoes.funcoes import exec_app
+from Funcoes.utils import exec_app
 import sys
 
 app = QApplication(sys.argv)
@@ -20,7 +20,7 @@ class TelaPrincipal(QMainWindow):
 
     def __init__(self, parent=None):
         super(TelaPrincipal, self).__init__(parent)
-        from Funcoes.funcoes import resource_path, retorna_ip
+        from Funcoes.utils import resource_path, retorna_ip
         from Funcoes.configdb import Banco
         from View.tela_principal import Ui_MainWindow
         from Model.Pessoa import Pessoa

@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QMessageBox, QInputDialog, QLineEdit
 from psycopg2.extensions import JSON
 
 from Funcoes.APIs import get_empresa_from_cnpj
-from Funcoes.funcoes import retirar_formatacao
+from Funcoes.utils import retirar_formatacao
 from Model.Fornecedor import Fornecedor
 
 
@@ -79,7 +79,7 @@ class CadastroFornecedor(QMainWindow):
             self.dialog_cnpj()
 
     def dialog_cnpj(self):
-        from Funcoes.funcoes import retirar_formatacao
+        from Funcoes.utils import retirar_formatacao
 
         while True:
             text, ok = QInputDialog().getText(self, "CNPJ Online",
@@ -168,7 +168,7 @@ class CadastroFornecedor(QMainWindow):
 
     def salvar(self):
         from PyQt5.QtWidgets import QMessageBox
-        from Funcoes.funcoes import retirar_formatacao
+        from Funcoes.utils import retirar_formatacao
 
         forn_inserir = Fornecedor()
 

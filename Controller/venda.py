@@ -1,10 +1,8 @@
-from site import venv
-
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from Model.Venda_Tmp import Venda_Tmp
 from PyQt5 import QtGui
-from Funcoes.funcoes import exec_app
+from Funcoes.utils import exec_app
 from Model.Cliente import Cliente
 from Model.Pessoa import Pessoa
 from Model.Servicos import Servicos
@@ -234,19 +232,22 @@ class VendaTemp(QMainWindow):
             else:
                 event.ignore()
 
-    def finalizar(self):
-        pass
-
     def deixar_aberto(self):
-        pass
+        from Model.Vendas_Header import Vendas_Header
+        from Model.Veiculo import Veiculo
+
+        header = Vendas_Header()
+
+        if self.ui.cb_veiculo.currentIndex() != 0:
+            header.veiculo = Veiculo()
+            indice_veic = self.tela_principal.ui.cb_veiculo.currentIndex()
+            header.veiculo.placa = self.ui.cb_veiculo.itemData(indice_veic)[0]
 
     def valida_campos(self):
         if not self.ui.tx_busca_cliente.text() and not self.ui.tx_nome_cliente.text():
             self.ui.tx_busca_cliente.setFocus()
         elif not self.ui.tx_busca_item.text() and not self.ui.tx_descricao_prod.text():
             self.ui.tx_busca_item.setFocus()
-        elif self.ui.cb_veiculo.currentIndex() == 0:
-            self.ui.cb_veiculo.setFocus()
         else:
             self.inserir()
 
@@ -309,25 +310,25 @@ class VendaTemp(QMainWindow):
         dados = Venda_Tmp.get_venda_atual()
 
         for i, linha in enumerate(dados):
-            total = int(linha[5]) * float(linha[6])
+            total = int(linha[6]) * float(linha[7])
 
             self.ui.tb_venda.insertRow(i)
             self.ui.tb_venda.setItem(i, 0, QTableWidgetItem(str(linha[0])))
-            self.ui.tb_venda.setItem(i, 3, QTableWidgetItem(str(linha[5])))
+            self.ui.tb_venda.setItem(i, 3, QTableWidgetItem(str(linha[6])))
             self.ui.tb_venda.setItem(i, 4, QTableWidgetItem(f"{total:.2f}"))
-            self.ui.tb_venda.setItem(i, 5, QTableWidgetItem(f"{linha[7]:.2f}"))
-            self.ui.tb_venda.setItem(i, 6, QTableWidgetItem(str(linha[4])))
+            self.ui.tb_venda.setItem(i, 5, QTableWidgetItem(f"{linha[8]:.2f}"))
+            self.ui.tb_venda.setItem(i, 6, QTableWidgetItem(str(linha[5])))
 
             # item
-            if linha[4] == "SERVIÇO":
+            if linha[5] == "SERVIÇO":
                 serv = Servicos()
-                serv.id = linha[3]
+                serv.id = linha[4]
                 servico = serv.get_servico_by_id()
                 self.ui.tb_venda.setItem(i, 1, QTableWidgetItem(str(servico[1])))
                 self.ui.tb_venda.setItem(i, 2, QTableWidgetItem(str(servico[2])))
             else:
                 p = Produtos()
-                p.id = linha[3]
+                p.id = linha[4]
                 produto = p.get_produto_by_id()
                 self.ui.tb_venda.setItem(i, 1, QTableWidgetItem(str(produto[5])))
                 self.ui.tb_venda.setItem(i, 2, QTableWidgetItem(str(produto[7])))
@@ -348,31 +349,19 @@ class VendaTemp(QMainWindow):
             cli = Cliente()
             cli.id = int(self.ui.tx_busca_cliente.text())
             cliente = cli.get_cliente_by_id()
-            cli.pessoa = Pessoa()
 
             try:
                 self.cliente_selecionado.id = cliente[0]
-                self.cliente_selecionado.pessoa.id = cliente[1]
+                self.cliente_selecionado.nome = cliente[2]
             except TypeError:
                 QMessageBox.warning(self, "Erro!", "Cliente não encontrado.")
                 self.limpar_selecao_cliente()
                 return
             else:
-                cli.pessoa.id = self.cliente_selecionado.pessoa.id
-                selec = cli.pessoa.get_pessoa_cliente_by_id()
-
-                try:
-                    self.cliente_selecionado.pessoa.id = selec[0]
-                    self.cliente_selecionado.pessoa.nome = selec[3]
-                except TypeError:
-                    QMessageBox.warning(self, "Erro!", "Cliente não encontrado.")
-                    self.limpar_selecao_cliente()
-                    return
-                else:
-                    self.ui.tx_nome_cliente.setText(self.cliente_selecionado.pessoa.nome)
-                    self.preenche_combo_veiculos()
-                    self.ui.cb_veiculo.showPopup()
-                    self.ui.bt_add_veiculo.setEnabled(True)
+                self.ui.tx_nome_cliente.setText(self.cliente_selecionado.nome)
+                self.preenche_combo_veiculos()
+                self.ui.cb_veiculo.showPopup()
+                self.ui.bt_add_veiculo.setEnabled(True)
         else:
             QMessageBox.warning(self, "Erro!", "Favor informar um código.")
             self.limpar_selecao_cliente()
@@ -459,18 +448,18 @@ class VendaTemp(QMainWindow):
         v.cliente = Cliente()
         v.cliente.id = self.cliente_selecionado.id
 
-        todos_veiculos = v.get_veic_by_pessoa()
+        todos_veiculos = v.get_veic_by_cliente("=")
 
         for contador, veic in enumerate(todos_veiculos):
             contador += 1
-            self.ui.cb_veiculo.addItem(f"{veic[2]} - {veic[3]}")
+            self.ui.cb_veiculo.addItem(f"{veic[1]} - {veic[2]}")
             self.ui.cb_veiculo.setItemData(contador, veic)
 
         self.ui.cb_veiculo.setFocus()
 
     def limpar_selecao_cliente(self):
         self.cliente_selecionado.id = None
-        self.cliente_selecionado.pessoa.nome = ""
+        self.cliente_selecionado.nome = ""
         self.ui.bt_add_veiculo.setEnabled(False)
         self.ui.tx_nome_cliente.setText("")
         self.ui.tx_busca_cliente.setText("")
@@ -570,7 +559,7 @@ class VendaTemp(QMainWindow):
         self.ui.bt_alterar_cliente.setHidden(True)
 
         self.ui.tb_venda.clearContents()
-        self.ui.tb_venda.removeRow(0)
+        self.ui.tb_venda.setRowCount(0)
         self.ui.tx_busca_cliente.setFocus()
 
         self.recebeu_pagamento = False

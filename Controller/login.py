@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication
-from Funcoes.funcoes import centralizar
+from Funcoes.utils import centralizar
 
 
 class Login(QMainWindow):
@@ -7,7 +7,7 @@ class Login(QMainWindow):
         super(Login, self).__init__(parent)
         from View import login
         from Model.Usuario import Usuario
-        from Funcoes.funcoes import resource_path
+        from Funcoes.utils import resource_path
         from PyQt5 import QtGui
         from PyQt5.QtCore import Qt
 
@@ -45,7 +45,7 @@ class Login(QMainWindow):
     def validar_login(self):
         from Funcoes.configdb import Banco
         import psycopg2
-        from Funcoes.funcoes import verificar_criptografia, exec_app
+        from Funcoes.utils import verificar_criptografia, exec_app
         from Model.Operador import Operador
 
         self.usuarios = self.ui.tx_user.text().lower()
@@ -91,7 +91,7 @@ class Login(QMainWindow):
                 print('Database connection closed.')
 
     def cadastrar(self):
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
         from Controller.cadastro_usuario import CadastroUsuario
 
         cadastro = CadastroUsuario()

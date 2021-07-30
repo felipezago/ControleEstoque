@@ -88,7 +88,7 @@ class ListaUsuario(QMainWindow):
             self.ui.tx_login.setText(self.usuario_selecionado.nome)
 
     def editar(self):
-        from Funcoes.funcoes import verificar_criptografia
+        from Funcoes.utils import verificar_criptografia
 
         if self.usuario_selecionado.id:
             itens = list()

@@ -3,7 +3,7 @@ from PyQt5.QtCore import Qt
 from Model.Cliente import Cliente
 from PyQt5 import QtGui
 from Model.Pessoa import Pessoa
-from Funcoes.funcoes import formatar_cpf, formatar_rg, formatar_cnpj
+from Funcoes.utils import formatar_cpf, formatar_rg, formatar_cnpj
 from PyQt5 import QtCore
 
 
@@ -73,7 +73,7 @@ class PesquisaClientes(QMainWindow):
 
     def add(self):
         from Controller.cadastro_clientes import CadastroClientes
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando = True
         c_cli = CadastroClientes()
@@ -97,7 +97,7 @@ class PesquisaClientes(QMainWindow):
         self.ui.cb_clientes.clear()
         self.ui.cb_clientes.addItem("ID")
         self.ui.cb_clientes.addItem("NOME")
-        self.ui.cb_clientes.addItem("CPF")
+        self.ui.cb_clientes.addItem("CPF/CNPJ")
         self.ui.cb_clientes.addItem("RG")
 
     def sair(self):
@@ -169,18 +169,37 @@ class PesquisaClientes(QMainWindow):
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
-            for i, linha in enumerate(dados):
-                self.ui.tb_clientes.insertRow(i)
+            if isinstance(dados, list):
+                for i, linha in enumerate(dados):
+                    self.ui.tb_clientes.insertRow(i)
+                    for j in range(0, 13):
+                        if j == 1:
+                            if len(linha[j]) >= 14:
+                                self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
+                            else:
+                                self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
+                        elif j == 5:
+                            if linha[j] != "ISENTO":
+                                self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_rg(str(linha[j]))))
+                            else:
+                                self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
+                        else:
+                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
+            else:
+                self.ui.tb_clientes.insertRow(0)
                 for j in range(0, 13):
                     if j == 1:
-                        if len(linha[j]) >= 14:
-                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
+                        if len(dados[j]) >= 14:
+                            self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_cnpj(str(dados[j]))))
                         else:
-                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
+                            self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_cpf(str(dados[j]))))
                     elif j == 5:
-                        self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_rg(str(linha[j]))))
+                        if dados[j] != "ISENTO":
+                            self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_rg(str(dados[j]))))
+                        else:
+                            self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(str(dados[j])))
                     else:
-                        self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
+                        self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(str(dados[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")

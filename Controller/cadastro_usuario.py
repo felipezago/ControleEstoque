@@ -46,7 +46,7 @@ class CadastroUsuario(QMainWindow):
 
     def add_emp(self):
         from Controller.cadastro_empresas import CadastroEmpresas
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         c_emp = CadastroEmpresas()
         exec_app(c_emp)

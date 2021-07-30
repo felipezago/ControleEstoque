@@ -66,7 +66,7 @@ class PesquisaServico(QMainWindow):
 
     def add(self):
         from Controller.cadastro_servicos import CadastroServicos
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando = True
         c_serv = CadastroServicos()

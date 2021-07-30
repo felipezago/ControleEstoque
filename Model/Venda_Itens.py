@@ -57,12 +57,14 @@ class Vendas:
             WHEN venda_tipo = 'PRODUTO' THEN prod_desc
             WHEN venda_tipo = 'SERVIÇO' THEN serv_desc 
             END, 
-            venda_qtd, CONCAT('R$ ', venda_valor) , CONCAT('R$ ', (venda_qtd * venda_valor::numeric)), 
-            CONCAT('R$ ', (venda_desconto)::numeric),
-            CONCAT('R$ ', (venda_valor * venda_qtd - venda_desconto)::numeric) AS total
+            venda_qtd, 
+            CONCAT('R$ ', ROUND(venda_valor::numeric, 2)), 
+            CONCAT('R$ ', ROUND((venda_qtd * venda_valor)::numeric, 2)), 
+            CONCAT('R$ ', ROUND((venda_desconto)::numeric, 2)),
+            CONCAT('R$ ', ROUND((venda_valor * venda_qtd - venda_desconto)::numeric, 2))
             FROM vendas_itens
-            INNER JOIN produtos ON venda_prod_serv_id = prod_id
-            LEFT JOIN servicos ON venda_prod_serv_id = serv_id
+            FULL JOIN produtos ON venda_prod_serv_id = prod_id
+            FULL JOIN servicos ON venda_prod_serv_id = serv_id
             WHERE venda_id = {self.id_venda}
             """)
         select = cur.fetchall()

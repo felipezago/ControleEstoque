@@ -58,7 +58,7 @@ class ConexaoTeste(object):
         self.sucesso = False
 
     def conectar(self):
-        from Funcoes.funcoes import show_msg
+        from Funcoes.utils import show_msg
 
         conn = None
         try:

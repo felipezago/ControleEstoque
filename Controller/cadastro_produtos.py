@@ -28,7 +28,7 @@ class CadastroProdutos(QMainWindow):
     def __init__(self, parent=None):
         super(CadastroProdutos, self).__init__(parent)
         from View.cadastro_produtos import Ui_ct_FormProdutos
-        from Funcoes.funcoes import IconeBotaoMenu, resource_path
+        from Funcoes.utils import IconeBotaoMenu, resource_path
         from PyQt5.QtGui import QIntValidator, QDoubleValidator
         from Model.Produtos import Produtos
 
@@ -97,7 +97,7 @@ class CadastroProdutos(QMainWindow):
 
     def add_forn(self):
         from Controller.cadastro_fornecedor import CadastroFornecedor
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         cad_forn = CadastroFornecedor()
         exec_app(cad_forn)
@@ -107,7 +107,7 @@ class CadastroProdutos(QMainWindow):
 
     def add_categoria(self):
         from Controller.cadastro_categoria import CadastroCategoria
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         cad_cat = CadastroCategoria()
         exec_app(cad_cat)

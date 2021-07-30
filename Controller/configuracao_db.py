@@ -93,7 +93,7 @@ class DBConfig(QMainWindow):
                     pass
             else:
                 from Controller.login import Login
-                from Funcoes.funcoes import exec_app
+                from Funcoes.utils import exec_app
 
                 login = Login()
                 exec_app(login)
@@ -103,7 +103,7 @@ class DBConfig(QMainWindow):
     def testar(self):
         from PyQt5.QtGui import QPixmap
         from Funcoes.configdb import ConexaoTeste
-        from Funcoes.funcoes import resource_path
+        from Funcoes.utils import resource_path
 
         conecta = ConexaoTeste()
 
@@ -144,7 +144,7 @@ class DBConfig(QMainWindow):
 
 
 def exec_conf_db():
-    from Funcoes.funcoes import centralizar
+    from Funcoes.utils import centralizar
     app = QApplication(sys.argv)
     form = DBConfig()
     form.show()

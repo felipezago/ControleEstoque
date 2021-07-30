@@ -77,7 +77,7 @@ class ListaVeiculos(QMainWindow):
 
     def novo(self):
         from Controller.cadastro_veiculos import CadastroVeiculos
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando = True
         c = CadastroVeiculos()

@@ -154,10 +154,7 @@ def create_tables():
                venda_datahora TIMESTAMP,
                FOREIGN KEY (venda_clie_id)
                     REFERENCES cliente (clie_id)
-                        ON UPDATE CASCADE ON DELETE CASCADE,
-                FOREIGN KEY (venda_veic_placa)
-                    REFERENCES veiculo (veic_placa)
-                        ON UPDATE CASCADE ON DELETE CASCADE 
+                        ON UPDATE CASCADE ON DELETE CASCADE
            )
            """,
             "criar_venda": """
@@ -200,10 +197,7 @@ def create_tables():
                            venda_status VARCHAR(50),
                            FOREIGN KEY (venda_clie_id)
                                REFERENCES cliente (clie_id)
-                               ON UPDATE CASCADE ON DELETE CASCADE,
-                           FOREIGN KEY (venda_veic_placa)
-                               REFERENCES veiculo (veic_placa)
-                               ON UPDATE CASCADE ON DELETE CASCADE 
+                               ON UPDATE CASCADE ON DELETE CASCADE
                        )
                        """,
             "criar_function_prod": """
@@ -238,7 +232,7 @@ def create_tables():
         conn = psycopg2.connect(**params)
     except Exception as e:
         print(e.__class__)
-        from Funcoes.funcoes import show_msg
+        from Funcoes.utils import show_msg
         show_msg("erro", "Erro", "Erro no banco de dados")
         return False
     else:

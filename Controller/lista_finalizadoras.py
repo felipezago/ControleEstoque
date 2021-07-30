@@ -68,7 +68,7 @@ class ListaFinalizadoras(QMainWindow):
 
     def nova_fin(self):
         from Controller.cadastro_finalizadoras import CadastroFinalizadoras
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando_fin = True
         c = CadastroFinalizadoras()

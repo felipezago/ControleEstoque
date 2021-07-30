@@ -993,51 +993,6 @@ background-color: #40a286
       <normaloff>../../Imagens/search.png</normaloff>../../Imagens/search.png</iconset>
     </property>
    </widget>
-   <widget class="QPushButton" name="bt_busca_cnpj">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>70</y>
-      <width>120</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Tahoma</family>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
-    </property>
-    <property name="contextMenuPolicy">
-     <enum>Qt::ActionsContextMenu</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-background-color: #7AB32E;
-color: #FFF
- }
-QPushButton:hover{
-background-color: #40a286
-}</string>
-    </property>
-    <property name="text">
-     <string>BUSCAR CNPJ</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>75</width>
-      <height>35</height>
-     </size>
-    </property>
-   </widget>
    <zorder>lb_LogoEmpresa</zorder>
    <zorder>bt_DelLogo</zorder>
    <zorder>lb_FormFornecedor_21</zorder>
@@ -1072,7 +1027,6 @@ background-color: #40a286
    <zorder>tx_NomeFantasia</zorder>
    <zorder>bt_AddLogo</zorder>
    <zorder>bt_busca_cep</zorder>
-   <zorder>bt_busca_cnpj</zorder>
   </widget>
  </widget>
  <tabstops>

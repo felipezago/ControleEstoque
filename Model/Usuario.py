@@ -1,6 +1,6 @@
 import psycopg2
 from Funcoes.configdb import Banco
-from Funcoes.funcoes import show_msg
+from Funcoes.utils import show_msg
 from Model.Pessoa import Pessoa
 from Model.Empresa import Empresa
 
@@ -69,7 +69,7 @@ class Usuario(Pessoa):
                 conn.close()
 
     def editar(self):
-        from Funcoes.funcoes import criptografar_senha
+        from Funcoes.utils import criptografar_senha
 
         config = Banco()
         params = config.get_params()
@@ -107,7 +107,7 @@ class Usuario(Pessoa):
         return senha
 
     def inserir(self):
-        from Funcoes.funcoes import criptografar_senha, retirar_formatacao
+        from Funcoes.utils import criptografar_senha, retirar_formatacao
 
         config = Banco()
         params = config.get_params()

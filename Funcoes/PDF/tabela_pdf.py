@@ -1,4 +1,5 @@
 from fpdf import FPDF
+from Funcoes.utils import retirar_formatacao
 
 
 class PDF(FPDF):
@@ -47,7 +48,6 @@ class PDF(FPDF):
 
     def imagex(self):
         from Model.Empresa import Empresa
-        from Funcoes.funcoes import retirar_formatacao
         import os
 
         self.set_xy(5, 5)
@@ -74,7 +74,11 @@ class PDF(FPDF):
         self.set_font('helvetica', 'I', 10)
         self.text(5, 55, f"Nome: {self.cliente[0]}")
         self.text(5, 60, f"CPF: {self.cliente[1]}")
-        self.text(5, 65, f"RG: {self.cliente[2]}")
+
+        if self.cliente[2] != 'IS.ENT.O-':
+            self.text(5, 65, f"RG: {self.cliente[2]}")
+        else:
+            self.text(5, 65, f"RG: {retirar_formatacao(self.cliente[2])}")
         self.text(5, 70, f"Celular: {self.cliente[3]}")
 
         self.text(80, 55, f"Fone: {self.cliente[4]}")

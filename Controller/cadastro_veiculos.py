@@ -22,7 +22,7 @@ class CadastroVeiculos(QMainWindow):
     def __init__(self, parent=None):
         super(CadastroVeiculos, self).__init__(parent)
         from View.cadastro_veiculo import Ui_ct_FormVeiculos
-        from Funcoes.funcoes import IconeBotaoMenu, resource_path
+        from Funcoes.utils import IconeBotaoMenu, resource_path
 
         self.ui = Ui_ct_FormVeiculos()
         self.ui.setupUi(self)
@@ -50,7 +50,7 @@ class CadastroVeiculos(QMainWindow):
         self.preenche_combo()
 
     def cadastro_cliente(self):
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
         from Controller.cadastro_clientes import CadastroClientes
 
         clie = CadastroClientes(self)
@@ -96,7 +96,7 @@ class CadastroVeiculos(QMainWindow):
         from Model.Veiculo import Veiculo
         from Model.Pessoa import Pessoa
         from PyQt5.QtWidgets import QMessageBox
-        from Funcoes.funcoes import retirar_formatacao
+        from Funcoes.utils import retirar_formatacao
         v = Veiculo()
         v.cliente = Pessoa()
 

@@ -71,7 +71,7 @@ class ListaServicos (QMainWindow):
 
     def novo_servico(self):
         from Controller.cadastro_servicos import CadastroServicos
-        from Funcoes.funcoes import exec_app
+        from Funcoes.utils import exec_app
 
         self.adicionando_serv = True
         c = CadastroServicos()
