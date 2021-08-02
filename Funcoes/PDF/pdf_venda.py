@@ -55,19 +55,22 @@ def gerar_pdf(venda_id, emp_cnpj, clie_id):
     pdf_venda.cell(center=True, txt=f"Valor Líquido:  R$    {header_venda[0]}", border=0)
     pdf_venda.ln(5)
 
-    pdf_venda.cell(center=False, txt="Finalização", border=0)
-    pdf_venda.ln(5)
-    pdf_venda.create_table(table_data=fins, cell_width='uneven', x_start=10)
-    pdf_venda.set_font('helvetica', 'B', 10)
-    pdf_venda.ln(5)
-    pdf_venda.cell(center=False, txt=f"Valor Pago:     R$ {v_fin.valor_pago():.2f}", border=0)
-    pdf_venda.ln(5)
+    if v_fin.valor_pago() > 0:
 
-    restante = header_venda[0] - v_fin.valor_pago()
-    if restante > 0:
-        pdf_venda.cell(center=False, txt=f"Restante:        R$ {restante:.2f}", border=0)
-    else:
-        pdf_venda.cell(center=False, txt=f"Troco:        R$ {restante*-1:.2f}", border=0)
+        pdf_venda.cell(center=False, txt="Finalização", border=0)
+        pdf_venda.ln(5)
+        pdf_venda.create_table(table_data=fins, cell_width='uneven', x_start=10)
+        pdf_venda.set_font('helvetica', 'B', 10)
+        pdf_venda.ln(5)
+        pdf_venda.cell(center=False, txt=f"Valor Pago:     R$ {v_fin.valor_pago():.2f}", border=0)
+        pdf_venda.ln(5)
+
+        restante = header_venda[0] - v_fin.valor_pago()
+        if restante > 0:
+            pdf_venda.cell(center=False, txt=f"Restante:        R$ {restante:.2f}", border=0)
+        else:
+            pdf_venda.cell(center=False, txt=f"Troco:        R$ {restante*-1:.2f}", border=0)
+
     pdf_venda.set_auto_page_break(auto=True, margin=15)
     pdf_venda.alias_nb_pages()
     pdf_venda.output("PDF/venda.pdf")

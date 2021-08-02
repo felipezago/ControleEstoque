@@ -1,3 +1,4 @@
+from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMainWindow, QInputDialog, QMessageBox, QLineEdit
 from psycopg2.extensions import JSON
 from Funcoes.APIs import get_empresa_from_cnpj
@@ -45,6 +46,8 @@ class CadastroEmpresas(QMainWindow):
         self.ui.tx_CepEmpresa.textChanged.connect(self.enable_cidade_estado)
         self.ui.bt_busca_cep.clicked.connect(self.busca_cep)
         self.ui.bt_busca_cnpj.clicked.connect(self.busca_cnpj)
+
+        QTimer.singleShot(1, self.dialog_cnpj)
 
     def preenche_campos_cnpj(self, dados: JSON):
         self.ui.tx_Cnpj.setText(retirar_formatacao(dados['cnpj']))

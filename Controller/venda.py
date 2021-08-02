@@ -1,5 +1,9 @@
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
+
+from Model.Usuario import Usuario
+from Model.Veiculo import Veiculo
+from Model.Venda_Itens import Vendas
 from Model.Venda_Tmp import Venda_Tmp
 from PyQt5 import QtGui
 from Funcoes.utils import exec_app
@@ -8,6 +12,7 @@ from Model.Pessoa import Pessoa
 from Model.Servicos import Servicos
 from Model.Produtos import Produtos
 from Model.Venda_Fin import Venda_Fin
+from Model.Vendas_Header import Vendas_Header
 
 
 class EventFilter(QtCore.QObject):
@@ -37,11 +42,12 @@ class EventFilter(QtCore.QObject):
 
 
 class VendaTemp(QMainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, cod_venda=""):
         super(VendaTemp, self).__init__(parent)
         from View.venda import Ui_Frame
         from PyQt5.QtGui import QIntValidator
         from PyQt5.QtCore import Qt
+        from Model.Venda_Itens import Vendas
 
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
@@ -128,6 +134,37 @@ class VendaTemp(QMainWindow):
         self.ui.bt_descontos.setEnabled(False)
 
         self.preenche_combo_selecao()
+
+        if cod_venda:
+            self.codigo_venda = cod_venda
+            self.vendas_itens = Vendas()
+            vendas_header = Vendas_Header()
+            self.venda_tmp = Venda_Tmp()
+
+            self.venda_tmp.id_venda = cod_venda
+            self.vendas_itens.id_venda = cod_venda
+            vendas_header.id = cod_venda
+            self.venda_fin.venda_id = cod_venda
+
+            self.venda_tmp.inserir_from_itens()
+            header = vendas_header.get_vendas_by_id()
+            self.ui.tx_busca_cliente.setText(str(header[1]))
+            self.buscar_cliente()
+
+            vendas_header.veiculo = Veiculo()
+            vendas_header.veiculo.placa = header[2]
+            veic = vendas_header.veiculo.get_veic_by_placa()
+
+            if header[2]:
+                idx = self.ui.cb_veiculo.findText(veic[1] + " - " + veic[2])
+                self.ui.cb_veiculo.setCurrentIndex(idx)
+                self.ui.tx_busca_cliente.setEnabled(False)
+                self.ui.tx_nome_cliente.setEnabled(False)
+                self.ui.cb_veiculo.setEnabled(False)
+                self.ui.bt_add_veiculo.setEnabled(False)
+                self.ui.bt_alterar_cliente.setVisible(True)
+
+            self.atualiza_tabela()
 
     def resizeEvent(self, a0: QtGui.QResizeEvent):
         self.setFixedSize(self.size())
@@ -233,15 +270,69 @@ class VendaTemp(QMainWindow):
                 event.ignore()
 
     def deixar_aberto(self):
-        from Model.Vendas_Header import Vendas_Header
-        from Model.Veiculo import Veiculo
+        if Venda_Tmp.check_registros():
+            from Model.Vendas_Header import Vendas_Header
+            from Model.Veiculo import Veiculo
+            from Model.Pendencias import Pendencias
+            from Funcoes.utils import data_hora_atual
 
-        header = Vendas_Header()
+            fin = Venda_Fin()
+            fin.venda_id = Venda_Tmp.get_cod_venda()
 
-        if self.ui.cb_veiculo.currentIndex() != 0:
+            header = Vendas_Header()
+            header.cliente = Cliente()
             header.veiculo = Veiculo()
-            indice_veic = self.tela_principal.ui.cb_veiculo.currentIndex()
-            header.veiculo.placa = self.ui.cb_veiculo.itemData(indice_veic)[0]
+            header.cliente.id = self.cliente_selecionado.id
+            header.id = Venda_Tmp.get_cod_venda()
+            header.status = "PENDENTE"
+            header.qtd_itens = Venda_Tmp.qtd_itens()
+            header.total_descontos = Venda_Tmp.soma_descontos()
+            header.valor_total = Venda_Tmp.retorna_total()
+
+            pend = Pendencias()
+            pend.venda = header
+            pend.veiculo = header.veiculo
+            pend.cliente = self.cliente_selecionado
+            pend.datahora = data_hora_atual()
+            pend.valor = header.valor_total - fin.valor_pago()
+
+            if self.ui.cb_veiculo.currentIndex() != 0:
+                indice_veic = self.ui.cb_veiculo.currentIndex()
+                header.veiculo.placa = self.ui.cb_veiculo.itemData(indice_veic)[0]
+                pend.veiculo = header.veiculo
+
+            if self.codigo_venda:
+                header.update()
+                pend.update()
+                v = Vendas()
+                v.id_venda = self.codigo_venda
+                v.delete_venda_by_id()
+                v.inserir_venda()
+            else:
+                header.inserir()
+                pend.inserir()
+                Vendas.inserir_venda()
+
+            reply = QMessageBox.question(self, 'Imprimir?', f'Deseja imprimir o relatório da venda?',
+                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+
+            if reply == QMessageBox.Yes:
+                from Funcoes.utils import print_dialog
+                from Funcoes.PDF.pdf_venda import gerar_pdf
+                from Model.Operador import Operador
+
+                usuario_operador = Usuario()
+                usuario_operador.id = Operador.get_operador_atual()[0]
+                usu = usuario_operador.get_usuario_by_id()
+                cnpj = usu[10]
+
+                gerar_pdf(header.id, cnpj, self.cliente_selecionado.id)
+                print_dialog(self, "venda.pdf")
+
+            Venda_Tmp.delete_venda()
+            self.limpa_tela()
+        else:
+            QMessageBox.warning(self, "Aviso!", "Não é possível finalizar sem nenhum item registrado.")
 
     def valida_campos(self):
         if not self.ui.tx_busca_cliente.text() and not self.ui.tx_nome_cliente.text():
@@ -281,16 +372,14 @@ class VendaTemp(QMainWindow):
                 self.atualiza_tabela()
                 return
 
-        from datetime import datetime
+        from Funcoes.utils import data_hora_atual
 
-        data_e_hora_atuais = datetime.now()
-        data_e_hora_em_texto = data_e_hora_atuais.strftime('%d/%m/%Y %H:%M:%S')
         status = "EM ANDAMENTO"
 
         venda.id_prod_serv = self.item_selecionado.id
         venda.valor = float(self.ui.tx_valor.text())
         venda.desconto = 0
-        venda.data_hora = data_e_hora_em_texto
+        venda.data_hora = data_hora_atual()
         venda.tipo = tipo
         venda.qtd = qtd
         venda.status = status

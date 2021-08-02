@@ -1,17 +1,10 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut, QLabel
-from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut, QLabel, QInputDialog, QLineEdit, QMessageBox, \
+    QPushButton
 from Model.Operador import Operador
 from Funcoes.utils import exec_app
 import sys
 
 app = QApplication(sys.argv)
-
-
-class Label(QLabel):
-    clicked = QtCore.pyqtSignal()
-
-    def mousePressEvent(self, event):
-        self.clicked.emit()
 
 
 class TelaPrincipal(QMainWindow):
@@ -45,6 +38,16 @@ class TelaPrincipal(QMainWindow):
         self.ui.lbl_atalho_venda_txt.clicked.connect(self.nova_venda)
         self.atalho_venda = QShortcut(QtGui.QKeySequence("F5"), self)
         self.atalho_venda.activated.connect(self.nova_venda)
+
+        self.ui.lbl_atalho_vis_venda.clicked.connect(self.vis_venda)
+        self.ui.lbl_atalho_vis_venda_txt.clicked.connect(self.vis_venda)
+        self.atalho_vis_venda = QShortcut(QtGui.QKeySequence("F6"), self)
+        self.atalho_vis_venda.activated.connect(self.vis_venda)
+
+        self.ui.lbl_atalho_abrir_venda.clicked.connect(self.abrir_venda)
+        self.ui.lbl_atalho_abrir_venda_txt.clicked.connect(self.abrir_venda)
+        self.atalho_abrir_venda = QShortcut(QtGui.QKeySequence("F7"), self)
+        self.atalho_abrir_venda.activated.connect(self.abrir_venda)
 
         # redimensionando
         self.resolucao = app.desktop().screenGeometry()
@@ -128,6 +131,20 @@ class TelaPrincipal(QMainWindow):
         nova_venda = VendaTemp()
         exec_app(nova_venda)
         self.dialogs.append(nova_venda)
+
+    def abrir_venda(self):
+        from Controller.venda import VendaTemp
+
+        nova_venda = VendaTemp(cod_venda=8)
+        exec_app(nova_venda)
+        self.dialogs.append(nova_venda)
+
+    def vis_venda(self):
+        from Controller.lista_vendas import ListaVendas
+
+        l_vendas = ListaVendas()
+        exec_app(l_vendas)
+        self.dialogs.append(l_vendas)
 
     def visualiza_produtos(self):
         from Controller.lista_produtos import ListaProdutos
@@ -301,13 +318,12 @@ class TelaPrincipal(QMainWindow):
         self.ui.frame.move(self.width - 350, self.height - 360)
 
     def thread_func(self):
-        from datetime import datetime
+        from Funcoes.utils import data_hora_atual
         import time
 
         while not self.kill_thread:
-            data_e_hora_atuais = datetime.now()
-            data_e_hora_em_texto = data_e_hora_atuais.strftime('%d/%m/%Y %H:%M:%S')
-            self.ui.lbl_data.setText(data_e_hora_em_texto)
+            data = data_hora_atual()
+            self.ui.lbl_data.setText(data)
             time.sleep(1)
 
 

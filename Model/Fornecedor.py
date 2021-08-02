@@ -1,5 +1,4 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 from Model.Endereco import Endereco
 
 
@@ -13,9 +12,7 @@ class Fornecedor(Endereco):
         self.fone = fone
 
     def get_fornecedor_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, forn_numero, '
                     f'forn_cidade, forn_estado, forn_cep FROM fornecedor WHERE forn_id = \'{self.id}\'')
@@ -25,9 +22,7 @@ class Fornecedor(Endereco):
         return row
 
     def delete_fornecedor_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM fornecedor WHERE forn_id = {self.id}")
         cur.close()
@@ -36,9 +31,7 @@ class Fornecedor(Endereco):
 
     @staticmethod
     def get_todos_fornecedores():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM fornecedor ORDER BY forn_id")
         lista_fornecedores = cur.fetchall()
@@ -48,9 +41,7 @@ class Fornecedor(Endereco):
 
     @staticmethod
     def get_todos_fornecedores_tabela():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, forn_numero, "
                     f"forn_cidade, forn_estado, forn_cep FROM fornecedor "
@@ -62,9 +53,7 @@ class Fornecedor(Endereco):
 
     @staticmethod
     def qtd_forn():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT COUNT(*) FROM fornecedor")
         qtd = cur.fetchall()
@@ -73,9 +62,7 @@ class Fornecedor(Endereco):
         return qtd
 
     def editar(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"UPDATE fornecedor SET forn_nome = \'{self.nome}\', forn_cnpj = \'{self.cnpj}\', "
                     f"forn_email = \'{self.email}\', forn_fone = \'{self.fone}\' WHERE forn_id = \'{self.id}\'")
@@ -85,9 +72,7 @@ class Fornecedor(Endereco):
 
     @staticmethod
     def get_fornecedores_by_desc(campo, desc):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT forn_id, forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, forn_numero, '
                     f'forn_cidade, forn_estado, forn_cep FROM fornecedor WHERE {campo} like \'%{desc}%\' '
@@ -103,9 +88,7 @@ class Fornecedor(Endereco):
             return row
 
     def inserir(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"INSERT INTO fornecedor (forn_nome, forn_cnpj, forn_email, forn_fone, forn_rua, forn_bairro, "
                     f"forn_numero, forn_cidade, forn_estado, forn_cep) VALUES "

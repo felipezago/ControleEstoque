@@ -1,17 +1,14 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 
 
 class Servicos:
-    def __init__(self, id="", descricao="", preco=""):
-        self.id = id
+    def __init__(self, serv_id="", descricao="", preco=""):
+        self.id = serv_id
         self.descricao = descricao
         self.preco = preco
 
     def get_servico_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM servicos WHERE serv_id = \'{self.id}\'')
         row = cur.fetchone()
@@ -20,9 +17,7 @@ class Servicos:
         return row
 
     def get_servico_by_preco(self, operador):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM servicos WHERE serv_preco {operador} \'{self.preco}\'')
         row = cur.fetchall()
@@ -32,9 +27,7 @@ class Servicos:
 
     @staticmethod
     def get_servicos_by_desc(desc):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM servicos WHERE serv_desc like \'%{desc}%\' order by serv_id')
         row = cur.fetchall()
@@ -48,9 +41,7 @@ class Servicos:
             return row
 
     def delete_servico_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM servicos WHERE serv_id = {self.id}")
         conn.commit()
@@ -58,9 +49,7 @@ class Servicos:
         conn.close()
 
     def inserir_servico(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"INSERT INTO servicos (serv_desc, serv_preco) "
                     f"VALUES (\'{self.descricao}\', {self.preco})")
@@ -70,9 +59,7 @@ class Servicos:
 
     @staticmethod
     def get_todos_servicos():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM servicos ORDER BY serv_id")
         lista_categorias = cur.fetchall()
@@ -81,9 +68,7 @@ class Servicos:
         return lista_categorias
 
     def editar_servicos(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"UPDATE servicos SET serv_desc = \'{self.descricao}\', serv_preco = {self.preco} "
                     f"WHERE serv_id = {self.id}")
@@ -93,21 +78,17 @@ class Servicos:
 
     @staticmethod
     def ultimo_servico():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT MAX(serv_id) FROM servicos")
-        id = cur.fetchall()
+        serv_id = cur.fetchall()
         cur.close()
         conn.close()
-        return id
+        return serv_id
 
     @staticmethod
     def qtd_servicos():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT COUNT(*) FROM servicos")
         qtd = cur.fetchall()

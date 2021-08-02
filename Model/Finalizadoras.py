@@ -1,16 +1,13 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 
 
 class Finalizadoras:
-    def __init__(self, id="", descricao=""):
-        self.id = id
+    def __init__(self, fin_id="", descricao=""):
+        self.id = fin_id
         self.descricao = descricao
 
     def get_finalizadora_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM finalizadoras WHERE fin_id = \'{self.id}\'')
         row = cur.fetchone()
@@ -20,9 +17,7 @@ class Finalizadoras:
 
     @staticmethod
     def get_fin_by_desc(desc):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM finalizadoras WHERE fin_desc like \'%{desc}%\' order by fin_id')
         row = cur.fetchall()
@@ -36,9 +31,7 @@ class Finalizadoras:
             return row
 
     def delete_fin_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM finalizadoras WHERE fin_id = {self.id}")
         conn.commit()
@@ -46,9 +39,7 @@ class Finalizadoras:
         conn.close()
 
     def inserir_finalizadora(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"INSERT INTO finalizadoras (fin_desc) "
                     f"VALUES (\'{self.descricao}\')")
@@ -58,9 +49,7 @@ class Finalizadoras:
 
     @staticmethod
     def get_todas_finalizadoras():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM finalizadoras ORDER BY fin_id")
         lista_categorias = cur.fetchall()
@@ -69,9 +58,7 @@ class Finalizadoras:
         return lista_categorias
 
     def editar_finalizadoras(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"UPDATE finalizadoras SET fin_desc = \'{self.descricao}\'"
                     f"WHERE fin_id = {self.id}")
@@ -81,21 +68,17 @@ class Finalizadoras:
 
     @staticmethod
     def ultima_fin():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT MAX(fin_id) FROM finalizadoras")
-        id = cur.fetchone()
+        fin_id = cur.fetchone()
         cur.close()
         conn.close()
-        return id
+        return fin_id
 
     @staticmethod
     def qtd_fin():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT COUNT(*) FROM finalizadoras")
         qtd = cur.fetchall()

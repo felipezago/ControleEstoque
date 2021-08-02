@@ -1,5 +1,5 @@
 from fpdf import FPDF
-from Funcoes.utils import retirar_formatacao
+from Funcoes.utils import retirar_formatacao, formatar_cnpj
 
 
 class PDF(FPDF):
@@ -73,7 +73,11 @@ class PDF(FPDF):
 
         self.set_font('helvetica', 'I', 10)
         self.text(5, 55, f"Nome: {self.cliente[0]}")
-        self.text(5, 60, f"CPF: {self.cliente[1]}")
+        cpf_cnpj = retirar_formatacao(self.cliente[1])
+        if len(cpf_cnpj) >= 14:
+            self.text(5, 60, f"CNPJ: {formatar_cnpj(cpf_cnpj)}")
+        else:
+            self.text(5, 60, f"CPF: {self.cliente[1]}")
 
         if self.cliente[2] != 'IS.ENT.O-':
             self.text(5, 65, f"RG: {self.cliente[2]}")

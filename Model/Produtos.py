@@ -1,10 +1,13 @@
 import psycopg2
-from Funcoes.configdb import Banco
+from Model.Categoria import Categoria
+from Model.Fornecedor import Fornecedor
+from Funcoes.banco import conexao
 
 
 class Produtos:
-    def __init__(self, id="", fornecedor="", estoque="", codbarras="", descricao="", marca="", preco="", categoria=""):
-        self.id = id
+    def __init__(self, prod_id="", fornecedor: Fornecedor = "", estoque="", codbarras="", descricao="", marca="",
+                 preco="", categoria: Categoria = ""):
+        self.id = prod_id
         self.fornecedor = fornecedor
         self.estoque = estoque
         self.codbarras = codbarras
@@ -15,9 +18,7 @@ class Produtos:
 
     @staticmethod
     def get_produtos_by_desc(campo, desc):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
                     f'cat_descricao FROM produtos '
@@ -31,9 +32,7 @@ class Produtos:
         return row
 
     def get_produto_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM produtos WHERE prod_id = {self.id}')
         row = cur.fetchone()
@@ -42,9 +41,7 @@ class Produtos:
         return row
 
     def get_produto_by_id_tb(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
                     f'cat_descricao FROM produtos '
@@ -57,9 +54,7 @@ class Produtos:
         return row
 
     def get_produto_by_fornecedor(self, op):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
                     f'cat_descricao FROM produtos '
@@ -72,9 +67,7 @@ class Produtos:
         return row
 
     def get_produto_by_categoria(self, op):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
                     f'cat_descricao FROM produtos '
@@ -88,9 +81,7 @@ class Produtos:
 
     @staticmethod
     def delete_produtos_by_id(id_prod):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM produtos WHERE prod_id = {id_prod}")
         conn.commit()
@@ -99,9 +90,7 @@ class Produtos:
 
     @staticmethod
     def get_new_produto():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute('SELECT max(prod_id) FROM produtos')
         row = cur.fetchone()
@@ -115,9 +104,7 @@ class Produtos:
 
     @staticmethod
     def inserir_produtos(forn_id, cat_it, estoque, codbarras, descricao, marca, preco):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"INSERT INTO produtos (prod_forn_id, prod_cat_id, prod_estoque, prod_codbarras, prod_desc, "
                     f"prod_marca, prod_preco) VALUES ({forn_id}, {cat_it}, {estoque}, \'{codbarras}\', \'{descricao}\')"
@@ -128,9 +115,7 @@ class Produtos:
 
     @staticmethod
     def get_todos_produtos():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
                     f'cat_descricao FROM produtos '
@@ -144,9 +129,7 @@ class Produtos:
 
     @staticmethod
     def qtd_prod():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT COUNT(*) FROM produtos")
         qtd = cur.fetchall()
@@ -155,9 +138,7 @@ class Produtos:
         return qtd
 
     def editar(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"UPDATE produtos SET prod_cat_id = {self.categoria.id}, prod_forn_id = {self.fornecedor.id}, "
                     f"prod_estoque = {self.estoque}, prod_codbarras = \'{self.codbarras}\', "
@@ -168,9 +149,7 @@ class Produtos:
         conn.close()
 
     def delete(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM produtos WHERE prod_id = {self.id}")
         conn.commit()
@@ -183,9 +162,7 @@ class Produtos:
         try:
             # read data from a picture
             drawing = open(path_to_file, 'rb').read()
-            config = Banco()
-            params = config.get_params()
-            conn = psycopg2.connect(**params)
+            conn = conexao()
             cur = conn.cursor()
             cur.execute("INSERT INTO prod_img(prod_id, img_ext, img_dados) " +
                         "VALUES(%s,%s,%s)",
@@ -200,9 +177,7 @@ class Produtos:
 
     def atualizar_imagem(self, path_to_file):
         drawing = open(path_to_file, 'rb').read()
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
 
         cur.execute("UPDATE prod_img SET img_dados = %s WHERE prod_id = %s",
@@ -213,9 +188,7 @@ class Produtos:
 
     def check_imagem(self):
         """ insert a BLOB into a table """
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM prod_img WHERE prod_id = \'{self.id}\'")
         row = cur.fetchone()
@@ -229,9 +202,7 @@ class Produtos:
         from PyQt5.QtGui import QPixmap
         conn = None
         try:
-            config = Banco()
-            params = config.get_params()
-            conn = psycopg2.connect(**params)
+            conn = conexao()
             cur = conn.cursor()
             cur.execute(""" SELECT prod_desc, img_ext, img_dados
                             FROM prod_img

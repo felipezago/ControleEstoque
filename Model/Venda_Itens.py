@@ -1,5 +1,4 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 
 
 class Vendas:
@@ -14,31 +13,25 @@ class Vendas:
         self.data_hora = data_hora
 
     def get_vendas_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM vendas_itens WHERE id_venda = \'{self.id_venda}\'')
-        row = cur.fetchone()
+        cur.execute(f'SELECT * FROM vendas_itens WHERE venda_id = \'{self.id_venda}\'')
+        row = cur.fetchall()
         cur.close()
         conn.close()
         return row
 
     def delete_venda_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
-        cur.execute(f"DELETE FROM vendas_itens WHERE id_venda = {self.id_venda}")
+        cur.execute(f"DELETE FROM vendas_itens WHERE venda_id = {self.id_venda}")
         conn.commit()
         cur.close()
         conn.close()
 
     @staticmethod
     def inserir_venda():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"INSERT INTO vendas_itens SELECT venda_cod_interno, venda_id, venda_prod_serv_id, venda_tipo, "
                     f"venda_qtd, venda_valor, venda_desconto, venda_datahora from venda_tmp")
@@ -47,9 +40,7 @@ class Vendas:
         conn.close()
 
     def select_tb_pdf(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
             SELECT venda_prod_serv_id, 
@@ -73,3 +64,11 @@ class Vendas:
         conn.close()
         return select
 
+    def retorna_total(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f'SELECT SUM() FROM vendas_itens WHERE venda_id = \'{self.id_venda}\'')
+        row = cur.fetchall()
+        cur.close()
+        conn.close()
+        return row

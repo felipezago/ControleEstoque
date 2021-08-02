@@ -1,5 +1,4 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 from Model.Finalizadoras import Finalizadoras
 
 
@@ -11,9 +10,7 @@ class Venda_Fin:
         self.valor = valor
 
     def valor_pago(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT SUM(vendas_fin_valor)::numeric FROM vendas_fin WHERE vendas_id = {self.venda_id}')
         row = cur.fetchone()
@@ -26,9 +23,7 @@ class Venda_Fin:
             return row[0]
 
     def get_fins_venda(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM vendas_fin WHERE vendas_id = {self.venda_id}')
         row = cur.fetchall()
@@ -37,9 +32,7 @@ class Venda_Fin:
         return row
 
     def get_fins_venda_pdf(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT fin_desc, vendas_fin_valor FROM vendas_fin '
                     f'INNER JOIN finalizadoras ON vendas_fin.fin_id = finalizadoras.fin_id '
@@ -50,9 +43,7 @@ class Venda_Fin:
         return row
 
     def inserir_fin_venda(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"INSERT INTO vendas_fin (fin_id, vendas_id, vendas_fin_valor) "
                     f"VALUES ({self.finalizadoras.id}, {self.venda_id}, {self.valor})")
@@ -61,9 +52,7 @@ class Venda_Fin:
         conn.close()
 
     def delete_fin_by_cod(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM vendas_fin WHERE vendas_fin_id = {self.id}")
         conn.commit()
@@ -71,9 +60,7 @@ class Venda_Fin:
         conn.close()
 
     def delete_fin_by_venda(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM vendas_fin WHERE vendas_id = {self.venda_id}")
         conn.commit()

@@ -119,18 +119,18 @@ color: rgb(0, 0, 0);</string>
       <rect>
        <x>6</x>
        <y>40</y>
-       <width>81</width>
+       <width>111</width>
        <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>F5 - Vendas</string>
+      <string>F5 - Nova Venda</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbl_atalho_venda">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>50</x>
        <y>10</y>
        <width>41</width>
        <height>31</height>
@@ -140,7 +140,65 @@ color: rgb(0, 0, 0);</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../Imagens/venda.png</pixmap>
+      <pixmap>../../Imagens/add_venda.png</pixmap>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_atalho_vis_venda_txt">
+     <property name="geometry">
+      <rect>
+       <x>136</x>
+       <y>40</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>F6 - Vis. Vendas</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_atalho_vis_venda">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>10</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>../../Imagens/visualiza.png</pixmap>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_atalho_abrir_venda">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>40</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>F7 - Abrir Venda</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_atalho_abrir_venda_txt">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>10</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>../../Imagens/abrir_venda.png</pixmap>
      </property>
     </widget>
    </widget>
@@ -189,6 +247,7 @@ color: rgb(0, 0, 0);</string>
     </property>
     <addaction name="actionNova_Venda"/>
     <addaction name="actionVisualizar_Vendas"/>
+    <addaction name="actionAbrir_Venda"/>
    </widget>
    <widget class="QMenu" name="menuConfigura_o">
     <property name="title">
@@ -328,6 +387,11 @@ color: rgb(0, 0, 0);</string>
   <action name="actionVisualizaFinalizadoras">
    <property name="text">
     <string>Finalizadoras</string>
+   </property>
+  </action>
+  <action name="actionAbrir_Venda">
+   <property name="text">
+    <string>Abrir Venda</string>
    </property>
   </action>
  </widget>

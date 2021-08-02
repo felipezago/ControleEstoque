@@ -1,5 +1,4 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 from PyQt5.QtWidgets import QMessageBox
 
 
@@ -9,9 +8,7 @@ class Operador:
 
     @staticmethod
     def get_operador_atual():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM operador')
         row = cur.fetchone()
@@ -21,9 +18,7 @@ class Operador:
 
     @staticmethod
     def inserir_operador(id_usuario):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             f'INSERT INTO operador (ope_id) '
@@ -39,9 +34,7 @@ class Operador:
 
     @staticmethod
     def sair_operador():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute("DELETE FROM operador")
         conn.commit()
@@ -50,10 +43,8 @@ class Operador:
 
     @staticmethod
     def verifica_operador_ativo():
-        config = Banco()
-        params = config.get_params()
         try:
-            conn = psycopg2.connect(**params)
+            conn = conexao()
         except Exception as e:
             print(e)
             msg = QMessageBox()

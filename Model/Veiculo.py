@@ -1,5 +1,4 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 from Model.Cliente import Cliente
 
 
@@ -11,9 +10,7 @@ class Veiculo:
         self.modelo = modelo
 
     def delete_veiculos_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM veiculo WHERE veic_placa = \'{self.placa}\'")
         conn.commit()
@@ -21,9 +18,7 @@ class Veiculo:
         conn.close()
 
     def inserir_veiculo(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             f"INSERT INTO veiculo (veic_placa, veic_clie_id, veic_marca, veic_modelo)"
@@ -35,9 +30,7 @@ class Veiculo:
 
     @staticmethod
     def get_todos_veiculos():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT veic_placa, veic_marca, veic_modelo, clie_nome FROM veiculo "
                     f"INNER JOIN cliente ON veic_clie_id = clie_id ")
@@ -48,9 +41,7 @@ class Veiculo:
 
     @staticmethod
     def qtd_cli():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT COUNT(*) FROM veiculo")
         qtd = cur.fetchall()
@@ -60,9 +51,7 @@ class Veiculo:
 
     @staticmethod
     def get_veic_by_desc(campo, desc):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT veic_placa, veic_marca, veic_modelo, clie_nome FROM veiculo '
                     f'INNER JOIN cliente ON veic_clie_id = clie_id WHERE {campo} like \'%{desc}%\'')
@@ -72,9 +61,7 @@ class Veiculo:
         return row
 
     def get_veic_by_placa(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT veic_placa, veic_marca, veic_modelo, clie_nome FROM veiculo '
                     f'INNER JOIN cliente ON veic_clie_id = clie_id WHERE veic_placa = \'{self.placa}\'')
@@ -84,9 +71,7 @@ class Veiculo:
         return row
 
     def get_veic_by_cliente(self, op):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT veic_placa, veic_marca, veic_modelo, clie_nome FROM veiculo '
                     f'INNER JOIN cliente ON veic_clie_id = clie_id WHERE veic_clie_id {op} {self.cliente.id}')
@@ -96,9 +81,7 @@ class Veiculo:
         return row
 
     def editar(self, placa_antiga):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"UPDATE veiculo SET veic_placa = \'{self.placa}\', veic_clie_id = \'{self.cliente.id}\', "
                     f"veic_marca = \'{self.marca}\', veic_modelo = \'{self.modelo}\' "

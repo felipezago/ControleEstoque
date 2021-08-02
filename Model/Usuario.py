@@ -1,5 +1,4 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 from Funcoes.utils import show_msg
 from Model.Pessoa import Pessoa
 from Model.Empresa import Empresa
@@ -16,9 +15,7 @@ class Usuario(Pessoa):
 
     @staticmethod
     def get_usu_by_desc(campo, desc):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             (f'SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login, '
@@ -32,9 +29,7 @@ class Usuario(Pessoa):
         return row
 
     def get_usuario_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT usu_id, usu_cpf, usu_nome, usu_fone, usu_email, usu_rg, usu_celular, usu_login, '
                     f'usu_nivel_acesso, emp_nomefantasia, emp_cnpj FROM usuarios '
@@ -47,11 +42,9 @@ class Usuario(Pessoa):
 
     @staticmethod
     def get_todos_usuarios():
-        config = Banco()
-        params = config.get_params()
         conn = None
         try:
-            conn = psycopg2.connect(**params)
+            conn = conexao()
         except Exception as e:
             print(e)
             show_msg(title="Erro", mensagem="Erro no banco")
@@ -71,9 +64,7 @@ class Usuario(Pessoa):
     def editar(self):
         from Funcoes.utils import criptografar_senha
 
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         if self.senha:
             cur.execute(f"UPDATE usuarios SET usu_login = \'{self.login}\', usu_nivel_acesso = \'{self.nivel}\',"
@@ -96,9 +87,7 @@ class Usuario(Pessoa):
         conn.close()
 
     def get_senha_criptografada(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT usu_senha FROM usuarios WHERE usu_id = {self.id}")
         senha = cur.fetchone()
@@ -109,9 +98,7 @@ class Usuario(Pessoa):
     def inserir(self):
         from Funcoes.utils import criptografar_senha, retirar_formatacao
 
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             f"INSERT INTO usuarios (usu_emp_cnpj, usu_login, usu_senha, usu_nivel_acesso, usu_cpf,"
@@ -126,9 +113,7 @@ class Usuario(Pessoa):
 
     @staticmethod
     def qtd_usu():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT COUNT(*) FROM usuarios")
         qtd = cur.fetchall()
@@ -137,9 +122,7 @@ class Usuario(Pessoa):
         return qtd
 
     def delete_usuario_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM usuarios WHERE usu_id = \'{self.id}\'")
         conn.commit()

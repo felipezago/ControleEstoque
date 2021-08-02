@@ -200,6 +200,22 @@ def create_tables():
                                ON UPDATE CASCADE ON DELETE CASCADE
                        )
                        """,
+            "criar_pendencias": """
+                CREATE TABLE IF NOT EXISTS pendencias(
+                    pend_id SERIAL PRIMARY KEY,
+                    pend_clie_id INT,
+                    pend_venda_id INT,
+                    pend_veic_placa VARCHAR(15),
+                    pend_datahora TIMESTAMP,
+                    pend_valor FLOAT,
+                    FOREIGN KEY (pend_clie_id)
+                               REFERENCES cliente (clie_id)
+                               ON UPDATE CASCADE ON DELETE CASCADE,
+                    FOREIGN KEY (pend_venda_id)
+                               REFERENCES vendas (venda_id)
+                               ON UPDATE CASCADE ON DELETE CASCADE                      
+                )
+            """,
             "criar_function_prod": """
            CREATE OR REPLACE FUNCTION add_prod(
                descricao VARCHAR,

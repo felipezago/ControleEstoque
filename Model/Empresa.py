@@ -1,5 +1,5 @@
 import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 from Model.Endereco import Endereco
 
 
@@ -18,9 +18,7 @@ class Empresa(Endereco):
 
     @staticmethod
     def get_empresas_by_desc(campo, desc):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
                     f'emp_site, emp_rua, emp_bairro, emp_numero, emp_cidade, emp_estado, emp_cep FROM empresas '
@@ -33,9 +31,7 @@ class Empresa(Endereco):
         return row
 
     def get_empresas_pdf(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
         SELECT INITCAP(emp_nomefantasia), INITCAP(emp_rua), emp_numero, INITCAP(emp_bairro), emp_fone, 
@@ -49,9 +45,7 @@ class Empresa(Endereco):
         return row
 
     def get_empresa_by_cnpj(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
                     f'emp_site, emp_rua, emp_bairro, emp_numero, emp_cidade, emp_estado, emp_cep FROM empresas '
@@ -62,9 +56,7 @@ class Empresa(Endereco):
         return row
 
     def get_empresa_by_cnpj_all(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM empresas '
                     f'WHERE emp_cnpj = \'{self.cnpj}\'')
@@ -75,9 +67,7 @@ class Empresa(Endereco):
 
     @staticmethod
     def get_todas_empresas():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT * FROM empresas ORDER BY emp_nomefantasia')
         row = cur.fetchall()
@@ -87,9 +77,7 @@ class Empresa(Endereco):
 
     @staticmethod
     def get_todas_empresas_tabela():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f'SELECT emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email, emp_fone, '
                     f'emp_site, emp_rua, emp_bairro, emp_numero, emp_cidade, emp_estado, emp_cep FROM empresas '
@@ -101,9 +89,7 @@ class Empresa(Endereco):
 
     @staticmethod
     def qtd_emp():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT COUNT(*) FROM empresas")
         qtd = cur.fetchall()
@@ -112,9 +98,7 @@ class Empresa(Endereco):
         return qtd
 
     def editar(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"UPDATE empresas SET emp_razaosocial = \'{self.razao_social}\', "
                     f"emp_nomefantasia = \'{self.nome_fantasia}\', emp_inscricaoestadual = \'{self.inscricao_estadual}"
@@ -127,9 +111,7 @@ class Empresa(Endereco):
         conn.close()
 
     def delete_empresa(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM empresas WHERE emp_cnpj = \'{self.cnpj}\'")
         conn.commit()
@@ -142,9 +124,7 @@ class Empresa(Endereco):
         try:
             # read data from a picture
             drawing = open(path_to_file, 'rb').read()
-            config = Banco()
-            params = config.get_params()
-            conn = psycopg2.connect(**params)
+            conn = conexao()
             cur = conn.cursor()
             cur.execute("INSERT INTO emp_img(emp_cnpj, img_ext, img_dados) " +
                         "VALUES(%s,%s,%s)",
@@ -159,9 +139,7 @@ class Empresa(Endereco):
 
     def atualizar_imagem(self, path_to_file):
         drawing = open(path_to_file, 'rb').read()
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
 
         cur.execute("UPDATE emp_img SET img_dados = %s WHERE emp_cnpj = %s",
@@ -172,9 +150,7 @@ class Empresa(Endereco):
 
     def check_imagem(self):
         """ insert a BLOB into a table """
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM emp_img WHERE emp_cnpj = \'{self.cnpj}\'")
         row = cur.fetchone()
@@ -188,9 +164,7 @@ class Empresa(Endereco):
         from PyQt5.QtGui import QPixmap
         conn = None
         try:
-            config = Banco()
-            params = config.get_params()
-            conn = psycopg2.connect(**params)
+            conn = conexao()
             cur = conn.cursor()
             cur.execute(""" SELECT emp_nomefantasia, img_ext, img_dados
                             FROM emp_img
@@ -222,9 +196,7 @@ class Empresa(Endereco):
     def ler_imagem_empresas_pdf(self, path_to_dir):
         conn = None
         try:
-            config = Banco()
-            params = config.get_params()
-            conn = psycopg2.connect(**params)
+            conn = conexao()
             cur = conn.cursor()
             cur.execute(""" SELECT emp_nomefantasia, img_ext, img_dados
                             FROM emp_img
@@ -250,9 +222,7 @@ class Empresa(Endereco):
                 conn.close()
 
     def inserir(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
             INSERT INTO empresas (emp_cnpj, emp_razaosocial, emp_nomefantasia, emp_inscricaoestadual, emp_email,emp_fone

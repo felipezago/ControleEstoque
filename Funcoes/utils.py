@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from PIL.ImageQt import ImageQt
 from PyQt5.QtPrintSupport import QPrinter, QPrintDialog
 from PyQt5.QtCore import QSize
@@ -162,6 +164,12 @@ def except_hook(type, value, tb):
     Venda_Tmp.delete_venda()
     TelaPrincipal.kill_thread = True
     qApp.quit()
+
+
+def data_hora_atual():
+    data_e_hora_atuais = datetime.now()
+    data_e_hora_em_texto = data_e_hora_atuais.strftime('%d/%m/%Y %H:%M:%S')
+    return data_e_hora_em_texto
 
 
 if __name__ == '__main__':

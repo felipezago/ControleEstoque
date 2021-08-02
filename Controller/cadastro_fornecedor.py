@@ -1,3 +1,4 @@
+from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QInputDialog, QLineEdit
 from psycopg2.extensions import JSON
 
@@ -35,6 +36,8 @@ class CadastroFornecedor(QMainWindow):
         self.ui.tx_Cidade.setMaxLength(50)
         self.ui.tx_Estado.setMaxLength(2)
         self.ui.tx_Bairro.setMaxLength(60)
+
+        QTimer.singleShot(1, self.dialog_cnpj)
 
     def limpa_campos(self):
         self.ui.tx_cnpj.setText("")

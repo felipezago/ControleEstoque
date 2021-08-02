@@ -1,5 +1,4 @@
-import psycopg2
-from Funcoes.configdb import Banco
+from Funcoes.banco import conexao
 from Model.Pessoa import Pessoa
 
 
@@ -10,9 +9,7 @@ class Cliente(Pessoa):
 
     @staticmethod
     def get_cliente_by_desc(campo, desc):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             f'''SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, clie_rua, 
@@ -25,14 +22,11 @@ class Cliente(Pessoa):
         return row
 
     def get_cliente_pdf(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             f'''SELECT INITCAP(clie_nome), 
-                CONCAT(SUBSTR(clie_cpf_cnpj,1,3),'.',SUBSTR(clie_cpf_cnpj,4,3),'.',SUBSTR(clie_cpf_cnpj,7,3),'-',
-                SUBSTR(clie_cpf_cnpj,10,2)), CONCAT(SUBSTR(clie_rg,1,2),'.',SUBSTR(clie_rg,3,3),'.',SUBSTR(clie_rg,6,3),
+                clie_cpf_cnpj, CONCAT(SUBSTR(clie_rg,1,2),'.',SUBSTR(clie_rg,3,3),'.',SUBSTR(clie_rg,6,3),
                 '-',SUBSTR(clie_rg,9,1)), clie_celular, clie_fone, clie_email, INITCAP(clie_rua), INITCAP(clie_bairro)
                 , clie_numero, INITCAP(clie_cidade), clie_estado from cliente
                 WHERE clie_id = {self.id}''')
@@ -42,9 +36,7 @@ class Cliente(Pessoa):
         return row
 
     def get_cliente_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             f'SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, clie_rua,'
@@ -56,9 +48,7 @@ class Cliente(Pessoa):
         return row
 
     def delete_cliente_by_id(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM cliente WHERE clie_id = {self.id}")
         conn.commit()
@@ -67,9 +57,7 @@ class Cliente(Pessoa):
 
     @staticmethod
     def get_todos_clientes():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             f"SELECT clie_id, clie_cpf_cnpj, clie_nome, clie_fone, clie_email, clie_rg, clie_celular, clie_rua, "
@@ -81,9 +69,7 @@ class Cliente(Pessoa):
 
     @staticmethod
     def qtd_cli():
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(f"SELECT COUNT(*) FROM cliente")
         qtd = cur.fetchall()
@@ -92,9 +78,7 @@ class Cliente(Pessoa):
         return qtd
 
     def inserir(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
         cur.execute(
             f"INSERT INTO cliente (clie_cpf_cnpj, clie_nome, clie_fone, clie_celular, clie_email, clie_rg, clie_tipo, "
@@ -108,16 +92,16 @@ class Cliente(Pessoa):
         conn.close()
 
     def editar(self):
-        config = Banco()
-        params = config.get_params()
-        conn = psycopg2.connect(**params)
+        conn = conexao()
         cur = conn.cursor()
-        cur.execute(f"UPDATE cliente SET clie_cpf_cnpj = \'{self.cpf}\', clie_nome = \'{self.nome}\',"
-                    f" clie_fone = \'{self.fone}\', clie_email = \'{self.email}\', clie_rg = \'{self.rg}\', "
-                    f"clie_tipo = \'{self.tipo}\', clie_rua = \'{self.rua}\', clie_bairro = \'{self.bairro}\', "
-                    f"clie_numero = \'{self.numero}\', clie_cidade = \'{self.cidade}\', clie_estado = \'{self.estado}\', "
-                    f"clie_cep = \'{self.cep}\' "
-                    f"WHERE clie_id = {self.id}")
+        cur.execute(
+            f"UPDATE cliente SET clie_cpf_cnpj = \'{self.cpf}\', clie_nome = \'{self.nome}\',"
+            f" clie_fone = \'{self.fone}\', clie_email = \'{self.email}\', clie_rg = \'{self.rg}\', "
+            f"clie_tipo = \'{self.tipo}\', clie_rua = \'{self.rua}\', clie_bairro = \'{self.bairro}\', "
+            f"clie_numero = \'{self.numero}\', clie_cidade = \'{self.cidade}\', clie_estado = \'{self.estado}\', "
+            f"clie_cep = \'{self.cep}\' "
+            f"WHERE clie_id = {self.id}"
+        )
         conn.commit()
         cur.close()
         conn.close()
