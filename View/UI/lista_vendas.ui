@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Frame</string>
+   <string>Lista Vendas</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background: #FFF;</string>
@@ -82,17 +82,22 @@ QComboBox::down-arrow {
    </property>
    <item>
     <property name="text">
-     <string>SELECIONE</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
      <string>ID</string>
     </property>
    </item>
    <item>
     <property name="text">
      <string>CLIENTE</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PENDENTES</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>FINALIZADAS</string>
     </property>
    </item>
   </widget>

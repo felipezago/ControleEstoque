@@ -43,7 +43,7 @@ class Pendencias:
     def delete(self):
         conn = conexao()
         cur = conn.cursor()
-        cur.execute(f"DELETE FROM pendencias WHERE pend_id = {self.id}")
+        cur.execute(f"DELETE FROM pendencias WHERE pend_venda_id = {self.venda.id}")
         conn.commit()
         cur.close()
         conn.close()

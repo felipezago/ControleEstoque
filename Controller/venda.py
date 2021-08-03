@@ -66,6 +66,7 @@ class VendaTemp(QMainWindow):
         self.linha_selecionada = None
         self.codigo_cliente = None
         self.codigo_item = None
+        self.codigo_venda = None
 
         # flags
         self.adicionando = False
@@ -140,6 +141,7 @@ class VendaTemp(QMainWindow):
             self.vendas_itens = Vendas()
             vendas_header = Vendas_Header()
             self.venda_tmp = Venda_Tmp()
+            self.ui.bt_descontos.setEnabled(True)
 
             self.venda_tmp.id_venda = cod_venda
             self.vendas_itens.id_venda = cod_venda
@@ -155,7 +157,7 @@ class VendaTemp(QMainWindow):
             vendas_header.veiculo.placa = header[2]
             veic = vendas_header.veiculo.get_veic_by_placa()
 
-            if header[2]:
+            if vendas_header.veiculo.placa != 'null':
                 idx = self.ui.cb_veiculo.findText(veic[1] + " - " + veic[2])
                 self.ui.cb_veiculo.setCurrentIndex(idx)
                 self.ui.tx_busca_cliente.setEnabled(False)
@@ -247,7 +249,7 @@ class VendaTemp(QMainWindow):
         self.close()
 
     def closeEvent(self, event: QtGui.QCloseEvent):
-        if not Venda_Tmp.check_registros():
+        if not Venda_Tmp.check_registros() or Vendas_Header.check_vendas(Venda_Tmp.get_cod_venda()):
             Venda_Tmp.delete_venda()
             event.accept()
         else:
@@ -384,7 +386,16 @@ class VendaTemp(QMainWindow):
         venda.qtd = qtd
         venda.status = status
 
-        venda.inserir_venda()
+        maximo = venda.select_max()
+
+        if self.codigo_venda:
+            venda.inserir_venda(self.codigo_venda)
+        else:
+            if maximo == 0:
+                venda.inserir_venda(1)
+            else:
+                venda.inserir_venda(maximo + 1)
+
         self.venda_fin.venda_id = Venda_Tmp.get_cod_venda()
 
         self.limpa_campos_item()

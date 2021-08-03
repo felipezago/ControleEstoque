@@ -29,7 +29,7 @@ class Vendas_Header:
     def delete(self):
         conn = conexao()
         cur = conn.cursor()
-        cur.execute(f"DELETE FROM vendas WHERE venda_id = {self.id})")
+        cur.execute(f"DELETE FROM vendas WHERE venda_id = {self.id}")
         conn.commit()
         cur.close()
         conn.close()
@@ -53,12 +53,70 @@ class Vendas_Header:
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
-            SELECT venda_id, clie_nome, veic_modelo, venda_qtd_itens, ROUND(venda_total_descontos::numeric, 2), ROUND(venda_valor_total::numeric, 2), venda_status
+            SELECT venda_id, clie_nome, veic_modelo, venda_qtd_itens, ROUND(venda_total_descontos::numeric, 2), 
+            ROUND(venda_valor_total::numeric, 2), venda_status
             FROM vendas
             INNER join cliente ON venda_clie_id = clie_id
-            INNER JOIN veiculo ON veic_placa = venda_veic_placa
+            LEFT JOIN veiculo ON veic_placa = venda_veic_placa
             ORDER BY venda_id
         """)
+        row = cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return row
+
+    def busca_vendas_by_id(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+                SELECT venda_id, clie_nome, veic_modelo, venda_qtd_itens, ROUND(venda_total_descontos::numeric, 2), 
+                ROUND(venda_valor_total::numeric, 2), venda_status
+                FROM vendas
+                INNER join cliente ON venda_clie_id = clie_id
+                LEFT JOIN veiculo ON veic_placa = venda_veic_placa
+                WHERE venda_id = {self.id}
+                ORDER BY venda_id
+            """)
+        row = cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return row
+
+    def busca_vendas_by_cliente(self, op):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+                SELECT venda_id, clie_nome, veic_modelo, venda_qtd_itens, ROUND(venda_total_descontos::numeric, 2), 
+                ROUND(venda_valor_total::numeric, 2), venda_status
+                FROM vendas
+                INNER join cliente ON venda_clie_id = clie_id
+                LEFT JOIN veiculo ON veic_placa = venda_veic_placa
+                WHERE clie_id {op} {self.cliente.id}
+                ORDER BY venda_id
+            """)
+        row = cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return row
+
+    def busca_vendas_by_status(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+                SELECT venda_id, clie_nome, veic_modelo, venda_qtd_itens, ROUND(venda_total_descontos::numeric, 2), 
+                ROUND(venda_valor_total::numeric, 2), venda_status
+                FROM vendas
+                INNER join cliente ON venda_clie_id = clie_id
+                LEFT JOIN veiculo ON veic_placa = venda_veic_placa
+                WHERE venda_status = \'{self.status}\'
+                ORDER BY venda_id
+            """)
         row = cur.fetchall()
         conn.commit()
         cur.close()
@@ -81,13 +139,65 @@ class Vendas_Header:
 
         return row
 
+    def get_venda_pendente_by_id(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+            SELECT * FROM vendas
+            WHERE venda_id = {self.id}
+            AND venda_status = \'PENDENTE\'
+            ORDER BY venda_id
+        """)
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return row
+
+    @staticmethod
+    def check_pendentes():
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+            SELECT * FROM vendas
+            WHERE  venda_status = \'PENDENTE\'
+        """)
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        if row is None:
+            return 0
+        else:
+            return row[0]
+
+    @staticmethod
+    def check_vendas(id_venda):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+            SELECT * FROM vendas
+            WHERE venda_id = {id_venda}
+        """)
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        if row is None:
+            return False
+        else:
+            return True
+
     def update(self):
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
            UPDATE vendas
             SET venda_clie_id = {self.cliente.id},
-            venda_veic_placa = \'{self.veiculo.placa}\',
+            venda_veic_placa = \'{self.veiculo.placa if self.veiculo.placa else 'null'}\',
             venda_qtd_itens = {self.qtd_itens},
             venda_total_descontos = {self.total_descontos},
             venda_valor_total = {self.valor_total},

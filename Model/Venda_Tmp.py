@@ -66,7 +66,19 @@ class Venda_Tmp:
         cur.close()
         conn.close()
 
-    def inserir_venda(self):
+    def inserir_venda(self, id_venda):
+        conn = conexao()
+        cur_insert = conn.cursor()
+        cur_insert.execute(f"INSERT INTO venda_tmp(venda_veic_placa, venda_id, venda_prod_serv_id, venda_tipo, "
+                           f"venda_qtd, venda_valor, venda_desconto, venda_datahora) VALUES "
+                           f"(null, {id_venda}, {self.id_prod_serv}, \'{self.tipo}\', {self.qtd}, {self.valor}, "
+                           f"{self.desconto}, \'{self.data_hora}\')")
+        conn.commit()
+        cur_insert.close()
+        conn.close()
+
+    @staticmethod
+    def select_max():
         conn = conexao()
         cur_select_nova_venda = conn.cursor()
         cur_select_nova_venda.execute("SELECT MAX(venda_id) FROM vendas")
@@ -74,19 +86,9 @@ class Venda_Tmp:
         cur_select_nova_venda.close()
 
         if select_nova[0] is None:
-            self.id_venda = 1
+            return 0
         else:
-            self.id_venda = select_nova[0] + 1
-
-        cur_insert = conn.cursor()
-
-        cur_insert.execute(f"INSERT INTO venda_tmp(venda_veic_placa, venda_id, venda_prod_serv_id, venda_tipo, "
-                           f"venda_qtd, venda_valor, venda_desconto, venda_datahora) VALUES "
-                           f"(null, {self.id_venda}, {self.id_prod_serv}, \'{self.tipo}\', {self.qtd}, {self.valor}, "
-                           f"{self.desconto}, \'{self.data_hora}\')")
-        conn.commit()
-        cur_insert.close()
-        conn.close()
+            return select_nova[0]
 
     @staticmethod
     def get_venda_atual():

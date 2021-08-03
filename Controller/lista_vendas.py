@@ -1,6 +1,10 @@
+from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QPushButton
+from Model.Cliente import Cliente
+from Model.Venda_Fin import Venda_Fin
+from Model.Venda_Itens import Vendas
 from Model.Vendas_Header import Vendas_Header
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import Qt
 
 
@@ -12,14 +16,19 @@ class ListaVendas(QMainWindow):
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho_tela = self.size()
+        self.setFixedSize(self.tamanho_tela)
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
-        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
 
         self.venda_selecionada = Vendas_Header()
         self.linha_selecionada = None
         self.filtrado = False
+        self.tela = parent
+
+        # ação da busca
+        self.ui.bt_busca.clicked.connect(self.buscar)
+        self.ui.tx_busca.returnPressed.connect(self.buscar)
 
         # ação dos botoes
         self.ui.bt_refresh.clicked.connect(self.dados_tabela)
@@ -42,14 +51,30 @@ class ListaVendas(QMainWindow):
 
         self.dados_tabela()
 
+        if self.tela:
+            self.ui.cb_vendas.setCurrentIndex(2)
+            self.ui.bt_refresh.setEnabled(False)
+            self.ui.cb_vendas.setEnabled(False)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent):
+        self.resize(self.tamanho_tela)
+
     def limpa_campo_busca(self):
         self.ui.tx_busca.setText("")
+        if self.ui.cb_vendas.currentIndex() in (2, 3):
+            self.ui.tx_busca.setEnabled(False)
+            self.ui.bt_busca.setEnabled(False)
+            self.ui.bt_refresh.setEnabled(False)
+            self.buscar()
+        else:
+            self.ui.tx_busca.setEnabled(True)
+            self.ui.bt_busca.setEnabled(True)
 
     def formatar_texto(self):
         texto = self.ui.tx_busca.text()
         tamanho = len(texto)
         if self.ui.cb_vendas.currentIndex() == 0:
-            if not texto[tamanho-1:tamanho].isnumeric():
+            if not texto[tamanho - 1:tamanho].isnumeric():
                 self.ui.tx_busca.setText(texto[:tamanho - 1])
 
     def sair(self):
@@ -68,13 +93,137 @@ class ListaVendas(QMainWindow):
 
             self.ui.tb_vendas.insertRow(i)
             for c in range(0, 7):
-                self.ui.tb_vendas.setItem(i, c, QTableWidgetItem(str(linha[c])))
+                if c == 6:
+                    item = QTableWidgetItem(str(linha[6]))
+                    if linha[6] == "PENDENTE":
+                        fin = Venda_Fin()
+                        fin.venda_id = linha[0]
+                        pago = fin.valor_pago()
 
-            if linha[6] == "PENDENTE":
-                btn_editar = QPushButton(self.ui.tb_vendas)
-                btn_editar.setText("ABRIR VENDA")
-                self.ui.tb_vendas.setCellWidget(i, 7, btn_editar)
-                btn_editar.clicked.connect(self.abrir_venda)
+                        total = linha[5] - pago
+                        self.ui.tb_vendas.setItem(i, 5, QTableWidgetItem(str(total)))
+
+                        btn_editar = QPushButton(self.ui.tb_vendas)
+                        btn_editar.setText("ABRIR VENDA")
+                        btn_editar.setStyleSheet("""
+                                background-color: rgb(0, 0, 150);
+                                color: white;
+                        """)
+
+                        self.ui.tb_vendas.setCellWidget(i, 7, btn_editar)
+                        btn_editar.clicked.connect(self.abrir_venda)
+
+                        item.setForeground(QBrush(QColor(255, 0, 0)))
+                        self.ui.tb_vendas.setItem(i, 6, item)
+                    else:
+                        btn_exc = QPushButton(self.ui.tb_vendas)
+                        btn_exc.setText("EXCLUIR")
+                        btn_exc.setStyleSheet("""
+                            background-color: rgb(200, 0, 0);
+                            color: white;
+                        """)
+
+                        self.ui.tb_vendas.setCellWidget(i, 7, btn_exc)
+                        btn_exc.clicked.connect(self.excluir)
+
+                        item.setForeground(QBrush(QColor(0, 200, 80)))
+                        self.ui.tb_vendas.setItem(i, 6, item)
+                elif c == 2:
+                    if linha[2] is None:
+                        self.ui.tb_vendas.setItem(i, 2, QTableWidgetItem("SEM VEICULO"))
+                    else:
+                        self.ui.tb_vendas.setItem(i, 2, QTableWidgetItem(str(linha[c])))
+                else:
+                    self.ui.tb_vendas.setItem(i, c, QTableWidgetItem(str(linha[c])))
+
+    def buscar(self):
+        self.ui.tb_vendas.clearContents()
+        self.ui.tb_vendas.setRowCount(0)
+
+        venda = Vendas_Header()
+        venda.cliente = Cliente()
+        dados = ""
+
+        if self.ui.cb_vendas.currentIndex() == 0:
+            venda.id = self.ui.tx_busca.text()
+            if venda.id:
+                dados = venda.busca_vendas_by_id()
+            else:
+                QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
+                self.dados_tabela()
+                return
+        elif self.ui.cb_vendas.currentIndex() == 1:
+            venda.cliente.nome = self.ui.tx_busca.text().upper()
+            if venda.cliente.nome:
+                dados_cliente = venda.cliente.get_cliente_by_desc("clie_nome", venda.cliente.nome)
+
+                if dados_cliente:
+                    if len(dados_cliente) > 1:
+                        cods = list()
+                        for item in dados_cliente:
+                            cods.append(item[0])
+                        tup = tuple(cods)
+                        venda.cliente.id = tup
+                        dados = venda.busca_vendas_by_cliente("in")
+                    else:
+                        venda.cliente.id = dados_cliente[0][0]
+                        dados = venda.busca_vendas_by_cliente("=")
+            else:
+                QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
+                self.dados_tabela()
+                return
+        elif self.ui.cb_vendas.currentIndex() == 2:
+            venda.status = "PENDENTE"
+            dados = venda.busca_vendas_by_status()
+        else:
+            venda.status = "FINALIZADO"
+            dados = venda.busca_vendas_by_status()
+
+        if dados:
+            self.filtrado = True
+            self.ui.bt_refresh.setEnabled(True)
+
+            for i, linha in enumerate(dados):
+                self.ui.tb_vendas.insertRow(i)
+                for c in range(0, 7):
+                    if c == 6:
+                        item = QTableWidgetItem(str(linha[6]))
+                        if linha[6] == "PENDENTE":
+                            fin = Venda_Fin()
+                            fin.venda_id = linha[0]
+                            pago = fin.valor_pago()
+
+                            total = linha[5] - pago
+                            self.ui.tb_vendas.setItem(i, 5, QTableWidgetItem(str(total)))
+
+                            btn_editar = QPushButton(self.ui.tb_vendas)
+                            btn_editar.setText("ABRIR VENDA")
+                            self.ui.tb_vendas.setCellWidget(i, 7, btn_editar)
+                            btn_editar.clicked.connect(self.abrir_venda)
+
+                            item.setForeground(QBrush(QColor(255, 0, 0)))
+                            self.ui.tb_vendas.setItem(i, 6, item)
+                        else:
+                            btn_exc = QPushButton(self.ui.tb_vendas)
+                            btn_exc.setText("EXCLUIR")
+                            self.ui.tb_vendas.setCellWidget(i, 7, btn_exc)
+                            btn_exc.clicked.connect(self.excluir)
+
+                            item.setForeground(QBrush(QColor(0, 200, 80)))
+                            self.ui.tb_vendas.setItem(i, 6, item)
+                    elif c == 2:
+                        if linha[2] is None:
+                            self.ui.tb_vendas.setItem(i, 2, QTableWidgetItem("SEM VEICULO"))
+                        else:
+                            self.ui.tb_vendas.setItem(i, 2, QTableWidgetItem(str(linha[c])))
+                    else:
+                        self.ui.tb_vendas.setItem(i, c, QTableWidgetItem(str(linha[c])))
+        else:
+            QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
+            self.ui.tx_busca.setText("")
+            self.dados_tabela()
+
+        self.ui.tb_vendas.selectRow(0)
 
     def abrir_venda(self):
         id_venda = self.ui.tb_vendas.item(self.ui.tb_vendas.currentRow(), 0).text()
@@ -85,22 +234,31 @@ class ListaVendas(QMainWindow):
         abrir_venda = VendaTemp(cod_venda=id_venda)
         exec_app(abrir_venda)
         self.dialogs.append(abrir_venda)
+        self.close()
 
     def excluir(self):
-        if self.venda_selecionada.id:
-            reply = QMessageBox.question(self, 'Excluir?', f'Tem certeza que deseja excluir a venda: '
-                                                           f'{self.venda_selecionada.id}?',
-                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        self.linha_selecionada = self.ui.tb_vendas.currentRow()
+        self.venda_selecionada.id = self.ui.tb_vendas.item(self.ui.tb_vendas.currentRow(), 0).text()
 
-            if reply == QMessageBox.Yes:
-                try:
-                    self.venda_selecionada.delete()
-                    self.venda_selecionada.id = None
-                except Exception as error:
-                    QMessageBox.warning(self, "Erro", str(error))
-                else:
-                    self.ui.tb_vendas.removeRow(self.linha_selecionada)
+        v_fin = Venda_Fin()
+        v_fin.venda_id = self.ui.tb_vendas.item(self.ui.tb_vendas.currentRow(), 0).text()
+
+        v_itens = Vendas()
+        v_itens.id_venda = self.ui.tb_vendas.item(self.ui.tb_vendas.currentRow(), 0).text()
+
+        reply = QMessageBox.question(self, 'Excluir?', f'Tem certeza que deseja excluir a venda: '
+                                                       f'{self.venda_selecionada.id}?',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+
+        if reply == QMessageBox.Yes:
+            try:
+                self.venda_selecionada.delete()
+                v_fin.delete_fin_by_venda()
+                v_itens.delete_venda_by_id()
+                self.venda_selecionada.id = None
+            except Exception as error:
+                QMessageBox.warning(self, "Erro", str(error))
             else:
-                return
+                self.ui.tb_vendas.removeRow(self.linha_selecionada)
         else:
-            QMessageBox.warning(self, "Atenção!", "Favor selecionar alguma linha!")
+            return

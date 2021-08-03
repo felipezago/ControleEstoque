@@ -99,6 +99,8 @@ class TelaPrincipal(QMainWindow):
 
         # actions venda
         self.ui.actionNova_Venda.triggered.connect(self.nova_venda)
+        self.ui.actionVisualizar_Vendas.triggered.connect(self.vis_venda)
+        self.ui.actionAbrir_Venda.triggered.connect(self.abrir_venda)
 
         # actions conf
         self.ui.actionBanco_de_Dados.triggered.connect(self.configurar_db)
@@ -133,11 +135,11 @@ class TelaPrincipal(QMainWindow):
         self.dialogs.append(nova_venda)
 
     def abrir_venda(self):
-        from Controller.venda import VendaTemp
+        from Controller.abrir_venda import AbrirVenda
 
-        nova_venda = VendaTemp(cod_venda=8)
-        exec_app(nova_venda)
-        self.dialogs.append(nova_venda)
+        abrir_venda = AbrirVenda()
+        exec_app(abrir_venda)
+        self.dialogs.append(abrir_venda)
 
     def vis_venda(self):
         from Controller.lista_vendas import ListaVendas

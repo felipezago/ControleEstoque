@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow
+
+from Model.Pendencias import Pendencias
 from Model.Venda_Tmp import Venda_Tmp
 from Model.Venda_Fin import Venda_Fin
 from Model.Finalizadoras import Finalizadoras
@@ -156,9 +158,22 @@ class Finalizar(QMainWindow):
                     header.total_descontos = Venda_Tmp.soma_descontos()
                     header.valor_total = Venda_Tmp.retorna_total()
                     header.status = "FINALIZADO"
-                    header.inserir()
 
-                    Vendas.inserir_venda()
+                    if self.tela_principal.codigo_venda:
+                        header.update()
+                        venda = Vendas()
+                        venda.id_venda = self.tela_principal.codigo_venda
+                        venda.delete_venda_by_id()
+                        Vendas.inserir_venda()
+
+                        p = Pendencias()
+                        p.venda = Vendas_Header()
+                        p.venda.id = self.tela_principal.codigo_venda
+                        p.delete()
+                    else:
+                        header.inserir()
+                        Vendas.inserir_venda()
+
                     Venda_Tmp.delete_venda()
 
                     reply = QMessageBox.question(self, 'Imprimir?', f'Deseja imprimir o relatório da venda?',

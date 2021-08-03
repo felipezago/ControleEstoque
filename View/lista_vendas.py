@@ -57,6 +57,7 @@ class Ui_Frame(object):
         self.cb_vendas.addItem("")
         self.cb_vendas.addItem("")
         self.cb_vendas.addItem("")
+        self.cb_vendas.addItem("")
         self.tb_vendas = QtWidgets.QTableWidget(Frame)
         self.tb_vendas.setGeometry(QtCore.QRect(0, 100, 981, 441))
         self.tb_vendas.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -167,11 +168,12 @@ class Ui_Frame(object):
 
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate
-        Frame.setWindowTitle(_translate("Frame", "Frame"))
+        Frame.setWindowTitle(_translate("Frame", "Lista Vendas"))
         self.tx_busca.setPlaceholderText(_translate("Frame", "PROCURAR POR..."))
-        self.cb_vendas.setItemText(0, _translate("Frame", "SELECIONE"))
-        self.cb_vendas.setItemText(1, _translate("Frame", "ID"))
-        self.cb_vendas.setItemText(2, _translate("Frame", "CLIENTE"))
+        self.cb_vendas.setItemText(0, _translate("Frame", "ID"))
+        self.cb_vendas.setItemText(1, _translate("Frame", "CLIENTE"))
+        self.cb_vendas.setItemText(2, _translate("Frame", "PENDENTES"))
+        self.cb_vendas.setItemText(3, _translate("Frame", "FINALIZADAS"))
         item = self.tb_vendas.verticalHeaderItem(0)
         item.setText(_translate("Frame", "1"))
         item = self.tb_vendas.horizontalHeaderItem(0)
