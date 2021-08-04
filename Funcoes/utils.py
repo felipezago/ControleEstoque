@@ -11,16 +11,6 @@ import tempfile
 from pdf2image import convert_from_path
 
 
-def IconeBotaoTopo(botao, imagem):
-    icon = QIcon()
-    icon.addPixmap(QPixmap(imagem),
-                   QIcon.Normal, QIcon.Off)
-    # icon.addPixmap(QPixmap((os.path.join(caminho, imagem)),
-    #                              QIcon.Normal, QIcon.Off))
-    botao.setIcon(icon)
-    botao.setIconSize(QSize(50, 35))
-
-
 def verificar_criptografia(senha, senhaCriptografada):
     return bcrypt.checkpw(senha, senhaCriptografada)
 
@@ -37,22 +27,6 @@ def IconeBotaoMenu(botao, imagem):
                    QIcon.Normal, QIcon.Off)
     botao.setIcon(icon)
     botao.setIconSize(QSize(25, 25))
-
-
-def IconeHome(botao, imagem):
-    icon = QIcon()
-    icon.addPixmap(QPixmap(imagem),
-                   QIcon.Normal, QIcon.Off)
-    botao.setIcon(icon)
-    botao.setIconSize(QSize(130, 120))
-
-
-def IconeBotaoForm(botao, imagem):
-    icon = QIcon()
-    icon.addPixmap(QPixmap(imagem),
-                   QIcon.Normal, QIcon.Off)
-    botao.setIcon(icon)
-    botao.setIconSize(QSize(80, 35))
 
 
 def centralizar(object):

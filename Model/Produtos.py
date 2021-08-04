@@ -156,6 +156,14 @@ class Produtos:
         cur.close()
         conn.close()
 
+    def alterar_estoque(self, op, qtd):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"UPDATE produtos SET prod_estoque = prod_estoque {op} {qtd} WHERE prod_id = {self.id}")
+        conn.commit()
+        cur.close()
+        conn.close()
+
     def gravar_imagem_produtos(self, path_to_file, file_extension):
         """ insert a BLOB into a table """
         conn = None

@@ -106,8 +106,8 @@ class ListaVendas(QMainWindow):
                         btn_editar = QPushButton(self.ui.tb_vendas)
                         btn_editar.setText("ABRIR VENDA")
                         btn_editar.setStyleSheet("""
-                                background-color: rgb(0, 0, 150);
-                                color: white;
+                                background-color: #E8DCDC;
+                                color: black;
                         """)
 
                         self.ui.tb_vendas.setCellWidget(i, 7, btn_editar)
@@ -117,16 +117,16 @@ class ListaVendas(QMainWindow):
                         self.ui.tb_vendas.setItem(i, 6, item)
                     else:
                         btn_exc = QPushButton(self.ui.tb_vendas)
-                        btn_exc.setText("EXCLUIR")
+                        btn_exc.setText("DETALHES")
                         btn_exc.setStyleSheet("""
-                            background-color: rgb(200, 0, 0);
-                            color: white;
+                            background-color: #E8DCDC;
+                            color: black;
                         """)
 
                         self.ui.tb_vendas.setCellWidget(i, 7, btn_exc)
-                        btn_exc.clicked.connect(self.excluir)
+                        btn_exc.clicked.connect(self.detalhes_venda)
 
-                        item.setForeground(QBrush(QColor(0, 200, 80)))
+                        item.setForeground(QBrush(QColor(103, 194, 0)))
                         self.ui.tb_vendas.setItem(i, 6, item)
                 elif c == 2:
                     if linha[2] is None:
@@ -198,6 +198,11 @@ class ListaVendas(QMainWindow):
 
                             btn_editar = QPushButton(self.ui.tb_vendas)
                             btn_editar.setText("ABRIR VENDA")
+                            btn_editar.setStyleSheet("""
+                                    background-color: #E8DCDC;
+                                    color: black;
+                            """)
+
                             self.ui.tb_vendas.setCellWidget(i, 7, btn_editar)
                             btn_editar.clicked.connect(self.abrir_venda)
 
@@ -205,11 +210,16 @@ class ListaVendas(QMainWindow):
                             self.ui.tb_vendas.setItem(i, 6, item)
                         else:
                             btn_exc = QPushButton(self.ui.tb_vendas)
-                            btn_exc.setText("EXCLUIR")
-                            self.ui.tb_vendas.setCellWidget(i, 7, btn_exc)
-                            btn_exc.clicked.connect(self.excluir)
+                            btn_exc.setText("DETALHES")
+                            btn_exc.setStyleSheet("""
+                                background-color: #E8DCDC;
+                                color: black;
+                            """)
 
-                            item.setForeground(QBrush(QColor(0, 200, 80)))
+                            self.ui.tb_vendas.setCellWidget(i, 7, btn_exc)
+                            btn_exc.clicked.connect(self.detalhes_venda)
+
+                            item.setForeground(QBrush(QColor(103, 194, 0)))
                             self.ui.tb_vendas.setItem(i, 6, item)
                     elif c == 2:
                         if linha[2] is None:
@@ -236,29 +246,14 @@ class ListaVendas(QMainWindow):
         self.dialogs.append(abrir_venda)
         self.close()
 
-    def excluir(self):
-        self.linha_selecionada = self.ui.tb_vendas.currentRow()
-        self.venda_selecionada.id = self.ui.tb_vendas.item(self.ui.tb_vendas.currentRow(), 0).text()
+    def detalhes_venda(self):
+        id_venda = self.ui.tb_vendas.item(self.ui.tb_vendas.currentRow(), 0).text()
 
-        v_fin = Venda_Fin()
-        v_fin.venda_id = self.ui.tb_vendas.item(self.ui.tb_vendas.currentRow(), 0).text()
+        from Controller.detalhes_venda import DetalhesVenda
+        from Funcoes.utils import exec_app
 
-        v_itens = Vendas()
-        v_itens.id_venda = self.ui.tb_vendas.item(self.ui.tb_vendas.currentRow(), 0).text()
+        det_venda = DetalhesVenda(cod_venda=id_venda)
+        exec_app(det_venda)
+        self.dialogs.append(det_venda)
+        self.close()
 
-        reply = QMessageBox.question(self, 'Excluir?', f'Tem certeza que deseja excluir a venda: '
-                                                       f'{self.venda_selecionada.id}?',
-                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
-
-        if reply == QMessageBox.Yes:
-            try:
-                self.venda_selecionada.delete()
-                v_fin.delete_fin_by_venda()
-                v_itens.delete_venda_by_id()
-                self.venda_selecionada.id = None
-            except Exception as error:
-                QMessageBox.warning(self, "Erro", str(error))
-            else:
-                self.ui.tb_vendas.removeRow(self.linha_selecionada)
-        else:
-            return

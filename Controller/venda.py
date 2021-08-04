@@ -278,6 +278,8 @@ class VendaTemp(QMainWindow):
             from Model.Pendencias import Pendencias
             from Funcoes.utils import data_hora_atual
 
+            itens = Vendas()
+
             fin = Venda_Fin()
             fin.venda_id = Venda_Tmp.get_cod_venda()
 
@@ -290,6 +292,7 @@ class VendaTemp(QMainWindow):
             header.qtd_itens = Venda_Tmp.qtd_itens()
             header.total_descontos = Venda_Tmp.soma_descontos()
             header.valor_total = Venda_Tmp.retorna_total()
+            header.datahora = data_hora_atual()
 
             pend = Pendencias()
             pend.venda = header
@@ -310,10 +313,28 @@ class VendaTemp(QMainWindow):
                 v.id_venda = self.codigo_venda
                 v.delete_venda_by_id()
                 v.inserir_venda()
+
+                itens.id_venda = self.codigo_venda
+                itens_venda = itens.select_produtos_venda()
+
+                for linha in itens_venda:
+                    produtos = Produtos()
+                    produtos.id = linha[1]
+                    qtd = linha[3]
+                    produtos.alterar_estoque("-", qtd)
             else:
                 header.inserir()
                 pend.inserir()
                 Vendas.inserir_venda()
+
+                itens.id_venda = Venda_Tmp.get_cod_venda()
+                itens_venda = itens.select_produtos_venda()
+
+                for linha in itens_venda:
+                    produtos = Produtos()
+                    produtos.id = linha[1]
+                    qtd = linha[3]
+                    produtos.alterar_estoque("-", qtd)
 
             reply = QMessageBox.question(self, 'Imprimir?', f'Deseja imprimir o relatório da venda?',
                                          QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)

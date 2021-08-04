@@ -64,11 +64,53 @@ class Vendas:
         conn.close()
         return select
 
+    def detalhes_venda(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f""" SELECT venda_id, prod_desc, venda_qtd, ROUND(venda_valor::numeric, 2), 
+            ROUND(venda_desconto::numeric, 2), ROUND((venda_qtd * venda_valor)::numeric, 2)
+            FROM vendas_itens
+            INNER JOIN produtos ON venda_prod_serv_id = prod_id
+            WHERE venda_tipo = 'PRODUTO'
+            AND venda_id = {self.id_venda}
+        """)
+        select = cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+        return select
+
+    def select_produtos_venda(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+             SELECT venda_id, venda_prod_serv_id, prod_desc, venda_qtd, prod_estoque
+             FROM vendas_itens
+             INNER JOIN produtos ON venda_prod_serv_id = prod_id
+             WHERE venda_tipo = 'PRODUTO'
+             AND venda_id = {self.id_venda}
+            """)
+        select = cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+        return select
+
     def retorna_total(self):
         conn = conexao()
         cur = conn.cursor()
-        cur.execute(f'SELECT SUM() FROM vendas_itens WHERE venda_id = \'{self.id_venda}\'')
-        row = cur.fetchall()
+        cur.execute(f'SELECT SUM(venda_valor * venda_qtd) FROM vendas_itens WHERE venda_id = \'{self.id_venda}\'')
+        row = cur.fetchone()
         cur.close()
         conn.close()
-        return row
+        return row[0]
+
+    def retorna_total_descontos(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f'SELECT SUM(venda_desconto) FROM vendas_itens WHERE venda_id = \'{self.id_venda}\'')
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+        return row[0]
+

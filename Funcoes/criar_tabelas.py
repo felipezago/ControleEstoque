@@ -195,6 +195,7 @@ def create_tables():
                            venda_total_descontos FLOAT,
                            venda_valor_total FLOAT,
                            venda_status VARCHAR(50),
+                           venda_datahora TIMESTAMP,
                            FOREIGN KEY (venda_clie_id)
                                REFERENCES cliente (clie_id)
                                ON UPDATE CASCADE ON DELETE CASCADE

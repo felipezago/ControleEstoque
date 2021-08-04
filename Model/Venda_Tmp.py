@@ -105,7 +105,8 @@ class Venda_Tmp:
         cur = conn.cursor()
         cur.execute("INSERT INTO venda_tmp "
                     "SELECT venda_cod_interno, venda_clie_id, venda_veic_placa, vendas.venda_id, "
-                    "venda_prod_serv_id, venda_tipo, venda_qtd, venda_valor, venda_desconto, venda_datahora "
+                    "venda_prod_serv_id, venda_tipo, venda_qtd, venda_valor, venda_desconto, "
+                    "vendas_itens.venda_datahora "
                     "FROM vendas_itens "
                     "INNER JOIN vendas "
                     "ON vendas.venda_id = vendas_itens.venda_id "

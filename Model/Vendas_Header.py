@@ -5,7 +5,7 @@ from Model.Cliente import Cliente
 
 class Vendas_Header:
     def __init__(self, id_venda="", cliente: Cliente = "", veiculo: Veiculo = "", qtd_itens="", total_descontos="",
-                 valor_total="", status=""):
+                 valor_total="", status="", datahora=""):
         self.id = id_venda
         self.veiculo = veiculo
         self.cliente = cliente
@@ -13,23 +13,29 @@ class Vendas_Header:
         self.total_descontos = total_descontos
         self.valor_total = valor_total
         self.status = status
+        self.datahora = datahora
 
     def inserir(self):
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"INSERT INTO vendas (venda_id, venda_veic_placa, venda_clie_id, venda_qtd_itens,"
-                    f" venda_total_descontos, venda_valor_total, venda_status) VALUES ({self.id}, "
+                    f" venda_total_descontos, venda_valor_total, venda_status, venda_datahora) VALUES ({self.id}, "
                     f"\'{self.veiculo.placa if self.veiculo.placa else 'null'}\', \'{self.cliente.id}\', "
                     f"{self.qtd_itens}, {self.total_descontos}, "
-                    f"{self.valor_total}, \'{self.status}\')")
+                    f"{self.valor_total}, \'{self.status}\', \'{self.datahora}\')")
         conn.commit()
         cur.close()
         conn.close()
 
-    def delete(self):
+    def delete_venda(self):
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM vendas WHERE venda_id = {self.id}")
+        conn.commit()
+        cur.execute(f"DELETE FROM vendas_fin WHERE vendas_id = {self.id}")
+        conn.commit()
+        cur.execute(f"DELETE FROM vendas_itens WHERE venda_id = {self.id}")
+        conn.commit()
         conn.commit()
         cur.close()
         conn.close()
@@ -207,4 +213,50 @@ class Vendas_Header:
         conn.commit()
         cur.close()
         conn.close()
+
+    def retorna_hora(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+            SELECT venda_datahora FROM vendas
+            WHERE venda_id = {self.id}
+        """)
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return row[0]
+
+    def retorna_placa_veiculo(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+            SELECT venda_veic_placa FROM vendas
+            WHERE venda_id = {self.id}
+        """)
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        if row[0] == "null":
+            return 0
+        else:
+            return row[0]
+
+    def retorna_cod_cliente(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+            SELECT venda_clie_id FROM vendas
+            WHERE venda_id = {self.id}
+        """)
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return row[0]
+
 

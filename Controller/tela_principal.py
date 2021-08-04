@@ -1,5 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut, QLabel, QInputDialog, QLineEdit, QMessageBox, \
-    QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut
 from Model.Operador import Operador
 from Funcoes.utils import exec_app
 import sys
@@ -26,6 +25,8 @@ class TelaPrincipal(QMainWindow):
 
         self.usuario_operador = Usuario()
         self.pessoa_operador = Pessoa()
+
+        self.setWindowIcon(QtGui.QIcon("../Imagens/logo.png"))
 
         palete = QtGui.QPalette()
         image = QtGui.QPixmap(resource_path('../Imagens/background_1920x1080.png'))
@@ -70,6 +71,7 @@ class TelaPrincipal(QMainWindow):
             self.ui.actionCadastroUsuarios.setVisible(False)
             self.ui.actionVisualizaEmpresas.setVisible(False)
             self.ui.menuConfigura_o.menuAction().setVisible(False)
+            self.ui.menuFinanceiro.menuAction().setVisible(False)
             self.ui.actionVisualizaUsuarios.triggered.connect(self.visualiza_usuario)
         else:
             self.ui.actionVisualizaUsuarios.triggered.connect(self.visualiza_usuarios)
@@ -98,9 +100,9 @@ class TelaPrincipal(QMainWindow):
         self.ui.actionVisualizaFinalizadoras.triggered.connect(self.visualiza_finalizadoras)
 
         # actions venda
-        self.ui.actionNova_Venda.triggered.connect(self.nova_venda)
-        self.ui.actionVisualizar_Vendas.triggered.connect(self.vis_venda)
-        self.ui.actionAbrir_Venda.triggered.connect(self.abrir_venda)
+        self.ui.actionNovaVenda.triggered.connect(self.nova_venda)
+        self.ui.actionVisualizar_Venda.triggered.connect(self.vis_venda)
+        self.ui.actionAbrirVenda.triggered.connect(self.abrir_venda)
 
         # actions conf
         self.ui.actionBanco_de_Dados.triggered.connect(self.configurar_db)

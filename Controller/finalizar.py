@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QMainWindow
 
+from Funcoes.utils import data_hora_atual
 from Model.Pendencias import Pendencias
+from Model.Produtos import Produtos
 from Model.Venda_Tmp import Venda_Tmp
 from Model.Venda_Fin import Venda_Fin
 from Model.Finalizadoras import Finalizadoras
@@ -158,6 +160,7 @@ class Finalizar(QMainWindow):
                     header.total_descontos = Venda_Tmp.soma_descontos()
                     header.valor_total = Venda_Tmp.retorna_total()
                     header.status = "FINALIZADO"
+                    header.datahora = data_hora_atual()
 
                     if self.tela_principal.codigo_venda:
                         header.update()
@@ -173,6 +176,16 @@ class Finalizar(QMainWindow):
                     else:
                         header.inserir()
                         Vendas.inserir_venda()
+
+                        itens = Vendas()
+                        itens.id_venda = Venda_Tmp.get_cod_venda()
+                        itens_venda = itens.select_produtos_venda()
+
+                        for linha in itens_venda:
+                            produtos = Produtos()
+                            produtos.id = linha[1]
+                            qtd = linha[3]
+                            produtos.alterar_estoque("-", qtd)
 
                     Venda_Tmp.delete_venda()
 
