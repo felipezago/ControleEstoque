@@ -53,6 +53,20 @@ class Produtos:
         cur.close()
         return row
 
+    @staticmethod
+    def order_by_estoque(param):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f'SELECT prod_id, prod_codbarras, prod_estoque, prod_desc, prod_marca, prod_preco, forn_nome, '
+                    f'cat_descricao FROM produtos '
+                    f'INNER JOIN fornecedor ON prod_forn_id = forn_id '
+                    f'INNER JOIN categoria ON prod_cat_id = cat_id '
+                    f'ORDER BY prod_estoque {param}')
+        row = cur.fetchall()
+        conn.close()
+        cur.close()
+        return row
+
     def get_produto_by_fornecedor(self, op):
         conn = conexao()
         cur = conn.cursor()

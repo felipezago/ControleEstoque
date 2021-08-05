@@ -163,6 +163,14 @@ class ListaProdutos(QMainWindow):
     def limpa_campo_busca(self):
         self.ui.tx_busca.setText("")
 
+        if self.ui.cb_produtos.currentIndex() in (6, 7):
+            self.buscar()
+            self.ui.tx_busca.setEnabled(False)
+            self.ui.bt_busca.setEnabled(False)
+        else:
+            self.ui.tx_busca.setEnabled(True)
+            self.ui.bt_busca.setEnabled(True)
+
     def formatar_texto(self):
         texto = self.ui.tx_busca.text()
         tamanho = len(texto)
@@ -178,6 +186,8 @@ class ListaProdutos(QMainWindow):
         self.ui.cb_produtos.addItem("MARCA")
         self.ui.cb_produtos.addItem("FORNECEDOR")
         self.ui.cb_produtos.addItem("CATEGORIA")
+        self.ui.cb_produtos.addItem("MAIOR ESTOQUE")
+        self.ui.cb_produtos.addItem("MENOR ESTOQUE")
 
     def sair(self):
         self.close()
@@ -194,53 +204,58 @@ class ListaProdutos(QMainWindow):
         prod.fornecedor = Fornecedor()
         dados = ""
 
-        if self.ui.tx_busca.text():
-            if self.ui.cb_produtos.currentIndex() == 0:
-                prod.id = self.ui.tx_busca.text()
-                dados = prod.get_produto_by_id_tb()
-            elif self.ui.cb_produtos.currentIndex() == 1:
-                prod.codbarras = self.ui.tx_busca.text()
-                dados = prod.get_produtos_by_desc("prod_codbarras", prod.codbarras)
-            elif self.ui.cb_produtos.currentIndex() == 2:
-                prod.descricao = self.ui.tx_busca.text().upper()
-                dados = prod.get_produtos_by_desc("prod_desc", prod.descricao)
-            elif self.ui.cb_produtos.currentIndex() == 3:
-                prod.marca = self.ui.tx_busca.text().upper()
-                dados = prod.get_produtos_by_desc("prod_marca", prod.marca)
-            elif self.ui.cb_produtos.currentIndex() == 4:
-                prod.fornecedor.nome = self.ui.tx_busca.text().upper()
-                dados_fornecedor = prod.fornecedor.get_fornecedores_by_desc("forn_nome", prod.fornecedor.nome)
-
-                if dados_fornecedor:
-                    if type(dados_fornecedor) == list:
-                        cods = list()
-                        for item in dados_fornecedor:
-                            cods.append(item[0])
-                        tup = tuple(cods)
-                        prod.fornecedor.id = tup
-                        dados = prod.get_produto_by_fornecedor("in")
-                    else:
-                        prod.fornecedor.id = dados_fornecedor[0]
-                        dados = prod.get_produto_by_fornecedor("=")
-            else:
-                prod.categoria.descricao = self.ui.tx_busca.text().upper()
-                dados_cat = prod.categoria.get_categorias_by_desc(prod.categoria.descricao)
-
-                if dados_cat:
-                    if type(dados_cat) == list:
-                        cods = list()
-                        for item in dados_cat:
-                            cods.append(item[0])
-                        tup = tuple(cods)
-                        prod.categoria.id = tup
-                        dados = prod.get_produto_by_categoria("in")
-                    else:
-                        prod.categoria.id = dados_cat[0]
-                        dados = prod.get_produto_by_categoria("=")
+        if self.ui.cb_produtos.currentIndex() == 6:
+            dados = prod.order_by_estoque("desc")
+        elif self.ui.cb_produtos.currentIndex() == 7:
+            dados = prod.order_by_estoque("asc")
         else:
-            QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
-            self.dados_tabela()
-            return
+            if self.ui.tx_busca.text():
+                if self.ui.cb_produtos.currentIndex() == 0:
+                    prod.id = self.ui.tx_busca.text()
+                    dados = prod.get_produto_by_id_tb()
+                elif self.ui.cb_produtos.currentIndex() == 1:
+                    prod.codbarras = self.ui.tx_busca.text()
+                    dados = prod.get_produtos_by_desc("prod_codbarras", prod.codbarras)
+                elif self.ui.cb_produtos.currentIndex() == 2:
+                    prod.descricao = self.ui.tx_busca.text().upper()
+                    dados = prod.get_produtos_by_desc("prod_desc", prod.descricao)
+                elif self.ui.cb_produtos.currentIndex() == 3:
+                    prod.marca = self.ui.tx_busca.text().upper()
+                    dados = prod.get_produtos_by_desc("prod_marca", prod.marca)
+                elif self.ui.cb_produtos.currentIndex() == 4:
+                    prod.fornecedor.nome = self.ui.tx_busca.text().upper()
+                    dados_fornecedor = prod.fornecedor.get_fornecedores_by_desc("forn_nome", prod.fornecedor.nome)
+
+                    if dados_fornecedor:
+                        if type(dados_fornecedor) == list:
+                            cods = list()
+                            for item in dados_fornecedor:
+                                cods.append(item[0])
+                            tup = tuple(cods)
+                            prod.fornecedor.id = tup
+                            dados = prod.get_produto_by_fornecedor("in")
+                        else:
+                            prod.fornecedor.id = dados_fornecedor[0]
+                            dados = prod.get_produto_by_fornecedor("=")
+                else:
+                    prod.categoria.descricao = self.ui.tx_busca.text().upper()
+                    dados_cat = prod.categoria.get_categorias_by_desc(prod.categoria.descricao)
+
+                    if dados_cat:
+                        if type(dados_cat) == list:
+                            cods = list()
+                            for item in dados_cat:
+                                cods.append(item[0])
+                            tup = tuple(cods)
+                            prod.categoria.id = tup
+                            dados = prod.get_produto_by_categoria("in")
+                        else:
+                            prod.categoria.id = dados_cat[0]
+                            dados = prod.get_produto_by_categoria("=")
+            else:
+                QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
+                self.dados_tabela()
+                return
 
         if dados:
             self.filtrado = True
