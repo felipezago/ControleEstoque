@@ -50,6 +50,11 @@ class TelaPrincipal(QMainWindow):
         self.atalho_abrir_venda = QShortcut(QtGui.QKeySequence("F7"), self)
         self.atalho_abrir_venda.activated.connect(self.abrir_venda)
 
+        self.ui.lbl_atalho_nova_compra.clicked.connect(self.nova_compra)
+        self.ui.lbl_atalho_nova_compra_txt.clicked.connect(self.nova_compra)
+        self.atalho_nova_compra = QShortcut(QtGui.QKeySequence("F8"), self)
+        self.atalho_nova_compra.activated.connect(self.nova_compra)
+
         # redimensionando
         self.resolucao = app.desktop().screenGeometry()
         self.width, self.height = self.resolucao.width(), self.resolucao.height()
@@ -104,6 +109,9 @@ class TelaPrincipal(QMainWindow):
         self.ui.actionVisualizar_Venda.triggered.connect(self.vis_venda)
         self.ui.actionAbrirVenda.triggered.connect(self.abrir_venda)
 
+        # actions compra
+        self.ui.actionNovaCompra.triggered.connect(self.nova_compra)
+
         # actions conf
         self.ui.actionBanco_de_Dados.triggered.connect(self.configurar_db)
 
@@ -142,6 +150,13 @@ class TelaPrincipal(QMainWindow):
         abrir_venda = AbrirVenda()
         exec_app(abrir_venda)
         self.dialogs.append(abrir_venda)
+
+    def nova_compra(self):
+        from Controller.compra import Compra
+
+        compra = Compra()
+        exec_app(compra)
+        self.dialogs.append(compra)
 
     def vis_venda(self):
         from Controller.lista_vendas import ListaVendas

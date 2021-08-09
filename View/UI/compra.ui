@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>778</width>
+    <width>784</width>
     <height>593</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Venda</string>
+   <string>Compra</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background: #FFF;</string>
@@ -33,7 +33,7 @@
      <rect>
       <x>10</x>
       <y>15</y>
-      <width>391</width>
+      <width>461</width>
       <height>30</height>
      </rect>
     </property>
@@ -49,14 +49,14 @@
      <string notr="true">color: rgb(0, 0, 0)</string>
     </property>
     <property name="text">
-     <string>VENDA - SAÍDA DE ESTOQUE</string>
+     <string>COMPRA - ENTRADA DE ESTOQUE</string>
     </property>
    </widget>
   </widget>
   <widget class="QFrame" name="fr_botoes">
    <property name="geometry">
     <rect>
-     <x>-200</x>
+     <x>-190</x>
      <y>560</y>
      <width>991</width>
      <height>31</height>
@@ -119,7 +119,7 @@ background-color: #40a286
    <widget class="QPushButton" name="bt_finalizar">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>650</x>
       <y>0</y>
       <width>161</width>
       <height>31</height>
@@ -161,56 +161,11 @@ QPushButton:hover{
      </size>
     </property>
    </widget>
-   <widget class="QPushButton" name="bt_aberto">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>0</y>
-      <width>161</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Liberation Sans</family>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
-    </property>
-    <property name="contextMenuPolicy">
-     <enum>Qt::ActionsContextMenu</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-	background-color: rgb(186, 176, 48);
-color: #FFF
- }
-QPushButton:hover{
-	background-color: rgb(217, 202, 49);
-}</string>
-    </property>
-    <property name="text">
-     <string>DEIXAR EM ABERTO</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>75</width>
-      <height>35</height>
-     </size>
-    </property>
-   </widget>
   </widget>
   <widget class="QLineEdit" name="tx_busca_item">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>10</x>
      <y>210</y>
      <width>101</width>
      <height>31</height>
@@ -238,7 +193,7 @@ color: #000
   <widget class="QPushButton" name="bt_busca_item">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>110</x>
      <y>210</y>
      <width>30</width>
      <height>31</height>
@@ -270,64 +225,12 @@ color: #000
      <normaloff>../../Imagens/search.png</normaloff>../../Imagens/search.png</iconset>
    </property>
   </widget>
-  <widget class="QComboBox" name="cb_selec">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>210</y>
-     <width>141</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::StrongFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QComboBox{
-background: #fff;
-color: #000;
-font: 13px &quot;Arial&quot; ;
-text-transform: uppercase
-}
-QComboBox:Focus {
-border: 1px solid red;
-}
- QComboBox::drop-down {
-     subcontrol-origin: padding;
-     subcontrol-position: top right;
-     width: 25px;
-     border-left-width: 1px;
-     border-left-color: darkgray;
-     border-left-style: solid; /* just a single line */
-     border-top-right-radius: 3px; /* same radius as the QComboBox */
-     border-bottom-right-radius: 3px;
- }
-QComboBox::down-arrow {
-     image: url(&quot;Imagens/down.png&quot;);
- }
-</string>
-   </property>
-   <item>
-    <property name="text">
-     <string>SELECIONE</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QTableWidget" name="tb_venda">
+  <widget class="QTableWidget" name="tb_compra">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>290</y>
-     <width>841</width>
+     <width>781</width>
      <height>181</height>
     </rect>
    </property>
@@ -444,16 +347,6 @@ padding: 2px;
      <string>VL. TOTAL</string>
     </property>
    </column>
-   <column>
-    <property name="text">
-     <string>DESCONTO</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>TIPO</string>
-    </property>
-   </column>
   </widget>
   <widget class="QLabel" name="lb_tituloClientes_3">
    <property name="geometry">
@@ -483,7 +376,7 @@ padding: 2px;
    <property name="geometry">
     <rect>
      <x>500</x>
-     <y>480</y>
+     <y>500</y>
      <width>161</width>
      <height>21</height>
     </rect>
@@ -507,7 +400,7 @@ padding: 2px;
    <property name="geometry">
     <rect>
      <x>700</x>
-     <y>480</y>
+     <y>500</y>
      <width>71</width>
      <height>21</height>
     </rect>
@@ -536,7 +429,7 @@ padding: 2px;
   <widget class="QLineEdit" name="tx_qtd">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>450</x>
      <y>210</y>
      <width>71</width>
      <height>31</height>
@@ -567,7 +460,7 @@ color: #000
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>450</x>
      <y>190</y>
      <width>41</width>
      <height>17</height>
@@ -586,7 +479,7 @@ color: #000
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>10</x>
      <y>190</y>
      <width>91</width>
      <height>17</height>
@@ -605,8 +498,8 @@ color: #000
   <widget class="QPushButton" name="bt_inserir">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>250</y>
+     <x>620</x>
+     <y>210</y>
      <width>161</width>
      <height>31</height>
     </rect>
@@ -707,7 +600,7 @@ border-bottom: 2px solid #A2A2A2
     <string>CABEÇALHO</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="tx_busca_cliente">
+  <widget class="QLineEdit" name="tx_busca_forn">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -789,10 +682,10 @@ color: #000
     </font>
    </property>
    <property name="text">
-    <string>CLIENTE</string>
+    <string>FORNECEDOR</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="tx_nome_cliente">
+  <widget class="QLineEdit" name="tx_nome_forn">
    <property name="geometry">
     <rect>
      <x>150</x>
@@ -828,7 +721,7 @@ color: #000
     <rect>
      <x>150</x>
      <y>90</y>
-     <width>91</width>
+     <width>111</width>
      <height>17</height>
     </rect>
    </property>
@@ -839,13 +732,13 @@ color: #000
     </font>
    </property>
    <property name="text">
-    <string>NOME</string>
+    <string>NOME FANTASIA</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>150</x>
      <y>190</y>
      <width>91</width>
      <height>17</height>
@@ -864,7 +757,7 @@ color: #000
   <widget class="QLineEdit" name="tx_descricao_prod">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>150</x>
      <y>210</y>
      <width>201</width>
      <height>31</height>
@@ -890,91 +783,6 @@ color: #000
    </property>
    <property name="placeholderText">
     <string/>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="cb_veiculo">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>110</y>
-     <width>201</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::StrongFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QComboBox{
-background: #fff;
-color: #000;
-font: 13px &quot;Arial&quot; ;
-text-transform: uppercase
-}
-QComboBox:Focus {
-border: 1px solid red;
-}
- QComboBox::drop-down {
-     subcontrol-origin: padding;
-     subcontrol-position: top right;
-     width: 25px;
-     border-left-width: 1px;
-     border-left-color: darkgray;
-     border-left-style: solid; /* just a single line */
-     border-top-right-radius: 3px; /* same radius as the QComboBox */
-     border-bottom-right-radius: 3px;
- }
-QComboBox::down-arrow {
-     image: url(&quot;Imagens/down.png&quot;);
- }
-</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>90</y>
-     <width>91</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Liberation Sans</family>
-     <pointsize>9</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>VEÍCULO</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_10">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>190</y>
-     <width>91</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Liberation Sans</family>
-     <pointsize>9</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>TIPO</string>
    </property>
   </widget>
   <widget class="QPushButton" name="bt_excluir">
@@ -1022,45 +830,10 @@ QPushButton:hover{
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="bt_add_veiculo">
-   <property name="geometry">
-    <rect>
-     <x>560</x>
-     <y>110</y>
-     <width>31</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Liberation Sans</family>
-     <pointsize>16</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-background: #7AB32E;
-color: #FFF;
-border: 1px solid green
-}
-QPushButton:hover{
-background-color: #40a286
-}</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset theme="add">
-     <normaloff>../../../../.designer/backup</normaloff>../../../../.designer/backup</iconset>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>360</x>
      <y>190</y>
      <width>51</width>
      <height>17</height>
@@ -1079,7 +852,7 @@ background-color: #40a286
   <widget class="QLineEdit" name="tx_valor">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>360</x>
      <y>210</y>
      <width>81</width>
      <height>31</height>
@@ -1110,7 +883,7 @@ color: #000
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>680</x>
+     <x>530</x>
      <y>190</y>
      <width>51</width>
      <height>17</height>
@@ -1129,7 +902,7 @@ color: #000
   <widget class="QLineEdit" name="tx_total">
    <property name="geometry">
     <rect>
-     <x>680</x>
+     <x>530</x>
      <y>210</y>
      <width>81</width>
      <height>31</height>
@@ -1155,106 +928,6 @@ color: #000
    </property>
    <property name="placeholderText">
     <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="bt_descontos">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>480</y>
-     <width>161</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Liberation Sans</family>
-     <pointsize>10</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="contextMenuPolicy">
-    <enum>Qt::ActionsContextMenu</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton {
-background-color: #1E87F0;
-color: #FFF
- }
-QPushButton:hover{
-background-color: #40a286
-}</string>
-   </property>
-   <property name="text">
-    <string>DESCONTOS</string>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>75</width>
-     <height>35</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lb_tituloClientes_5">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>500</y>
-     <width>131</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Liberation Sans</family>
-     <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 0);
-margin-left: 30pt;</string>
-   </property>
-   <property name="text">
-    <string>DESCONTOS: R$ </string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lb_descontos">
-   <property name="geometry">
-    <rect>
-     <x>700</x>
-     <y>500</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Liberation Sans</family>
-     <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 0)</string>
-   </property>
-   <property name="text">
-    <string>5000,00</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="lb_tituloClientes_6">
@@ -1311,57 +984,12 @@ margin-left: 30pt;</string>
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="bt_alterar_cliente">
-   <property name="geometry">
-    <rect>
-     <x>610</x>
-     <y>110</y>
-     <width>161</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Liberation Sans</family>
-     <pointsize>10</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="contextMenuPolicy">
-    <enum>Qt::ActionsContextMenu</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton {
-	background-color: rgb(186, 176, 48);
-color: #FFF
- }
-QPushButton:hover{
-	background-color: rgb(217, 202, 49);
-}</string>
-   </property>
-   <property name="text">
-    <string>ALTERAR CLIENTE</string>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>75</width>
-     <height>35</height>
-    </size>
-   </property>
-  </widget>
   <widget class="QLabel" name="lb_tituloClientes_7">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>510</x>
      <y>540</y>
-     <width>141</width>
+     <width>151</width>
      <height>16</height>
     </rect>
    </property>
@@ -1377,7 +1005,7 @@ QPushButton:hover{
     <string notr="true">color: rgb(0, 0, 0)</string>
    </property>
    <property name="text">
-    <string>VALOR TOTAL: R$ </string>
+    <string>VALOR TOTAL:   R$ </string>
    </property>
   </widget>
   <widget class="QLabel" name="lb_valor_total">
@@ -1410,11 +1038,54 @@ QPushButton:hover{
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
+  <widget class="QPushButton" name="bt_alterar_cliente">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>110</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Liberation Sans</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::ActionsContextMenu</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	background-color: rgb(186, 176, 48);
+color: #FFF
+ }
+QPushButton:hover{
+	background-color: rgb(217, 202, 49);
+}</string>
+   </property>
+   <property name="text">
+    <string>ALTERAR</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>75</width>
+     <height>35</height>
+    </size>
+   </property>
+  </widget>
  </widget>
  <tabstops>
-  <tabstop>cb_selec</tabstop>
-  <tabstop>tb_venda</tabstop>
-  <tabstop>cb_veiculo</tabstop>
+  <tabstop>tb_compra</tabstop>
  </tabstops>
  <resources/>
  <connections/>

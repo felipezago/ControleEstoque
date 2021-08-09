@@ -201,6 +201,60 @@ def create_tables():
                                ON UPDATE CASCADE ON DELETE CASCADE
                        )
                        """,
+            "criar_compratmp": """
+              CREATE TABLE IF NOT EXISTS compra_tmp (
+                  compra_cod_interno SERIAL PRIMARY KEY,
+                  compra_forn_id INT,
+                  compra_id INT NOT NULL,
+                  compra_prod_id INT NOT NULL,
+                  compra_qtd INT DEFAULT 1,
+                  compra_valor FLOAT NOT NULL,
+                  compra_datahora TIMESTAMP,
+                  FOREIGN KEY (compra_forn_id)
+                       REFERENCES fornecedor (forn_id)
+                           ON UPDATE CASCADE ON DELETE CASCADE,
+                  FOREIGN KEY (compra_prod_id)
+                        REFERENCES produtos (prod_id)
+                            ON UPDATE CASCADE ON DELETE CASCADE
+              )
+              """,
+            "criar_compra": """
+              CREATE TABLE IF NOT EXISTS compra_itens (
+                  compra_cod_interno SERIAL PRIMARY KEY,
+                  compra_id INT NOT NULL,
+                  compra_prod_id INT NOT NULL,
+                  compra_qtd INT NOT NULL,
+                  compra_valor FLOAT NOT NULL,               
+                  compra_datahora TIMESTAMP,
+                  FOREIGN KEY (compra_prod_id)
+                        REFERENCES produtos (prod_id)
+                            ON UPDATE CASCADE ON DELETE CASCADE                             
+              )
+              """,
+            "criar_fin_compra": """
+                      CREATE TABLE IF NOT EXISTS compra_fin (
+                          compra_fin_id SERIAL PRIMARY KEY,
+                          fin_id INT,
+                          compra_id INT,
+                          compra_fin_valor FLOAT,
+                          FOREIGN KEY (fin_id)
+                              REFERENCES finalizadoras (fin_id)
+                              ON UPDATE CASCADE ON DELETE CASCADE
+                      )
+                      """,
+            "criar_compra_cabeçalho": """
+                          CREATE TABLE IF NOT EXISTS compras (
+                              compra_id INT PRIMARY KEY,
+                              compra_forn_id INT,
+                              compra_qtd_itens INT,
+                              compra_valor_total FLOAT,
+                              compra_status VARCHAR(50),
+                              compra_datahora TIMESTAMP,
+                              FOREIGN KEY (compra_forn_id)
+                                   REFERENCES fornecedor (forn_id)
+                                       ON UPDATE CASCADE ON DELETE CASCADE
+                          )
+                          """,
             "criar_pendencias": """
                 CREATE TABLE IF NOT EXISTS pendencias(
                     pend_id SERIAL PRIMARY KEY,

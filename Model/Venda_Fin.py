@@ -25,7 +25,8 @@ class Venda_Fin:
     def get_fins_venda(self):
         conn = conexao()
         cur = conn.cursor()
-        cur.execute(f'SELECT * FROM vendas_fin WHERE vendas_id = {self.venda_id}')
+        cur.execute(f'SELECT * FROM vendas_fin WHERE vendas_id = {self.venda_id} '
+                    f'ORDER BY vendas_fin_id')
         row = cur.fetchall()
         cur.close()
         conn.close()
@@ -63,6 +64,30 @@ class Venda_Fin:
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"DELETE FROM vendas_fin WHERE vendas_id = {self.venda_id}")
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    def check_fin(self, cod):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"SELECT * FROM vendas_fin "
+                    f"INNER JOIN finalizadoras ON vendas_fin.fin_id = finalizadoras.fin_id "
+                    f"WHERE vendas_id = {self.venda_id} AND vendas_fin.fin_id = {cod}")
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+        if row is not None:
+            return True
+        else:
+            return False
+
+    def update_fin_venda(self, cod):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"UPDATE vendas_fin SET vendas_fin_valor = vendas_fin_valor + {self.valor} "
+                    f"WHERE vendas_id = {self.venda_id} "
+                    f"AND fin_id = {cod}")
         conn.commit()
         cur.close()
         conn.close()

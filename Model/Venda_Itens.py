@@ -67,12 +67,17 @@ class Vendas:
     def detalhes_venda(self):
         conn = conexao()
         cur = conn.cursor()
-        cur.execute(f""" SELECT venda_id, prod_desc, venda_qtd, ROUND(venda_valor::numeric, 2), 
+        cur.execute(f""" SELECT venda_id, 
+            CASE 
+            WHEN venda_tipo = 'PRODUTO' THEN prod_desc
+            WHEN venda_tipo = 'SERVIÇO' THEN serv_desc 
+            END, 
+            venda_qtd, ROUND(venda_valor::numeric, 2), 
             ROUND(venda_desconto::numeric, 2), ROUND((venda_qtd * venda_valor)::numeric, 2)
             FROM vendas_itens
-            INNER JOIN produtos ON venda_prod_serv_id = prod_id
-            WHERE venda_tipo = 'PRODUTO'
-            AND venda_id = {self.id_venda}
+            FULL JOIN produtos ON venda_prod_serv_id = prod_id
+            FULL JOIN servicos ON venda_prod_serv_id = serv_id
+            WHERE venda_id = {self.id_venda}
         """)
         select = cur.fetchall()
         conn.commit()

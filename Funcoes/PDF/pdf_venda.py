@@ -68,10 +68,9 @@ def gerar_pdf(venda_id, emp_cnpj, clie_id):
         restante = header_venda[0] - v_fin.valor_pago()
         if restante > 0:
             pdf_venda.cell(center=False, txt=f"Restante:        R$ {restante:.2f}", border=0)
-        else:
+        elif restante < 0:
             pdf_venda.cell(center=False, txt=f"Troco:        R$ {restante*-1:.2f}", border=0)
 
     pdf_venda.set_auto_page_break(auto=True, margin=15)
     pdf_venda.alias_nb_pages()
     pdf_venda.output("PDF/venda.pdf")
-

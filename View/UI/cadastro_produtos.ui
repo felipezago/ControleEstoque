@@ -364,69 +364,6 @@ background-color: #40a286
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormProdutos_15">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>360</y>
-      <width>150</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: bold;
-color: #000
-}</string>
-    </property>
-    <property name="text">
-     <string>MARGEM LUCRO</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lb_FormProdutos_17">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>380</y>
-      <width>150</width>
-      <height>10</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 8px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: normal;
-color: #000
-}</string>
-    </property>
-    <property name="text">
-     <string>(APROXIMADA NO VAREJO)</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lb_porcVar">
-    <property name="geometry">
-     <rect>
-      <x>245</x>
-      <y>360</y>
-      <width>20</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-font-size: 20px;
-font-family: &quot;Arial Unicode MS&quot;;
-font-weight: bold;
-color: #7AB32E
-}</string>
-    </property>
-    <property name="text">
-     <string>%</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
@@ -808,7 +745,7 @@ border: 1px solid red;
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>360</y>
+      <y>350</y>
       <width>150</width>
       <height>30</height>
      </rect>
@@ -838,40 +775,6 @@ border: 1px solid red;
      <string>R$ 0.00</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_PorcentagemVarejo">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>360</y>
-      <width>60</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #FFF;
-border-radius: 2px;
-color: #7AB32E;
-font: 20px &quot;Arial&quot; ;
-font-weight: bold
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
    <zorder>lb_FormProdutos</zorder>
    <zorder>tx_idProduto</zorder>
    <zorder>lb_FotoProduto</zorder>
@@ -883,9 +786,6 @@ border: 1px solid red;
    <zorder>lb_FormProdutos_12</zorder>
    <zorder>fr_BotoesFormProdutos</zorder>
    <zorder>lb_qtdeMin</zorder>
-   <zorder>lb_FormProdutos_15</zorder>
-   <zorder>lb_FormProdutos_17</zorder>
-   <zorder>lb_porcVar</zorder>
    <zorder>label_2</zorder>
    <zorder>bt_DelImagem</zorder>
    <zorder>bt_AddImagem</zorder>
@@ -900,7 +800,6 @@ border: 1px solid red;
    <zorder>lb_FormProdutos_6</zorder>
    <zorder>tx_EstoqueMaximoProduto</zorder>
    <zorder>tx_ValorUnitarioProduto</zorder>
-   <zorder>tx_PorcentagemVarejo</zorder>
   </widget>
  </widget>
  <tabstops>

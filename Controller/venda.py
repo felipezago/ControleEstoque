@@ -380,6 +380,7 @@ class VendaTemp(QMainWindow):
                 venda.id_prod_serv = self.item_selecionado.id
                 venda.qtd = qtd
                 venda.tipo = tipo
+                self.venda_fin.venda_id = Venda_Tmp.get_cod_venda()
                 venda.add_qtd_item()
                 self.limpa_campos_item()
                 self.atualiza_tabela()
@@ -390,6 +391,7 @@ class VendaTemp(QMainWindow):
                 venda.id_prod_serv = self.item_selecionado.id
                 venda.qtd = qtd
                 venda.tipo = tipo
+                self.venda_fin.venda_id = Venda_Tmp.get_cod_venda()
                 venda.add_qtd_item()
                 self.limpa_campos_item()
                 self.atualiza_tabela()
