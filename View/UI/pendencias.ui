@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Lista Vendas</string>
+   <string>Pendências</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background: #FFF;</string>
@@ -87,11 +87,11 @@ QComboBox::down-arrow {
    </item>
    <item>
     <property name="text">
-     <string>FORNECEDOR</string>
+     <string>CLIENTE</string>
     </property>
    </item>
   </widget>
-  <widget class="QTableWidget" name="tb_compras">
+  <widget class="QTableWidget" name="tb_pend">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -192,17 +192,27 @@ padding: 2px;
    </column>
    <column>
     <property name="text">
-     <string>FORNECEDOR</string>
+     <string>VENDA</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>QTD. ITENS</string>
+     <string>CLIENTE</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>TOTAL</string>
+     <string>TOTAL DEVIDO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PAGO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>RESTANTE</string>
     </property>
    </column>
    <column>
@@ -244,7 +254,7 @@ padding: 2px;
      <string notr="true">color: rgb(0, 0, 0)</string>
     </property>
     <property name="text">
-     <string>COMPRAS</string>
+     <string>PENDÊNCIAS</string>
     </property>
    </widget>
   </widget>

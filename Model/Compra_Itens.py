@@ -45,7 +45,7 @@ class Compra_Itens:
         cur.execute(f""" SELECT compra_id, prod_desc, compra_qtd, ROUND(compra_valor::numeric, 2), 
             ROUND((compra_qtd * compra_valor)::numeric, 2)
             FROM compra_itens
-            INNER JOIN produtos ON compra_prod_serv_id = prod_id
+            INNER JOIN produtos ON compra_prod_id = prod_id
             WHERE compra_id = {self.id_compra}
         """)
         select = cur.fetchall()

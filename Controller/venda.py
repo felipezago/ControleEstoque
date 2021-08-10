@@ -249,19 +249,22 @@ class VendaTemp(QMainWindow):
         self.close()
 
     def closeEvent(self, event: QtGui.QCloseEvent):
-        if not Venda_Tmp.check_registros() or Vendas_Header.check_vendas(Venda_Tmp.get_cod_venda()):
+        if not Venda_Tmp.check_registros():
             Venda_Tmp.delete_venda()
+            event.accept()
+        elif Vendas_Header.check_vendas(Venda_Tmp.get_cod_venda()):
+            self.deixar_aberto()
             event.accept()
         else:
             box = QMessageBox()
             box.setIcon(QMessageBox.Question)
             box.setWindowTitle('Sair?')
-            box.setText('Tem certeza que deseja sair sem finalizar a venda? Todos os dados serão perdidos.')
+            box.setText('O que deseja fazer com a venda em aberto?')
             box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
             button_sim = box.button(QMessageBox.Yes)
-            button_sim.setText('Sim')
+            button_sim.setText('Deixar Pendente')
             button_nao = box.button(QMessageBox.No)
-            button_nao.setText('Não')
+            button_nao.setText('Excluir Venda')
             box.exec_()
 
             if box.clickedButton() == button_sim:
@@ -269,6 +272,7 @@ class VendaTemp(QMainWindow):
                 Venda_Tmp.delete_venda()
                 event.accept()
             else:
+                self.deixar_aberto()
                 event.ignore()
 
     def deixar_aberto(self):

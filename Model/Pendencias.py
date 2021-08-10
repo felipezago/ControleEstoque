@@ -47,3 +47,37 @@ class Pendencias:
         conn.commit()
         cur.close()
         conn.close()
+
+    @staticmethod
+    def todas_pendencias():
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"SELECT pend_id, pend_venda_id, clie_nome, ROUND(pend_valor::numeric, 2) FROM pendencias "
+                    f"INNER JOIN cliente ON clie_id = pend_clie_id")
+        row = cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return row
+
+    def busca_pendencias_by_cliente(self, op):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"SELECT pend_id, pend_venda_id, clie_nome, ROUND(pend_valor::numeric, 2) FROM pendencias "
+                    f"INNER JOIN cliente ON clie_id = pend_clie_id"
+                    f"AND clie_id {op} {self.cliente.id}")
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    def busca_pendencias_by_id(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"SELECT pend_id, pend_venda_id, clie_nome, ROUND(pend_valor::numeric, 2) FROM pendencias "
+                    f"INNER JOIN cliente ON clie_id = pend_clie_id"
+                    f"AND pend_id = {self.id}")
+        conn.commit()
+        cur.close()
+        conn.close()
+

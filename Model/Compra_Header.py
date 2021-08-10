@@ -29,10 +29,9 @@ class Compras_Header:
         cur = conn.cursor()
         cur.execute(f"DELETE FROM compras WHERE compra_id = {self.id}")
         conn.commit()
-        cur.execute(f"DELETE FROM compras_fin WHERE compra_id = {self.id}")
+        cur.execute(f"DELETE FROM compra_fin WHERE compra_id = {self.id}")
         conn.commit()
-        cur.execute(f"DELETE FROM compras_itens WHERE compra_id = {self.id}")
-        conn.commit()
+        cur.execute(f"DELETE FROM compra_itens WHERE compra_id = {self.id}")
         conn.commit()
         cur.close()
         conn.close()
@@ -42,8 +41,8 @@ class Compras_Header:
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
-            SELECT compra_id, forn_nome, compra_qtd_itens, ROUND(compra_total_descontos::numeric, 2), 
-            ROUND(compra_valor_total::numeric, 2), compra_status
+            SELECT compra_id, forn_nome, compra_qtd_itens, 
+            ROUND(compra_valor_total::numeric, 2)
             FROM compras
             INNER JOIN fornecedor ON forn_id = compra_forn_id
             ORDER BY compra_id
@@ -59,8 +58,8 @@ class Compras_Header:
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
-                SELECT compra_id, forn_nome, compra_qtd_itens, ROUND(compra_total_descontos::numeric, 2), 
-                ROUND(compra_valor_total::numeric, 2), compra_status
+                SELECT compra_id, forn_nome, compra_qtd_itens,
+                ROUND(compra_valor_total::numeric, 2)
                 FROM compras
                 INNER JOIN fornecedor ON forn_id = compra_forn_id
                 WHERE compra_id = {self.id}
@@ -77,8 +76,8 @@ class Compras_Header:
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
-                SELECT compra_id, forn_nome, compra_qtd_itens, ROUND(compra_total_descontos::numeric, 2), 
-                ROUND(compra_valor_total::numeric, 2), compra_status
+                SELECT compra_id, forn_nome, compra_qtd_itens,
+                ROUND(compra_valor_total::numeric, 2)
                 FROM compras
                 INNER JOIN fornecedor ON forn_id = compra_forn_id
                 WHERE forn_id {op} {self.fornecedor.id}

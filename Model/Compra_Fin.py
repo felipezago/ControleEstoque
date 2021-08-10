@@ -32,6 +32,18 @@ class Compra_Fin:
         conn.close()
         return row
 
+    def get_fins_compra_pdf(self):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f'SELECT fin_desc, compra_fin_valor FROM compra_fin '
+                    f'INNER JOIN finalizadoras ON compra_fin.fin_id = finalizadoras.fin_id '
+                    f'AND compra_id = {self.compra_id} '
+                    f'ORDER BY compra_fin_id')
+        row = cur.fetchall()
+        cur.close()
+        conn.close()
+        return row
+
     def inserir_fin_compra(self):
         conn = conexao()
         cur = conn.cursor()

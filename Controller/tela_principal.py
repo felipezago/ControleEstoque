@@ -55,6 +55,16 @@ class TelaPrincipal(QMainWindow):
         self.atalho_nova_compra = QShortcut(QtGui.QKeySequence("F8"), self)
         self.atalho_nova_compra.activated.connect(self.nova_compra)
 
+        self.ui.lbl_atalho_vis_compra.clicked.connect(self.vis_compra)
+        self.ui.lbl_atalho_vis_compra_txt.clicked.connect(self.vis_compra)
+        self.atalho_vis_compra = QShortcut(QtGui.QKeySequence("F9"), self)
+        self.atalho_vis_compra.activated.connect(self.vis_compra)
+
+        self.ui.lbl_atalho_pend.clicked.connect(self.pend)
+        self.ui.lbl_atalho_pend_txt.clicked.connect(self.pend)
+        self.atalho_pend = QShortcut(QtGui.QKeySequence("F10"), self)
+        self.atalho_pend.activated.connect(self.pend)
+
         # redimensionando
         self.resolucao = app.desktop().screenGeometry()
         self.width, self.height = self.resolucao.width(), self.resolucao.height()
@@ -111,6 +121,10 @@ class TelaPrincipal(QMainWindow):
 
         # actions compra
         self.ui.actionNovaCompra.triggered.connect(self.nova_compra)
+        self.ui.actionVisualizarCompras.triggered.connect(self.vis_compra)
+
+        # actions pendencias
+        self.ui.actionVisualizar_Pendencias.triggered.connect(self.pend)
 
         # actions conf
         self.ui.actionBanco_de_Dados.triggered.connect(self.configurar_db)
@@ -122,6 +136,13 @@ class TelaPrincipal(QMainWindow):
         import threading
         x = threading.Thread(target=self.thread_func)
         x.start()
+
+    def pend(self):
+        from Controller.lista_pendencias import ListaPendencias
+
+        pend = ListaPendencias()
+        exec_app(pend)
+        self.dialogs.append(pend)
 
     def visualiza_finalizadoras(self):
         from Controller.lista_finalizadoras import ListaFinalizadoras
@@ -164,6 +185,13 @@ class TelaPrincipal(QMainWindow):
         l_vendas = ListaVendas()
         exec_app(l_vendas)
         self.dialogs.append(l_vendas)
+
+    def vis_compra(self):
+        from Controller.lista_compras import ListaCompras
+
+        l_compras = ListaCompras()
+        exec_app(l_compras)
+        self.dialogs.append(l_compras)
 
     def visualiza_produtos(self):
         from Controller.lista_produtos import ListaProdutos

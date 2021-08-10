@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem
-from Funcoes.utils import data_hora_atual
 from Model.Cliente import Cliente
 from Model.Veiculo import Veiculo
 from Model.Venda_Fin import Venda_Fin
@@ -132,6 +131,14 @@ class DetalhesVenda(QMainWindow):
             except Exception as error:
                 QMessageBox.warning(self, "Erro", str(error))
             else:
+                QMessageBox.information(self, "Sucesso!", "Venda excluída com sucesso!")
+                from Controller.lista_vendas import ListaVendas
+                from Funcoes.utils import exec_app
+
+                lista_v = ListaVendas()
+                exec_app(lista_v)
+                self.dialogs.append(lista_v)
+
                 self.close()
         else:
             return

@@ -1,9 +1,6 @@
-from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QPushButton
-from Model.Cliente import Cliente
 from Model.Compra_Header import Compras_Header
-from Model.Venda_Fin import Venda_Fin
-from Model.Vendas_Header import Vendas_Header
+from Model.Fornecedor import Fornecedor
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import Qt
 
@@ -38,35 +35,22 @@ class ListaCompras(QMainWindow):
         self.ui.cb_vendas.currentIndexChanged.connect(self.limpa_campo_busca)
 
         self.ui.tb_compras.setColumnWidth(0, 20)
-        self.ui.tb_compras.setColumnWidth(1, 200)
+        self.ui.tb_compras.setColumnWidth(1, 350)
         self.ui.tb_compras.setColumnWidth(2, 150)
         self.ui.tb_compras.setColumnWidth(3, 100)
         self.ui.tb_compras.setColumnWidth(4, 135)
         self.ui.tb_compras.setColumnWidth(5, 100)
 
-        for c in range(0, 6):
+        for c in range(0, 5):
             self.ui.tb_compras.horizontalHeaderItem(c).setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
         self.dados_tabela()
-
-        if self.tela:
-            self.ui.cb_vendas.setCurrentIndex(2)
-            self.ui.bt_refresh.setEnabled(False)
-            self.ui.cb_vendas.setEnabled(False)
 
     def resizeEvent(self, a0: QtGui.QResizeEvent):
         self.resize(self.tamanho_tela)
 
     def limpa_campo_busca(self):
         self.ui.tx_busca.setText("")
-        if self.ui.cb_vendas.currentIndex() in (2, 3):
-            self.ui.tx_busca.setEnabled(False)
-            self.ui.bt_busca.setEnabled(False)
-            self.ui.bt_refresh.setEnabled(False)
-            self.buscar()
-        else:
-            self.ui.tx_busca.setEnabled(True)
-            self.ui.bt_busca.setEnabled(True)
 
     def formatar_texto(self):
         texto = self.ui.tx_busca.text()
@@ -85,52 +69,22 @@ class ListaCompras(QMainWindow):
         self.ui.tb_compras.clearContents()
         self.ui.tb_compras.setRowCount(0)
 
-        dados = Vendas_Header.get_vendas()
+        dados = Compras_Header.get_compras()
 
         for i, linha in enumerate(dados):
 
             self.ui.tb_compras.insertRow(i)
-            for c in range(0, 7):
-                if c == 6:
-                    item = QTableWidgetItem(str(linha[6]))
-                    if linha[6] == "PENDENTE":
-                        fin = Venda_Fin()
-                        fin.venda_id = linha[0]
-                        pago = fin.valor_pago()
+            for c in range(0, 5):
+                if c == 4:
+                    btn_detalhes = QPushButton(self.ui.tb_compras)
+                    btn_detalhes.setText("DETALHES")
+                    btn_detalhes.setStyleSheet("""
+                                                    background-color: #E8DCDC;
+                                                    color: black;
+                                                """)
 
-                        total = linha[5] - pago
-                        self.ui.tb_compras.setItem(i, 5, QTableWidgetItem(str(total)))
-
-                        btn_editar = QPushButton(self.ui.tb_compras)
-                        btn_editar.setText("ABRIR VENDA")
-                        btn_editar.setStyleSheet("""
-                                background-color: #E8DCDC;
-                                color: black;
-                        """)
-
-                        self.ui.tb_compras.setCellWidget(i, 7, btn_editar)
-                        btn_editar.clicked.connect(self.abrir_venda)
-
-                        item.setForeground(QBrush(QColor(255, 0, 0)))
-                        self.ui.tb_compras.setItem(i, 6, item)
-                    else:
-                        btn_exc = QPushButton(self.ui.tb_compras)
-                        btn_exc.setText("DETALHES")
-                        btn_exc.setStyleSheet("""
-                            background-color: #E8DCDC;
-                            color: black;
-                        """)
-
-                        self.ui.tb_compras.setCellWidget(i, 7, btn_exc)
-                        btn_exc.clicked.connect(self.detalhes_venda)
-
-                        item.setForeground(QBrush(QColor(103, 194, 0)))
-                        self.ui.tb_compras.setItem(i, 6, item)
-                elif c == 2:
-                    if linha[2] is None:
-                        self.ui.tb_compras.setItem(i, 2, QTableWidgetItem("SEM VEICULO"))
-                    else:
-                        self.ui.tb_compras.setItem(i, 2, QTableWidgetItem(str(linha[c])))
+                    self.ui.tb_compras.setCellWidget(i, c, btn_detalhes)
+                    btn_detalhes.clicked.connect(self.detalhes_compra)
                 else:
                     self.ui.tb_compras.setItem(i, c, QTableWidgetItem(str(linha[c])))
 
@@ -138,92 +92,57 @@ class ListaCompras(QMainWindow):
         self.ui.tb_compras.clearContents()
         self.ui.tb_compras.setRowCount(0)
 
-        venda = Vendas_Header()
-        venda.cliente = Cliente()
+        compra = Compras_Header()
+        compra.fornecedor = Fornecedor()
         dados = ""
 
         if self.ui.cb_vendas.currentIndex() == 0:
-            venda.id = self.ui.tx_busca.text()
-            if venda.id:
-                dados = venda.busca_vendas_by_id()
+            compra.id = self.ui.tx_busca.text()
+            if compra.id:
+                dados = compra.busca_compras_by_id()
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
                 return
         elif self.ui.cb_vendas.currentIndex() == 1:
-            venda.cliente.nome = self.ui.tx_busca.text().upper()
-            if venda.cliente.nome:
-                dados_cliente = venda.cliente.get_cliente_by_desc("clie_nome", venda.cliente.nome)
+            compra.fornecedor.nome = self.ui.tx_busca.text().upper()
+            dados_fornecedor = compra.fornecedor.get_fornecedores_by_desc("forn_nome", compra.fornecedor.nome)
 
-                if dados_cliente:
-                    if len(dados_cliente) > 1:
+            if compra.fornecedor.nome:
+                if dados_fornecedor:
+                    if type(dados_fornecedor) == list:
                         cods = list()
-                        for item in dados_cliente:
+                        for item in dados_fornecedor:
                             cods.append(item[0])
                         tup = tuple(cods)
-                        venda.cliente.id = tup
-                        dados = venda.busca_vendas_by_cliente("in")
+                        compra.fornecedor.id = tup
+                        dados = compra.busca_compras_by_forn("in")
                     else:
-                        venda.cliente.id = dados_cliente[0][0]
-                        dados = venda.busca_vendas_by_cliente("=")
+                        compra.fornecedor.id = dados_fornecedor[0]
+                        dados = compra.busca_compras_by_forn("=")
             else:
                 QMessageBox.warning(self, "Atenção!", "Favor informar algum valor!")
                 self.dados_tabela()
                 return
-        elif self.ui.cb_vendas.currentIndex() == 2:
-            venda.status = "PENDENTE"
-            dados = venda.busca_vendas_by_status()
-        else:
-            venda.status = "FINALIZADO"
-            dados = venda.busca_vendas_by_status()
 
         if dados:
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
             for i, linha in enumerate(dados):
+
                 self.ui.tb_compras.insertRow(i)
-                for c in range(0, 7):
-                    if c == 6:
-                        item = QTableWidgetItem(str(linha[6]))
-                        if linha[6] == "PENDENTE":
-                            fin = Venda_Fin()
-                            fin.venda_id = linha[0]
-                            pago = fin.valor_pago()
+                for c in range(0, 5):
+                    if c == 4:
+                        btn_detalhes = QPushButton(self.ui.tb_compras)
+                        btn_detalhes.setText("DETALHES")
+                        btn_detalhes.setStyleSheet("""
+                                                        background-color: #E8DCDC;
+                                                        color: black;
+                                                    """)
 
-                            total = linha[5] - pago
-                            self.ui.tb_compras.setItem(i, 5, QTableWidgetItem(str(total)))
-
-                            btn_editar = QPushButton(self.ui.tb_compras)
-                            btn_editar.setText("ABRIR VENDA")
-                            btn_editar.setStyleSheet("""
-                                    background-color: #E8DCDC;
-                                    color: black;
-                            """)
-
-                            self.ui.tb_compras.setCellWidget(i, 7, btn_editar)
-                            btn_editar.clicked.connect(self.abrir_venda)
-
-                            item.setForeground(QBrush(QColor(255, 0, 0)))
-                            self.ui.tb_compras.setItem(i, 6, item)
-                        else:
-                            btn_exc = QPushButton(self.ui.tb_compras)
-                            btn_exc.setText("DETALHES")
-                            btn_exc.setStyleSheet("""
-                                background-color: #E8DCDC;
-                                color: black;
-                            """)
-
-                            self.ui.tb_compras.setCellWidget(i, 7, btn_exc)
-                            btn_exc.clicked.connect(self.detalhes_venda)
-
-                            item.setForeground(QBrush(QColor(103, 194, 0)))
-                            self.ui.tb_compras.setItem(i, 6, item)
-                    elif c == 2:
-                        if linha[2] is None:
-                            self.ui.tb_compras.setItem(i, 2, QTableWidgetItem("SEM VEICULO"))
-                        else:
-                            self.ui.tb_compras.setItem(i, 2, QTableWidgetItem(str(linha[c])))
+                        self.ui.tb_compras.setCellWidget(i, c, btn_detalhes)
+                        btn_detalhes.clicked.connect(self.detalhes_compra)
                     else:
                         self.ui.tb_compras.setItem(i, c, QTableWidgetItem(str(linha[c])))
         else:
@@ -233,13 +152,13 @@ class ListaCompras(QMainWindow):
 
         self.ui.tb_compras.selectRow(0)
 
-    def detalhes_venda(self):
-        id_venda = self.ui.tb_compras.item(self.ui.tb_compras.currentRow(), 0).text()
+    def detalhes_compra(self):
+        id_compra = self.ui.tb_compras.item(self.ui.tb_compras.currentRow(), 0).text()
 
-        from Controller.detalhes_venda import DetalhesVenda
+        from Controller.detalhes_compra import DetalhesCompra
         from Funcoes.utils import exec_app
 
-        det_venda = DetalhesVenda(cod_venda=id_venda)
-        exec_app(det_venda)
-        self.dialogs.append(det_venda)
+        det_compra = DetalhesCompra(cod_compra=id_compra)
+        exec_app(det_compra)
+        self.dialogs.append(det_compra)
         self.close()

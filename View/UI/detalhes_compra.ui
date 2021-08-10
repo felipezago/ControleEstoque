@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>791</width>
-    <height>601</height>
+    <width>792</width>
+    <height>574</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>140</y>
+     <y>100</y>
      <width>781</width>
      <height>181</height>
     </rect>
@@ -221,35 +221,11 @@ padding: 2px;
     <string>Total Itens:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lb_tituloClientes_6">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>90</y>
-     <width>161</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>DejaVu Sans</family>
-     <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 0)</string>
-   </property>
-   <property name="text">
-    <string>Total Líquido:</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="lb_tituloClientes_7">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>350</y>
+     <y>310</y>
      <width>221</width>
      <height>30</height>
     </rect>
@@ -273,8 +249,8 @@ padding: 2px;
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>390</y>
-     <width>791</width>
+     <y>350</y>
+     <width>781</width>
      <height>171</height>
     </rect>
    </property>
@@ -378,7 +354,7 @@ padding: 2px;
    <property name="geometry">
     <rect>
      <x>-190</x>
-     <y>570</y>
+     <y>540</y>
      <width>991</width>
      <height>30</height>
     </rect>
@@ -504,33 +480,9 @@ QPushButton:hover{
   <widget class="QLabel" name="lb_total_itens">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>120</x>
      <y>60</y>
-     <width>111</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Sans</family>
-     <pointsize>12</pointsize>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 0)</string>
-   </property>
-   <property name="text">
-    <string>R$ 5000,00</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lb_total_liquido">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>90</y>
-     <width>111</width>
+     <width>131</width>
      <height>21</height>
     </rect>
    </property>
@@ -554,7 +506,7 @@ QPushButton:hover{
     <rect>
      <x>480</x>
      <y>60</y>
-     <width>341</width>
+     <width>301</width>
      <height>21</height>
     </rect>
    </property>

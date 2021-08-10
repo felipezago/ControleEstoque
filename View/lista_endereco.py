@@ -327,7 +327,7 @@ class Ui_Frame(object):
         self.bt_busca_cep.setGeometry(QtCore.QRect(230, 260, 31, 25))
         self.bt_busca_cep.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("View/UI/../../Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Imagens/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_busca_cep.setIcon(icon)
         self.bt_busca_cep.setObjectName("bt_busca_cep")
 
