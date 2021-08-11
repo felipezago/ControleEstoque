@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem
 from Model.Cliente import Cliente
+from Model.Operador import Operador
+from Model.Usuario import Usuario
 from Model.Veiculo import Veiculo
 from Model.Venda_Fin import Venda_Fin
 from Model.Venda_Itens import Vendas
@@ -47,6 +49,7 @@ class DetalhesVenda(QMainWindow):
 
         self.ui.bt_cancelar.clicked.connect(self.sair)
         self.ui.bt_excluir.clicked.connect(self.excluir)
+        self.ui.bt_imprimir.clicked.connect(self.imprimir)
 
         self.ui.tb_itens.setColumnWidth(0, 20)
         self.ui.tb_itens.setColumnWidth(1, 200)
@@ -67,6 +70,24 @@ class DetalhesVenda(QMainWindow):
         self.dados_tabela_itens()
         self.dados_tabela_fin()
         self.set_lbl()
+
+    def imprimir(self):
+        reply = QMessageBox.question(self, 'Imprimir?', f'Deseja imprimir o relatório da venda?',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+
+        if reply == QMessageBox.Yes:
+            from Funcoes.utils import print_dialog
+            from Funcoes.PDF.pdf_venda import gerar_pdf
+
+            usuario_operador = Usuario()
+            usuario_operador.id = Operador.get_operador_atual()[0]
+            usu = usuario_operador.get_usuario_by_id()
+            cnpj = usu[10]
+
+            gerar_pdf(self.venda_selecionada.id, cnpj, self.venda_selecionada.cliente.id)
+            print_dialog(self, f"venda_{self.venda_selecionada.id}.pdf")
+
+        self.close()
 
     def set_lbl(self):
         self.ui.lb_venda.setText(f"Venda - Código {self.venda_selecionada.id}")

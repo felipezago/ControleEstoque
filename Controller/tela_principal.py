@@ -26,10 +26,10 @@ class TelaPrincipal(QMainWindow):
         self.usuario_operador = Usuario()
         self.pessoa_operador = Pessoa()
 
-        self.setWindowIcon(QtGui.QIcon("../Imagens/logo.png"))
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo.png"))
 
         palete = QtGui.QPalette()
-        image = QtGui.QPixmap(resource_path('../Imagens/background_1920x1080.png'))
+        image = QtGui.QPixmap(QtGui.QPixmap('Imagens/background_1920x1080.png'))
         brush = QtGui.QBrush(image)
         palete.setBrush(QtGui.QPalette.Background, brush)
         self.setPalette(palete)
@@ -87,6 +87,7 @@ class TelaPrincipal(QMainWindow):
             self.ui.actionVisualizaEmpresas.setVisible(False)
             self.ui.menuConfigura_o.menuAction().setVisible(False)
             self.ui.menuFinanceiro.menuAction().setVisible(False)
+            self.ui.actionRelatorio.setVisible(False)
             self.ui.actionVisualizaUsuarios.triggered.connect(self.visualiza_usuario)
         else:
             self.ui.actionVisualizaUsuarios.triggered.connect(self.visualiza_usuarios)
@@ -123,6 +124,9 @@ class TelaPrincipal(QMainWindow):
         self.ui.actionNovaCompra.triggered.connect(self.nova_compra)
         self.ui.actionVisualizarCompras.triggered.connect(self.vis_compra)
 
+        # relatorio
+        self.ui.actionRelatorio.triggered.connect(self.relatorio)
+
         # actions pendencias
         self.ui.actionVisualizar_Pendencias.triggered.connect(self.pend)
 
@@ -136,6 +140,13 @@ class TelaPrincipal(QMainWindow):
         import threading
         x = threading.Thread(target=self.thread_func)
         x.start()
+
+    def relatorio(self):
+        from Controller.relatorio_movimento import RelatorioMovimento
+
+        rel = RelatorioMovimento()
+        exec_app(rel)
+        self.dialogs.append(rel)
 
     def pend(self):
         from Controller.lista_pendencias import ListaPendencias

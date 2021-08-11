@@ -118,6 +118,9 @@ class ListaUsuario(QMainWindow):
                     if self.validar_senhas():
                         if self.ui.tx_nova_senha.text() == self.ui.tx_nova_senha_2.text():
                             usu_editar.senha = self.ui.tx_nova_senha.text()
+                            self.ui.tx_senha_antiga.setText("")
+                            self.ui.tx_nova_senha.setText("")
+                            self.ui.tx_nova_senha_2.setText("")
                 else:
                     self.ui.tx_senha_antiga.clear()
                     self.ui.tx_senha_antiga.setPlaceholderText("A senha antiga não confere")

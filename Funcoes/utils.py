@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from datetime import datetime
 
 from PIL.ImageQt import ImageQt
@@ -104,6 +105,8 @@ def print_dialog(self, img):
     dialog = QPrintDialog(printer, self)
 
     if dialog.exec_() == QPrintDialog.Accepted:
+        if not os.path.isdir('PDF'):
+            os.makedirs('PDF')
         with tempfile.TemporaryDirectory() as path:
             images = convert_from_path("PDF/" + img, dpi=300, output_folder=path)
             painter = QPainter()
@@ -123,6 +126,8 @@ def print_dialog(self, img):
 def remove_pdf(desc):
     import os
 
+    if not os.path.isdir('PDF'):
+        os.makedirs('PDF')
     dir_img = f"PDF/{desc}.png"
 
     if os.path.isfile(dir_img):

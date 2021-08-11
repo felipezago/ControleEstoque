@@ -1,3 +1,5 @@
+import os
+
 from fpdf import FPDF
 from Funcoes.utils import retirar_formatacao, formatar_cnpj
 
@@ -8,6 +10,9 @@ class PDF(FPDF):
 
         self.empresa = empresa
         self.cliente = cliente
+
+        if not os.path.isdir('temp'):
+            os.makedirs('temp')
 
         self.add_page()
         self.informacoes_cliente()

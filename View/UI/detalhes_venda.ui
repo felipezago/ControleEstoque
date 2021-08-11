@@ -674,6 +674,39 @@ QPushButton:hover{
     <string>Volks - Constelation</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="bt_imprimir">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>140</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../../Imagens/gtk-print.png</normaloff>../../Imagens/gtk-print.png</iconset>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

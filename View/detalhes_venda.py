@@ -306,6 +306,25 @@ class Ui_Frame(object):
         self.lb_veiculo.setFont(font)
         self.lb_veiculo.setStyleSheet("color: rgb(0, 0, 0)")
         self.lb_veiculo.setObjectName("lb_veiculo")
+        self.bt_imprimir = QtWidgets.QPushButton(Frame)
+        self.bt_imprimir.setGeometry(QtCore.QRect(730, 140, 41, 31))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_imprimir.setFont(font)
+        self.bt_imprimir.setStyleSheet("QPushButton{\n"
+"color: #FFF\n"
+"}\n"
+"QPushButton:hover{\n"
+"background-color: #40a286\n"
+"}")
+        self.bt_imprimir.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("Imagens/gtk-print.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_imprimir.setIcon(icon)
+        self.bt_imprimir.setObjectName("bt_imprimir")
 
         self.retranslateUi(Frame)
         QtCore.QMetaObject.connectSlotsByName(Frame)

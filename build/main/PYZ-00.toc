@@ -1,0 +1,2402 @@
+('/home/felipe/PycharmProjects/FZR '
+ 'Sistemas/ControleEstoque/build/main/PYZ-00.pyz',
+ [('ssl', '/usr/lib/python3.8/ssl.py', 'PYMODULE'),
+  ('calendar', '/usr/lib/python3.8/calendar.py', 'PYMODULE'),
+  ('argparse', '/usr/lib/python3.8/argparse.py', 'PYMODULE'),
+  ('textwrap', '/usr/lib/python3.8/textwrap.py', 'PYMODULE'),
+  ('shutil', '/usr/lib/python3.8/shutil.py', 'PYMODULE'),
+  ('zipfile', '/usr/lib/python3.8/zipfile.py', 'PYMODULE'),
+  ('py_compile', '/usr/lib/python3.8/py_compile.py', 'PYMODULE'),
+  ('importlib.machinery',
+   '/usr/lib/python3.8/importlib/machinery.py',
+   'PYMODULE'),
+  ('importlib', '/usr/lib/python3.8/importlib/__init__.py', 'PYMODULE'),
+  ('importlib._bootstrap',
+   '/usr/lib/python3.8/importlib/_bootstrap.py',
+   'PYMODULE'),
+  ('importlib._bootstrap_external',
+   '/usr/lib/python3.8/importlib/_bootstrap_external.py',
+   'PYMODULE'),
+  ('importlib.metadata',
+   '/usr/lib/python3.8/importlib/metadata.py',
+   'PYMODULE'),
+  ('importlib.abc', '/usr/lib/python3.8/importlib/abc.py', 'PYMODULE'),
+  ('configparser', '/usr/lib/python3.8/configparser.py', 'PYMODULE'),
+  ('pathlib', '/usr/lib/python3.8/pathlib.py', 'PYMODULE'),
+  ('urllib.parse', '/usr/lib/python3.8/urllib/parse.py', 'PYMODULE'),
+  ('urllib', '/usr/lib/python3.8/urllib/__init__.py', 'PYMODULE'),
+  ('ntpath', '/usr/lib/python3.8/ntpath.py', 'PYMODULE'),
+  ('string', '/usr/lib/python3.8/string.py', 'PYMODULE'),
+  ('genericpath', '/usr/lib/python3.8/genericpath.py', 'PYMODULE'),
+  ('email', '/usr/lib/python3.8/email/__init__.py', 'PYMODULE'),
+  ('email.parser', '/usr/lib/python3.8/email/parser.py', 'PYMODULE'),
+  ('email._policybase', '/usr/lib/python3.8/email/_policybase.py', 'PYMODULE'),
+  ('email.utils', '/usr/lib/python3.8/email/utils.py', 'PYMODULE'),
+  ('email._parseaddr', '/usr/lib/python3.8/email/_parseaddr.py', 'PYMODULE'),
+  ('random', '/usr/lib/python3.8/random.py', 'PYMODULE'),
+  ('hashlib', '/usr/lib/python3.8/hashlib.py', 'PYMODULE'),
+  ('logging', '/usr/lib/python3.8/logging/__init__.py', 'PYMODULE'),
+  ('pickle', '/usr/lib/python3.8/pickle.py', 'PYMODULE'),
+  ('pprint', '/usr/lib/python3.8/pprint.py', 'PYMODULE'),
+  ('doctest', '/usr/lib/python3.8/doctest.py', 'PYMODULE'),
+  ('unittest', '/usr/lib/python3.8/unittest/__init__.py', 'PYMODULE'),
+  ('unittest.signals', '/usr/lib/python3.8/unittest/signals.py', 'PYMODULE'),
+  ('signal', '/usr/lib/python3.8/signal.py', 'PYMODULE'),
+  ('unittest.main', '/usr/lib/python3.8/unittest/main.py', 'PYMODULE'),
+  ('unittest.runner', '/usr/lib/python3.8/unittest/runner.py', 'PYMODULE'),
+  ('unittest.loader', '/usr/lib/python3.8/unittest/loader.py', 'PYMODULE'),
+  ('unittest.suite', '/usr/lib/python3.8/unittest/suite.py', 'PYMODULE'),
+  ('unittest.case', '/usr/lib/python3.8/unittest/case.py', 'PYMODULE'),
+  ('unittest.async_case',
+   '/usr/lib/python3.8/unittest/async_case.py',
+   'PYMODULE'),
+  ('asyncio', '/usr/lib/python3.8/asyncio/__init__.py', 'PYMODULE'),
+  ('asyncio.unix_events',
+   '/usr/lib/python3.8/asyncio/unix_events.py',
+   'PYMODULE'),
+  ('asyncio.log', '/usr/lib/python3.8/asyncio/log.py', 'PYMODULE'),
+  ('subprocess', '/usr/lib/python3.8/subprocess.py', 'PYMODULE'),
+  ('selectors', '/usr/lib/python3.8/selectors.py', 'PYMODULE'),
+  ('asyncio.windows_events',
+   '/usr/lib/python3.8/asyncio/windows_events.py',
+   'PYMODULE'),
+  ('asyncio.windows_utils',
+   '/usr/lib/python3.8/asyncio/windows_utils.py',
+   'PYMODULE'),
+  ('tempfile', '/usr/lib/python3.8/tempfile.py', 'PYMODULE'),
+  ('asyncio.selector_events',
+   '/usr/lib/python3.8/asyncio/selector_events.py',
+   'PYMODULE'),
+  ('asyncio.proactor_events',
+   '/usr/lib/python3.8/asyncio/proactor_events.py',
+   'PYMODULE'),
+  ('asyncio.base_subprocess',
+   '/usr/lib/python3.8/asyncio/base_subprocess.py',
+   'PYMODULE'),
+  ('asyncio.subprocess',
+   '/usr/lib/python3.8/asyncio/subprocess.py',
+   'PYMODULE'),
+  ('asyncio.streams', '/usr/lib/python3.8/asyncio/streams.py', 'PYMODULE'),
+  ('asyncio.queues', '/usr/lib/python3.8/asyncio/queues.py', 'PYMODULE'),
+  ('asyncio.runners', '/usr/lib/python3.8/asyncio/runners.py', 'PYMODULE'),
+  ('asyncio.events', '/usr/lib/python3.8/asyncio/events.py', 'PYMODULE'),
+  ('contextvars', '/usr/lib/python3.8/contextvars.py', 'PYMODULE'),
+  ('asyncio.trsock', '/usr/lib/python3.8/asyncio/trsock.py', 'PYMODULE'),
+  ('asyncio.staggered', '/usr/lib/python3.8/asyncio/staggered.py', 'PYMODULE'),
+  ('typing', '/usr/lib/python3.8/typing.py', 'PYMODULE'),
+  ('asyncio.tasks', '/usr/lib/python3.8/asyncio/tasks.py', 'PYMODULE'),
+  ('concurrent.futures',
+   '/usr/lib/python3.8/concurrent/futures/__init__.py',
+   'PYMODULE'),
+  ('concurrent.futures.thread',
+   '/usr/lib/python3.8/concurrent/futures/thread.py',
+   'PYMODULE'),
+  ('queue', '/usr/lib/python3.8/queue.py', 'PYMODULE'),
+  ('concurrent.futures.process',
+   '/usr/lib/python3.8/concurrent/futures/process.py',
+   'PYMODULE'),
+  ('multiprocessing.queues',
+   '/usr/lib/python3.8/multiprocessing/queues.py',
+   'PYMODULE'),
+  ('multiprocessing.synchronize',
+   '/usr/lib/python3.8/multiprocessing/synchronize.py',
+   'PYMODULE'),
+  ('multiprocessing.heap',
+   '/usr/lib/python3.8/multiprocessing/heap.py',
+   'PYMODULE'),
+  ('multiprocessing.resource_tracker',
+   '/usr/lib/python3.8/multiprocessing/resource_tracker.py',
+   'PYMODULE'),
+  ('multiprocessing.spawn',
+   '/usr/lib/python3.8/multiprocessing/spawn.py',
+   'PYMODULE'),
+  ('runpy', '/usr/lib/python3.8/runpy.py', 'PYMODULE'),
+  ('pkgutil', '/usr/lib/python3.8/pkgutil.py', 'PYMODULE'),
+  ('zipimport', '/usr/lib/python3.8/zipimport.py', 'PYMODULE'),
+  ('multiprocessing.process',
+   '/usr/lib/python3.8/multiprocessing/process.py',
+   'PYMODULE'),
+  ('multiprocessing.util',
+   '/usr/lib/python3.8/multiprocessing/util.py',
+   'PYMODULE'),
+  ('multiprocessing.forkserver',
+   '/usr/lib/python3.8/multiprocessing/forkserver.py',
+   'PYMODULE'),
+  ('multiprocessing.context',
+   '/usr/lib/python3.8/multiprocessing/context.py',
+   'PYMODULE'),
+  ('multiprocessing.popen_spawn_win32',
+   '/usr/lib/python3.8/multiprocessing/popen_spawn_win32.py',
+   'PYMODULE'),
+  ('multiprocessing.popen_forkserver',
+   '/usr/lib/python3.8/multiprocessing/popen_forkserver.py',
+   'PYMODULE'),
+  ('multiprocessing.popen_spawn_posix',
+   '/usr/lib/python3.8/multiprocessing/popen_spawn_posix.py',
+   'PYMODULE'),
+  ('multiprocessing.popen_fork',
+   '/usr/lib/python3.8/multiprocessing/popen_fork.py',
+   'PYMODULE'),
+  ('multiprocessing.sharedctypes',
+   '/usr/lib/python3.8/multiprocessing/sharedctypes.py',
+   'PYMODULE'),
+  ('ctypes', '/usr/lib/python3.8/ctypes/__init__.py', 'PYMODULE'),
+  ('ctypes._endian', '/usr/lib/python3.8/ctypes/_endian.py', 'PYMODULE'),
+  ('multiprocessing.pool',
+   '/usr/lib/python3.8/multiprocessing/pool.py',
+   'PYMODULE'),
+  ('multiprocessing.dummy',
+   '/usr/lib/python3.8/multiprocessing/dummy/__init__.py',
+   'PYMODULE'),
+  ('multiprocessing.dummy.connection',
+   '/usr/lib/python3.8/multiprocessing/dummy/connection.py',
+   'PYMODULE'),
+  ('multiprocessing.managers',
+   '/usr/lib/python3.8/multiprocessing/managers.py',
+   'PYMODULE'),
+  ('multiprocessing.shared_memory',
+   '/usr/lib/python3.8/multiprocessing/shared_memory.py',
+   'PYMODULE'),
+  ('secrets', '/usr/lib/python3.8/secrets.py', 'PYMODULE'),
+  ('hmac', '/usr/lib/python3.8/hmac.py', 'PYMODULE'),
+  ('multiprocessing.reduction',
+   '/usr/lib/python3.8/multiprocessing/reduction.py',
+   'PYMODULE'),
+  ('multiprocessing.resource_sharer',
+   '/usr/lib/python3.8/multiprocessing/resource_sharer.py',
+   'PYMODULE'),
+  ('multiprocessing.connection',
+   '/usr/lib/python3.8/multiprocessing/connection.py',
+   'PYMODULE'),
+  ('xmlrpc.client', '/usr/lib/python3.8/xmlrpc/client.py', 'PYMODULE'),
+  ('xmlrpc', '/usr/lib/python3.8/xmlrpc/__init__.py', 'PYMODULE'),
+  ('xmlrpc.server', '/usr/lib/python3.8/xmlrpc/server.py', 'PYMODULE'),
+  ('pydoc', '/usr/lib/python3.8/pydoc.py', 'PYMODULE'),
+  ('getopt', '/usr/lib/python3.8/getopt.py', 'PYMODULE'),
+  ('webbrowser', '/usr/lib/python3.8/webbrowser.py', 'PYMODULE'),
+  ('glob', '/usr/lib/python3.8/glob.py', 'PYMODULE'),
+  ('shlex', '/usr/lib/python3.8/shlex.py', 'PYMODULE'),
+  ('email.message', '/usr/lib/python3.8/email/message.py', 'PYMODULE'),
+  ('email.policy', '/usr/lib/python3.8/email/policy.py', 'PYMODULE'),
+  ('email.contentmanager',
+   '/usr/lib/python3.8/email/contentmanager.py',
+   'PYMODULE'),
+  ('email.quoprimime', '/usr/lib/python3.8/email/quoprimime.py', 'PYMODULE'),
+  ('email.headerregistry',
+   '/usr/lib/python3.8/email/headerregistry.py',
+   'PYMODULE'),
+  ('email.iterators', '/usr/lib/python3.8/email/iterators.py', 'PYMODULE'),
+  ('email.generator', '/usr/lib/python3.8/email/generator.py', 'PYMODULE'),
+  ('email._encoded_words',
+   '/usr/lib/python3.8/email/_encoded_words.py',
+   'PYMODULE'),
+  ('quopri', '/usr/lib/python3.8/quopri.py', 'PYMODULE'),
+  ('uu', '/usr/lib/python3.8/uu.py', 'PYMODULE'),
+  ('optparse', '/usr/lib/python3.8/optparse.py', 'PYMODULE'),
+  ('pydoc_data.topics', '/usr/lib/python3.8/pydoc_data/topics.py', 'PYMODULE'),
+  ('pydoc_data', '/usr/lib/python3.8/pydoc_data/__init__.py', 'PYMODULE'),
+  ('tty', '/usr/lib/python3.8/tty.py', 'PYMODULE'),
+  ('sysconfig', '/usr/lib/python3.8/sysconfig.py', 'PYMODULE'),
+  ('_sysconfigdata__x86_64-linux-gnu',
+   '/usr/lib/python3.8/_sysconfigdata__x86_64-linux-gnu.py',
+   'PYMODULE'),
+  ('_osx_support', '/usr/lib/python3.8/_osx_support.py', 'PYMODULE'),
+  ('distutils.log', '/usr/lib/python3.8/distutils/log.py', 'PYMODULE'),
+  ('distutils', '/usr/lib/python3.8/distutils/__init__.py', 'PYMODULE'),
+  ('distutils.archive_util',
+   '/usr/lib/python3.8/distutils/archive_util.py',
+   'PYMODULE'),
+  ('distutils.dir_util',
+   '/usr/lib/python3.8/distutils/dir_util.py',
+   'PYMODULE'),
+  ('distutils.file_util',
+   '/usr/lib/python3.8/distutils/file_util.py',
+   'PYMODULE'),
+  ('distutils.dep_util',
+   '/usr/lib/python3.8/distutils/dep_util.py',
+   'PYMODULE'),
+  ('distutils.spawn', '/usr/lib/python3.8/distutils/spawn.py', 'PYMODULE'),
+  ('distutils.debug', '/usr/lib/python3.8/distutils/debug.py', 'PYMODULE'),
+  ('distutils.errors', '/usr/lib/python3.8/distutils/errors.py', 'PYMODULE'),
+  ('distutils.ccompiler',
+   '/usr/lib/python3.8/distutils/ccompiler.py',
+   'PYMODULE'),
+  ('distutils.fancy_getopt',
+   '/usr/lib/python3.8/distutils/fancy_getopt.py',
+   'PYMODULE'),
+  ('distutils.util', '/usr/lib/python3.8/distutils/util.py', 'PYMODULE'),
+  ('distutils.filelist',
+   '/usr/lib/python3.8/distutils/filelist.py',
+   'PYMODULE'),
+  ('distutils.sysconfig',
+   '/usr/lib/python3.8/distutils/sysconfig.py',
+   'PYMODULE'),
+  ('distutils.text_file',
+   '/usr/lib/python3.8/distutils/text_file.py',
+   'PYMODULE'),
+  ('platform', '/usr/lib/python3.8/platform.py', 'PYMODULE'),
+  ('plistlib', '/usr/lib/python3.8/plistlib.py', 'PYMODULE'),
+  ('socketserver', '/usr/lib/python3.8/socketserver.py', 'PYMODULE'),
+  ('html', '/usr/lib/python3.8/html/__init__.py', 'PYMODULE'),
+  ('html.entities', '/usr/lib/python3.8/html/entities.py', 'PYMODULE'),
+  ('http.server', '/usr/lib/python3.8/http/server.py', 'PYMODULE'),
+  ('http', '/usr/lib/python3.8/http/__init__.py', 'PYMODULE'),
+  ('mimetypes', '/usr/lib/python3.8/mimetypes.py', 'PYMODULE'),
+  ('gzip', '/usr/lib/python3.8/gzip.py', 'PYMODULE'),
+  ('_compression', '/usr/lib/python3.8/_compression.py', 'PYMODULE'),
+  ('xml.parsers.expat', '/usr/lib/python3.8/xml/parsers/expat.py', 'PYMODULE'),
+  ('xml.parsers', '/usr/lib/python3.8/xml/parsers/__init__.py', 'PYMODULE'),
+  ('xml', '/usr/lib/python3.8/xml/__init__.py', 'PYMODULE'),
+  ('xml.sax.expatreader',
+   '/usr/lib/python3.8/xml/sax/expatreader.py',
+   'PYMODULE'),
+  ('xml.sax.saxutils', '/usr/lib/python3.8/xml/sax/saxutils.py', 'PYMODULE'),
+  ('urllib.request', '/usr/lib/python3.8/urllib/request.py', 'PYMODULE'),
+  ('getpass', '/usr/lib/python3.8/getpass.py', 'PYMODULE'),
+  ('nturl2path', '/usr/lib/python3.8/nturl2path.py', 'PYMODULE'),
+  ('ftplib', '/usr/lib/python3.8/ftplib.py', 'PYMODULE'),
+  ('netrc', '/usr/lib/python3.8/netrc.py', 'PYMODULE'),
+  ('http.cookiejar', '/usr/lib/python3.8/http/cookiejar.py', 'PYMODULE'),
+  ('urllib.response', '/usr/lib/python3.8/urllib/response.py', 'PYMODULE'),
+  ('urllib.error', '/usr/lib/python3.8/urllib/error.py', 'PYMODULE'),
+  ('xml.sax', '/usr/lib/python3.8/xml/sax/__init__.py', 'PYMODULE'),
+  ('xml.sax.handler', '/usr/lib/python3.8/xml/sax/handler.py', 'PYMODULE'),
+  ('xml.sax._exceptions',
+   '/usr/lib/python3.8/xml/sax/_exceptions.py',
+   'PYMODULE'),
+  ('xml.sax.xmlreader', '/usr/lib/python3.8/xml/sax/xmlreader.py', 'PYMODULE'),
+  ('http.client', '/usr/lib/python3.8/http/client.py', 'PYMODULE'),
+  ('decimal', '/usr/lib/python3.8/decimal.py', 'PYMODULE'),
+  ('_pydecimal', '/usr/lib/python3.8/_pydecimal.py', 'PYMODULE'),
+  ('numbers', '/usr/lib/python3.8/numbers.py', 'PYMODULE'),
+  ('multiprocessing',
+   '/usr/lib/python3.8/multiprocessing/__init__.py',
+   'PYMODULE'),
+  ('concurrent.futures._base',
+   '/usr/lib/python3.8/concurrent/futures/_base.py',
+   'PYMODULE'),
+  ('concurrent', '/usr/lib/python3.8/concurrent/__init__.py', 'PYMODULE'),
+  ('asyncio.base_tasks',
+   '/usr/lib/python3.8/asyncio/base_tasks.py',
+   'PYMODULE'),
+  ('asyncio.locks', '/usr/lib/python3.8/asyncio/locks.py', 'PYMODULE'),
+  ('asyncio.sslproto', '/usr/lib/python3.8/asyncio/sslproto.py', 'PYMODULE'),
+  ('asyncio.transports',
+   '/usr/lib/python3.8/asyncio/transports.py',
+   'PYMODULE'),
+  ('asyncio.base_events',
+   '/usr/lib/python3.8/asyncio/base_events.py',
+   'PYMODULE'),
+  ('asyncio.protocols', '/usr/lib/python3.8/asyncio/protocols.py', 'PYMODULE'),
+  ('asyncio.futures', '/usr/lib/python3.8/asyncio/futures.py', 'PYMODULE'),
+  ('asyncio.coroutines',
+   '/usr/lib/python3.8/asyncio/coroutines.py',
+   'PYMODULE'),
+  ('asyncio.base_futures',
+   '/usr/lib/python3.8/asyncio/base_futures.py',
+   'PYMODULE'),
+  ('asyncio.exceptions',
+   '/usr/lib/python3.8/asyncio/exceptions.py',
+   'PYMODULE'),
+  ('asyncio.format_helpers',
+   '/usr/lib/python3.8/asyncio/format_helpers.py',
+   'PYMODULE'),
+  ('asyncio.constants', '/usr/lib/python3.8/asyncio/constants.py', 'PYMODULE'),
+  ('unittest.result', '/usr/lib/python3.8/unittest/result.py', 'PYMODULE'),
+  ('unittest.util', '/usr/lib/python3.8/unittest/util.py', 'PYMODULE'),
+  ('pdb', '/usr/lib/python3.8/pdb.py', 'PYMODULE'),
+  ('code', '/usr/lib/python3.8/code.py', 'PYMODULE'),
+  ('codeop', '/usr/lib/python3.8/codeop.py', 'PYMODULE'),
+  ('dis', '/usr/lib/python3.8/dis.py', 'PYMODULE'),
+  ('opcode', '/usr/lib/python3.8/opcode.py', 'PYMODULE'),
+  ('bdb', '/usr/lib/python3.8/bdb.py', 'PYMODULE'),
+  ('cmd', '/usr/lib/python3.8/cmd.py', 'PYMODULE'),
+  ('inspect', '/usr/lib/python3.8/inspect.py', 'PYMODULE'),
+  ('ast', '/usr/lib/python3.8/ast.py', 'PYMODULE'),
+  ('token', '/usr/lib/python3.8/token.py', 'PYMODULE'),
+  ('difflib', '/usr/lib/python3.8/difflib.py', 'PYMODULE'),
+  ('__future__', '/usr/lib/python3.8/__future__.py', 'PYMODULE'),
+  ('_compat_pickle', '/usr/lib/python3.8/_compat_pickle.py', 'PYMODULE'),
+  ('bisect', '/usr/lib/python3.8/bisect.py', 'PYMODULE'),
+  ('email.feedparser', '/usr/lib/python3.8/email/feedparser.py', 'PYMODULE'),
+  ('email._header_value_parser',
+   '/usr/lib/python3.8/email/_header_value_parser.py',
+   'PYMODULE'),
+  ('email.header', '/usr/lib/python3.8/email/header.py', 'PYMODULE'),
+  ('email.base64mime', '/usr/lib/python3.8/email/base64mime.py', 'PYMODULE'),
+  ('email.charset', '/usr/lib/python3.8/email/charset.py', 'PYMODULE'),
+  ('email.encoders', '/usr/lib/python3.8/email/encoders.py', 'PYMODULE'),
+  ('email.errors', '/usr/lib/python3.8/email/errors.py', 'PYMODULE'),
+  ('csv', '/usr/lib/python3.8/csv.py', 'PYMODULE'),
+  ('tokenize', '/usr/lib/python3.8/tokenize.py', 'PYMODULE'),
+  ('contextlib', '/usr/lib/python3.8/contextlib.py', 'PYMODULE'),
+  ('threading', '/usr/lib/python3.8/threading.py', 'PYMODULE'),
+  ('_threading_local', '/usr/lib/python3.8/_threading_local.py', 'PYMODULE'),
+  ('struct', '/usr/lib/python3.8/struct.py', 'PYMODULE'),
+  ('posixpath', '/usr/lib/python3.8/posixpath.py', 'PYMODULE'),
+  ('importlib.util', '/usr/lib/python3.8/importlib/util.py', 'PYMODULE'),
+  ('tarfile', '/usr/lib/python3.8/tarfile.py', 'PYMODULE'),
+  ('lzma', '/usr/lib/python3.8/lzma.py', 'PYMODULE'),
+  ('bz2', '/usr/lib/python3.8/bz2.py', 'PYMODULE'),
+  ('fnmatch', '/usr/lib/python3.8/fnmatch.py', 'PYMODULE'),
+  ('stat', '/usr/lib/python3.8/stat.py', 'PYMODULE'),
+  ('copy', '/usr/lib/python3.8/copy.py', 'PYMODULE'),
+  ('gettext', '/usr/lib/python3.8/gettext.py', 'PYMODULE'),
+  ('datetime', '/usr/lib/python3.8/datetime.py', 'PYMODULE'),
+  ('_strptime', '/usr/lib/python3.8/_strptime.py', 'PYMODULE'),
+  ('base64', '/usr/lib/python3.8/base64.py', 'PYMODULE'),
+  ('socket', '/usr/lib/python3.8/socket.py', 'PYMODULE'),
+  ('os', '/usr/lib/python3.8/os.py', 'PYMODULE'),
+  ('pkg_resources',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/__init__.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.version',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/version.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.markers',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/markers.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging._compat',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/_compat.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.specifiers',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/specifiers.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.requirements',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/requirements.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/__init__.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.tags',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/tags.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging._typing',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/_typing.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/__init__.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging._structures',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/_structures.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.appdirs',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/appdirs.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/utils.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.pyparsing',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/pyparsing.py',
+   'PYMODULE'),
+  ('uuid', '/usr/lib/python3.8/uuid.py', 'PYMODULE'),
+  ('ctypes.util', '/usr/lib/python3.8/ctypes/util.py', 'PYMODULE'),
+  ('ctypes._aix', '/usr/lib/python3.8/ctypes/_aix.py', 'PYMODULE'),
+  ('pkg_resources._vendor.packaging.__about__',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/_vendor/packaging/__about__.py',
+   'PYMODULE'),
+  ('pkg_resources.extern',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pkg_resources/extern/__init__.py',
+   'PYMODULE'),
+  ('imp', '/usr/lib/python3.8/imp.py', 'PYMODULE'),
+  ('_py_abc', '/usr/lib/python3.8/_py_abc.py', 'PYMODULE'),
+  ('stringprep', '/usr/lib/python3.8/stringprep.py', 'PYMODULE'),
+  ('tracemalloc', '/usr/lib/python3.8/tracemalloc.py', 'PYMODULE'),
+  ('Funcoes.utils',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/Funcoes/utils.py',
+   'PYMODULE'),
+  ('Funcoes', '-', 'PYMODULE'),
+  ('Model.Venda_Tmp',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Venda_Tmp.py',
+   'PYMODULE'),
+  ('Model', '-', 'PYMODULE'),
+  ('Model.Cliente',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/Model/Cliente.py',
+   'PYMODULE'),
+  ('Model.Pessoa',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/Model/Pessoa.py',
+   'PYMODULE'),
+  ('Model.Endereco',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Endereco.py',
+   'PYMODULE'),
+  ('Model.Veiculo',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/Model/Veiculo.py',
+   'PYMODULE'),
+  ('Funcoes.banco',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/Funcoes/banco.py',
+   'PYMODULE'),
+  ('psycopg2',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/psycopg2/__init__.py',
+   'PYMODULE'),
+  ('psycopg2.extensions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/psycopg2/extensions.py',
+   'PYMODULE'),
+  ('psycopg2._range',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/psycopg2/_range.py',
+   'PYMODULE'),
+  ('psycopg2.extras',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/psycopg2/extras.py',
+   'PYMODULE'),
+  ('psycopg2.sql',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/psycopg2/sql.py',
+   'PYMODULE'),
+  ('psycopg2._ipaddress',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/psycopg2/_ipaddress.py',
+   'PYMODULE'),
+  ('ipaddress', '/usr/lib/python3.8/ipaddress.py', 'PYMODULE'),
+  ('psycopg2._json',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/psycopg2/_json.py',
+   'PYMODULE'),
+  ('json', '/usr/lib/python3.8/json/__init__.py', 'PYMODULE'),
+  ('json.encoder', '/usr/lib/python3.8/json/encoder.py', 'PYMODULE'),
+  ('json.decoder', '/usr/lib/python3.8/json/decoder.py', 'PYMODULE'),
+  ('json.scanner', '/usr/lib/python3.8/json/scanner.py', 'PYMODULE'),
+  ('PyQt5',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PyQt5/__init__.py',
+   'PYMODULE'),
+  ('pdf2image',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pdf2image/__init__.py',
+   'PYMODULE'),
+  ('pdf2image.pdf2image',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pdf2image/pdf2image.py',
+   'PYMODULE'),
+  ('pdf2image.exceptions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pdf2image/exceptions.py',
+   'PYMODULE'),
+  ('pdf2image.parsers',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pdf2image/parsers.py',
+   'PYMODULE'),
+  ('pdf2image.generators',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pdf2image/generators.py',
+   'PYMODULE'),
+  ('PIL.Image',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/Image.py',
+   'PYMODULE'),
+  ('PIL.CurImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/CurImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.FitsStubImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/FitsStubImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.ImageFile',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageFile.py',
+   'PYMODULE'),
+  ('PIL.GribStubImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/GribStubImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.IcoImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/IcoImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.BufrStubImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/BufrStubImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.ImtImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImtImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.ImImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.McIdasImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/McIdasImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.Jpeg2KImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/Jpeg2KImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PcdImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PcdImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PixarImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PixarImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.SunImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/SunImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XbmImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/XbmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.MicImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/MicImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.DdsImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/DdsImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.GbrImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/GbrImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PdfImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PdfImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PdfParser',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PdfParser.py',
+   'PYMODULE'),
+  ('PIL.ImageSequence',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageSequence.py',
+   'PYMODULE'),
+  ('PIL.SgiImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/SgiImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PsdImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PsdImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.MspImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/MspImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.Hdf5StubImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/Hdf5StubImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.EpsImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/EpsImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.IcnsImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/IcnsImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.features',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/features.py',
+   'PYMODULE'),
+  ('PIL.FliImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/FliImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XpmImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/XpmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XVThumbImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/XVThumbImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PalmImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PalmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.BlpImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/BlpImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.WebPImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/WebPImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.FpxImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/FpxImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.FtexImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/FtexImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.SpiderImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/SpiderImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.ImageTk',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageTk.py',
+   'PYMODULE'),
+  ('PIL.PcxImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PcxImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.MpegImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/MpegImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.WmfImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/WmfImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.MpoImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/MpoImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.IptcImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/IptcImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.TgaImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/TgaImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.DcxImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/DcxImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.TiffImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/TiffImagePlugin.py',
+   'PYMODULE'),
+  ('fractions', '/usr/lib/python3.8/fractions.py', 'PYMODULE'),
+  ('PIL.ImageShow',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageShow.py',
+   'PYMODULE'),
+  ('PIL.ImageColor',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageColor.py',
+   'PYMODULE'),
+  ('colorsys', '/usr/lib/python3.8/colorsys.py', 'PYMODULE'),
+  ('PIL.ImageFilter',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageFilter.py',
+   'PYMODULE'),
+  ('PIL.PyAccess',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PyAccess.py',
+   'PYMODULE'),
+  ('PIL.ImagePalette',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImagePalette.py',
+   'PYMODULE'),
+  ('PIL.PaletteFile',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PaletteFile.py',
+   'PYMODULE'),
+  ('PIL.GimpPaletteFile',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/GimpPaletteFile.py',
+   'PYMODULE'),
+  ('PIL.GimpGradientFile',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/GimpGradientFile.py',
+   'PYMODULE'),
+  ('PIL.PngImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PngImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.ImageChops',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageChops.py',
+   'PYMODULE'),
+  ('PIL.PpmImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/PpmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.JpegImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/JpegImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.JpegPresets',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/JpegPresets.py',
+   'PYMODULE'),
+  ('PIL.GifImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/GifImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.BmpImagePlugin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/BmpImagePlugin.py',
+   'PYMODULE'),
+  ('cffi',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/__init__.py',
+   'PYMODULE'),
+  ('cffi.error',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/error.py',
+   'PYMODULE'),
+  ('cffi.api',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/api.py',
+   'PYMODULE'),
+  ('cffi.recompiler',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/recompiler.py',
+   'PYMODULE'),
+  ('distutils.command.build_ext',
+   '/usr/lib/python3.8/distutils/command/build_ext.py',
+   'PYMODULE'),
+  ('distutils.command',
+   '/usr/lib/python3.8/distutils/command/__init__.py',
+   'PYMODULE'),
+  ('distutils._msvccompiler',
+   '/usr/lib/python3.8/distutils/_msvccompiler.py',
+   'PYMODULE'),
+  ('site',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PyInstaller/fake-modules/site.py',
+   'PYMODULE'),
+  ('distutils.extension',
+   '/usr/lib/python3.8/distutils/extension.py',
+   'PYMODULE'),
+  ('distutils.core', '/usr/lib/python3.8/distutils/core.py', 'PYMODULE'),
+  ('distutils.config', '/usr/lib/python3.8/distutils/config.py', 'PYMODULE'),
+  ('cgi', '/usr/lib/python3.8/cgi.py', 'PYMODULE'),
+  ('distutils.cmd', '/usr/lib/python3.8/distutils/cmd.py', 'PYMODULE'),
+  ('distutils.dist', '/usr/lib/python3.8/distutils/dist.py', 'PYMODULE'),
+  ('distutils.versionpredicate',
+   '/usr/lib/python3.8/distutils/versionpredicate.py',
+   'PYMODULE'),
+  ('distutils.version', '/usr/lib/python3.8/distutils/version.py', 'PYMODULE'),
+  ('distutils.msvc9compiler',
+   '/usr/lib/python3.8/distutils/msvc9compiler.py',
+   'PYMODULE'),
+  ('cffi.cffi_opcode',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/cffi_opcode.py',
+   'PYMODULE'),
+  ('cffi.verifier',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/verifier.py',
+   'PYMODULE'),
+  ('cffi.lock',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/lock.py',
+   'PYMODULE'),
+  ('_dummy_thread', '/usr/lib/python3.8/_dummy_thread.py', 'PYMODULE'),
+  ('cffi.pkgconfig',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/pkgconfig.py',
+   'PYMODULE'),
+  ('cffi.vengine_cpy',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/vengine_cpy.py',
+   'PYMODULE'),
+  ('cffi.vengine_gen',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/vengine_gen.py',
+   'PYMODULE'),
+  ('cffi.ffiplatform',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/ffiplatform.py',
+   'PYMODULE'),
+  ('setuptools',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.version',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/version.py',
+   'PYMODULE'),
+  ('setuptools._vendor.more_itertools.recipes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/more_itertools/recipes.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.__about__',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/__about__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._typing',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/_typing.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.requirements',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/requirements.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/utils.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.markers',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/markers.py',
+   'PYMODULE'),
+  ('setuptools._vendor.more_itertools.more',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/more_itertools/more.py',
+   'PYMODULE'),
+  ('setuptools._vendor.more_itertools',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/more_itertools/__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._structures',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/_structures.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._compat',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/_compat.py',
+   'PYMODULE'),
+  ('setuptools._vendor.pyparsing',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/pyparsing.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.tags',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/tags.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.specifiers',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/packaging/specifiers.py',
+   'PYMODULE'),
+  ('setuptools._vendor',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.ordered_set',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_vendor/ordered_set.py',
+   'PYMODULE'),
+  ('setuptools.msvc',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/msvc.py',
+   'PYMODULE'),
+  ('setuptools.monkey',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/monkey.py',
+   'PYMODULE'),
+  ('setuptools.depends',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/depends.py',
+   'PYMODULE'),
+  ('setuptools._imp',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_imp.py',
+   'PYMODULE'),
+  ('setuptools.py34compat',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/py34compat.py',
+   'PYMODULE'),
+  ('setuptools.dist',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/dist.py',
+   'PYMODULE'),
+  ('setuptools.installer',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/installer.py',
+   'PYMODULE'),
+  ('setuptools.wheel',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/wheel.py',
+   'PYMODULE'),
+  ('setuptools.command.egg_info',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/command/egg_info.py',
+   'PYMODULE'),
+  ('setuptools.glob',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/glob.py',
+   'PYMODULE'),
+  ('setuptools.unicode_utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/unicode_utils.py',
+   'PYMODULE'),
+  ('setuptools.command.bdist_egg',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/command/bdist_egg.py',
+   'PYMODULE'),
+  ('setuptools.command.setopt',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/command/setopt.py',
+   'PYMODULE'),
+  ('setuptools.command.sdist',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/command/sdist.py',
+   'PYMODULE'),
+  ('setuptools.command.py36compat',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/command/py36compat.py',
+   'PYMODULE'),
+  ('distutils.command.sdist',
+   '/usr/lib/python3.8/distutils/command/sdist.py',
+   'PYMODULE'),
+  ('setuptools.config',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/config.py',
+   'PYMODULE'),
+  ('setuptools.command',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/command/__init__.py',
+   'PYMODULE'),
+  ('distutils.command.bdist',
+   '/usr/lib/python3.8/distutils/command/bdist.py',
+   'PYMODULE'),
+  ('setuptools.extern',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/extern/__init__.py',
+   'PYMODULE'),
+  ('setuptools.windows_support',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/windows_support.py',
+   'PYMODULE'),
+  ('setuptools.extension',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/extension.py',
+   'PYMODULE'),
+  ('setuptools.version',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/version.py',
+   'PYMODULE'),
+  ('setuptools._deprecation_warning',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/setuptools/_deprecation_warning.py',
+   'PYMODULE'),
+  ('_distutils_hack.override',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/_distutils_hack/override.py',
+   'PYMODULE'),
+  ('_distutils_hack',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/_distutils_hack/__init__.py',
+   'PYMODULE'),
+  ('cffi.cparser',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/cparser.py',
+   'PYMODULE'),
+  ('pycparser.lextab',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/lextab.py',
+   'PYMODULE'),
+  ('pycparser.yacctab',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/yacctab.py',
+   'PYMODULE'),
+  ('pycparser',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/__init__.py',
+   'PYMODULE'),
+  ('pycparser.c_parser',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/c_parser.py',
+   'PYMODULE'),
+  ('pycparser.ast_transforms',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/ast_transforms.py',
+   'PYMODULE'),
+  ('pycparser.plyparser',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/plyparser.py',
+   'PYMODULE'),
+  ('pycparser.c_lexer',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/c_lexer.py',
+   'PYMODULE'),
+  ('pycparser.ply.lex',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/ply/lex.py',
+   'PYMODULE'),
+  ('pycparser.ply.yacc',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/ply/yacc.py',
+   'PYMODULE'),
+  ('pycparser.ply',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/ply/__init__.py',
+   'PYMODULE'),
+  ('pycparser.c_ast',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycparser/c_ast.py',
+   'PYMODULE'),
+  ('cffi.commontypes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/commontypes.py',
+   'PYMODULE'),
+  ('cffi.model',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cffi/model.py',
+   'PYMODULE'),
+  ('PIL._util',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/_util.py',
+   'PYMODULE'),
+  ('PIL._binary',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/_binary.py',
+   'PYMODULE'),
+  ('PIL.TiffTags',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/TiffTags.py',
+   'PYMODULE'),
+  ('PIL.ImageMode',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageMode.py',
+   'PYMODULE'),
+  ('defusedxml.ElementTree',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/ElementTree.py',
+   'PYMODULE'),
+  ('defusedxml',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/__init__.py',
+   'PYMODULE'),
+  ('defusedxml.xmlrpc',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/xmlrpc.py',
+   'PYMODULE'),
+  ('defusedxml.sax',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/sax.py',
+   'PYMODULE'),
+  ('defusedxml.minidom',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/minidom.py',
+   'PYMODULE'),
+  ('xml.dom.minidom', '/usr/lib/python3.8/xml/dom/minidom.py', 'PYMODULE'),
+  ('xml.dom.pulldom', '/usr/lib/python3.8/xml/dom/pulldom.py', 'PYMODULE'),
+  ('xml.dom.expatbuilder',
+   '/usr/lib/python3.8/xml/dom/expatbuilder.py',
+   'PYMODULE'),
+  ('xml.dom.NodeFilter',
+   '/usr/lib/python3.8/xml/dom/NodeFilter.py',
+   'PYMODULE'),
+  ('xml.dom.xmlbuilder',
+   '/usr/lib/python3.8/xml/dom/xmlbuilder.py',
+   'PYMODULE'),
+  ('xml.dom.minicompat',
+   '/usr/lib/python3.8/xml/dom/minicompat.py',
+   'PYMODULE'),
+  ('xml.dom.domreg', '/usr/lib/python3.8/xml/dom/domreg.py', 'PYMODULE'),
+  ('xml.dom', '/usr/lib/python3.8/xml/dom/__init__.py', 'PYMODULE'),
+  ('defusedxml.pulldom',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/pulldom.py',
+   'PYMODULE'),
+  ('defusedxml.expatreader',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/expatreader.py',
+   'PYMODULE'),
+  ('defusedxml.expatbuilder',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/expatbuilder.py',
+   'PYMODULE'),
+  ('defusedxml.cElementTree',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/cElementTree.py',
+   'PYMODULE'),
+  ('xml.etree.cElementTree',
+   '/usr/lib/python3.8/xml/etree/cElementTree.py',
+   'PYMODULE'),
+  ('xml.etree', '/usr/lib/python3.8/xml/etree/__init__.py', 'PYMODULE'),
+  ('xml.etree.ElementPath',
+   '/usr/lib/python3.8/xml/etree/ElementPath.py',
+   'PYMODULE'),
+  ('defusedxml.common',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/common.py',
+   'PYMODULE'),
+  ('xml.etree.ElementTree',
+   '/usr/lib/python3.8/xml/etree/ElementTree.py',
+   'PYMODULE'),
+  ('xml.etree.ElementInclude',
+   '/usr/lib/python3.8/xml/etree/ElementInclude.py',
+   'PYMODULE'),
+  ('PIL',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/__init__.py',
+   'PYMODULE'),
+  ('PIL._version',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/_version.py',
+   'PYMODULE'),
+  ('bcrypt',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/bcrypt/__init__.py',
+   'PYMODULE'),
+  ('bcrypt.__about__',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/bcrypt/__about__.py',
+   'PYMODULE'),
+  ('six',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/six.py',
+   'PYMODULE'),
+  ('PIL.ImageQt',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/PIL/ImageQt.py',
+   'PYMODULE'),
+  ('Controller.configuracao_db',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/configuracao_db.py',
+   'PYMODULE'),
+  ('Controller', '-', 'PYMODULE'),
+  ('View.mainDB',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/View/mainDB.py',
+   'PYMODULE'),
+  ('View', '-', 'PYMODULE'),
+  ('View.login',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/View/login.py',
+   'PYMODULE'),
+  ('Controller.login',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/login.py',
+   'PYMODULE'),
+  ('Controller.cadastro_usuario',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_usuario.py',
+   'PYMODULE'),
+  ('Model.Empresa',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/Model/Empresa.py',
+   'PYMODULE'),
+  ('Controller.cadastro_empresas',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_empresas.py',
+   'PYMODULE'),
+  ('View.cadastro_empresa',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_empresa.py',
+   'PYMODULE'),
+  ('Funcoes.APIs',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/Funcoes/APIs.py',
+   'PYMODULE'),
+  ('requests',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/__init__.py',
+   'PYMODULE'),
+  ('requests.status_codes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/status_codes.py',
+   'PYMODULE'),
+  ('requests.structures',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/structures.py',
+   'PYMODULE'),
+  ('requests.compat',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/compat.py',
+   'PYMODULE'),
+  ('http.cookies', '/usr/lib/python3.8/http/cookies.py', 'PYMODULE'),
+  ('requests.api',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/api.py',
+   'PYMODULE'),
+  ('requests.sessions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/sessions.py',
+   'PYMODULE'),
+  ('requests.adapters',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/adapters.py',
+   'PYMODULE'),
+  ('urllib3.contrib.socks',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/contrib/socks.py',
+   'PYMODULE'),
+  ('urllib3.util.url',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/url.py',
+   'PYMODULE'),
+  ('idna',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/idna/__init__.py',
+   'PYMODULE'),
+  ('idna.intranges',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/idna/intranges.py',
+   'PYMODULE'),
+  ('idna.core',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/idna/core.py',
+   'PYMODULE'),
+  ('idna.uts46data',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/idna/uts46data.py',
+   'PYMODULE'),
+  ('idna.idnadata',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/idna/idnadata.py',
+   'PYMODULE'),
+  ('idna.package_data',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/idna/package_data.py',
+   'PYMODULE'),
+  ('urllib3.packages.six',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/packages/six.py',
+   'PYMODULE'),
+  ('urllib3.packages',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/packages/__init__.py',
+   'PYMODULE'),
+  ('urllib3.packages.ssl_match_hostname',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/packages/ssl_match_hostname/__init__.py',
+   'PYMODULE'),
+  ('urllib3.packages.ssl_match_hostname._implementation',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/packages/ssl_match_hostname/_implementation.py',
+   'PYMODULE'),
+  ('urllib3.connectionpool',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/connectionpool.py',
+   'PYMODULE'),
+  ('urllib3.util.timeout',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/timeout.py',
+   'PYMODULE'),
+  ('urllib3.util.response',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/response.py',
+   'PYMODULE'),
+  ('urllib3.util.request',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/request.py',
+   'PYMODULE'),
+  ('urllib3.util.queue',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/queue.py',
+   'PYMODULE'),
+  ('urllib3.util.proxy',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/proxy.py',
+   'PYMODULE'),
+  ('urllib3.util.ssl_',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/ssl_.py',
+   'PYMODULE'),
+  ('urllib3.util.ssltransport',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/ssltransport.py',
+   'PYMODULE'),
+  ('urllib3.util.connection',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/connection.py',
+   'PYMODULE'),
+  ('urllib3.util.wait',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/wait.py',
+   'PYMODULE'),
+  ('urllib3.contrib._appengine_environ',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/contrib/_appengine_environ.py',
+   'PYMODULE'),
+  ('urllib3.request',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/request.py',
+   'PYMODULE'),
+  ('urllib3.filepost',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/filepost.py',
+   'PYMODULE'),
+  ('urllib3.fields',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/fields.py',
+   'PYMODULE'),
+  ('urllib3.connection',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/connection.py',
+   'PYMODULE'),
+  ('urllib3._version',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/_version.py',
+   'PYMODULE'),
+  ('urllib3._collections',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/_collections.py',
+   'PYMODULE'),
+  ('urllib3.util.retry',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/retry.py',
+   'PYMODULE'),
+  ('urllib3.util',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/util/__init__.py',
+   'PYMODULE'),
+  ('urllib3.response',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/response.py',
+   'PYMODULE'),
+  ('urllib3.poolmanager',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/poolmanager.py',
+   'PYMODULE'),
+  ('requests._internal_utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/_internal_utils.py',
+   'PYMODULE'),
+  ('requests.hooks',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/hooks.py',
+   'PYMODULE'),
+  ('requests.cookies',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/cookies.py',
+   'PYMODULE'),
+  ('dummy_threading', '/usr/lib/python3.8/dummy_threading.py', 'PYMODULE'),
+  ('requests.auth',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/auth.py',
+   'PYMODULE'),
+  ('requests.models',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/models.py',
+   'PYMODULE'),
+  ('requests.packages',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/packages.py',
+   'PYMODULE'),
+  ('requests.utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/utils.py',
+   'PYMODULE'),
+  ('requests.certs',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/certs.py',
+   'PYMODULE'),
+  ('certifi',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/certifi/__init__.py',
+   'PYMODULE'),
+  ('certifi.core',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/certifi/core.py',
+   'PYMODULE'),
+  ('importlib.resources',
+   '/usr/lib/python3.8/importlib/resources.py',
+   'PYMODULE'),
+  ('requests.__version__',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/__version__.py',
+   'PYMODULE'),
+  ('urllib3.exceptions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/exceptions.py',
+   'PYMODULE'),
+  ('urllib3.contrib.pyopenssl',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/contrib/pyopenssl.py',
+   'PYMODULE'),
+  ('urllib3.packages.backports.makefile',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/packages/backports/makefile.py',
+   'PYMODULE'),
+  ('urllib3.packages.backports',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/packages/backports/__init__.py',
+   'PYMODULE'),
+  ('urllib3.contrib',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/contrib/__init__.py',
+   'PYMODULE'),
+  ('urllib3.contrib.appengine',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/contrib/appengine.py',
+   'PYMODULE'),
+  ('charset_normalizer',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/__init__.py',
+   'PYMODULE'),
+  ('charset_normalizer.models',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/models.py',
+   'PYMODULE'),
+  ('charset_normalizer.cd',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/cd.py',
+   'PYMODULE'),
+  ('charset_normalizer.assets',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/assets/__init__.py',
+   'PYMODULE'),
+  ('charset_normalizer.utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/utils.py',
+   'PYMODULE'),
+  ('charset_normalizer.md',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/md.py',
+   'PYMODULE'),
+  ('charset_normalizer.constant',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/constant.py',
+   'PYMODULE'),
+  ('charset_normalizer.version',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/version.py',
+   'PYMODULE'),
+  ('charset_normalizer.legacy',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/legacy.py',
+   'PYMODULE'),
+  ('charset_normalizer.api',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/charset_normalizer/api.py',
+   'PYMODULE'),
+  ('requests.exceptions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests/exceptions.py',
+   'PYMODULE'),
+  ('urllib3',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/urllib3/__init__.py',
+   'PYMODULE'),
+  ('pycep_correios',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycep_correios/__init__.py',
+   'PYMODULE'),
+  ('pycep_correios.client',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycep_correios/client.py',
+   'PYMODULE'),
+  ('pycep_correios.viacep',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycep_correios/viacep.py',
+   'PYMODULE'),
+  ('pycep_correios.correios',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycep_correios/correios.py',
+   'PYMODULE'),
+  ('zeep',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/__init__.py',
+   'PYMODULE'),
+  ('zeep.xsd.valueobjects',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/valueobjects.py',
+   'PYMODULE'),
+  ('zeep.xsd.types',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/types/__init__.py',
+   'PYMODULE'),
+  ('zeep.xsd.types.simple',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/types/simple.py',
+   'PYMODULE'),
+  ('zeep.xsd.schema',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/schema.py',
+   'PYMODULE'),
+  ('zeep.xsd.visitor',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/visitor.py',
+   'PYMODULE'),
+  ('zeep.xsd.types.unresolved',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/types/unresolved.py',
+   'PYMODULE'),
+  ('zeep.utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/utils.py',
+   'PYMODULE'),
+  ('zeep.xsd.elements.builtins',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/elements/builtins.py',
+   'PYMODULE'),
+  ('zeep.xsd.elements.base',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/elements/base.py',
+   'PYMODULE'),
+  ('zeep.loader',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/loader.py',
+   'PYMODULE'),
+  ('defusedxml.lxml',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/defusedxml/lxml.py',
+   'PYMODULE'),
+  ('zeep.ns',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/ns.py',
+   'PYMODULE'),
+  ('zeep.xsd.context',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/context.py',
+   'PYMODULE'),
+  ('zeep.xsd.const',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/const.py',
+   'PYMODULE'),
+  ('zeep.exceptions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/exceptions.py',
+   'PYMODULE'),
+  ('lxml',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/__init__.py',
+   'PYMODULE'),
+  ('lxml.ElementInclude',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/ElementInclude.py',
+   'PYMODULE'),
+  ('lxml.html._html5builder',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/_html5builder.py',
+   'PYMODULE'),
+  ('lxml.cssselect',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/cssselect.py',
+   'PYMODULE'),
+  ('lxml.html.builder',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/builder.py',
+   'PYMODULE'),
+  ('lxml.html.defs',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/defs.py',
+   'PYMODULE'),
+  ('lxml.html.usedoctest',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/usedoctest.py',
+   'PYMODULE'),
+  ('lxml.html',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/__init__.py',
+   'PYMODULE'),
+  ('lxml.html._setmixin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/_setmixin.py',
+   'PYMODULE'),
+  ('lxml.html.ElementSoup',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/ElementSoup.py',
+   'PYMODULE'),
+  ('lxml.html.formfill',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/formfill.py',
+   'PYMODULE'),
+  ('lxml.html._diffcommand',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/_diffcommand.py',
+   'PYMODULE'),
+  ('lxml.html.html5parser',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/html5parser.py',
+   'PYMODULE'),
+  ('lxml.pyclasslookup',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/pyclasslookup.py',
+   'PYMODULE'),
+  ('lxml.isoschematron',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/isoschematron/__init__.py',
+   'PYMODULE'),
+  ('lxml.html.soupparser',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/html/soupparser.py',
+   'PYMODULE'),
+  ('lxml.includes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/includes/__init__.py',
+   'PYMODULE'),
+  ('lxml.usedoctest',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/usedoctest.py',
+   'PYMODULE'),
+  ('lxml.doctestcompare',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/lxml/doctestcompare.py',
+   'PYMODULE'),
+  ('zeep.xsd.types.complex',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/types/complex.py',
+   'PYMODULE'),
+  ('zeep.xsd.utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/utils.py',
+   'PYMODULE'),
+  ('zeep.xsd.elements.indicators',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/elements/indicators.py',
+   'PYMODULE'),
+  ('cached_property',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/cached_property.py',
+   'PYMODULE'),
+  ('zeep.xsd.types.collection',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/types/collection.py',
+   'PYMODULE'),
+  ('zeep.xsd.types.base',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/types/base.py',
+   'PYMODULE'),
+  ('zeep.xsd.types.any',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/types/any.py',
+   'PYMODULE'),
+  ('zeep.xsd.types.builtins',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/types/builtins.py',
+   'PYMODULE'),
+  ('pytz',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pytz/__init__.py',
+   'PYMODULE'),
+  ('pytz.tzfile',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pytz/tzfile.py',
+   'PYMODULE'),
+  ('pytz.tzinfo',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pytz/tzinfo.py',
+   'PYMODULE'),
+  ('pytz.lazy',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pytz/lazy.py',
+   'PYMODULE'),
+  ('pytz.exceptions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pytz/exceptions.py',
+   'PYMODULE'),
+  ('isodate',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/__init__.py',
+   'PYMODULE'),
+  ('isodate.isostrf',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/isostrf.py',
+   'PYMODULE'),
+  ('isodate.duration',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/duration.py',
+   'PYMODULE'),
+  ('isodate.tzinfo',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/tzinfo.py',
+   'PYMODULE'),
+  ('isodate.isotzinfo',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/isotzinfo.py',
+   'PYMODULE'),
+  ('isodate.isoerror',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/isoerror.py',
+   'PYMODULE'),
+  ('isodate.isoduration',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/isoduration.py',
+   'PYMODULE'),
+  ('isodate.isodatetime',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/isodatetime.py',
+   'PYMODULE'),
+  ('isodate.isotime',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/isotime.py',
+   'PYMODULE'),
+  ('isodate.isodates',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/isodate/isodates.py',
+   'PYMODULE'),
+  ('zeep.xsd',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/__init__.py',
+   'PYMODULE'),
+  ('zeep.xsd.elements',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/elements/__init__.py',
+   'PYMODULE'),
+  ('zeep.xsd.elements.references',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/elements/references.py',
+   'PYMODULE'),
+  ('zeep.xsd.elements.element',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/elements/element.py',
+   'PYMODULE'),
+  ('zeep.xsd.elements.attribute',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/elements/attribute.py',
+   'PYMODULE'),
+  ('zeep.xsd.elements.any',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/elements/any.py',
+   'PYMODULE'),
+  ('zeep.xsd.printer',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/xsd/printer.py',
+   'PYMODULE'),
+  ('zeep.transports',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/transports.py',
+   'PYMODULE'),
+  ('zeep.wsdl.utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/utils.py',
+   'PYMODULE'),
+  ('zeep.wsdl',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/__init__.py',
+   'PYMODULE'),
+  ('zeep.wsdl.wsdl',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/wsdl.py',
+   'PYMODULE'),
+  ('zeep.wsdl.bindings',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/bindings/__init__.py',
+   'PYMODULE'),
+  ('zeep.wsdl.bindings.soap',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/bindings/soap.py',
+   'PYMODULE'),
+  ('zeep.wsdl.messages.xop',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/messages/xop.py',
+   'PYMODULE'),
+  ('zeep.wsdl.attachments',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/attachments.py',
+   'PYMODULE'),
+  ('requests_toolbelt.multipart.decoder',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/multipart/decoder.py',
+   'PYMODULE'),
+  ('requests_toolbelt.multipart',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/multipart/__init__.py',
+   'PYMODULE'),
+  ('requests_toolbelt',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/__init__.py',
+   'PYMODULE'),
+  ('requests_toolbelt.utils.user_agent',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/utils/user_agent.py',
+   'PYMODULE'),
+  ('requests_toolbelt.utils',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/utils/__init__.py',
+   'PYMODULE'),
+  ('requests_toolbelt.streaming_iterator',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/streaming_iterator.py',
+   'PYMODULE'),
+  ('requests_toolbelt.auth.guess',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/auth/guess.py',
+   'PYMODULE'),
+  ('requests_toolbelt.auth.http_proxy_digest',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/auth/http_proxy_digest.py',
+   'PYMODULE'),
+  ('requests_toolbelt.auth._digest_auth_compat',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/auth/_digest_auth_compat.py',
+   'PYMODULE'),
+  ('requests_toolbelt.auth',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/auth/__init__.py',
+   'PYMODULE'),
+  ('requests_toolbelt.adapters',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/adapters/__init__.py',
+   'PYMODULE'),
+  ('requests_toolbelt.adapters.source',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/adapters/source.py',
+   'PYMODULE'),
+  ('requests_toolbelt._compat',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/_compat.py',
+   'PYMODULE'),
+  ('requests_toolbelt.adapters.ssl',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/adapters/ssl.py',
+   'PYMODULE'),
+  ('requests_toolbelt.multipart.encoder',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_toolbelt/multipart/encoder.py',
+   'PYMODULE'),
+  ('zeep.wsdl.bindings.http',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/bindings/http.py',
+   'PYMODULE'),
+  ('zeep.wsdl.messages',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/messages/__init__.py',
+   'PYMODULE'),
+  ('zeep.wsdl.messages.soap',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/messages/soap.py',
+   'PYMODULE'),
+  ('zeep.wsdl.messages.multiref',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/messages/multiref.py',
+   'PYMODULE'),
+  ('zeep.wsdl.messages.base',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/messages/base.py',
+   'PYMODULE'),
+  ('zeep.wsdl.messages.mime',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/messages/mime.py',
+   'PYMODULE'),
+  ('zeep.helpers',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/helpers.py',
+   'PYMODULE'),
+  ('zeep.wsdl.messages.http',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/messages/http.py',
+   'PYMODULE'),
+  ('zeep.wsdl.parse',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/parse.py',
+   'PYMODULE'),
+  ('zeep.wsdl.definitions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsdl/definitions.py',
+   'PYMODULE'),
+  ('requests_file',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/requests_file.py',
+   'PYMODULE'),
+  ('zeep.settings',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/settings.py',
+   'PYMODULE'),
+  ('attr',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/__init__.py',
+   'PYMODULE'),
+  ('attr._next_gen',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/_next_gen.py',
+   'PYMODULE'),
+  ('attr._version_info',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/_version_info.py',
+   'PYMODULE'),
+  ('attr._make',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/_make.py',
+   'PYMODULE'),
+  ('attr._compat',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/_compat.py',
+   'PYMODULE'),
+  ('attr._funcs',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/_funcs.py',
+   'PYMODULE'),
+  ('attr._cmp',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/_cmp.py',
+   'PYMODULE'),
+  ('attr.validators',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/validators.py',
+   'PYMODULE'),
+  ('attr.filters',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/filters.py',
+   'PYMODULE'),
+  ('attr.exceptions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/exceptions.py',
+   'PYMODULE'),
+  ('attr.converters',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/converters.py',
+   'PYMODULE'),
+  ('attr.setters',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/setters.py',
+   'PYMODULE'),
+  ('attr._config',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/attr/_config.py',
+   'PYMODULE'),
+  ('zeep.client',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/client.py',
+   'PYMODULE'),
+  ('zeep.cache',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/cache.py',
+   'PYMODULE'),
+  ('sqlite3', '/usr/lib/python3.8/sqlite3/__init__.py', 'PYMODULE'),
+  ('sqlite3.dump', '/usr/lib/python3.8/sqlite3/dump.py', 'PYMODULE'),
+  ('sqlite3.dbapi2', '/usr/lib/python3.8/sqlite3/dbapi2.py', 'PYMODULE'),
+  ('appdirs',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/appdirs.py',
+   'PYMODULE'),
+  ('zeep.proxy',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/proxy.py',
+   'PYMODULE'),
+  ('zeep.wsa',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/wsa.py',
+   'PYMODULE'),
+  ('zeep.plugins',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/zeep/plugins.py',
+   'PYMODULE'),
+  ('pycep_correios.apicep',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycep_correios/apicep.py',
+   'PYMODULE'),
+  ('pycep_correios.exceptions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/pycep_correios/exceptions.py',
+   'PYMODULE'),
+  ('View.cadastro_usuario',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_usuario.py',
+   'PYMODULE'),
+  ('Model.Usuario',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/Model/Usuario.py',
+   'PYMODULE'),
+  ('Controller.tela_principal',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/tela_principal.py',
+   'PYMODULE'),
+  ('Controller.cadastro_servicos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_servicos.py',
+   'PYMODULE'),
+  ('Model.Servicos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Servicos.py',
+   'PYMODULE'),
+  ('View.cadastro_servicos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_servicos.py',
+   'PYMODULE'),
+  ('Controller.cadastro_categoria',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_categoria.py',
+   'PYMODULE'),
+  ('Model.Categoria',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Categoria.py',
+   'PYMODULE'),
+  ('View.cadastro_categoria',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_categoria.py',
+   'PYMODULE'),
+  ('Funcoes.tab_order',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Funcoes/tab_order.py',
+   'PYMODULE'),
+  ('Controller.cadastro_fornecedor',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_fornecedor.py',
+   'PYMODULE'),
+  ('View.cadastro_fornecedor',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_fornecedor.py',
+   'PYMODULE'),
+  ('Model.Fornecedor',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Fornecedor.py',
+   'PYMODULE'),
+  ('Controller.cadastro_produtos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_produtos.py',
+   'PYMODULE'),
+  ('Model.Produtos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Produtos.py',
+   'PYMODULE'),
+  ('View.cadastro_produtos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_produtos.py',
+   'PYMODULE'),
+  ('Controller.cadastro_clientes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_clientes.py',
+   'PYMODULE'),
+  ('View.cadastro_cliente',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_cliente.py',
+   'PYMODULE'),
+  ('Controller.cadastro_veiculos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_veiculos.py',
+   'PYMODULE'),
+  ('View.cadastro_veiculo',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_veiculo.py',
+   'PYMODULE'),
+  ('Controller.lista_servicos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_servicos.py',
+   'PYMODULE'),
+  ('View.lista_servicos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_servicos.py',
+   'PYMODULE'),
+  ('Controller.lista_categorias',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_categorias.py',
+   'PYMODULE'),
+  ('View.lista_categorias',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_categorias.py',
+   'PYMODULE'),
+  ('Controller.lista_endereco',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_endereco.py',
+   'PYMODULE'),
+  ('View.lista_endereco',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_endereco.py',
+   'PYMODULE'),
+  ('Controller.lista_usuarios',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_usuarios.py',
+   'PYMODULE'),
+  ('View.lista_usuarios',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_usuarios.py',
+   'PYMODULE'),
+  ('Controller.lista_usuario',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_usuario.py',
+   'PYMODULE'),
+  ('View.lista_usuario',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_usuario.py',
+   'PYMODULE'),
+  ('Controller.lista_empresa',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_empresa.py',
+   'PYMODULE'),
+  ('View.lista_empresa',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_empresa.py',
+   'PYMODULE'),
+  ('Controller.lista_clientes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_clientes.py',
+   'PYMODULE'),
+  ('View.lista_clientes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_clientes.py',
+   'PYMODULE'),
+  ('Controller.lista_veiculos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_veiculos.py',
+   'PYMODULE'),
+  ('View.lista_veiculos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_veiculos.py',
+   'PYMODULE'),
+  ('Controller.lista_fornecedores',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_fornecedores.py',
+   'PYMODULE'),
+  ('View.lista_fornecedores',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_fornecedores.py',
+   'PYMODULE'),
+  ('Controller.lista_produtos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_produtos.py',
+   'PYMODULE'),
+  ('View.lista_produtos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_produtos.py',
+   'PYMODULE'),
+  ('Model.Compra_Itens',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Compra_Itens.py',
+   'PYMODULE'),
+  ('Controller.lista_compras',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_compras.py',
+   'PYMODULE'),
+  ('Controller.detalhes_compra',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/detalhes_compra.py',
+   'PYMODULE'),
+  ('View.detalhes_compra',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/detalhes_compra.py',
+   'PYMODULE'),
+  ('Model.Compra_Fin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Compra_Fin.py',
+   'PYMODULE'),
+  ('Model.Finalizadoras',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Finalizadoras.py',
+   'PYMODULE'),
+  ('View.lista_compras',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_compras.py',
+   'PYMODULE'),
+  ('Model.Compra_Header',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Compra_Header.py',
+   'PYMODULE'),
+  ('Controller.lista_vendas',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_vendas.py',
+   'PYMODULE'),
+  ('Controller.detalhes_venda',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/detalhes_venda.py',
+   'PYMODULE'),
+  ('Funcoes.PDF.pdf_venda',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Funcoes/PDF/pdf_venda.py',
+   'PYMODULE'),
+  ('Funcoes.PDF', '-', 'PYMODULE'),
+  ('Funcoes.PDF.tabela_pdf',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Funcoes/PDF/tabela_pdf.py',
+   'PYMODULE'),
+  ('fpdf',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/__init__.py',
+   'PYMODULE'),
+  ('fpdf.deprecation',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/deprecation.py',
+   'PYMODULE'),
+  ('fpdf.template',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/template.py',
+   'PYMODULE'),
+  ('fpdf.errors',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/errors.py',
+   'PYMODULE'),
+  ('fpdf.html',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/html.py',
+   'PYMODULE'),
+  ('html.parser', '/usr/lib/python3.8/html/parser.py', 'PYMODULE'),
+  ('_markupbase', '/usr/lib/python3.8/_markupbase.py', 'PYMODULE'),
+  ('fpdf.fpdf',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/fpdf.py',
+   'PYMODULE'),
+  ('fpdf.syntax',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/syntax.py',
+   'PYMODULE'),
+  ('fpdf.util',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/util.py',
+   'PYMODULE'),
+  ('fpdf.ttfonts',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/ttfonts.py',
+   'PYMODULE'),
+  ('fpdf.structure_tree',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/structure_tree.py',
+   'PYMODULE'),
+  ('fpdf.recorder',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/recorder.py',
+   'PYMODULE'),
+  ('fpdf.outline',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/outline.py',
+   'PYMODULE'),
+  ('fpdf.image_parsing',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/image_parsing.py',
+   'PYMODULE'),
+  ('fpdf.fonts',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/fonts.py',
+   'PYMODULE'),
+  ('fpdf.actions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/venv/lib/python3.8/site-packages/fpdf/actions.py',
+   'PYMODULE'),
+  ('View.detalhes_venda',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/detalhes_venda.py',
+   'PYMODULE'),
+  ('View.lista_vendas',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_vendas.py',
+   'PYMODULE'),
+  ('Model.Vendas_Header',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Vendas_Header.py',
+   'PYMODULE'),
+  ('Model.Venda_Itens',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Venda_Itens.py',
+   'PYMODULE'),
+  ('Model.Venda_Fin',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Venda_Fin.py',
+   'PYMODULE'),
+  ('Controller.compra',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/compra.py',
+   'PYMODULE'),
+  ('Controller.pesquisa_produto',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/pesquisa_produto.py',
+   'PYMODULE'),
+  ('View.pesquisa_produtos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/pesquisa_produtos.py',
+   'PYMODULE'),
+  ('Controller.pesquisa_forn',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/pesquisa_forn.py',
+   'PYMODULE'),
+  ('View.pesquisa_fornecedores',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/pesquisa_fornecedores.py',
+   'PYMODULE'),
+  ('Controller.finalizar',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/finalizar.py',
+   'PYMODULE'),
+  ('View.finalizar',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/finalizar.py',
+   'PYMODULE'),
+  ('Model.Pendencias',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Pendencias.py',
+   'PYMODULE'),
+  ('View.compra',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/View/compra.py',
+   'PYMODULE'),
+  ('Model.Compra_Tmp',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Compra_Tmp.py',
+   'PYMODULE'),
+  ('Controller.abrir_venda',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/abrir_venda.py',
+   'PYMODULE'),
+  ('View.abrir_venda',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/abrir_venda.py',
+   'PYMODULE'),
+  ('Controller.venda',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/venda.py',
+   'PYMODULE'),
+  ('Controller.pesquisa_servico',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/pesquisa_servico.py',
+   'PYMODULE'),
+  ('View.pesquisa_servicos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/pesquisa_servicos.py',
+   'PYMODULE'),
+  ('Controller.pesquisa_cliente',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/pesquisa_cliente.py',
+   'PYMODULE'),
+  ('View.pesquisa_clientes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/pesquisa_clientes.py',
+   'PYMODULE'),
+  ('Controller.descontos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/descontos.py',
+   'PYMODULE'),
+  ('View.descontos',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/descontos.py',
+   'PYMODULE'),
+  ('View.venda',
+   '/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque/View/venda.py',
+   'PYMODULE'),
+  ('Controller.cadastro_finalizadoras',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/cadastro_finalizadoras.py',
+   'PYMODULE'),
+  ('View.cadastro_finalizadoras',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/cadastro_finalizadoras.py',
+   'PYMODULE'),
+  ('Controller.lista_finalizadoras',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_finalizadoras.py',
+   'PYMODULE'),
+  ('View.lista_finalizadoras',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/lista_finalizadoras.py',
+   'PYMODULE'),
+  ('Controller.lista_pendencias',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/lista_pendencias.py',
+   'PYMODULE'),
+  ('View.pendencias',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/pendencias.py',
+   'PYMODULE'),
+  ('Controller.relatorio_movimento',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Controller/relatorio_movimento.py',
+   'PYMODULE'),
+  ('View.relatorio_movimento',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/relatorio_movimento.py',
+   'PYMODULE'),
+  ('View.tela_principal',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/View/tela_principal.py',
+   'PYMODULE'),
+  ('Funcoes.classes',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Funcoes/classes.py',
+   'PYMODULE'),
+  ('Funcoes.criar_tabelas',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Funcoes/criar_tabelas.py',
+   'PYMODULE'),
+  ('Funcoes.configdb',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Funcoes/configdb.py',
+   'PYMODULE'),
+  ('Funcoes.exceptions',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Funcoes/exceptions.py',
+   'PYMODULE'),
+  ('Model.Operador',
+   '/home/felipe/PycharmProjects/FZR '
+   'Sistemas/ControleEstoque/Model/Operador.py',
+   'PYMODULE')])

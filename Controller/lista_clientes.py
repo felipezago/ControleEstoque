@@ -205,18 +205,31 @@ class ListaClientes(QMainWindow):
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
 
-            for i, linha in enumerate(dados):
-                self.ui.tb_clientes.insertRow(i)
+            if isinstance(dados, list):
+                for i, linha in enumerate(dados):
+                    self.ui.tb_clientes.insertRow(i)
+                    for j in range(0, 13):
+                        if j == 1:
+                            if len(linha[j]) >= 14:
+                                self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
+                            else:
+                                self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
+                        elif j == 5:
+                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_rg(str(linha[j]))))
+                        else:
+                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
+            else:
+                self.ui.tb_clientes.insertRow(0)
                 for j in range(0, 13):
                     if j == 1:
-                        if len(linha[j]) >= 14:
-                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
+                        if len(dados[j]) >= 14:
+                            self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_cnpj(str(dados[j]))))
                         else:
-                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
+                            self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_cpf(str(dados[j]))))
                     elif j == 5:
-                        self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_rg(str(linha[j]))))
+                        self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_rg(str(dados[j]))))
                     else:
-                        self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
+                        self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(str(dados[j])))
         else:
             QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
             self.ui.tx_busca.setText("")

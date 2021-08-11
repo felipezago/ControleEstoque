@@ -368,6 +368,7 @@ color: rgb(0, 0, 0);</string>
     </widget>
     <addaction name="menuVenda"/>
     <addaction name="menuCompra"/>
+    <addaction name="actionRelatorio"/>
    </widget>
    <addaction name="menu_cadastros"/>
    <addaction name="menu_visualizar"/>
@@ -540,6 +541,11 @@ color: rgb(0, 0, 0);</string>
   <action name="actionVisualizarCompras">
    <property name="text">
     <string>Visualizar Compras</string>
+   </property>
+  </action>
+  <action name="actionRelatorio">
+   <property name="text">
+    <string>Relatório</string>
    </property>
   </action>
  </widget>

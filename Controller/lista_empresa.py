@@ -1,3 +1,5 @@
+import os
+
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Empresa import Empresa
@@ -25,6 +27,9 @@ class ListaEmpresa(QMainWindow):
         super(ListaEmpresa, self).__init__(parent)
         from View.lista_empresa import Ui_Frame
         from Funcoes.utils import IconeBotaoMenu, resource_path
+
+        if not os.path.isdir('temp'):
+            os.makedirs('temp')
 
         self.ui = Ui_Frame()
         self.ui.setupUi(self)

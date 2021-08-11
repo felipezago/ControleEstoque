@@ -1,3 +1,5 @@
+import os
+
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 
@@ -29,6 +31,9 @@ class ListaProdutos(QMainWindow):
         from View.lista_produtos import Ui_Frame
         from Funcoes.utils import IconeBotaoMenu, resource_path
         from PyQt5.QtGui import QDoubleValidator
+
+        if not os.path.isdir('temp'):
+            os.makedirs('temp')
 
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
@@ -335,15 +340,18 @@ class ListaProdutos(QMainWindow):
 
     def calcula_lucro(self):
 
-        if self.ui.tx_preco_compra.text() and float(self.ui.tx_preco.text()) > 0:
-            preco_compra = float(self.ui.tx_preco_compra.text())
-            preco_venda = float(self.ui.tx_preco.text())
-            lucro = preco_venda - preco_compra
-            lucro = lucro / preco_compra * 100
-            if preco_compra > preco_venda:
-                self.ui.tx_PorcentagemVarejo.setText("")
+        if self.ui.tx_preco_compra.text() and self.ui.tx_preco.text():
+            if float(self.ui.tx_preco.text()) > 0:
+                preco_compra = float(self.ui.tx_preco_compra.text())
+                preco_venda = float(self.ui.tx_preco.text())
+                lucro = preco_venda - preco_compra
+                lucro = lucro / preco_compra * 100
+                if preco_compra > preco_venda:
+                    self.ui.tx_PorcentagemVarejo.setText("")
+                else:
+                    self.ui.tx_PorcentagemVarejo.setText(f"{lucro:.2f}")
             else:
-                self.ui.tx_PorcentagemVarejo.setText(f"{lucro:.2f}")
+                self.ui.tx_PorcentagemVarejo.setText("")
         else:
             self.ui.tx_PorcentagemVarejo.setText("")
 
@@ -381,8 +389,8 @@ class ListaProdutos(QMainWindow):
             itens.append(prod_editar.id)
             prod_editar.codbarras = self.ui.tx_codbarras.text().upper()
             itens.append(prod_editar.codbarras)
-            estoque = self.ui.tb_produtos.item(self.linha_selecionada, 2).text()
-            itens.append(estoque)
+            prod_editar.estoque = self.ui.tb_produtos.item(self.ui.tb_produtos.currentRow(), 2).text()
+            itens.append(prod_editar.estoque)
             prod_editar.descricao = self.ui.tx_descricao.text().upper()
             itens.append(prod_editar.descricao)
             prod_editar.marca = self.ui.tx_marca.text().upper()
@@ -453,6 +461,7 @@ class ListaProdutos(QMainWindow):
         self.ui.tx_codbarras.setText("")
         self.ui.tx_preco.setText("")
         self.ui.tx_descricao.setText("")
+        self.ui.tx_preco_compra.setText("")
         self.del_img()
 
     def set_tx_enabled(self, boolean):

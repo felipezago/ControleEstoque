@@ -224,4 +224,21 @@ class Compras_Header:
 
         return row[0]
 
+    @staticmethod
+    def relatorio_movimento(datainicial, datafinal):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+                        SELECT ROUND(SUM(compra_valor_total)::numeric, 2)
+                        FROM compras
+                        WHERE compra_status = 'FINALIZADO'
+                        AND CAST(compra_datahora AS DATE) BETWEEN \'{datainicial}\' AND \'{datafinal}\'
+                    """)
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+        if row is not None:
+            if row[0] is not None:
+                return row
 

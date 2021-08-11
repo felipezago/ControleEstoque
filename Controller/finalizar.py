@@ -229,7 +229,7 @@ class Finalizar(QMainWindow):
                             cnpj = usu[10]
 
                             gerar_pdf(header.id, cnpj, v.cliente.id)
-                            print_dialog(self, "venda.pdf")
+                            print_dialog(self, f"venda_{self.tela_principal.codigo_venda}.pdf")
 
                         self.close()
                     else:

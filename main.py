@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     conexao = Banco()
     conexao.conecta()
-    #sys.excepthook = except_hook
+    sys.excepthook = except_hook
     app = QApplication(sys.argv)
 
     if conexao.conectado:

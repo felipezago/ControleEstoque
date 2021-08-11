@@ -259,4 +259,23 @@ class Vendas_Header:
 
         return row[0]
 
+    @staticmethod
+    def relatorio_movimento(datainicial, datafinal):
+        conn = conexao()
+        cur = conn.cursor()
+        cur.execute(f"""
+                    SELECT ROUND(SUM(venda_valor_total)::NUMERIC, 2), ROUND(SUM(venda_total_descontos)::NUMERIC, 2), 
+                    ROUND((SUM(venda_valor_total)::NUMERIC - SUM(venda_total_descontos)::NUMERIC), 2)
+                    FROM vendas
+                    WHERE venda_status = 'FINALIZADO'
+                    AND CAST(venda_datahora AS DATE) BETWEEN \'{datainicial}\' AND \'{datafinal}\'
+                """)
+        row = cur.fetchone()
+        conn.commit()
+        cur.close()
+        conn.close()
+        if row is not None:
+            if row[0] is not None:
+                return row
+
 
