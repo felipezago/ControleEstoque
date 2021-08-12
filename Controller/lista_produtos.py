@@ -73,8 +73,8 @@ class ListaProdutos(QMainWindow):
         # signals
         self.ui.tb_produtos.cellClicked.connect(self.linha_clicada)
         self.ui.tx_busca.textChanged.connect(self.formatar_texto)
-        self.ui.tx_preco.textChanged.connect(self.calcula_lucro)
-        self.ui.tx_preco_compra.textChanged.connect(self.calcula_lucro)
+        self.ui.tx_preco.textChanged.connect(self.valor_compra_changed)
+        self.ui.tx_preco_compra.textChanged.connect(self.valor_compra_changed)
         self.ui.cb_produtos.currentIndexChanged.connect(self.limpa_campo_busca)
 
         self.set_tx_enabled(False)
@@ -335,6 +335,7 @@ class ListaProdutos(QMainWindow):
         compra_itens = Compra_Itens()
         compra_itens.id_prod = self.produto_selecionado
         preco = compra_itens.retorna_ultimo_preco()
+
         if preco != 0:
             self.ui.tx_preco_compra.setText(str(compra_itens.retorna_ultimo_preco()))
             self.calcula_lucro()
@@ -342,6 +343,10 @@ class ListaProdutos(QMainWindow):
             self.ui.tx_preco_compra.setText("")
 
         self.produto_selecionado.ler_imagem_produtos(self, "temp/")
+
+    def valor_compra_changed(self):
+        if self.ui.tx_preco_compra.text() != '0':
+            self.calcula_lucro()
 
     def calcula_lucro(self):
         if self.ui.tx_preco_compra.text() and self.ui.tx_preco.text():

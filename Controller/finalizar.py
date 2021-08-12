@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QMainWindow
-
 from Controller.venda import VendaTemp
 from Funcoes.utils import data_hora_atual
 from Model.Compra_Itens import Compra_Itens
@@ -233,7 +232,7 @@ class Finalizar(QMainWindow):
                             cnpj = usu[10]
 
                             gerar_pdf(header.id, cnpj, v.cliente.id)
-                            print_dialog(self, f"venda_{self.tela_principal.codigo_venda}.pdf")
+                            print_dialog(self, "venda.pdf")
 
                         self.close()
                     else:

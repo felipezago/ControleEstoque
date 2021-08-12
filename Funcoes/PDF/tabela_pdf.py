@@ -61,7 +61,7 @@ class PDF(FPDF):
         emp.nome_fantasia = self.empresa[0]
 
         emp.ler_imagem_empresas_pdf("temp/")
-        nome_img = emp.nome_fantasia.upper().strip().replace(' ', '')
+        nome_img = emp.nome_fantasia.upper().strip().replace(' ', '').replace('.', '')
         dir_img = f"temp/{nome_img}.png"
 
         if os.path.isfile(dir_img):
@@ -191,7 +191,6 @@ class PDF(FPDF):
         line_height = self.font_size * 2.5
 
         col_width = get_col_widths()
-        self.set_font(size=title_size)
 
         # Get starting position of x
         # Determin width of table to get x starting point for centred table
@@ -221,7 +220,6 @@ class PDF(FPDF):
             self.multi_cell(0, line_height, title, border=0, align='j', ln=3, max_line_height=self.font_size)
             self.ln(line_height)  # move cursor back to the left margin
 
-        self.set_font(size=data_size)
         # add header
         y1 = self.get_y()
         if x_start:
@@ -247,11 +245,9 @@ class PDF(FPDF):
                 for datum in row:
                     if datum in emphasize_data:
                         self.set_text_color(*emphasize_color)
-                        self.set_font(style=emphasize_style)
                         self.multi_cell(col_width, line_height, datum, border=0, align=align_data, ln=3,
                                         max_line_height=self.font_size)
                         self.set_text_color(0, 0, 0)
-                        self.set_font(style=default_style)
                     else:
                         self.multi_cell(col_width, line_height, datum, border=0, align=align_data, ln=3,
                                         max_line_height=self.font_size)  # ln = 3 - move cursor to right with same vertical offset # this uses an object named self
@@ -281,11 +277,9 @@ class PDF(FPDF):
                     adjusted_col_width = col_width[i]
                     if datum in emphasize_data:
                         self.set_text_color(*emphasize_color)
-                        self.set_font(style=emphasize_style)
                         self.multi_cell(adjusted_col_width, line_height, datum, border=0, align=align_data, ln=3,
                                         max_line_height=self.font_size)
                         self.set_text_color(0, 0, 0)
-                        self.set_font(style=default_style)
                     else:
                         self.multi_cell(adjusted_col_width, line_height, datum, border=0, align=align_data, ln=3,
                                         max_line_height=self.font_size)  # ln = 3 - move cursor to right with same vertical offset # this uses an object named self

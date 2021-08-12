@@ -184,11 +184,11 @@ padding: 2px;
    <attribute name="verticalHeaderVisible">
     <bool>false</bool>
    </attribute>
-   <attribute name="verticalHeaderMinimumSectionSize">
-    <number>20</number>
-   </attribute>
    <attribute name="verticalHeaderDefaultSectionSize">
     <number>50</number>
+   </attribute>
+   <attribute name="verticalHeaderMinimumSectionSize">
+    <number>20</number>
    </attribute>
    <row>
     <property name="text">
@@ -1097,9 +1097,9 @@ color: #000
   <widget class="QLabel" name="lb_porcVar">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>375</x>
      <y>470</y>
-     <width>20</width>
+     <width>31</width>
      <height>30</height>
     </rect>
    </property>
@@ -1118,7 +1118,7 @@ color: #7AB32E
   <widget class="QLineEdit" name="tx_PorcentagemVarejo">
    <property name="geometry">
     <rect>
-     <x>265</x>
+     <x>260</x>
      <y>470</y>
      <width>111</width>
      <height>30</height>

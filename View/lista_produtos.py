@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI/lista_produtos.ui'
+# Form implementation generated from reading ui file '.\UI\lista_produtos.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -527,7 +527,7 @@ class Ui_Frame(object):
 "}")
         self.lb_FormProdutos_15.setObjectName("lb_FormProdutos_15")
         self.lb_porcVar = QtWidgets.QLabel(Frame)
-        self.lb_porcVar.setGeometry(QtCore.QRect(380, 470, 20, 30))
+        self.lb_porcVar.setGeometry(QtCore.QRect(375, 470, 31, 30))
         self.lb_porcVar.setStyleSheet("QLabel{\n"
 "font-size: 20px;\n"
 "font-family: \"Arial Unicode MS\";\n"
@@ -536,7 +536,7 @@ class Ui_Frame(object):
 "}")
         self.lb_porcVar.setObjectName("lb_porcVar")
         self.tx_PorcentagemVarejo = QtWidgets.QLineEdit(Frame)
-        self.tx_PorcentagemVarejo.setGeometry(QtCore.QRect(265, 470, 111, 30))
+        self.tx_PorcentagemVarejo.setGeometry(QtCore.QRect(260, 470, 111, 30))
         self.tx_PorcentagemVarejo.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_PorcentagemVarejo.setStyleSheet("QLineEdit{\n"
 "background: #FFF;\n"

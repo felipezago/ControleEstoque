@@ -175,10 +175,12 @@ class Empresa(Endereco):
             blob = cur.fetchone()
 
             if blob is not None:
-                open(path_to_dir + str(blob[0]).replace(" ", "").strip() + '.' + blob[1], 'wb').write(blob[2])
+                open(path_to_dir + str(blob[0]).replace(" ", "").replace('.', '').strip() + '.' + blob[1], 'wb').\
+                    write(blob[2])
 
                 # colocando a imagem em um label
-                s.ui.lb_LogoEmpresa.setPixmap(QPixmap(path_to_dir + str(blob[0]).replace(" ", "").strip() + '.' +
+                s.ui.lb_LogoEmpresa.setPixmap(QPixmap(path_to_dir + str(blob[0]).replace(" ", "").replace(".", "")
+                                                      .strip() + '.' +
                                                       blob[1]).scaledToWidth(150, Qt.
                                                                              TransformationMode(Qt.FastTransformation)))
                 cur.close()
@@ -207,7 +209,8 @@ class Empresa(Endereco):
             blob = cur.fetchone()
 
             if blob is not None:
-                open(path_to_dir + str(blob[0]).replace(" ", "").strip() + '.' + blob[1], 'wb').write(blob[2])
+                open(path_to_dir + str(blob[0]).replace(" ", "").replace(".", "").strip() + '.' + blob[1], 'wb')\
+                    .write(blob[2])
 
                 cur.close()
             else:

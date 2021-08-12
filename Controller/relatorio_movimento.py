@@ -66,7 +66,7 @@ class RelatorioMovimento(QMainWindow):
                 total_liq = 0
                 self.ui.tb_rel.insertRow(0)
 
-                if dados_compra is not None and dados_venda is not None:
+                if dados_compra is not None or dados_venda is not None:
 
                     if dados_venda is not None:
                         for i in range(0, 3):

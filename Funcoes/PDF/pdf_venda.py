@@ -77,4 +77,4 @@ def gerar_pdf(venda_id, emp_cnpj, clie_id):
     pdf_venda.alias_nb_pages()
     if not os.path.isdir('PDF'):
         os.makedirs('PDF')
-    pdf_venda.output(f"PDF/venda_{venda_id}.pdf")
+    pdf_venda.output(f"PDF/venda.pdf")

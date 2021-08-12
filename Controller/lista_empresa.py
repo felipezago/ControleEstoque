@@ -191,7 +191,7 @@ class ListaEmpresa(QMainWindow):
     def remove_img(self):
         import os
 
-        dir_img = f"temp/{self.empresa_selecionada.nome_fantasia.replace(' ', '').strip()}.png"
+        dir_img = f"temp/{self.empresa_selecionada.nome_fantasia.replace(' ', '').replace('.', '').strip()}.png"
 
         if os.path.isfile(dir_img):
             os.remove(dir_img)

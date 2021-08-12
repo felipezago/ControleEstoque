@@ -87,7 +87,7 @@ class DetalhesVenda(QMainWindow):
             cnpj = usu[10]
 
             gerar_pdf(self.venda_selecionada.id, cnpj, self.venda_selecionada.cliente.id)
-            print_dialog(self, f"venda_{self.venda_selecionada.id}.pdf")
+            print_dialog(self, f"venda.pdf")
 
         self.close()
 
