@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from Model.Empresa import Empresa
 from Model.Usuario import Usuario
 from PyQt5.QtCore import Qt
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from Funcoes.utils import formatar_cpf, formatar_rg
 
 
@@ -30,7 +30,10 @@ class ListaUsuario(QMainWindow):
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         # removendo opção de maximizar
@@ -83,6 +86,9 @@ class ListaUsuario(QMainWindow):
 
         self.preenche_combo()
         self.dados_tabela()
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def novo(self):
         from Controller.cadastro_usuario import CadastroUsuario

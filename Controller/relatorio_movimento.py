@@ -1,4 +1,4 @@
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QMessageBox
 
@@ -18,6 +18,8 @@ class RelatorioMovimento(QMainWindow):
         self.dialogs = list()
         self.tamanho = self.size()
         self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         # removendo opção de maximizar
@@ -39,6 +41,9 @@ class RelatorioMovimento(QMainWindow):
         self.ui.tx_datainicial.setDate(date.today())
         self.ui.tx_datafinal.setDate(date.today())
         self.buscar()
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def sair(self):
         self.close()

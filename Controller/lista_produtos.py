@@ -7,7 +7,7 @@ from Model.Compra_Itens import Compra_Itens
 from Model.Produtos import Produtos
 from Model.Categoria import Categoria
 from Model.Fornecedor import Fornecedor
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QPixmap
 
 
@@ -38,7 +38,10 @@ class ListaProdutos(QMainWindow):
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         IconeBotaoMenu(self.ui.bt_DelLogo,
                        resource_path('../Imagens/edit-delete.png'))
@@ -105,6 +108,9 @@ class ListaProdutos(QMainWindow):
         self.dados_tabela()
         self.ui.cb_fornecedor.clear()
         self.ui.cb_categoria.clear()
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def add_img(self):
         from PyQt5.QtCore import Qt

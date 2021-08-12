@@ -43,6 +43,8 @@ class Compra(QMainWindow):
         self.size = self.size()
         self.setFixedSize(self.size)
 
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
         self.installEventFilter(EventFilter(self))
 
         self.item_selecionado = None

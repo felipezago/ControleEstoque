@@ -1,5 +1,7 @@
 import sys
 import configparser
+
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from Model.Operador import Operador
 
@@ -14,7 +16,10 @@ class DBConfig(QMainWindow):
         # setar ui
         self.ui = mainDB.Ui_ct_dbConf()
         self.ui.setupUi(self)
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
 
@@ -55,6 +60,9 @@ class DBConfig(QMainWindow):
         self.ui.tx_DbUser.textChanged.connect(self.desabilita_bt)
         self.ui.tx_DbName.textChanged.connect(self.desabilita_bt)
         self.ui.tx_DbPass.textChanged.connect(self.desabilita_bt)
+
+    def resizeEvent(self, *args, **kwargs):
+        self.setFixedSize(self.tamanho)
 
     def desabilita_bt(self):
         self.ui.bt_SalvarConfigDB.setEnabled(False)

@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 
 
 class EventFilter(QtCore.QObject):
@@ -27,7 +27,10 @@ class CadastroVeiculos(QMainWindow):
         self.ui = Ui_ct_FormVeiculos()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(562, 283)
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.tela = parent
         self.indice_cb = 0
@@ -48,6 +51,9 @@ class CadastroVeiculos(QMainWindow):
         self.ui.bt_add_cliente.clicked.connect(self.cadastro_cliente)
 
         self.preenche_combo()
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def cadastro_cliente(self):
         from Funcoes.utils import exec_app

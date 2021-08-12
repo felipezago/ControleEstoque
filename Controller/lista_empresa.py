@@ -3,7 +3,7 @@ import os
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Empresa import Empresa
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from Funcoes.utils import formatar_cnpj, retirar_formatacao
 from PyQt5.QtGui import QPixmap
 
@@ -34,7 +34,10 @@ class ListaEmpresa(QMainWindow):
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         IconeBotaoMenu(self.ui.bt_DelLogo,
                        resource_path('../Imagens/edit-delete.png'))
@@ -110,6 +113,9 @@ class ListaEmpresa(QMainWindow):
         self.preenche_combo()
         self.dados_tabela()
         self.ui.bt_AddLogo.setEnabled(False)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def enable_cidade_estado(self):
         if not self.ui.tx_cidade.isEnabled():

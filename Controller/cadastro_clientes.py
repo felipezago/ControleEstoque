@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QInputDialog, QLineEdit, QMessageBox
 from psycopg2.extensions import JSON
 from Funcoes.APIs import get_empresa_from_cnpj
@@ -13,7 +14,10 @@ class CadastroClientes(QMainWindow):
         self.ui = Ui_ct_FormClientes()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
 
@@ -36,7 +40,7 @@ class CadastroClientes(QMainWindow):
         self.ui.bt_busca_cnpj.hide()
 
     def resizeEvent(self, a0):
-        self.setFixedSize(self.size())
+        self.setFixedSize(self.tamanho)
 
     def limpa_campos(self):
         self.ui.tx_cpf.setText("")

@@ -30,6 +30,8 @@ class PesquisaServico(QMainWindow):
         self.tamanho_tela = self.size()
         self.setFixedSize(self.tamanho_tela)
 
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
         self.servico_selecionado = Servicos()
         self.linha_selecionada = None
         self.filtrado = False

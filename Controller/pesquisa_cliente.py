@@ -32,6 +32,8 @@ class PesquisaClientes(QMainWindow):
         self.tamanho_tela = self.size()
         self.setFixedSize(self.tamanho_tela)
 
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
         self.cliente_selecionado = Cliente()
         self.cliente_selecionado.pessoa = Pessoa()
         self.linha_selecionada = None

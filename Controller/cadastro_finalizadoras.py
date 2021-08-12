@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow
 
 
@@ -11,7 +12,10 @@ class CadastroFinalizadoras(QMainWindow):
         self.ui = Ui_ct_FormProdutos()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
@@ -21,6 +25,9 @@ class CadastroFinalizadoras(QMainWindow):
         self.ui.bt_cancelar.clicked.connect(self.sair)
         self.ui.bt_salvar.clicked.connect(self.salvar)
         self.ui.tx_desc.returnPressed.connect(self.salvar)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def sair(self):
         self.close()

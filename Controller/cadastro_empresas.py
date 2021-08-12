@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMainWindow, QInputDialog, QMessageBox, QLineEdit
 from psycopg2.extensions import JSON
@@ -15,7 +16,10 @@ class CadastroEmpresas(QMainWindow):
         self.ui = Ui_ct_empresa()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.caminho_img = None
 
@@ -48,6 +52,9 @@ class CadastroEmpresas(QMainWindow):
         self.ui.bt_busca_cnpj.clicked.connect(self.busca_cnpj)
 
         QTimer.singleShot(1, self.dialog_cnpj)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def preenche_campos_cnpj(self, dados: JSON):
         self.ui.tx_Cnpj.setText(retirar_formatacao(dados['cnpj']))

@@ -19,6 +19,8 @@ class ListaPendencias(QMainWindow):
         self.tamanho_tela = self.size()
         self.setFixedSize(self.tamanho_tela)
 
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
         self.setWindowModality(QtCore.Qt.ApplicationModal)
 
         self.pend_selecionada = Pendencias()

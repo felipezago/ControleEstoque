@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow
 
 
@@ -10,7 +11,10 @@ class CadastroCategoria(QMainWindow):
         # setando View
         self.ui = Ui_ct_FormCategoria()
         self.ui.setupUi(self)
-        self.setFixedSize(285, 161)
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
@@ -19,6 +23,9 @@ class CadastroCategoria(QMainWindow):
         self.ui.bt_CancelarProdutos.clicked.connect(self.sair)
 
         self.ui.tx_desc_cat.setMaxLength(50)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def inserir(self):
         from Model.Categoria import Categoria

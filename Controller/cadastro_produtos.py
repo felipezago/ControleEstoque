@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 
 
 class EventFilter(QtCore.QObject):
@@ -36,7 +36,10 @@ class CadastroProdutos(QMainWindow):
         self.ui = Ui_ct_FormProdutos()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.caminho_img = None
         self.adicionando_forn = False
@@ -88,6 +91,9 @@ class CadastroProdutos(QMainWindow):
         self.ui.tx_codbarras.setMaxLength(15)
 
         self.ui.tx_ValorUnitarioProduto.textChanged.connect(self.converter_virgula)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def converter_virgula(self):
         valor = str(self.ui.tx_ValorUnitarioProduto.text())

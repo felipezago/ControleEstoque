@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from PyQt5.QtCore import Qt
 from Model.Fornecedor import Fornecedor
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from Funcoes.utils import formatar_cnpj, retirar_formatacao
 
 
@@ -27,7 +27,10 @@ class ListaFornecedor(QMainWindow):
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
 
@@ -93,6 +96,9 @@ class ListaFornecedor(QMainWindow):
 
         self.preenche_combo()
         self.dados_tabela()
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def enable_cidade_estado(self):
         if not self.ui.tx_cidade.isEnabled():

@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow
 
 
@@ -12,7 +13,10 @@ class CadastroServicos(QMainWindow):
         self.ui = Ui_ct_FormServicos()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(562, 261)
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
@@ -25,6 +29,9 @@ class CadastroServicos(QMainWindow):
         self.ui.tx_ValorUnitarioProduto.textChanged.connect(self.converter_virgula)
         self.ui.bt_cancelar.clicked.connect(self.sair)
         self.ui.bt_salvar.clicked.connect(self.salvar)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def sair(self):
         self.close()

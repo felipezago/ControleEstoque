@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from Funcoes.utils import centralizar
 
@@ -13,7 +14,7 @@ class Login(QMainWindow):
 
         # background images
         palete = QtGui.QPalette()
-        image = QtGui.QPixmap(resource_path('../Imagens/login_bg.png'))
+        image = QtGui.QPixmap((QtGui.QPixmap('Imagens/login_bg.png')))
         brush = QtGui.QBrush(image)
         palete.setBrush(QtGui.QPalette.Background, brush)
         self.setPalette(palete)
@@ -22,7 +23,10 @@ class Login(QMainWindow):
         self.ui = login.Ui_ct_login()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(Qt.ApplicationModal)
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
@@ -41,6 +45,9 @@ class Login(QMainWindow):
             self.ui.bt_cadastrar.clicked.connect(self.cadastrar)
 
         self.operador = None
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.size())
 
     def validar_login(self):
         from Funcoes.configdb import Banco
@@ -72,7 +79,8 @@ class Login(QMainWindow):
 
                     from Controller.tela_principal import TelaPrincipal
                     princ = TelaPrincipal()
-                    exec_app(princ)
+                    princ.showMaximized()
+                    centralizar(princ)
                     self.dialogs.append(princ)
                     self.close()
 

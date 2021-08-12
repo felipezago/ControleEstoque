@@ -44,7 +44,15 @@ bdist_dmg_options = {
     "volume_label": "TEST",
 }
 
-executables = [Executable("main.py", base=base, target_name="ControleEstoque")]
+executables = [
+    Executable(
+        "main.py",
+        base=base,
+        copyright="Copyright (C) 2021 FZR Sistemas",
+        target_name="ControleEstoque",
+        icon='Imagens\logo.ICO'
+    )
+]
 
 setup(
     name="ControleEstoque",

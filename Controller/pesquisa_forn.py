@@ -31,6 +31,8 @@ class PesquisaForn(QMainWindow):
         self.tamanho_tela = self.size()
         self.setFixedSize(self.tamanho_tela)
 
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
         self.forn_selecionado = Fornecedor()
         self.linha_selecionada = None
         self.filtrado = False

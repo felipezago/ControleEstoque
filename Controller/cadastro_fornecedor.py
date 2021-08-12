@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QInputDialog, QLineEdit
 from psycopg2.extensions import JSON
@@ -16,7 +17,10 @@ class CadastroFornecedor(QMainWindow):
         # setando View
         self.ui = Ui_ct_FormFornecedor()
         self.ui.setupUi(self)
-        self.setFixedSize(653, 371)
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
@@ -38,6 +42,9 @@ class CadastroFornecedor(QMainWindow):
         self.ui.tx_Bairro.setMaxLength(60)
 
         QTimer.singleShot(1, self.dialog_cnpj)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def limpa_campos(self):
         self.ui.tx_cnpj.setText("")

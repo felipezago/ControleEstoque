@@ -32,6 +32,8 @@ class PesquisaProdutos(QMainWindow):
         self.tamanho_tela = self.size()
         self.setFixedSize(self.tamanho_tela)
 
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
         self.produto_selecionado = Produtos()
         self.linha_selecionada = None
         self.adicionando = False

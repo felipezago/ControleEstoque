@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 
 
 class EventFilter(QtCore.QObject):
@@ -27,7 +27,10 @@ class CadastroUsuario(QMainWindow):
         self.ui = Ui_ct_FormUsuario()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.installEventFilter(EventFilter(self))
 

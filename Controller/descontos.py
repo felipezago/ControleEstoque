@@ -13,7 +13,11 @@ class Descontos(QMainWindow):
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
         self.tela_principal = parent
 
         self.setWindowModality(Qt.ApplicationModal)
@@ -47,7 +51,7 @@ class Descontos(QMainWindow):
         self.preenche_tabela()
 
     def resizeEvent(self, a0: QtGui.QResizeEvent):
-        self.setFixedSize(self.size())
+        self.setFixedSize(self.tamanho)
 
     def formatar_texto(self):
         texto = self.ui.tx_valor.text()

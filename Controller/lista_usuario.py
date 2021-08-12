@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
 from Model.Usuario import Usuario
 from Model.Pessoa import Pessoa
@@ -13,7 +14,10 @@ class ListaUsuario(QMainWindow):
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         # removendo opção de maximizar
@@ -50,6 +54,9 @@ class ListaUsuario(QMainWindow):
         self.ui.tb_usuario.setColumnWidth(7, 100)
 
         self.dados_tabela()
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def sair(self):
         self.close()

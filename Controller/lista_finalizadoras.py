@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem
 from Model.Finalizadoras import Finalizadoras
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import Qt
 
 
@@ -26,7 +26,10 @@ class ListaFinalizadoras(QMainWindow):
         self.ui = Ui_Frame()
         self.ui.setupUi(self)
         self.dialogs = list()
-        self.setFixedSize(self.size())
+        self.tamanho = self.size()
+        self.setFixedSize(self.tamanho)
+
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
 
@@ -65,6 +68,9 @@ class ListaFinalizadoras(QMainWindow):
 
         self.preenche_combo()
         self.dados_tabela()
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.setFixedSize(self.tamanho)
 
     def nova_fin(self):
         from Controller.cadastro_finalizadoras import CadastroFinalizadoras

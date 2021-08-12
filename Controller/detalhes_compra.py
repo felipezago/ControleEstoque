@@ -19,6 +19,8 @@ class DetalhesCompra(QMainWindow):
         self.tamanho_tela = self.size()
         self.setFixedSize(self.tamanho_tela)
 
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
         self.setWindowModality(QtCore.Qt.ApplicationModal)
 
         self.compra_selecionada = Compras_Header()
