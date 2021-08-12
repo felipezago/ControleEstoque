@@ -1,8 +1,5 @@
 import os
-
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QMainWindow
-from PyQt5.QtCore import Qt
-
 from Model.Compra_Itens import Compra_Itens
 from Model.Produtos import Produtos
 from Model.Categoria import Categoria
@@ -29,8 +26,9 @@ class ListaProdutos(QMainWindow):
     def __init__(self, parent=None):
         super(ListaProdutos, self).__init__(parent)
         from View.lista_produtos import Ui_Frame
-        from Funcoes.utils import icone_botao_menu, resource_path
+        from Funcoes.utils import icone_botao_menu
         from PyQt5.QtGui import QDoubleValidator
+        from PyQt5.QtCore import Qt
 
         if not os.path.isdir('temp'):
             os.makedirs('temp')
@@ -43,8 +41,8 @@ class ListaProdutos(QMainWindow):
 
         self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
-        icone_botao_menu(self.ui.bt_DelLogo, resource_path('../Imagens/edit-delete.png'))
-        icone_botao_menu(self.ui.bt_AddLogo, resource_path('../Imagens/edit-add.png'))
+        icone_botao_menu(self.ui.bt_DelLogo, QtGui.QPixmap('Imagens/edit-delete.png'))
+        icone_botao_menu(self.ui.bt_AddLogo, QtGui.QPixmap('Imagens/edit-add.png'))
 
         # removendo opção de maximizar
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
@@ -336,14 +334,16 @@ class ListaProdutos(QMainWindow):
 
         compra_itens = Compra_Itens()
         compra_itens.id_prod = self.produto_selecionado
-        self.ui.tx_preco_compra.setText(str(compra_itens.retorna_ultimo_preco()))
-
-        self.calcula_lucro()
+        preco = compra_itens.retorna_ultimo_preco()
+        if preco != 0:
+            self.ui.tx_preco_compra.setText(str(compra_itens.retorna_ultimo_preco()))
+            self.calcula_lucro()
+        else:
+            self.ui.tx_preco_compra.setText("")
 
         self.produto_selecionado.ler_imagem_produtos(self, "temp/")
 
     def calcula_lucro(self):
-
         if self.ui.tx_preco_compra.text() and self.ui.tx_preco.text():
             if float(self.ui.tx_preco.text()) > 0:
                 preco_compra = float(self.ui.tx_preco_compra.text())
