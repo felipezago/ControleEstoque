@@ -1,3 +1,5 @@
+from datetime import date
+
 if __name__ == '__main__':
     from Model.Operador import Operador
     from Funcoes.configdb import Banco
@@ -15,7 +17,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     if conexao.conectado:
-
         create_tables()
         if Operador.verifica_operador_ativo():
             exec_main()

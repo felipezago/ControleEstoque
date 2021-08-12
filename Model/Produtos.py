@@ -1,4 +1,6 @@
 import psycopg2
+
+from Funcoes.utils import gravar_logs
 from Model.Categoria import Categoria
 from Model.Fornecedor import Fornecedor
 from Funcoes.banco import conexao
@@ -192,7 +194,7 @@ class Produtos:
             conn.commit()
             cur.close()
         except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
+            gravar_logs(error)
         finally:
             if conn is not None:
                 conn.close()

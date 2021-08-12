@@ -28,9 +28,8 @@ class CadastroProdutos(QMainWindow):
     def __init__(self, parent=None):
         super(CadastroProdutos, self).__init__(parent)
         from View.cadastro_produtos import Ui_ct_FormProdutos
-        from Funcoes.utils import IconeBotaoMenu, resource_path
+        from Funcoes.utils import icone_botao_menu, resource_path
         from PyQt5.QtGui import QIntValidator, QDoubleValidator
-        from Model.Produtos import Produtos
 
         # setando View
         self.ui = Ui_ct_FormProdutos()
@@ -51,14 +50,10 @@ class CadastroProdutos(QMainWindow):
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
 
         # adicionando icones aos botoes
-        IconeBotaoMenu(self.ui.bt_DelImagem,
-                       resource_path('../Imagens/edit-delete.png'))
-        IconeBotaoMenu(self.ui.bt_AddImagem,
-                       resource_path('../Imagens/edit-add.png'))
-        IconeBotaoMenu(self.ui.bt_AddCategoriaProduto,
-                       resource_path('../Imagens/edit-add.png'))
-        IconeBotaoMenu(self.ui.bt_addForn,
-                       resource_path('../Imagens/edit-add.png'))
+        icone_botao_menu(self.ui.bt_DelImagem, resource_path('../Imagens/edit-delete.png'))
+        icone_botao_menu(self.ui.bt_AddImagem, resource_path('../Imagens/edit-add.png'))
+        icone_botao_menu(self.ui.bt_AddCategoriaProduto, resource_path('../Imagens/edit-add.png'))
+        icone_botao_menu(self.ui.bt_addForn, resource_path('../Imagens/edit-add.png'))
 
         # definindo ações dos botões
         self.ui.bt_AddCategoriaProduto.clicked.connect(self.add_categoria)
@@ -70,10 +65,6 @@ class CadastroProdutos(QMainWindow):
 
         # instalando filtro de eventos
         self.installEventFilter(EventFilter(self))
-
-        # definindo novo ID
-        self.novo_id = Produtos.get_new_produto()
-        self.ui.tx_idProduto.setText(str(self.novo_id))
 
         # preenchendo combos
         self.preenche_combo_categorias()
@@ -246,6 +237,5 @@ class CadastroProdutos(QMainWindow):
         self.ui.tx_DescricaoProduto.setText("")
         self.ui.tx_EstoqueMaximoProduto.setText("")
         self.ui.tx_ValorUnitarioProduto.setText("")
-        self.ui.tx_PorcentagemVarejo.setText("")
         self.ui.cb_forn.setCurrentIndex(0)
         self.ui.cb_CategoriaProduto.setCurrentIndex(0)

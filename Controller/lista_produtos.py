@@ -29,7 +29,7 @@ class ListaProdutos(QMainWindow):
     def __init__(self, parent=None):
         super(ListaProdutos, self).__init__(parent)
         from View.lista_produtos import Ui_Frame
-        from Funcoes.utils import IconeBotaoMenu, resource_path
+        from Funcoes.utils import icone_botao_menu, resource_path
         from PyQt5.QtGui import QDoubleValidator
 
         if not os.path.isdir('temp'):
@@ -43,10 +43,8 @@ class ListaProdutos(QMainWindow):
 
         self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
-        IconeBotaoMenu(self.ui.bt_DelLogo,
-                       resource_path('../Imagens/edit-delete.png'))
-        IconeBotaoMenu(self.ui.bt_AddLogo,
-                       resource_path('../Imagens/edit-add.png'))
+        icone_botao_menu(self.ui.bt_DelLogo, resource_path('../Imagens/edit-delete.png'))
+        icone_botao_menu(self.ui.bt_AddLogo, resource_path('../Imagens/edit-add.png'))
 
         # removendo opção de maximizar
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)

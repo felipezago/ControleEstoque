@@ -22,7 +22,7 @@ class CadastroVeiculos(QMainWindow):
     def __init__(self, parent=None):
         super(CadastroVeiculos, self).__init__(parent)
         from View.cadastro_veiculo import Ui_ct_FormVeiculos
-        from Funcoes.utils import IconeBotaoMenu, resource_path
+        from Funcoes.utils import icone_botao_menu, resource_path
 
         self.ui = Ui_ct_FormVeiculos()
         self.ui.setupUi(self)
@@ -36,8 +36,7 @@ class CadastroVeiculos(QMainWindow):
         self.indice_cb = 0
         self.adicionando = False
 
-        IconeBotaoMenu(self.ui.bt_add_cliente,
-                       resource_path('../Imagens/edit-add.png'))
+        icone_botao_menu(self.ui.bt_add_cliente, resource_path('../Imagens/edit-add.png'))
 
         self.ui.tx_placa.setMaxLength(15)
         self.ui.tx_marca.setMaxLength(50)

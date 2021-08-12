@@ -26,7 +26,7 @@ class ListaEmpresa(QMainWindow):
     def __init__(self, parent=None):
         super(ListaEmpresa, self).__init__(parent)
         from View.lista_empresa import Ui_Frame
-        from Funcoes.utils import IconeBotaoMenu, resource_path
+        from Funcoes.utils import icone_botao_menu, resource_path
 
         if not os.path.isdir('temp'):
             os.makedirs('temp')
@@ -39,10 +39,8 @@ class ListaEmpresa(QMainWindow):
 
         self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
-        IconeBotaoMenu(self.ui.bt_DelLogo,
-                       resource_path('../Imagens/edit-delete.png'))
-        IconeBotaoMenu(self.ui.bt_AddLogo,
-                       resource_path('../Imagens/edit-add.png'))
+        icone_botao_menu(self.ui.bt_DelLogo, resource_path('../Imagens/edit-delete.png'))
+        icone_botao_menu(self.ui.bt_AddLogo, resource_path('../Imagens/edit-add.png'))
 
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         # removendo opção de maximizar

@@ -159,7 +159,6 @@ class ListaVeiculos(QMainWindow):
                 return
 
         if dados:
-            print(dados)
 
             self.filtrado = True
             self.ui.bt_refresh.setEnabled(True)
@@ -227,16 +226,11 @@ class ListaVeiculos(QMainWindow):
 
         dados = Veiculo.get_todos_veiculos()
 
-        if dados:
-            for i, linha in enumerate(dados):
-                self.ui.tb_veiculos.insertRow(i)
+        for i, linha in enumerate(dados):
+            self.ui.tb_veiculos.insertRow(i)
 
-                for j in range(0, len(linha)):
-                    self.ui.tb_veiculos.setItem(i, j, QTableWidgetItem(str(linha[j])))
-        else:
-            QMessageBox.warning(self, "Erro", "Não foi encontrado nenhum registro!")
-            self.ui.tx_busca.setText("")
-            self.dados_tabela()
+            for j in range(0, len(linha)):
+                self.ui.tb_veiculos.setItem(i, j, QTableWidgetItem(str(linha[j])))
 
     def editar(self):
         if self.veiculo_selecionado.placa:

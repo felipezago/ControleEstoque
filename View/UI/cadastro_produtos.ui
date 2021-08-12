@@ -63,43 +63,13 @@ border-bottom: 2px solid #A2A2A2
      <string>CADASTRAR PRODUTO</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_idProduto">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>85</y>
-      <width>150</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit{
-background: #CFCFCF;
-border: 1px solid #A2A2A2;
-color: #000;
-font-size: 14px;
-font-family: &quot;Arial&quot;;
-font-weight: bold;
-
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="lb_FotoProduto">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>110</y>
+      <y>99</y>
       <width>150</width>
-      <height>150</height>
+      <height>161</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -776,7 +746,6 @@ border: 1px solid red;
     </property>
    </widget>
    <zorder>lb_FormProdutos</zorder>
-   <zorder>tx_idProduto</zorder>
    <zorder>lb_FotoProduto</zorder>
    <zorder>lb_FormProdutos_2</zorder>
    <zorder>tx_DescricaoProduto</zorder>
@@ -803,7 +772,6 @@ border: 1px solid red;
   </widget>
  </widget>
  <tabstops>
-  <tabstop>tx_idProduto</tabstop>
   <tabstop>tx_DescricaoProduto</tabstop>
  </tabstops>
  <resources/>

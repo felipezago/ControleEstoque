@@ -60,5 +60,6 @@ $RECYCLE.BIN/
 #build and dist
 build/
 dist/
+logs/
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,venv

@@ -12,8 +12,8 @@ import tempfile
 from pdf2image import convert_from_path
 
 
-def verificar_criptografia(senha, senhaCriptografada):
-    return bcrypt.checkpw(senha, senhaCriptografada)
+def verificar_criptografia(senha, senha_criptografada):
+    return bcrypt.checkpw(senha, senha_criptografada)
 
 
 def criptografar_senha(senha):
@@ -22,7 +22,7 @@ def criptografar_senha(senha):
     return criptografada
 
 
-def IconeBotaoMenu(botao, imagem):
+def icone_botao_menu(botao, imagem):
     icon = QIcon()
     icon.addPixmap(QPixmap(imagem),
                    QIcon.Normal, QIcon.Off)
@@ -30,13 +30,13 @@ def IconeBotaoMenu(botao, imagem):
     botao.setIconSize(QSize(25, 25))
 
 
-def centralizar(object):
+def centralizar(obj):
     from PyQt5 import QtWidgets
 
-    qr = object.frameGeometry()
+    qr = obj.frameGeometry()
     cp = QtWidgets.QDesktopWidget().availableGeometry().center()
     qr.moveCenter(cp)
-    object.move(qr.topLeft())
+    obj.move(qr.topLeft())
 
 
 def resource_path(relative_path):
@@ -134,15 +134,25 @@ def remove_pdf(desc):
         os.remove(dir_img)
 
 
-def except_hook(type, value, tb):
+def except_hook(tipo, value, tb):
     from Model.Venda_Tmp import Venda_Tmp
     from PyQt5.QtWidgets import qApp
     from Controller.tela_principal import TelaPrincipal
 
-    print(type, value, tb)
+    gravar_logs(value)
+
     Venda_Tmp.delete_venda()
     TelaPrincipal.kill_thread = True
     qApp.quit()
+
+
+def gravar_logs(msg):
+    from datetime import date
+    if not os.path.isdir('logs'):
+        os.makedirs('logs')
+
+    log = open(f"logs/log-erros-{date.today()}.txt", "a+")
+    log.write(f"{data_hora_atual()} - Erro: {msg}\n")
 
 
 def data_hora_atual():

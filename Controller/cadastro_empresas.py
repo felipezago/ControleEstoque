@@ -11,7 +11,7 @@ class CadastroEmpresas(QMainWindow):
         super(CadastroEmpresas, self).__init__(parent)
         from View.cadastro_empresa import Ui_ct_empresa
         from PyQt5 import QtCore
-        from Funcoes.utils import IconeBotaoMenu, resource_path
+        from Funcoes.utils import icone_botao_menu, resource_path
 
         self.ui = Ui_ct_empresa()
         self.ui.setupUi(self)
@@ -26,10 +26,8 @@ class CadastroEmpresas(QMainWindow):
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
 
-        IconeBotaoMenu(self.ui.bt_DelLogo,
-                       resource_path('../Imagens/edit-delete.png'))
-        IconeBotaoMenu(self.ui.bt_AddLogo,
-                       resource_path('../Imagens/edit-add.png'))
+        icone_botao_menu(self.ui.bt_DelLogo, resource_path('../Imagens/edit-delete.png'))
+        icone_botao_menu(self.ui.bt_AddLogo, resource_path('../Imagens/edit-add.png'))
 
         self.ui.tx_NomeFantasia.setMaxLength(100)
         self.ui.tx_RazaoSocial.setMaxLength(40)
