@@ -49,7 +49,7 @@ executables = [Executable("main.py", base=base, target_name="ControleEstoque")]
 setup(
     name="ControleEstoque",
     version="0.3",
-    description="Sample cx_Freeze PyQt5 script",
+    description="Controle de Estoque - FZR Sistemas",
     options={
         "build_exe": build_exe_options,
         "bdist_mac": bdist_mac_options,

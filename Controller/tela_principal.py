@@ -26,7 +26,7 @@ class TelaPrincipal(QMainWindow):
         self.usuario_operador = Usuario()
         self.pessoa_operador = Pessoa()
 
-        self.setWindowIcon(QtGui.QIcon("Imagens/logo.png"))
+        self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
         palete = QtGui.QPalette()
         image = QtGui.QPixmap(QtGui.QPixmap('Imagens/background_1920x1080.png'))
