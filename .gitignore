@@ -57,9 +57,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-#build and dist
+#DIRECTORIES
 build/
 dist/
 logs/
+PDF/
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,venv
