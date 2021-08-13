@@ -1,5 +1,7 @@
+from datetime import datetime
+
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut
+from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut, QMessageBox
 from Model.Operador import Operador
 from Funcoes.utils import exec_app
 import sys
@@ -13,7 +15,7 @@ class TelaPrincipal(QMainWindow):
 
     def __init__(self, parent=None):
         super(TelaPrincipal, self).__init__(parent)
-        from Funcoes.utils import resource_path, retorna_ip
+        from Funcoes.utils import retorna_ip
         from Funcoes.configdb import Banco
         from View.tela_principal import Ui_MainWindow
         from Model.Pessoa import Pessoa
@@ -23,11 +25,31 @@ class TelaPrincipal(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.dialogs = list()
+        self.bloqueado = False
 
         self.usuario_operador = Usuario()
         self.pessoa_operador = Pessoa()
 
         self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+
+        data_limite = "12/08/2021"
+        data_atual = datetime.today()
+        data_limite_txt = datetime.strptime(data_limite, '%d/%m/%Y')
+        dias_restantes = data_limite_txt - data_atual
+
+        if data_atual >= data_limite_txt:
+            self.bloqueado = True
+            QMessageBox.warning(self, "Erro", "Acesso bloqueado. Para voltar a utilizar o sistema, \n"
+                                              "favor renovar o contrato. \n\n"
+                                              "Dúvidas entre em contato através \n"
+                                              "do telefone: (46) 99125-7210")
+            self.close()
+        elif dias_restantes.days <= 10:
+            QMessageBox.warning(self, "Aviso", f"Faltam {dias_restantes.days + 1} dias para o vencimento \n"
+                                               f"do contrato. Após isso, o uso do sistema \n"
+                                               f"será bloqueado.\n\n"
+                                               "Dúvidas entre em contato através \n"
+                                               "do telefone: (46) 99125-7210")
 
         palete = QtGui.QPalette()
         image = QtGui.QPixmap(QtGui.QPixmap('Imagens/background_1920x1080.png'))
@@ -328,43 +350,47 @@ class TelaPrincipal(QMainWindow):
         self.dialogs.append(conf)
 
     def closeEvent(self, event):
-        from PyQt5.QtWidgets import QMessageBox
+        if not self.bloqueado:
+            from PyQt5.QtWidgets import QMessageBox
 
-        box = QMessageBox()
-        box.setIcon(QMessageBox.Question)
-        box.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
-        box.setWindowTitle('Sair?')
-        box.setText('Tem certeza que deseja sair?')
-        box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-        button_sim = box.button(QMessageBox.Yes)
-        button_sim.setText('Sim')
-        button_nao = box.button(QMessageBox.No)
-        button_nao.setText('Não')
-        box.exec_()
+            box = QMessageBox()
+            box.setIcon(QMessageBox.Question)
+            box.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
+            box.setWindowTitle('Sair?')
+            box.setText('Tem certeza que deseja sair?')
+            box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            button_sim = box.button(QMessageBox.Yes)
+            button_sim.setText('Sim')
+            button_nao = box.button(QMessageBox.No)
+            button_nao.setText('Não')
 
-        if box.clickedButton() == button_sim:
-            from Model.Venda_Tmp import Venda_Tmp
+            box.exec_()
 
-            event.accept()
+            if box.clickedButton() == button_sim:
+                from Model.Venda_Tmp import Venda_Tmp
 
-            Venda_Tmp.delete_venda()
+                event.accept()
 
-            self.kill_thread = True
+                Venda_Tmp.delete_venda()
 
-            if self.saida_operador:
-                self.saida_operador = False
-                from Controller.login import Login
+                self.kill_thread = True
 
-                Operador.sair_operador()
-                logins = Login()
-                exec_app(logins)
-                self.dialogs.append(logins)
+                if self.saida_operador:
+                    self.saida_operador = False
+                    from Controller.login import Login
+
+                    Operador.sair_operador()
+                    logins = Login()
+                    exec_app(logins)
+                    self.dialogs.append(logins)
+                else:
+                    sys.exit(1)
             else:
-                sys.exit(1)
+                if self.saida_operador:
+                    self.saida_operador = False
+                event.ignore()
         else:
-            if self.saida_operador:
-                self.saida_operador = False
-            event.ignore()
+            sys.exit(1)
 
     def resizeEvent(self, event):
         self.resize(self.width, self.height)
