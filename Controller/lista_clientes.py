@@ -215,25 +215,31 @@ class ListaClientes(QMainWindow):
                 for i, linha in enumerate(dados):
                     self.ui.tb_clientes.insertRow(i)
                     for j in range(0, 13):
-                        if j == 1:
+                        if j == 5:
+                            if linha[5] != "ISENTO":
+                                self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(formatar_rg((linha[5]))))
+                            else:
+                                self.ui.tb_clientes.setItem(i, 5, QTableWidgetItem(linha[5]))
+                        elif j == 1:
                             if len(linha[j]) >= 14:
                                 self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cnpj(str(linha[j]))))
                             else:
                                 self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_cpf(str(linha[j]))))
-                        elif j == 5:
-                            self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(formatar_rg(str(linha[j]))))
                         else:
                             self.ui.tb_clientes.setItem(i, j, QTableWidgetItem(str(linha[j])))
             else:
                 self.ui.tb_clientes.insertRow(0)
                 for j in range(0, 13):
-                    if j == 1:
+                    if j == 5:
+                        if dados[5] != "ISENTO":
+                            self.ui.tb_clientes.setItem(0, 5, QTableWidgetItem(formatar_rg((dados[5]))))
+                        else:
+                            self.ui.tb_clientes.setItem(0, 5, QTableWidgetItem(dados[5]))
+                    elif j == 1:
                         if len(dados[j]) >= 14:
                             self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_cnpj(str(dados[j]))))
                         else:
                             self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_cpf(str(dados[j]))))
-                    elif j == 5:
-                        self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(formatar_rg(str(dados[j]))))
                     else:
                         self.ui.tb_clientes.setItem(0, j, QTableWidgetItem(str(dados[j])))
         else:

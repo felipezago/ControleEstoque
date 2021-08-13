@@ -154,8 +154,11 @@ def gravar_logs(msg):
     if not os.path.isdir('logs'):
         os.makedirs('logs')
 
+    data_e_hora_atuais = datetime.now()
+    hora_em_texto = data_e_hora_atuais.strftime('%H:%M:%S')
+
     log = open(f"logs/log-erros-{date.today()}.txt", "a+")
-    log.write(f"{data_hora_atual()} - Erro: {msg}\n")
+    log.write(f"{hora_em_texto} - Erro: {msg}\n")
 
 
 def data_hora_atual():

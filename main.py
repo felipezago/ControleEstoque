@@ -1,5 +1,3 @@
-from datetime import date
-
 if __name__ == '__main__':
     from Model.Operador import Operador
     from Funcoes.configdb import Banco

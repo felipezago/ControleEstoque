@@ -1,3 +1,5 @@
+from datetime import date
+
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QMessageBox
@@ -40,7 +42,7 @@ class RelatorioMovimento(QMainWindow):
 
         self.ui.tx_datainicial.setDate(date.today())
         self.ui.tx_datafinal.setDate(date.today())
-        self.buscar()
+        self.ui.tx_datainicial.setFocus()
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         self.setFixedSize(self.tamanho)
@@ -89,7 +91,8 @@ class RelatorioMovimento(QMainWindow):
                     item = self.ui.tb_rel.item(0, 4)
 
                     if res > 0:
-                        self.ui.tb_rel.setHorizontalHeaderLabels(["VENDAS", "DESCONTOS", "VENDAS LIQ.", "COMPRAS", "LUCRO"])
+                        self.ui.tb_rel.setHorizontalHeaderLabels(["VENDAS", "DESCONTOS", "VENDAS LIQ.", "COMPRAS",
+                                                                  "LUCRO"])
                         item.setForeground(QBrush(QColor(103, 194, 0)))
                     else:
                         self.ui.tb_rel.setHorizontalHeaderLabels(
@@ -107,4 +110,6 @@ class RelatorioMovimento(QMainWindow):
 
             else:
                 QMessageBox.warning(self, "Aviso!", "Data inicial não pode ser maior que a data final.")
+                self.ui.tx_datainicial.setDate(date.today())
+                self.ui.tx_datafinal.setDate(date.today())
                 self.ui.tb_rel.setRowCount(0)

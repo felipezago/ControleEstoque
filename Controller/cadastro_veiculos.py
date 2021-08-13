@@ -82,7 +82,7 @@ class CadastroVeiculos(QMainWindow):
             self.ui.cb_cliente.setItemData(contador, v)
 
         if self.tela:
-            indice = self.ui.cb_cliente.findText(self.tela.cliente_selecionado.pessoa.nome)
+            indice = self.ui.cb_cliente.findText(self.tela.cliente_selecionado.nome)
             self.ui.cb_cliente.setCurrentIndex(indice)
 
     def validar_campos(self):

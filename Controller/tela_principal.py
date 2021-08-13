@@ -1,3 +1,4 @@
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QShortcut
 from Model.Operador import Operador
 from Funcoes.utils import exec_app
@@ -253,13 +254,6 @@ class TelaPrincipal(QMainWindow):
         exec_app(l_usus)
         self.dialogs.append(l_usus)
 
-    def visualiza_endereco(self):
-        from Controller.lista_endereco import ListaEndereco
-
-        l_end = ListaEndereco()
-        exec_app(l_end)
-        self.dialogs.append(l_end)
-
     def visualiza_categorias(self):
         from Controller.lista_categorias import ListaCategorias
         l_cat = ListaCategorias()
@@ -338,6 +332,7 @@ class TelaPrincipal(QMainWindow):
 
         box = QMessageBox()
         box.setIcon(QMessageBox.Question)
+        box.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
         box.setWindowTitle('Sair?')
         box.setText('Tem certeza que deseja sair?')
         box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)

@@ -187,6 +187,33 @@ class ListaProdutos(QMainWindow):
             if not texto[tamanho-1:tamanho].isnumeric():
                 self.ui.tx_busca.setText(texto[:tamanho - 1])
 
+    def formatar_tx_preco(self):
+        texto_compra = self.ui.tx_preco_compra.text()
+        texto_venda = self.ui.tx_preco.text()
+
+        tamanho_compra = len(self.ui.tx_preco_compra.text())
+        tamanho_venda = len(self.ui.tx_preco.text())
+
+        if texto_compra[tamanho_compra - 1:tamanho_compra] == ',':
+            self.ui.tx_preco_compra.setText(texto_compra.replace(",", "."))
+        else:
+            if not texto_compra[tamanho_compra - 1:tamanho_compra].isnumeric():
+                if texto_compra[tamanho_compra - 1:tamanho_compra] != '.':
+                    self.ui.tx_preco_compra.setText(texto_compra[:tamanho_compra - 1])
+
+                if texto_compra.count(".") > 1 and texto_compra[tamanho_compra - 1:tamanho_compra] == '.':
+                    self.ui.tx_preco_compra.setText(texto_compra[:tamanho_compra - 1])
+
+        if texto_venda[tamanho_venda - 1:tamanho_venda] == ',':
+            self.ui.tx_preco.setText(texto_venda.replace(",", "."))
+        else:
+            if not texto_venda[tamanho_venda - 1:tamanho_venda].isnumeric():
+                if texto_venda[tamanho_venda - 1:tamanho_venda] != '.':
+                    self.ui.tx_preco_compra.setText(texto_venda[:tamanho_venda - 1])
+
+                if texto_venda.count(".") > 1 and texto_venda[tamanho_venda - 1:tamanho_venda] == '.':
+                    self.ui.tx_preco_compra.setText(texto_venda[:tamanho_venda - 1])
+
     def preenche_combo(self):
         self.ui.cb_produtos.clear()
         self.ui.cb_produtos.addItem("ID")
@@ -349,8 +376,9 @@ class ListaProdutos(QMainWindow):
             self.calcula_lucro()
 
     def calcula_lucro(self):
+        self.formatar_tx_preco()
         if self.ui.tx_preco_compra.text() and self.ui.tx_preco.text():
-            if float(self.ui.tx_preco.text()) > 0:
+            if float(self.ui.tx_preco_compra.text()) > 0:
                 preco_compra = float(self.ui.tx_preco_compra.text())
                 preco_venda = float(self.ui.tx_preco.text())
                 lucro = preco_venda - preco_compra
@@ -436,7 +464,7 @@ class ListaProdutos(QMainWindow):
             else:
                 self.ui.tb_produtos.setFocus()
 
-                for i in range(0, 7):
+                for i in range(0, 8):
                     self.ui.tb_produtos.setItem(self.linha_selecionada, i, QTableWidgetItem(str(itens[i])))
         else:
             QMessageBox.warning(self, "Atenção!", "Favor selecionar alguma linha!")

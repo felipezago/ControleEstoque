@@ -32,9 +32,9 @@ class EventFilter(QtCore.QObject):
                         obj.preenche_combo_veiculos()
                 elif obj.excluiu_descontos or obj.recebeu_desconto:
                     obj.atualiza_tabela()
+                    obj.set_valores_lbl()
                 elif obj.recebeu_pagamento or obj.excluiu_pagamento:
                     obj.set_valores_lbl()
-
                 if obj.finalizou:
                     obj.limpa_tela()
 
@@ -261,6 +261,7 @@ class VendaTemp(QMainWindow):
         else:
             box = QMessageBox()
             box.setIcon(QMessageBox.Question)
+            box.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
             box.setWindowTitle('Sair?')
             box.setText('O que deseja fazer com a venda em aberto?')
             box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
@@ -270,7 +271,7 @@ class VendaTemp(QMainWindow):
             button_nao.setText('Excluir Venda')
             box.exec_()
 
-            if box.clickedButton() == button_sim:
+            if box.clickedButton() == button_nao:
                 self.delete_fins()
                 Venda_Tmp.delete_venda()
                 event.accept()

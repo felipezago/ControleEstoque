@@ -264,8 +264,10 @@ class Vendas_Header:
         conn = conexao()
         cur = conn.cursor()
         cur.execute(f"""
-                    SELECT ROUND(SUM(venda_valor_total)::NUMERIC, 2), ROUND(SUM(venda_total_descontos)::NUMERIC, 2), 
-                    ROUND((SUM(venda_valor_total)::NUMERIC - SUM(venda_total_descontos)::NUMERIC), 2)
+                    SELECT ROUND(SUM(venda_valor_total + venda_total_descontos)::NUMERIC, 2), 
+                    ROUND(SUM(venda_total_descontos)::NUMERIC, 2), 
+                    ROUND((SUM(venda_valor_total + venda_total_descontos)::NUMERIC - 
+                    SUM(venda_total_descontos)::NUMERIC), 2)
                     FROM vendas
                     WHERE venda_status = 'FINALIZADO'
                     AND CAST(venda_datahora AS DATE) BETWEEN \'{datainicial}\' AND \'{datafinal}\'
