@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 from datetime import datetime
 
 from PIL.ImageQt import ImageQt
@@ -104,13 +105,15 @@ def print_dialog(self, img):
     printer = QPrinter(QPrinter.HighResolution)
     dialog = QPrintDialog(printer, self)
 
-    poppler_path = r'lib/poppler/bin'
-
     if dialog.exec_() == QPrintDialog.Accepted:
         if not os.path.isdir('PDF'):
             os.makedirs('PDF')
         with tempfile.TemporaryDirectory() as path:
-            images = convert_from_path("PDF/" + img, dpi=300, output_folder=path, poppler_path=poppler_path)
+            if sys.platform != "linux":
+                poppler_path = r'lib/poppler/bin'
+                images = convert_from_path("PDF/" + img, dpi=300, output_folder=path, poppler_path=poppler_path)
+            else:
+                images = convert_from_path("PDF/" + img, dpi=300, output_folder=path)
             painter = QPainter()
             painter.begin(printer)
             for i, image in enumerate(images):
