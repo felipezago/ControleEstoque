@@ -50,7 +50,7 @@ executables = [
         base=base,
         copyright="Copyright (C) 2021 FZR Sistemas",
         target_name="ControleEstoque",
-        icon='Imagens\logo.ICO'
+        icon='Imagens\logo.ICO' if sys.platform != 'linux' else 'Imagens/logo.ICO'
     )
 ]
 

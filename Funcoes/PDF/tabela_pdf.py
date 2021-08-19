@@ -102,6 +102,7 @@ class PDF(FPDF):
     def create_table(self, table_data, title='', data_size=10, title_size=12, align_data='L', align_header='L',
                      cell_width='even', x_start='x_default', emphasize_data=[], emphasize_style=None,
                      emphasize_color=(0, 0, 0)):
+
         """
         table_data:
                     list of lists with first element being list of headers
@@ -134,6 +135,9 @@ class PDF(FPDF):
                     emphasize_color: emphasize color (if other than black)
 
         """
+
+        epw = self.w - 2 * self.l_margin
+
         default_style = self.font_style
         if emphasize_style == None:
             emphasize_style = default_style
@@ -147,7 +151,7 @@ class PDF(FPDF):
         def get_col_widths():
             col_width = cell_width
             if col_width == 'even':
-                col_width = self.epw / len(data[
+                col_width = epw / len(data[
                                                0]) - 1  # distribute content evenly   # epw = effective page width (width of page not including margins)
             elif col_width == 'uneven':
                 col_widths = []
@@ -226,7 +230,7 @@ class PDF(FPDF):
             x_left = x_start
         else:
             x_left = self.get_x()
-        x_right = self.epw + x_left
+        x_right = epw + x_left
         if not isinstance(col_width, list):
             if x_start:
                 self.set_x(x_start)

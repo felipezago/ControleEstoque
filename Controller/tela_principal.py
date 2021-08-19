@@ -32,7 +32,7 @@ class TelaPrincipal(QMainWindow):
 
         self.setWindowIcon(QtGui.QIcon("Imagens/logo_fzr.png"))
 
-        data_limite = "12/08/2021"
+        data_limite = "12/08/2030"
         data_atual = datetime.today()
         data_limite_txt = datetime.strptime(data_limite, '%d/%m/%Y')
         dias_restantes = data_limite_txt - data_atual
