@@ -67,16 +67,70 @@ class Descontos(QMainWindow):
         from PyQt5.QtWidgets import QMessageBox
 
         indice = self.ui.cb_tipo_desconto.currentIndex()
-        valor = float(self.ui.tx_valor.text())
-        restante = 0
+        if self.ui.tx_valor.text():
+            valor = float(self.ui.tx_valor.text())
+            restante = 0
 
-        if valor:
-            porcentagem = valor / 100
-            if indice in (1, 2):
-                if not self.tela_principal.recebeu_desconto_subtotal:
-                    if valor <= 99.9:
-                        if indice == 1:
-                            self.desconto_total += float(self.total) * porcentagem
+            if valor:
+                porcentagem = valor / 100
+                if indice in (1, 2):
+                    if not self.tela_principal.recebeu_desconto_subtotal:
+                        if valor <= 99.9:
+                            if indice == 1:
+                                self.desconto_total += float(self.total) * porcentagem
+                                desconto_itens = self.desconto_total / Venda_Tmp.qtd_itens()
+                                dados = Venda_Tmp.get_venda_atual()
+
+                                for item in dados:
+                                    item_venda = Venda_Tmp()
+                                    item_venda.cod_interno = item[0]
+                                    item_venda.desconto = item[8]
+                                    item_venda.valor = item[7]
+                                    item_venda.qtd = item[6]
+                                    total_item = item_venda.valor * item_venda.qtd
+
+                                    desconto_total = item_venda.desconto + desconto_itens
+
+                                    if desconto_total >= total_item:
+                                        if item_venda.desconto == 0:
+                                            novo_desconto = total_item - 0.01
+                                        else:
+                                            novo_desconto = (desconto_total - total_item) + 0.01
+
+                                        restante += desconto_itens - novo_desconto
+                                        item_venda.desconto = novo_desconto
+                                    else:
+                                        item_venda.desconto += desconto_itens
+                                    item_venda.inserir_desconto_item()
+
+                                self.tela_principal.recebeu_desconto = True
+                                self.tela_principal.recebeu_desconto_subtotal = True
+                                self.tela_principal.excluiu_descontos = False
+                                self.preenche_tabela()
+                            else:
+                                if self.item_selecionado.cod_interno:
+                                    self.desconto_total += self.total_item * porcentagem
+                                    desconto_item = self.desconto_total
+
+                                    item_venda = Venda_Tmp()
+                                    item_venda.cod_interno = self.item_selecionado.cod_interno
+                                    item_venda.desconto = desconto_item
+                                    item_venda.inserir_desconto_item()
+
+                                    self.tela_principal.recebeu_desconto = True
+                                    self.tela_principal.recebeu_desconto_subtotal = True
+                                    self.tela_principal.excluiu_descontos = False
+                                    self.preenche_tabela()
+                                else:
+                                    QMessageBox.warning(self, "Erro!", "Selecione um item.")
+                        else:
+                            QMessageBox.warning(self, "Erro!", "Item não pode receber mais que 99.9% de desconto.")
+                    else:
+                        QMessageBox.warning(self, "Erro!", "Item já recebeu desconto em percentual")
+                elif indice in (3, 4):
+                    if indice == 3:
+                        if valor < self.total:
+                            self.desconto_total = valor
                             desconto_itens = self.desconto_total / Venda_Tmp.qtd_itens()
                             dados = Venda_Tmp.get_venda_atual()
 
@@ -95,7 +149,6 @@ class Descontos(QMainWindow):
                                         novo_desconto = total_item - 0.01
                                     else:
                                         novo_desconto = (desconto_total - total_item) + 0.01
-
                                     restante += desconto_itens - novo_desconto
                                     item_venda.desconto = novo_desconto
                                 else:
@@ -103,110 +156,60 @@ class Descontos(QMainWindow):
                                 item_venda.inserir_desconto_item()
 
                             self.tela_principal.recebeu_desconto = True
-                            self.tela_principal.recebeu_desconto_subtotal = True
                             self.tela_principal.excluiu_descontos = False
                             self.preenche_tabela()
                         else:
-                            if self.item_selecionado.cod_interno:
-                                self.desconto_total += self.total_item * porcentagem
-                                desconto_item = self.desconto_total
+                            QMessageBox.warning(self, "Erro!", "Valor do desconto não pode ser maior que o valor total.")
+                    else:
+                        if self.item_selecionado.cod_interno:
+                            if valor < self.total_item:
+                                self.desconto_total = valor
 
                                 item_venda = Venda_Tmp()
                                 item_venda.cod_interno = self.item_selecionado.cod_interno
-                                item_venda.desconto = desconto_item
+                                item_venda.desconto = self.desconto_total
                                 item_venda.inserir_desconto_item()
 
                                 self.tela_principal.recebeu_desconto = True
-                                self.tela_principal.recebeu_desconto_subtotal = True
                                 self.tela_principal.excluiu_descontos = False
                                 self.preenche_tabela()
                             else:
-                                QMessageBox.warning(self, "Erro!", "Selecione um item.")
-                    else:
-                        QMessageBox.warning(self, "Erro!", "Item não pode receber mais que 99.9% de desconto.")
-                else:
-                    QMessageBox.warning(self, "Erro!", "Item já recebeu desconto em percentual")
-            elif indice in (3, 4):
-                if indice == 3:
-                    if valor < self.total:
-                        self.desconto_total = valor
-                        desconto_itens = self.desconto_total / Venda_Tmp.qtd_itens()
-                        dados = Venda_Tmp.get_venda_atual()
-
-                        for item in dados:
-                            item_venda = Venda_Tmp()
-                            item_venda.cod_interno = item[0]
-                            item_venda.desconto = item[8]
-                            item_venda.valor = item[7]
-                            item_venda.qtd = item[6]
-                            total_item = item_venda.valor * item_venda.qtd
-
-                            desconto_total = item_venda.desconto + desconto_itens
-
-                            if desconto_total >= total_item:
-                                if item_venda.desconto == 0:
-                                    novo_desconto = total_item - 0.01
-                                else:
-                                    novo_desconto = (desconto_total - total_item) + 0.01
-                                restante += desconto_itens - novo_desconto
-                                item_venda.desconto = novo_desconto
-                            else:
-                                item_venda.desconto += desconto_itens
-                            item_venda.inserir_desconto_item()
-
-                        self.tela_principal.recebeu_desconto = True
-                        self.tela_principal.excluiu_descontos = False
-                        self.preenche_tabela()
-                    else:
-                        QMessageBox.warning(self, "Erro!", "Valor do desconto não pode ser maior que o valor total.")
-                else:
-                    if self.item_selecionado.cod_interno:
-                        if valor < self.total_item:
-                            self.desconto_total = valor
-
-                            item_venda = Venda_Tmp()
-                            item_venda.cod_interno = self.item_selecionado.cod_interno
-                            item_venda.desconto = self.desconto_total
-                            item_venda.inserir_desconto_item()
-
-                            self.tela_principal.recebeu_desconto = True
-                            self.tela_principal.excluiu_descontos = False
-                            self.preenche_tabela()
+                                QMessageBox.warning(self, "Erro!", "Valor do desconto não pode ser maior que o valor total "
+                                                                   "do item.")
                         else:
-                            QMessageBox.warning(self, "Erro!", "Valor do desconto não pode ser maior que o valor total "
-                                                               "do item.")
-                    else:
-                        QMessageBox.warning(self, "Erro!", "Selecione um item.")
+                            QMessageBox.warning(self, "Erro!", "Selecione um item.")
+                else:
+                    QMessageBox.warning(self, "Erro!", "Favor selecionar uma opção!")
             else:
-                QMessageBox.warning(self, "Erro!", "Favor selecionar uma opção!")
+                QMessageBox.warning(self, "Erro!", "Favor informar um valor.")
+
+            if restante > 0:
+                dados = Venda_Tmp.get_venda_atual()
+
+                for item in dados:
+                    item_venda = Venda_Tmp()
+                    item_venda.cod_interno = item[0]
+                    item_venda.desconto = item[8]
+                    item_venda.valor = item[7]
+                    item_venda.qtd = item[6]
+                    total_item = item_venda.valor * item_venda.qtd
+
+                    if not item_venda.desconto == (total_item - 0.01):
+                        sobra = total_item - item_venda.desconto
+                        if sobra >= restante:
+                            item_venda.desconto += restante
+                            restante = 0
+                        else:
+                            novo_desconto = item_venda.desconto + (sobra - 0.01)
+                            restante -= (sobra - 0.01)
+                            item_venda.desconto = novo_desconto
+                        item_venda.inserir_desconto_item()
+                        self.preenche_tabela()
+
+            self.ui.tx_valor.setText("")
+            self.set_lbls()
         else:
             QMessageBox.warning(self, "Erro!", "Favor informar um valor.")
-
-        if restante > 0:
-            dados = Venda_Tmp.get_venda_atual()
-
-            for item in dados:
-                item_venda = Venda_Tmp()
-                item_venda.cod_interno = item[0]
-                item_venda.desconto = item[8]
-                item_venda.valor = item[7]
-                item_venda.qtd = item[6]
-                total_item = item_venda.valor * item_venda.qtd
-
-                if not item_venda.desconto == (total_item - 0.01):
-                    sobra = total_item - item_venda.desconto
-                    if sobra >= restante:
-                        item_venda.desconto += restante
-                        restante = 0
-                    else:
-                        novo_desconto = item_venda.desconto + (sobra - 0.01)
-                        restante -= (sobra - 0.01)
-                        item_venda.desconto = novo_desconto
-                    item_venda.inserir_desconto_item()
-                    self.preenche_tabela()
-
-        self.ui.tx_valor.setText("")
-        self.set_lbls()
 
     def sair(self):
         self.close()
