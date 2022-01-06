@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['/home/felipe/PycharmProjects/FZR Sistemas/ControleEstoque'],
+             pathex=['/home/felipe/python_projects/FZR Sistemas/ControleEstoque'],
              binaries=[],
              datas=[],
              hiddenimports=[],

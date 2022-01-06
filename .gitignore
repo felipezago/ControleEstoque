@@ -58,9 +58,11 @@ $RECYCLE.BIN/
 *.lnk
 
 #DIRECTORIES
-build/
+build/*
 dist/
 logs/
 PDF/
+
+__pycache__
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,venv

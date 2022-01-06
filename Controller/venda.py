@@ -378,7 +378,7 @@ class VendaTemp(QMainWindow):
         self.set_clientes_enabled(False)
 
         if self.ui.tx_qtd.text():
-            qtd = int(self.ui.tx_qtd.text())
+            qtd = float(self.ui.tx_qtd.text())
         else:
             qtd = 1
 
@@ -607,7 +607,7 @@ class VendaTemp(QMainWindow):
 
     def calcula_preco(self):
         if self.ui.tx_qtd.text():
-            qtd = int(self.ui.tx_qtd.text())
+            qtd = float(self.ui.tx_qtd.text())
         else:
             qtd = 1
         total = qtd * float(self.ui.tx_valor.text())
